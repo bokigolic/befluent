@@ -1,0 +1,44 @@
+.tabbar {
+  position: sticky;
+  top: 58px;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--bord2);
+  padding: 10px 16px 0;
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabbar::-webkit-scrollbar {
+  display: none;
+}
+
+.tab {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--t2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: all 0.22s var(--ease);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tab:hover:not(.active) {
+  background: var(--elevated);
+  color: var(--t1);
+}
+
+.active {
+  background: var(--acc);
+  color: #ffffff;
+  border-color: var(--acc);
+  box-shadow: 0 0 18px rgba(124, 111, 255, 0.38);
+}
