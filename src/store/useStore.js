@@ -13,6 +13,7 @@ const useStore = create((set) => ({
   xp: load('bf_xp', 0),
   streak: load('bf_streak', 0),
   activePage: 'dictionary',
+  dictMode: 'en-en',
 
   addXP: (amount) =>
     set((state) => {
@@ -24,6 +25,7 @@ const useStore = create((set) => ({
     }),
 
   setActivePage: (page) => set({ activePage: page }),
+  setDictMode: (mode) => set({ dictMode: mode }),
 }))
 
 export const addXP = (amount) => useStore.getState().addXP(amount)

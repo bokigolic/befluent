@@ -1,0 +1,163 @@
+.container {
+  display: flex;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--bord);
+  border-radius: var(--radius);
+  padding: 8px;
+  margin-bottom: 18px;
+}
+
+/* ── Flag sides ── */
+.side {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+}
+
+.sideActive {
+  background: var(--elevated);
+  box-shadow: 0 2px 16px rgba(124, 111, 255, 0.18);
+}
+
+/* ── Swap button ── */
+.swap {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--elevated);
+  border: 1px solid var(--bord);
+  color: var(--t2);
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s var(--ease);
+}
+
+.swap:hover {
+  background: var(--acc);
+  color: #ffffff;
+  transform: rotate(180deg);
+}
+
+/* ── Labels ── */
+.label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--t2);
+  transition: color 0.2s;
+}
+
+.labelActive {
+  color: var(--t1);
+}
+
+/* ── US Flag (CSS only) ── */
+.flag {
+  width: 58px;
+  height: 38px;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 2px 4px 14px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  background: repeating-linear-gradient(
+    to bottom,
+    #B22234 0%,
+    #B22234 calc(100% / 13),
+    #ffffff calc(100% / 13),
+    #ffffff calc(200% / 13),
+    #B22234 calc(200% / 13),
+    #B22234 calc(300% / 13),
+    #ffffff calc(300% / 13),
+    #ffffff calc(400% / 13),
+    #B22234 calc(400% / 13),
+    #B22234 calc(500% / 13),
+    #ffffff calc(500% / 13),
+    #ffffff calc(600% / 13),
+    #B22234 calc(600% / 13),
+    #B22234 calc(700% / 13),
+    #ffffff calc(700% / 13),
+    #ffffff calc(800% / 13),
+    #B22234 calc(800% / 13),
+    #B22234 calc(900% / 13),
+    #ffffff calc(900% / 13),
+    #ffffff calc(1000% / 13),
+    #B22234 calc(1000% / 13),
+    #B22234 calc(1100% / 13),
+    #ffffff calc(1100% / 13),
+    #ffffff calc(1200% / 13),
+    #B22234 calc(1200% / 13),
+    #B22234 100%
+  );
+}
+
+.canton {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 38%;
+  height: 54%;
+  background:
+    #3C3B6E
+    radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px);
+  background-size: 100%, 5.5px 4.5px;
+  background-position: 0 0, 2px 2px;
+  border-radius: 0 0 3px 0;
+}
+
+/* ── Serbian Flag (CSS only) ── */
+.flagSr {
+  width: 58px;
+  height: 38px;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 2px 4px 14px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  background: linear-gradient(
+    to bottom,
+    #C6363C 0%,
+    #C6363C 33.33%,
+    #0C4076 33.33%,
+    #0C4076 66.66%,
+    #ffffff 66.66%,
+    #ffffff 100%
+  );
+}
+
+.eagle {
+  position: absolute;
+  left: 8%;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* ── 3D hover on flag wrappers ── */
+.flagWrap {
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.flagWrap:hover {
+  transform: perspective(200px) rotateY(-10deg) rotateX(4deg) scale(1.08);
+}
+
+.flagWrapSr {
+  transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.flagWrapSr:hover {
+  transform: perspective(200px) rotateY(10deg) rotateX(4deg) scale(1.08);
+}

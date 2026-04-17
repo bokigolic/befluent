@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar/Navbar'
 import TabBar from './components/TabBar/TabBar'
+import FlagSwitcher from './components/FlagSwitcher/FlagSwitcher'
 import useStore from './store/useStore'
 
 function App() {
@@ -11,7 +12,10 @@ function App() {
       <TabBar />
       <div className="wrap">
         {activePage === 'dictionary' && (
-          <p style={{ color: 'var(--t2)' }}>Dictionary coming soon...</p>
+          <>
+            <FlagSwitcher />
+            <p style={{ color: 'var(--t2)' }}>Dictionary coming soon...</p>
+          </>
         )}
         {activePage === 'history' && (
           <p style={{ color: 'var(--t2)' }}>History coming soon...</p>
