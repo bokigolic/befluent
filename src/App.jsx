@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar/Navbar'
 import TabBar from './components/TabBar/TabBar'
 import FlagSwitcher from './components/FlagSwitcher/FlagSwitcher'
+import SearchBar from './components/SearchBar/SearchBar'
 import useStore from './store/useStore'
 
 function App() {
@@ -14,7 +15,7 @@ function App() {
         {activePage === 'dictionary' && (
           <>
             <FlagSwitcher />
-            <p style={{ color: 'var(--t2)' }}>Dictionary coming soon...</p>
+            <SearchBar onSearch={(word) => console.log('search:', word)} />
           </>
         )}
         {activePage === 'history' && (
