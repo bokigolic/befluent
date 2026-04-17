@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, lazy, Suspense } from 'react'
 import ErrorBoundary from './components/ErrorBoundary'
 import Navbar from './components/Navbar/Navbar'
 import TabBar from './components/TabBar/TabBar'
@@ -6,15 +6,24 @@ import FlagSwitcher from './components/FlagSwitcher/FlagSwitcher'
 import SearchBar from './components/SearchBar/SearchBar'
 import ResultCard from './components/ResultCard/ResultCard'
 import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen'
-import HistoryPage from './pages/HistoryPage/HistoryPage'
+import SplashScreen from './components/SplashScreen/SplashScreen'
+import Onboarding from './components/Onboarding/Onboarding'
+import Achievements from './components/Achievements/Achievements'
+import OfflineBanner from './components/OfflineBanner/OfflineBanner'
+import BackgroundEffects from './components/BackgroundEffects/BackgroundEffects'
 import useStore from './store/useStore'
 
-const gradientLineStyle = {
-  height: 2,
-  background: 'linear-gradient(90deg, var(--acc), var(--acc-p), var(--acc-g), var(--acc))',
-  backgroundSize: '300% 100%',
-  animation: 'gradientMove 4s linear infinite',
-}
+const HistoryPage = lazy(() => import('./pages/HistoryPage/HistoryPage'))
+const SavedPage   = lazy(() => import('./pages/SavedPage/SavedPage'))
+const ProfilePage = lazy(() => import('./pages/ProfilePage/ProfilePage'))
+const QuizPage    = lazy(() => import('./pages/QuizPage/QuizPage'))
+
+const shouldShowSplash = () =>
+  !localStorage.getItem('bf_launched') ||
+  new URLSearchParams(window.location.search).get('splash') === '1'
+
+const shouldShowOnboarding = () =>
+  !localStorage.getItem('bf_onboarded')
 
 const scrollBtnStyle = {
   position: 'fixed',
@@ -37,16 +46,21 @@ const scrollBtnStyle = {
   transition: 'opacity 0.2s',
 }
 
-function App() {
-  const activePage     = useStore((s) => s.activePage)
-  const setActivePage  = useStore((s) => s.setActivePage)
-  const dictMode       = useStore((s) => s.dictMode)
-  const currentWord    = useStore((s) => s.currentWord)
-  const setCurrentWord = useStore((s) => s.setCurrentWord)
-  const addToHistory   = useStore((s) => s.addToHistory)
-  const addXP          = useStore((s) => s.addXP)
+const skelFallback = <div className="suspenseSkel" />
 
+function App() {
+  const activePage     = useStore(s => s.activePage)
+  const setActivePage  = useStore(s => s.setActivePage)
+  const dictMode       = useStore(s => s.dictMode)
+  const currentWord    = useStore(s => s.currentWord)
+  const setCurrentWord = useStore(s => s.setCurrentWord)
+  const addToHistory   = useStore(s => s.addToHistory)
+  const addXP          = useStore(s => s.addXP)
+
+  const [splashDone,    setSplashDone]    = useState(!shouldShowSplash())
+  const [onboardDone,   setOnboardDone]   = useState(!shouldShowOnboarding())
   const [showScrollTop, setShowScrollTop] = useState(false)
+  const [quizOpen,      setQuizOpen]      = useState(false)
 
   useEffect(() => {
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#09090f')
@@ -58,30 +72,40 @@ function App() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const handleSearch = (word) => {
+  const handleSearch = useCallback((word) => {
     setCurrentWord(word)
     addToHistory(word, dictMode)
     addXP(5)
-  }
+  }, [setCurrentWord, addToHistory, addXP, dictMode])
 
-  const handleWordClick = (word) => {
+  const handleWordClick = useCallback((word) => {
     setCurrentWord(word)
     addToHistory(word, dictMode)
     addXP(3)
-  }
+  }, [setCurrentWord, addToHistory, addXP, dictMode])
 
-  const handleHistoryClick = (word, mode) => {
+  const handleHistoryClick = useCallback((word, mode) => {
     setActivePage('dictionary')
     setCurrentWord(word)
     addToHistory(word, mode)
+  }, [setActivePage, setCurrentWord, addToHistory])
+
+  // Show splash before onboarding; show onboarding before app
+  if (!splashDone) {
+    return <SplashScreen onDone={() => setSplashDone(true)} />
+  }
+  if (!onboardDone) {
+    return <Onboarding onDone={() => setOnboardDone(true)} />
   }
 
   return (
     <ErrorBoundary>
+      <BackgroundEffects />
       <Navbar />
-      <div style={gradientLineStyle} />
+      <OfflineBanner />
       <TabBar />
-      <div className="wrap">
+
+      <div className="wrap" key={activePage}>
         {activePage === 'dictionary' && (
           <>
             <FlagSwitcher />
@@ -98,8 +122,23 @@ function App() {
             }
           </>
         )}
+
         {activePage === 'history' && (
-          <HistoryPage onWordClick={handleHistoryClick} />
+          <Suspense fallback={skelFallback}>
+            <HistoryPage onWordClick={handleHistoryClick} />
+          </Suspense>
+        )}
+
+        {activePage === 'saved' && (
+          <Suspense fallback={skelFallback}>
+            <SavedPage onWordClick={handleWordClick} onPractice={() => setQuizOpen(true)} />
+          </Suspense>
+        )}
+
+        {activePage === 'profile' && (
+          <Suspense fallback={skelFallback}>
+            <ProfilePage />
+          </Suspense>
         )}
       </div>
 
@@ -111,6 +150,14 @@ function App() {
         >
           ↑
         </button>
+      )}
+
+      <Achievements />
+
+      {quizOpen && (
+        <Suspense fallback={null}>
+          <QuizPage onClose={() => setQuizOpen(false)} />
+        </Suspense>
       )}
     </ErrorBoundary>
   )

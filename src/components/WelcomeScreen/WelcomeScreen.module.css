@@ -1,10 +1,6 @@
-.wrap {
-  padding-top: 8px;
-}
+.wrap { padding-top: 8px; }
 
-.top {
-  animation: fadeSlideUp 300ms var(--ease) both;
-}
+.top { animation: fadeSlideUp 300ms var(--ease) both; }
 
 .greeting {
   font-family: 'Space Grotesk', sans-serif;
@@ -42,7 +38,8 @@
   font-size: 14px;
   color: var(--t2);
   cursor: pointer;
-  transition: background 0.22s var(--ease), border-color 0.22s var(--ease), color 0.22s var(--ease), transform 0.22s var(--ease);
+  transition: background 0.22s var(--ease), border-color 0.22s var(--ease),
+              color 0.22s var(--ease), transform 0.22s var(--ease), box-shadow 0.22s var(--ease);
   font-family: inherit;
   animation: bounceIn 400ms var(--ease) both;
 }
@@ -52,38 +49,58 @@
   border-color: var(--acc);
   color: var(--t1);
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(124, 111, 255, 0.25);
 }
 
-/* ── Stats row ── */
-.stats {
-  display: flex;
-  gap: 8px;
-  margin-top: 28px;
+/* ── Daily Goal ── */
+.goalSection {
+  margin-top: 24px;
+  animation: fadeSlideUp 350ms var(--ease) 80ms both;
 }
 
-.statCard {
-  flex: 1;
-  background: var(--surface);
-  border: 1px solid var(--bord2);
-  border-radius: var(--radius-sm);
-  padding: 14px;
-  text-align: center;
+.goalHeader {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  gap: 2px;
-  animation: fadeSlideUp 350ms var(--ease) both;
+  margin-bottom: 8px;
 }
 
-.statValue {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: 20px;
-  color: var(--acc);
+.goalLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--t2);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
-.statLabel {
-  font-size: 12px;
+.goalCount {
+  font-size: 13px;
   color: var(--t3);
-  margin-top: 2px;
 }
+
+.goalTrack {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--bord2);
+  overflow: hidden;
+}
+
+.goalFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--acc-g), var(--acc));
+  transition: width 0.6s var(--ease);
+  max-width: 100%;
+}
+
+.goalFillDone {
+  background: linear-gradient(90deg, #ffa94d, #ffd200);
+}
+
+.goalDone {
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--acc-a);
+}
+

@@ -17,6 +17,18 @@
   --ease: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+[data-theme="light"] {
+  --bg: #f8f8ff;
+  --surface: #ffffff;
+  --elevated: #f0f0fa;
+  --hover: #e8e8f5;
+  --t1: #0a0a1a;
+  --t2: #4a4a6a;
+  --t3: #9898b0;
+  --bord: rgba(124, 111, 255, 0.2);
+  --bord2: rgba(0, 0, 0, 0.08);
+}
+
 *,
 *::before,
 *::after {
@@ -41,8 +53,10 @@ body {
   line-height: 1.5;
   position: relative;
   -webkit-overflow-scrolling: touch;
+  transition: background 0.3s var(--ease), color 0.3s var(--ease);
 }
 
+/* noise texture */
 body::before {
   content: '';
   position: fixed;
@@ -55,33 +69,41 @@ body::before {
   z-index: 0;
 }
 
+/* subtle grid pattern */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(124, 111, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 111, 255, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+  z-index: 0;
+}
+
 #root {
   position: relative;
   z-index: 1;
   min-height: 100vh;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(124, 111, 255, 0.4);
+  background: linear-gradient(180deg, var(--acc), var(--acc-p));
   border-radius: 99px;
 }
-
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(124, 111, 255, 0.6);
-}
-
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(124, 111, 255, 0.4) transparent;
+  scrollbar-color: var(--acc) transparent;
+}
+
+/* ── Selection ── */
+::selection {
+  background: rgba(124, 111, 255, 0.3);
+  color: var(--t1);
 }
 
 /* ── Keyframes ── */
@@ -111,9 +133,9 @@ body::before {
 }
 
 @keyframes bounceIn {
-  0%   { transform: scale(0.8);    opacity: 0; }
+  0%   { transform: scale(0.8);  opacity: 0; }
   60%  { transform: scale(1.05); }
-  100% { transform: scale(1);      opacity: 1; }
+  100% { transform: scale(1);    opacity: 1; }
 }
 
 @keyframes gradientMove {
@@ -121,11 +143,71 @@ body::before {
   100% { background-position: 300% 50%; }
 }
 
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1);   opacity: 0.6; }
+  50%       { transform: scale(1.5); opacity: 1; }
+}
+
+@keyframes float {
+  from { transform: translateY(0px); }
+  to   { transform: translateY(-8px); }
+}
+
+@keyframes particleFloat {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(5px, -14px); }
+  50%  { transform: translate(-3px, -8px); }
+  75%  { transform: translate(4px, -18px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes splashScale {
+  0%   { transform: scale(0);   opacity: 0; }
+  70%  { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1);   opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+@keyframes slideOut {
+  from { transform: translateX(0);     opacity: 1; }
+  to   { transform: translateX(-100%); opacity: 0; }
+}
+
+@keyframes underlineGrow {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
 /* ── Layout ── */
 .wrap {
   max-width: 680px;
   margin: 0 auto;
   padding: 0 16px max(80px, calc(80px + env(safe-area-inset-bottom)));
+  animation: tabEnter 220ms var(--ease) both;
+}
+
+@keyframes tabEnter {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Suspense skeleton fallback ── */
+.suspenseSkel {
+  height: 200px;
+  background: linear-gradient(
+    90deg,
+    var(--elevated) 25%,
+    var(--hover) 50%,
+    var(--elevated) 75%
+  );
+  background-size: 400px 100%;
+  animation: shimmer 1.4s infinite linear;
+  border-radius: var(--radius);
+  margin-top: 16px;
 }
 
 /* ── Mobile ── */

@@ -8,6 +8,7 @@ export default function SearchBar({ onSearch }) {
   const [open, setOpen] = useState(false)
   const [focused, setFocused] = useState(false)
   const [pressing, setPressing] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(-1)
   const dictMode = useStore((s) => s.dictMode)
   const inputRef = useRef(null)
   const containerRef = useRef(null)
@@ -19,6 +20,7 @@ export default function SearchBar({ onSearch }) {
 
   useEffect(() => {
     setOpen(suggestions.length > 0 && focused)
+    setActiveIndex(-1)
   }, [suggestions, focused])
 
   useEffect(() => {
@@ -52,8 +54,21 @@ export default function SearchBar({ onSearch }) {
   }
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter') commit(value)
-    if (e.key === 'Escape') { setValue(''); setOpen(false) }
+    if (e.key === 'ArrowDown') {
+      e.preventDefault()
+      setActiveIndex(i => (i < suggestions.length - 1 ? i + 1 : 0))
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault()
+      setActiveIndex(i => (i > 0 ? i - 1 : suggestions.length - 1))
+    } else if (e.key === 'Enter') {
+      if (open && activeIndex >= 0 && suggestions[activeIndex]) {
+        commit(suggestions[activeIndex])
+      } else {
+        commit(value)
+      }
+    } else if (e.key === 'Escape') {
+      setValue(''); setOpen(false); setActiveIndex(-1)
+    }
   }
 
   const handleSearchClick = () => {
@@ -96,9 +111,10 @@ export default function SearchBar({ onSearch }) {
             {suggestions.map((word, i) => (
               <li
                 key={word}
-                className={`${styles.item} ${i === suggestions.length - 1 ? styles.itemLast : ''}`}
+                className={`${styles.item} ${i === suggestions.length - 1 ? styles.itemLast : ''} ${i === activeIndex ? styles.itemActive : ''}`}
                 style={{ animationDelay: `${i * 30}ms` }}
                 onMouseDown={() => commit(word)}
+                onMouseEnter={() => setActiveIndex(i)}
               >
                 {word}
               </li>

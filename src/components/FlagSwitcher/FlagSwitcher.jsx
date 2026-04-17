@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import useStore from '../../store/useStore'
 import styles from './FlagSwitcher.module.css'
 
@@ -24,7 +24,7 @@ const LABELS = {
   'sr-en': ['Serbian', 'English'],
 }
 
-export default function FlagSwitcher() {
+function FlagSwitcher() {
   const dictMode = useStore((s) => s.dictMode)
   const setDictMode = useStore((s) => s.setDictMode)
   const [swapRotation, setSwapRotation] = useState(0)
@@ -93,3 +93,5 @@ export default function FlagSwitcher() {
     </div>
   )
 }
+
+export default memo(FlagSwitcher)

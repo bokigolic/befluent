@@ -1,0 +1,69 @@
+.card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(124,111,255,0.16), rgba(255,107,157,0.10));
+  border: 1px solid rgba(124,111,255,0.28);
+  border-radius: var(--radius);
+  padding: 18px 20px 16px;
+  margin-bottom: 24px;
+  cursor: pointer;
+  animation: fadeSlideUp 300ms var(--ease) both;
+  transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(124,111,255,0.22);
+}
+
+.label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--acc);
+  margin-bottom: 8px;
+}
+
+.word {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  color: var(--t1);
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+
+.hint {
+  font-size: 13px;
+  color: var(--t3);
+}
+
+.save {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--elevated);
+  border: 1px solid var(--bord2);
+  color: var(--t2);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.18s var(--ease);
+}
+
+.save:hover {
+  background: var(--hover);
+  border-color: var(--acc);
+  color: var(--t1);
+}
+
+.saveDone {
+  color: var(--acc-a);
+  border-color: rgba(255,169,77,0.3);
+  background: rgba(255,169,77,0.08);
+}

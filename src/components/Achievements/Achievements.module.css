@@ -1,0 +1,82 @@
+.container {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  pointer-events: auto;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  border: 1px solid;
+  cursor: pointer;
+  animation: bounceIn 350ms var(--ease);
+  white-space: nowrap;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.achievementToast {
+  background: rgba(255, 169, 77, 0.12);
+  border-color: rgba(255, 169, 77, 0.4);
+  backdrop-filter: blur(12px);
+}
+
+.levelToast {
+  background: rgba(124, 111, 255, 0.12);
+  border-color: rgba(124, 111, 255, 0.4);
+  backdrop-filter: blur(12px);
+}
+
+.dailyToast {
+  background: rgba(0, 229, 160, 0.12);
+  border-color: rgba(0, 229, 160, 0.4);
+  color: var(--acc-g);
+  font-size: 14px;
+  font-weight: 600;
+  backdrop-filter: blur(12px);
+  padding: 12px 20px;
+}
+
+.achEmoji {
+  font-size: 32px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.achText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.achUnlocked {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--acc-a);
+}
+
+.achTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--t1);
+}
+
+.achDesc {
+  font-size: 12px;
+  color: var(--t2);
+}
+
+.achXP {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--acc-g);
+  margin-top: 2px;
+}

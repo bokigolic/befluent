@@ -1,0 +1,120 @@
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  gap: 8px;
+}
+
+.emptyIcon {
+  font-size: 40px;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.emptyTitle {
+  font-size: 16px;
+  color: var(--t2);
+  font-weight: 500;
+}
+
+.emptySub {
+  font-size: 13px;
+  color: var(--t3);
+  text-align: center;
+}
+
+.wrap { padding-top: 4px; }
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--t1);
+}
+
+.count {
+  font-size: 13px;
+  color: var(--t3);
+  flex: 1;
+}
+
+.practiceBtn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--acc), var(--acc-p));
+  border: none;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: opacity 0.18s, transform 0.18s;
+  flex-shrink: 0;
+}
+
+.practiceBtn:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px 6px 12px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--bord2);
+  cursor: pointer;
+  animation: fadeSlideUp 300ms var(--ease) both;
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease),
+              transform 0.2s var(--ease), opacity 0.2s var(--ease);
+}
+
+.pill:hover {
+  border-color: var(--acc-a);
+  background: var(--elevated);
+}
+
+.pillRemoving {
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bookmark { font-size: 12px; }
+
+.word {
+  font-size: 14px;
+  color: var(--t1);
+}
+
+.remove {
+  font-size: 14px;
+  color: var(--t3);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+  font-family: inherit;
+  transition: color 0.15s;
+}
+
+.remove:hover { color: var(--acc-p); }

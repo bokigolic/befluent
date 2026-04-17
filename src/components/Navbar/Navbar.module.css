@@ -10,8 +10,10 @@
   background: rgba(9, 9, 15, 0.88);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  /* animated gradient bottom border via ::after */
-  position: sticky;
+}
+
+[data-theme="light"] .navbar {
+  background: rgba(248, 248, 255, 0.9);
 }
 
 .navbar::after {
@@ -34,35 +36,73 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.5px;
+  flex-shrink: 0;
 }
 
 .badges {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: nowrap;
 }
 
-.xp,
+.themeBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--elevated);
+  border: 1px solid var(--bord2);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s var(--ease);
+  flex-shrink: 0;
+}
+
+.themeBtn:hover {
+  background: var(--hover);
+  transform: rotate(20deg);
+}
+
 .streak {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
   font-size: 12px;
-  padding: 5px 12px;
+  padding: 5px 10px;
   border-radius: 999px;
   line-height: 1;
-}
-
-.xp {
-  background: linear-gradient(135deg, #f7971e, #ffd200);
-  color: #1a1000;
-}
-
-.streak {
   background: linear-gradient(135deg, #ff416c, #ff4b2b);
   color: #ffffff;
+  flex-shrink: 0;
 }
 
-.bounce {
-  animation: bounceIn 0.4s var(--ease);
+/* XP progress bar sits at very bottom of navbar (below the ::after border) */
+.xpBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--bord2);
+  z-index: 1;
+}
+
+.xpFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--acc), var(--acc-p));
+  transition: width 0.6s var(--ease);
+  max-width: 100%;
+}
+
+.pulse {
+  animation: xpPulse 0.6s var(--ease);
+}
+
+@keyframes xpPulse {
+  0%   { filter: brightness(1); }
+  40%  { filter: brightness(1.6); }
+  100% { filter: brightness(1); }
 }

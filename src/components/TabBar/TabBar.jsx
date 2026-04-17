@@ -1,15 +1,17 @@
-import { useState } from 'react'
+import { useState, memo } from 'react'
 import useStore from '../../store/useStore'
 import styles from './TabBar.module.css'
 
 const TABS = [
   { id: 'dictionary', label: '🔍 Dictionary' },
   { id: 'history',    label: '🕐 History' },
+  { id: 'saved',      label: '🔖 Saved' },
+  { id: 'profile',    label: '👤 Profile' },
 ]
 
-export default function TabBar() {
-  const activePage = useStore((s) => s.activePage)
-  const setActivePage = useStore((s) => s.setActivePage)
+function TabBar() {
+  const activePage    = useStore(s => s.activePage)
+  const setActivePage = useStore(s => s.setActivePage)
   const [bounceId, setBounceId] = useState(null)
 
   const handleClick = (id) => {
@@ -21,7 +23,7 @@ export default function TabBar() {
 
   return (
     <div className={styles.tabbar}>
-      {TABS.map((tab) => (
+      {TABS.map(tab => (
         <button
           key={tab.id}
           className={`${styles.tab} ${activePage === tab.id ? styles.active : ''} ${bounceId === tab.id ? styles.bounce : ''}`}
@@ -33,3 +35,5 @@ export default function TabBar() {
     </div>
   )
 }
+
+export default memo(TabBar)

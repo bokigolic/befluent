@@ -39,7 +39,7 @@
 
 .input:focus {
   border-color: var(--acc);
-  box-shadow: 0 0 0 3px rgba(124, 111, 255, 0.18);
+  box-shadow: 0 0 0 2px var(--acc), 0 0 0 4px rgba(124, 111, 255, 0.15);
 }
 
 /* fix iOS zoom on focus */
@@ -108,9 +108,15 @@
   animation: slideDown 200ms var(--ease) both;
 }
 
-.item:hover {
+.item:hover,
+.itemActive {
   background: var(--hover);
   color: var(--t1);
+}
+
+.itemActive {
+  border-left: 2px solid var(--acc);
+  padding-left: 14px;
 }
 
 .itemLast {
@@ -119,6 +125,8 @@
 
 /* ── Search button ── */
 .searchBtn {
+  position: relative;
+  overflow: hidden;
   width: 100%;
   height: 48px;
   margin-top: 8px;
@@ -132,6 +140,22 @@
   letter-spacing: 0.3px;
   cursor: pointer;
   transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+
+.searchBtn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.28), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s var(--ease);
+}
+
+.searchBtn:hover::after {
+  left: 160%;
 }
 
 .searchBtn:hover {

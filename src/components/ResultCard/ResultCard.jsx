@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, memo } from 'react'
 import useDictionary from '../../hooks/useDictionary'
 import useTranslation from '../../hooks/useTranslation'
 import useRelatedWords from '../../hooks/useRelatedWords'
@@ -42,7 +42,7 @@ function Skeleton() {
 
 function MeaningBlock({ meaning, mi, onWordClick }) {
   const [expanded, setExpanded] = useState(false)
-  const defs = meaning.definitions
+  const defs  = meaning.definitions
   const shown = expanded ? defs : defs.slice(0, 3)
   const extra = defs.length - 3
 
@@ -110,21 +110,21 @@ function MeaningBlock({ meaning, mi, onWordClick }) {
   )
 }
 
-export default function ResultCard({ word, dictMode, onWordClick }) {
+function ResultCard({ word, dictMode, onWordClick }) {
   const { data, isLoading: dictLoading, error } = useDictionary(word)
   const { translation, alternatives, isLoading: transLoading } = useTranslation(word, dictMode)
   const { words: relatedWords } = useRelatedWords(word)
   const { suggestions } = useSuggestions(word, !!error)
-  const savedWords = useStore((s) => s.savedWords)
-  const toggleSaved = useStore((s) => s.toggleSaved)
-  const addXP = useStore((s) => s.addXP)
+  const savedWords  = useStore(s => s.savedWords)
+  const toggleSaved = useStore(s => s.toggleSaved)
+  const addXP       = useStore(s => s.addXP)
 
   const [toast, setToast] = useState(null)
-  const toastTimer = useRef(null)
-  const pressTimer = useRef(null)
+  const toastTimer  = useRef(null)
+  const pressTimer  = useRef(null)
 
   const isLoading = dictLoading || transLoading
-  const isSaved = savedWords.includes(word)
+  const isSaved   = savedWords.includes(word)
 
   const showToast = (msg) => {
     setToast(msg)
@@ -134,21 +134,27 @@ export default function ResultCard({ word, dictMode, onWordClick }) {
 
   const handlePressStart = () => {
     pressTimer.current = setTimeout(async () => {
-      try {
-        await navigator.clipboard.writeText(word)
-        showToast('Copied! ✓')
-      } catch {}
+      try { await navigator.clipboard.writeText(word); showToast('Copied! ✓') } catch {}
     }, 500)
   }
-
   const handlePressEnd = () => clearTimeout(pressTimer.current)
+
+  const handleShare = async () => {
+    const firstDef = data?.meanings?.[0]?.definitions?.[0]?.definition ?? ''
+    const text = `${data.word}${data.phonetic ? ` ${data.phonetic}` : ''}\n\n${firstDef}\n\n— BeFluent`
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: `BeFluent: ${data.word}`, text })
+      } else {
+        await navigator.clipboard.writeText(text)
+        showToast('Copied! ✓')
+      }
+    } catch {}
+  }
 
   const handleSave = () => {
     toggleSaved(word)
-    if (!isSaved) {
-      addXP(2)
-      showToast('Word saved! ✓')
-    }
+    if (!isSaved) { addXP(2); showToast('Word saved! ✓') }
   }
 
   if (isLoading) return <Skeleton />
@@ -164,10 +170,8 @@ export default function ResultCard({ word, dictMode, onWordClick }) {
           <>
             <p className={styles.errorSub}>Did you mean:</p>
             <div className={styles.pills}>
-              {suggestions.map((s) => (
-                <button key={s} className={styles.pill} onClick={() => onWordClick(s)}>
-                  {s}
-                </button>
+              {suggestions.map(s => (
+                <button key={s} className={styles.pill} onClick={() => onWordClick(s)}>{s}</button>
               ))}
             </div>
           </>
@@ -206,6 +210,7 @@ export default function ResultCard({ word, dictMode, onWordClick }) {
           >
             {data.word}
           </span>
+          <div className={styles.wordUnderline} />
           {data.phonetic && <span className={styles.phonetic}>{data.phonetic}</span>}
           <div className={styles.heroActions}>
             {data.audioUrl && (
@@ -217,7 +222,21 @@ export default function ResultCard({ word, dictMode, onWordClick }) {
               </button>
             )}
             <button
-              className={styles.saveBtn}
+              className={styles.iconBtn}
+              onClick={handleShare}
+              title="Share word"
+              aria-label="Share"
+            >
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                <circle cx="11.5" cy="2.5" r="1.8" stroke="currentColor" strokeWidth="1.3"/>
+                <circle cx="11.5" cy="12.5" r="1.8" stroke="currentColor" strokeWidth="1.3"/>
+                <circle cx="3.5" cy="7.5" r="1.8" stroke="currentColor" strokeWidth="1.3"/>
+                <line x1="9.75" y1="3.4" x2="5.25" y2="6.6" stroke="currentColor" strokeWidth="1.3"/>
+                <line x1="9.75" y1="11.6" x2="5.25" y2="8.4" stroke="currentColor" strokeWidth="1.3"/>
+              </svg>
+            </button>
+            <button
+              className={styles.iconBtn}
               onClick={handleSave}
               title={isSaved ? 'Remove from saved' : 'Save word'}
               style={{ color: isSaved ? 'var(--acc-a)' : 'var(--t3)' }}
@@ -260,3 +279,5 @@ export default function ResultCard({ word, dictMode, onWordClick }) {
     </>
   )
 }
+
+export default memo(ResultCard)
