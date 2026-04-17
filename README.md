@@ -1,105 +1,53 @@
-# 🚀 Be Fluent – AI English Learning App
+# 🚀 Be Fluent
 
-![Status](https://img.shields.io/badge/status-active-success)
-![Made with](https://img.shields.io/badge/made%20with-JavaScript-yellow)
-![Platform](https://img.shields.io/badge/platform-web-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
+**AI-powered English learning app** focused on advanced vocabulary and real usage.
 
-🔗 Live App: https://be-fluent.netlify.app/
+🔗 Live: https://be-fluent.netlify.app/
 
 ---
 
-## 📚 Overview
+## ⚡ Overview
 
-**Be Fluent** is an AI-powered web application designed to help users improve their English through:
+Be Fluent is a web app designed primarily for **Serbian → English learners** who want to improve their vocabulary and fluency.
 
-- Real-time conversations 🗣️  
-- Vocabulary training 📖  
-- Speaking practice 🎤  
-- Writing & grammar correction ✍️  
-
-It acts like a **personal English tutor available 24/7**.
-
----
-
-## 🖼️ Screenshots
-
-> 📌 Replace these with your real screenshots later
-
-### 🏠 Home / Dashboard
-![Home](./screenshots/home.png)
-
-### 🤖 AI Chat
-![Chat](./screenshots/chat.png)
-
-### 📖 Vocabulary
-![Vocabulary](./screenshots/vocabulary.png)
-
-### 🎤 Speaking Practice
-![Speaking](./screenshots/speaking.png)
+It helps users learn **advanced English words**, understand meanings, and use them in real contexts.
 
 ---
 
 ## ✨ Features
 
-### 🗣️ AI Chat & Voice Coach
-- Real-time AI conversation  
-- Voice + text interaction  
-- Instant corrections  
+- 📖 Advanced vocabulary learning (Word of the Day, suggestions)  
+- 🔍 English dictionary with search  
+- 💾 Save & review words  
+- 📊 Daily learning goals & progress tracking  
+- 🧠 Smart word suggestions  
 
 ---
 
-### 📖 Vocabulary System
-- Word of the day  
-- Definitions + examples  
-- Smart learning  
+## 📱 PWA
+
+- Installable on mobile & desktop  
+- Works like a native app  
+- Fast and responsive  
 
 ---
 
-### 🔁 Spaced Repetition
-- Flashcards  
-- Smart review system  
-- Difficulty tracking  
+## 🛠️ Tech Stack
+
+- React (Vite) ⚛️  
+- JavaScript  
+- HTML / CSS  
+- PWA (Service Worker + Manifest)  
+- Netlify
+
+## 👨‍💻 Author
+
+## Bojan Golic
+Web Developer | AI Enthusiast
 
 ---
 
-### 🎤 Speaking Practice
-- Timed exercises  
-- Random topics  
-- Confidence building  
-
----
-
-### 🎬 Real-Life Learning
-- Scenario-based English  
-- Dialogue practice  
-
----
-
-### ✍️ Writing & Grammar
-- AI corrections  
-- Writing prompts  
-- Instant feedback  
-
----
-
-### 🧠 Gamification
-- XP system  
-- Streak tracking  
-- Progress dashboard  
-
----
-
-## 🧑‍💻 Tech Stack
-
-- HTML, CSS, JavaScript  
-- Netlify (hosting)  
-- AI APIs (chat + voice)  
-- Speech Recognition  
-
----
-
-## 🚀 Getting Started
+## 🚀 Run Locally
 
 ```bash
 git clone https://github.com/your-username/be-fluent.git
