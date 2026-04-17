@@ -101,5 +101,5 @@ body::before {
 .wrap {
   max-width: 680px;
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 16px 80px;
 }

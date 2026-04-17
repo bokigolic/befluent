@@ -1,0 +1,233 @@
+/* ── Skeleton ── */
+.skelWrap {
+  padding: 20px 0;
+}
+
+.skelLine {
+  background: linear-gradient(
+    90deg,
+    var(--elevated) 25%,
+    var(--hover) 50%,
+    var(--elevated) 75%
+  );
+  background-size: 400px 100%;
+  animation: shimmer 1.4s infinite linear;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+/* ── Error ── */
+.errorBox {
+  background: rgba(255, 107, 157, 0.08);
+  border: 1px solid rgba(255, 107, 157, 0.2);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.errorTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.errorText {
+  color: var(--acc-p);
+}
+
+.errorSub {
+  font-size: 13px;
+  color: var(--t2);
+  margin-bottom: 8px;
+}
+
+/* ── Translation box ── */
+.translationBox {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 229, 160, 0.08),
+    rgba(124, 111, 255, 0.06)
+  );
+  border: 1px solid rgba(0, 229, 160, 0.22);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  animation: fadeSlideUp 200ms var(--ease);
+}
+
+.transLabel {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--acc-g);
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.transMain {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--t1);
+}
+
+.transAlts {
+  font-size: 13px;
+  color: var(--t2);
+  margin-top: 4px;
+}
+
+/* ── Main card ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--bord2);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  animation: fadeSlideUp 280ms var(--ease);
+}
+
+/* ── Word hero ── */
+.hero {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.wordText {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  color: var(--t1);
+  cursor: default;
+  user-select: none;
+}
+
+.phonetic {
+  font-size: 15px;
+  color: var(--t3);
+  font-style: italic;
+}
+
+.audioBtn {
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--elevated);
+  border: 1px solid var(--bord);
+  color: var(--t2);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.audioBtn:hover {
+  background: var(--acc);
+  color: #ffffff;
+  border-color: var(--acc);
+}
+
+/* ── POS tag ── */
+.posTag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 10px 4px 10px 0;
+}
+
+/* ── Definitions ── */
+.defBlock {
+  padding: 8px 0 8px 14px;
+  border-left: 2px solid var(--bord);
+  margin-bottom: 8px;
+}
+
+.defText {
+  font-size: 14px;
+  color: var(--t1);
+  line-height: 1.65;
+}
+
+.defNum {
+  color: var(--t3);
+  margin-right: 4px;
+}
+
+.example {
+  font-size: 13px;
+  color: var(--t3);
+  font-style: italic;
+  margin-top: 3px;
+}
+
+/* ── Divider ── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--bord2);
+  margin: 12px 0;
+}
+
+/* ── Pill labels ── */
+.pillLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--t3);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 10px 0 6px;
+}
+
+/* ── Pills ── */
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.pill {
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--elevated);
+  border: 1px solid var(--bord2);
+  font-size: 13px;
+  color: var(--t2);
+  cursor: pointer;
+  transition: all 0.18s var(--ease);
+  font-family: inherit;
+}
+
+.pill:hover {
+  border-color: var(--acc);
+  color: var(--t1);
+  transform: translateY(-1px);
+}
+
+.pillRelated:hover {
+  border-color: var(--acc-g);
+  color: var(--t1);
+}
+
+/* ── Toast ── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--acc);
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  animation: fadeSlideUp 200ms var(--ease);
+  z-index: 999;
+  white-space: nowrap;
+  pointer-events: none;
+}

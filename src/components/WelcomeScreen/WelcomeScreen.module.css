@@ -1,0 +1,88 @@
+.wrap {
+  padding-top: 8px;
+  animation: fadeSlideUp 300ms var(--ease);
+}
+
+.top {
+  margin-bottom: 0;
+}
+
+.greeting {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--t1);
+}
+
+.sub {
+  font-size: 14px;
+  color: var(--t2);
+  margin-top: 6px;
+}
+
+.suggestLabel {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--t3);
+  margin: 24px 0 10px;
+  font-weight: 700;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pill {
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--bord);
+  background: var(--surface);
+  font-size: 14px;
+  color: var(--t2);
+  cursor: pointer;
+  transition: all 0.22s var(--ease);
+  font-family: inherit;
+}
+
+.pill:hover {
+  background: var(--elevated);
+  border-color: var(--acc);
+  color: var(--t1);
+  transform: translateY(-2px);
+}
+
+/* ── Stats row ── */
+.stats {
+  display: flex;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.statCard {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid var(--bord2);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.statValue {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--acc);
+}
+
+.statLabel {
+  font-size: 12px;
+  color: var(--t3);
+  margin-top: 2px;
+}
