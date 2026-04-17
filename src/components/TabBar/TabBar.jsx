@@ -4,10 +4,10 @@ import styles from './TabBar.module.css'
 
 const TABS = [
   { id: 'dictionary', label: '🔍 Dictionary' },
-  { id: 'history',    label: '🕐 History' },
-  { id: 'saved',      label: '🔖 Saved' },
   { id: 'verbs',      label: '📚 Verbs' },
   { id: 'grammar',    label: '📖 Grammar' },
+  { id: 'history',    label: '🕐 History' },
+  { id: 'saved',      label: '🔖 Saved' },
   { id: 'profile',    label: '👤 Profile' },
 ]
 
