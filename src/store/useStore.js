@@ -20,6 +20,7 @@ const useStore = create((set) => ({
   dictMode: 'en-en',
   currentWord: '',
   searchHistory: load('bf_history', []),
+  savedWords: load('bf_saved', []),
 
   addXP: (amount) =>
     set((state) => {
@@ -53,6 +54,15 @@ const useStore = create((set) => ({
     persist('bf_history', [])
     set({ searchHistory: [] })
   },
+
+  toggleSaved: (word) =>
+    set((state) => {
+      const saved = state.savedWords.includes(word)
+        ? state.savedWords.filter((w) => w !== word)
+        : [...state.savedWords, word]
+      persist('bf_saved', saved)
+      return { savedWords: saved }
+    }),
 }))
 
 export const addXP = (amount) => useStore.getState().addXP(amount)

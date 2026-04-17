@@ -9,6 +9,7 @@
   gap: 4px;
   overflow-x: auto;
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
 }
 
 .tabbar::-webkit-scrollbar {
@@ -41,4 +42,14 @@
   color: #ffffff;
   border-color: var(--acc);
   box-shadow: 0 0 18px rgba(124, 111, 255, 0.38);
+}
+
+.bounce {
+  animation: bounceIn 0.3s var(--ease);
+}
+
+@media (max-width: 480px) {
+  .tabbar {
+    padding: 8px 12px 0;
+  }
 }

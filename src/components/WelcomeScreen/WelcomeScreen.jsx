@@ -36,16 +36,25 @@ export default function WelcomeScreen({ onSearch }) {
 
       <div className={styles.suggestLabel}>✨ Try these words</div>
       <div className={styles.pills}>
-        {words.map((w) => (
-          <button key={w} className={styles.pill} onClick={() => onSearch(w)}>
+        {words.map((w, i) => (
+          <button
+            key={w}
+            className={styles.pill}
+            style={{ animationDelay: `${i * 60}ms` }}
+            onClick={() => onSearch(w)}
+          >
             {w}
           </button>
         ))}
       </div>
 
       <div className={styles.stats}>
-        {STATS.map((s) => (
-          <div key={s.label} className={styles.statCard}>
+        {STATS.map((s, i) => (
+          <div
+            key={s.label}
+            className={styles.statCard}
+            style={{ animationDelay: `${100 + i * 60}ms` }}
+          >
             <span className={styles.statValue}>{s.value}</span>
             <span className={styles.statLabel}>{s.label}</span>
           </div>

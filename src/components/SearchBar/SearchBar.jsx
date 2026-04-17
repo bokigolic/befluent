@@ -6,6 +6,8 @@ import styles from './SearchBar.module.css'
 export default function SearchBar({ onSearch }) {
   const [value, setValue] = useState('')
   const [open, setOpen] = useState(false)
+  const [focused, setFocused] = useState(false)
+  const [pressing, setPressing] = useState(false)
   const dictMode = useStore((s) => s.dictMode)
   const inputRef = useRef(null)
   const containerRef = useRef(null)
@@ -16,9 +18,8 @@ export default function SearchBar({ onSearch }) {
     dictMode === 'sr-en' ? 'Pretraži na srpskom...' : 'Search in English...'
 
   useEffect(() => {
-    if (suggestions.length > 0) setOpen(true)
-    else setOpen(false)
-  }, [suggestions])
+    setOpen(suggestions.length > 0 && focused)
+  }, [suggestions, focused])
 
   useEffect(() => {
     const handler = (e) => {
@@ -28,6 +29,18 @@ export default function SearchBar({ onSearch }) {
     }
     document.addEventListener('mousedown', handler)
     return () => document.removeEventListener('mousedown', handler)
+  }, [])
+
+  // "/" global shortcut
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.key === '/' && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
+        e.preventDefault()
+        inputRef.current?.focus()
+      }
+    }
+    document.addEventListener('keydown', handler)
+    return () => document.removeEventListener('keydown', handler)
   }, [])
 
   const commit = (word) => {
@@ -40,11 +53,16 @@ export default function SearchBar({ onSearch }) {
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') commit(value)
-    if (e.key === 'Escape') {
-      setValue('')
-      setOpen(false)
-    }
+    if (e.key === 'Escape') { setValue(''); setOpen(false) }
   }
+
+  const handleSearchClick = () => {
+    setPressing(true)
+    setTimeout(() => setPressing(false), 150)
+    commit(value)
+  }
+
+  const showSlashBadge = !focused && !value
 
   return (
     <div className={styles.wrapper} ref={containerRef}>
@@ -56,6 +74,8 @@ export default function SearchBar({ onSearch }) {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={handleKeyDown}
+          onFocus={() => setFocused(true)}
+          onBlur={() => { setFocused(false); setTimeout(() => setOpen(false), 120) }}
           placeholder={placeholder}
           autoComplete="off"
           spellCheck={false}
@@ -70,12 +90,14 @@ export default function SearchBar({ onSearch }) {
             ×
           </button>
         )}
+        {showSlashBadge && <span className={styles.slashBadge}>/</span>}
         {open && suggestions.length > 0 && (
           <ul className={styles.dropdown}>
             {suggestions.map((word, i) => (
               <li
                 key={word}
                 className={`${styles.item} ${i === suggestions.length - 1 ? styles.itemLast : ''}`}
+                style={{ animationDelay: `${i * 30}ms` }}
                 onMouseDown={() => commit(word)}
               >
                 {word}
@@ -85,8 +107,8 @@ export default function SearchBar({ onSearch }) {
         )}
       </div>
       <button
-        className={styles.searchBtn}
-        onClick={() => commit(value)}
+        className={`${styles.searchBtn} ${pressing ? styles.searchBtnPress : ''}`}
+        onClick={handleSearchClick}
       >
         Search
       </button>

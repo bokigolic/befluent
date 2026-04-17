@@ -74,12 +74,20 @@
   background: var(--surface);
   border: 1px solid var(--bord2);
   cursor: pointer;
-  transition: all 0.2s var(--ease);
+  animation: fadeSlideUp 300ms var(--ease) both;
+  transition: border-color 0.2s var(--ease), background 0.2s var(--ease),
+              transform 0.2s var(--ease), opacity 0.2s var(--ease);
 }
 
 .pill:hover {
   border-color: var(--acc);
   background: var(--elevated);
+}
+
+.pillRemoving {
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
 }
 
 .word {

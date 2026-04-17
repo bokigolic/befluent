@@ -10,7 +10,20 @@
   background: rgba(9, 9, 15, 0.88);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid var(--bord2);
+  /* animated gradient bottom border via ::after */
+  position: sticky;
+}
+
+.navbar::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--acc), var(--acc-p), var(--acc-g), var(--acc));
+  background-size: 300% 100%;
+  animation: gradientMove 4s linear infinite;
 }
 
 .logo {
@@ -48,4 +61,8 @@
 .streak {
   background: linear-gradient(135deg, #ff416c, #ff4b2b);
   color: #ffffff;
+}
+
+.bounce {
+  animation: bounceIn 0.4s var(--ease);
 }

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import useStore from '../../store/useStore'
 import styles from './HistoryPage.module.css'
 
@@ -8,9 +9,18 @@ const MODE_STYLE = {
 }
 
 export default function HistoryPage({ onWordClick }) {
-  const searchHistory  = useStore((s) => s.searchHistory)
+  const searchHistory     = useStore((s) => s.searchHistory)
   const removeFromHistory = useStore((s) => s.removeFromHistory)
-  const clearHistory   = useStore((s) => s.clearHistory)
+  const clearHistory      = useStore((s) => s.clearHistory)
+  const [removing, setRemoving] = useState(new Set())
+
+  const handleRemove = (word) => {
+    setRemoving((prev) => new Set([...prev, word]))
+    setTimeout(() => {
+      removeFromHistory(word)
+      setRemoving((prev) => { const next = new Set(prev); next.delete(word); return next })
+    }, 200)
+  }
 
   if (searchHistory.length === 0) {
     return (
@@ -29,11 +39,12 @@ export default function HistoryPage({ onWordClick }) {
         <button className={styles.clearBtn} onClick={clearHistory}>Clear all</button>
       </div>
       <div className={styles.grid}>
-        {searchHistory.map((item) => (
+        {searchHistory.map((item, i) => (
           <div
             key={item.word}
-            className={styles.pill}
-            onClick={() => onWordClick(item.word, item.mode)}
+            className={`${styles.pill} ${removing.has(item.word) ? styles.pillRemoving : ''}`}
+            style={{ animationDelay: `${i * 30}ms` }}
+            onClick={() => !removing.has(item.word) && onWordClick(item.word, item.mode)}
           >
             <span className={styles.word}>{item.word}</span>
             <span className={styles.modeBadge} style={MODE_STYLE[item.mode] ?? MODE_STYLE['en-en']}>
@@ -41,7 +52,7 @@ export default function HistoryPage({ onWordClick }) {
             </span>
             <button
               className={styles.remove}
-              onClick={(e) => { e.stopPropagation(); removeFromHistory(item.word) }}
+              onClick={(e) => { e.stopPropagation(); handleRemove(item.word) }}
               aria-label={`Remove ${item.word}`}
             >
               ×

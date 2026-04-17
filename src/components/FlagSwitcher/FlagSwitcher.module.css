@@ -28,7 +28,7 @@
   box-shadow: 0 2px 16px rgba(124, 111, 255, 0.18);
 }
 
-/* ── Swap button ── */
+/* ── Swap button (rotation applied inline for accumulation) ── */
 .swap {
   width: 40px;
   height: 40px;
@@ -42,13 +42,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s var(--ease);
+  transition: background 0.3s var(--ease), color 0.3s var(--ease), transform 0.4s var(--ease);
 }
 
 .swap:hover {
   background: var(--acc);
   color: #ffffff;
-  transform: rotate(180deg);
 }
 
 /* ── Labels ── */
@@ -145,7 +144,7 @@
   line-height: 1;
 }
 
-/* ── 3D hover on flag wrappers ── */
+/* ── 3D hover + swap out animations ── */
 .flagWrap {
   transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1);
 }
@@ -160,4 +159,22 @@
 
 .flagWrapSr:hover {
   transform: perspective(200px) rotateY(10deg) rotateX(4deg) scale(1.08);
+}
+
+.flagOut {
+  transform: perspective(200px) rotateY(90deg) scale(0.8) !important;
+  opacity: 0;
+  transition: transform 0.2s var(--ease), opacity 0.2s var(--ease);
+}
+
+.flagOutRight {
+  transform: perspective(200px) rotateY(-90deg) scale(0.8) !important;
+  opacity: 0;
+  transition: transform 0.2s var(--ease), opacity 0.2s var(--ease);
+}
+
+@media (max-width: 480px) {
+  .container { padding: 6px; }
+  .label { font-size: 12px; }
+  .side { gap: 8px; padding: 8px 10px; }
 }
