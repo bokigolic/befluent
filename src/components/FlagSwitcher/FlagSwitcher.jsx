@@ -3,19 +3,11 @@ import useStore from '../../store/useStore'
 import styles from './FlagSwitcher.module.css'
 
 function USFlag() {
-  return (
-    <div className={styles.flag}>
-      <div className={styles.canton} />
-    </div>
-  )
+  return <span className={styles.langCode}>ENG</span>
 }
 
 function SRFlag() {
-  return (
-    <div className={styles.flagSr}>
-      <span className={styles.eagle}>🦅</span>
-    </div>
-  )
+  return <span className={styles.langCode}>SR</span>
 }
 
 const LABELS = {

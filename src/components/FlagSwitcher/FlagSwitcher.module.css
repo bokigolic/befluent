@@ -1,3 +1,11 @@
+.langCode {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--t2);
+  letter-spacing: 0.04em;
+}
+
 .container {
   display: flex;
   align-items: center;
