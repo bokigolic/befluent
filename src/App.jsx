@@ -13,10 +13,12 @@ import OfflineBanner from './components/OfflineBanner/OfflineBanner'
 import BackgroundEffects from './components/BackgroundEffects/BackgroundEffects'
 import useStore from './store/useStore'
 
-const HistoryPage = lazy(() => import('./pages/HistoryPage/HistoryPage'))
-const SavedPage   = lazy(() => import('./pages/SavedPage/SavedPage'))
-const ProfilePage = lazy(() => import('./pages/ProfilePage/ProfilePage'))
-const QuizPage    = lazy(() => import('./pages/QuizPage/QuizPage'))
+const HistoryPage        = lazy(() => import('./pages/HistoryPage/HistoryPage'))
+const SavedPage          = lazy(() => import('./pages/SavedPage/SavedPage'))
+const ProfilePage        = lazy(() => import('./pages/ProfilePage/ProfilePage'))
+const QuizPage           = lazy(() => import('./pages/QuizPage/QuizPage'))
+const IrregularVerbsPage = lazy(() => import('./pages/IrregularVerbsPage/IrregularVerbsPage'))
+const GrammarPage        = lazy(() => import('./pages/GrammarPage/GrammarPage'))
 
 const shouldShowSplash = () =>
   !localStorage.getItem('bf_launched') ||
@@ -132,6 +134,18 @@ function App() {
         {activePage === 'saved' && (
           <Suspense fallback={skelFallback}>
             <SavedPage onWordClick={handleWordClick} onPractice={() => setQuizOpen(true)} />
+          </Suspense>
+        )}
+
+        {activePage === 'verbs' && (
+          <Suspense fallback={skelFallback}>
+            <IrregularVerbsPage />
+          </Suspense>
+        )}
+
+        {activePage === 'grammar' && (
+          <Suspense fallback={skelFallback}>
+            <GrammarPage />
           </Suspense>
         )}
 
