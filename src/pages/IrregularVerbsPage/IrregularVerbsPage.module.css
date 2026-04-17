@@ -4,9 +4,7 @@
   animation: fadeSlideUp 280ms var(--ease) both;
 }
 
-.header {
-  margin-bottom: 16px;
-}
+.header { margin-bottom: 16px; }
 
 .title {
   font-family: 'Space Grotesk', sans-serif;
@@ -16,10 +14,7 @@
   margin-bottom: 4px;
 }
 
-.sub {
-  font-size: 13px;
-  color: var(--t3);
-}
+.sub { font-size: 13px; color: var(--t3); }
 
 /* ── Search ── */
 .searchWrap {
@@ -50,10 +45,7 @@
   transition: border-color 0.2s;
 }
 
-.search:focus {
-  border-color: var(--acc);
-}
-
+.search:focus { border-color: var(--acc); }
 .search::placeholder { color: var(--t3); }
 
 .clear {
@@ -80,7 +72,7 @@
 
 .tableHead {
   display: grid;
-  grid-template-columns: 1.1fr 1fr 1.1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   padding: 10px 16px;
   background: var(--elevated);
   border-bottom: 1px solid var(--bord2);
@@ -94,11 +86,11 @@
 
 .row {
   display: grid;
-  grid-template-columns: 1.1fr 1fr 1.1fr 1fr;
-  padding: 11px 16px;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 10px 16px;
   border-bottom: 1px solid var(--bord2);
   gap: 8px;
-  align-items: center;
+  align-items: start;
   animation: fadeSlideUp 250ms var(--ease) both;
   transition: background 0.15s;
 }
@@ -106,24 +98,29 @@
 .row:last-child { border-bottom: none; }
 .row:hover { background: var(--elevated); }
 
-.cellBase {
+/* ── Each cell: EN word + SR below ── */
+.cell {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.cellEn {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 700;
   font-size: 14px;
   color: var(--t1);
 }
 
-.cellPast,
-.cellPart {
-  font-size: 13px;
-  color: var(--acc);
-  font-weight: 500;
-}
-
 .cellSr {
-  font-size: 13px;
+  font-size: 11px;
   color: var(--t3);
   font-style: italic;
+}
+
+/* First column (infinitive) gets accent color */
+.cell:first-child .cellEn {
+  color: var(--acc);
 }
 
 .empty {
@@ -134,39 +131,24 @@
 }
 
 /* ── Mobile ── */
-@media (max-width: 500px) {
+@media (max-width: 480px) {
   .tableHead { display: none; }
 
   .row {
-    display: block;
-    padding: 11px 14px;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 12px 10px;
+    gap: 6px;
   }
 
-  .cellBase {
-    display: inline;
-    font-size: 14px;
-  }
+  .cell { gap: 4px; }
 
-  .cellBase::after,
-  .cellPast::after {
-    content: ' · ';
-    color: var(--t3);
-    font-weight: 400;
-  }
-
-  .cellPast,
-  .cellPart {
-    display: inline;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--acc);
+  .cellEn {
+    font-size: 15px;
+    line-height: 1.2;
   }
 
   .cellSr {
-    display: block;
-    margin-top: 4px;
     font-size: 12px;
-    color: var(--t3);
-    font-style: italic;
+    line-height: 1.3;
   }
 }
