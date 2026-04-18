@@ -2,6 +2,8 @@ import { useState, useCallback, memo } from 'react'
 import useStore from '../../store/useStore'
 import { CATEGORIES } from './GrammarSection'
 import { GRAMMAR_DATA } from './grammarData'
+import { GRAMMAR_PRACTICE } from './grammarPractice'
+import PracticeView from './PracticeView'
 import styles from './GrammarDetailPage.module.css'
 
 // ── Highlight helper ──────────────────────────────────────────────────────────
@@ -24,15 +26,17 @@ function HighlightedSentence({ sentence, highlight }) {
 }
 
 // ── Lesson detail view ────────────────────────────────────────────────────────
-function LessonDetailView({ lesson, cat, onBack }) {
+function LessonDetailView({ lesson, cat, onBack, onNextLesson }) {
   const completedLessons    = useStore(s => s.completedLessons)
   const markLessonComplete  = useStore(s => s.markLessonComplete)
   const addXP               = useStore(s => s.addXP)
-  const [justDone, setJustDone] = useState(false)
+  const [justDone, setJustDone]     = useState(false)
+  const [showPractice, setShowPractice] = useState(false)
 
-  const categoryLessons = GRAMMAR_DATA[cat.id]?.lessons ?? []
+  const categoryLessons   = GRAMMAR_DATA[cat.id]?.lessons ?? []
   const categoryLessonIds = categoryLessons.map(l => l.id)
-  const isCompleted = completedLessons.includes(lesson.id)
+  const exercises         = GRAMMAR_PRACTICE[lesson.id] ?? []
+  const isCompleted       = completedLessons.includes(lesson.id)
 
   const handleComplete = useCallback(() => {
     if (isCompleted) return
@@ -40,6 +44,18 @@ function LessonDetailView({ lesson, cat, onBack }) {
     addXP(10)
     setJustDone(true)
   }, [isCompleted, lesson.id, cat.id, categoryLessonIds, markLessonComplete, addXP])
+
+  if (showPractice) {
+    return (
+      <PracticeView
+        lesson={lesson}
+        cat={cat}
+        exercises={exercises}
+        onBack={() => setShowPractice(false)}
+        onNextLesson={onNextLesson}
+      />
+    )
+  }
 
   return (
     <div className={styles.lessonOverlay}>
@@ -115,17 +131,39 @@ function LessonDetailView({ lesson, cat, onBack }) {
           </div>
         )}
 
-        {/* Complete button */}
-        <button
-          className={`${styles.completeBtn} ${(isCompleted || justDone) ? styles.completeBtnDone : ''}`}
-          onClick={handleComplete}
-          disabled={isCompleted || justDone}
-          style={!(isCompleted || justDone) ? { background: cat.color } : {}}
-        >
-          {(isCompleted || justDone) ? '✓ Completed' : 'Mark as Complete'}
-        </button>
-        {justDone && (
-          <p className={styles.xpNote}>+10 XP earned!</p>
+        {/* Bottom actions */}
+        {(isCompleted || justDone) ? (
+          <div className={styles.bottomActions}>
+            <div className={styles.completedBadge}>✓ Completed</div>
+            {exercises.length > 0 && (
+              <button
+                className={styles.practiceBtn}
+                style={{ background: cat.color }}
+                onClick={() => setShowPractice(true)}
+              >
+                Practice Again ⚡
+              </button>
+            )}
+          </div>
+        ) : (
+          <div className={styles.bottomActions}>
+            {exercises.length > 0 && (
+              <button
+                className={styles.practiceBtn}
+                style={{ background: cat.color }}
+                onClick={() => setShowPractice(true)}
+              >
+                Practice Now ⚡
+              </button>
+            )}
+            <button
+              className={styles.completeBtn}
+              onClick={handleComplete}
+            >
+              Mark as Complete ✓
+            </button>
+            {justDone && <p className={styles.xpNote}>+10 XP earned!</p>}
+          </div>
         )}
       </div>
     </div>
@@ -168,11 +206,14 @@ function GrammarDetailPage() {
   const activeLesson = activeLessonId ? lessons.find(l => l.id === activeLessonId) : null
 
   if (activeLesson) {
+    const activeLessonIndex = lessons.findIndex(l => l.id === activeLessonId)
+    const nextLesson = lessons[activeLessonIndex + 1] ?? null
     return (
       <LessonDetailView
         lesson={activeLesson}
         cat={cat}
         onBack={() => setActiveLessonId(null)}
+        onNextLesson={nextLesson ? () => setActiveLessonId(nextLesson.id) : null}
       />
     )
   }

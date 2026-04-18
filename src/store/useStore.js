@@ -67,7 +67,8 @@ const useStore = create((set, get) => ({
     tenses: 0, articles: 0, prepositions: 0,
     conditionals: 0, 'modal-verbs': 0, 'passive-voice': 0,
   }),
-  completedLessons: load('bf_lessons', []),
+  completedLessons:  load('bf_lessons', []),
+  practiceResults:   load('bf_practice', {}),
   activeGrammarCategory: null,
   notifications:  [],
 
@@ -77,6 +78,15 @@ const useStore = create((set, get) => ({
     const grammarProgress = { ...state.grammarProgress, [categoryId]: progress }
     persist('bf_grammar_progress', grammarProgress)
     return { grammarProgress }
+  }),
+
+  savePracticeResult: (lessonId, score, total) => set(state => {
+    const practiceResults = {
+      ...state.practiceResults,
+      [lessonId]: { score, total, date: new Date().toDateString() },
+    }
+    persist('bf_practice', practiceResults)
+    return { practiceResults }
   }),
 
   markLessonComplete: (lessonId, categoryId, categoryLessonIds) => set(state => {

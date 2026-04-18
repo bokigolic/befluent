@@ -340,8 +340,15 @@
   line-height: 1.55;
 }
 
-/* ── Complete button ── */
-.completeBtn {
+/* ── Bottom action buttons ── */
+.bottomActions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.practiceBtn {
   width: 100%;
   padding: 16px;
   border: none;
@@ -352,16 +359,38 @@
   color: #fff;
   cursor: pointer;
   transition: opacity 0.2s, transform 0.15s;
-  margin-top: 4px;
 }
 
-.completeBtn:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
-.completeBtn:active:not(:disabled) { transform: scale(0.98); }
+.practiceBtn:hover { opacity: 0.9; transform: translateY(-1px); }
+.practiceBtn:active { transform: scale(0.98); }
 
-.completeBtnDone {
-  background: var(--elevated) !important;
+.completeBtn {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid var(--bord);
+  border-radius: var(--radius);
+  background: none;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--t2);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.completeBtn:hover { border-color: var(--acc-g); color: var(--acc-g); background: rgba(0,229,160,0.05); }
+
+.completedBadge {
+  width: 100%;
+  padding: 14px;
+  text-align: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
   color: var(--acc-g);
-  cursor: default;
+  background: rgba(0, 229, 160, 0.08);
+  border-radius: var(--radius);
+  border: 1px solid rgba(0, 229, 160, 0.2);
 }
 
 .xpNote {
@@ -369,7 +398,6 @@
   font-size: 13px;
   color: var(--acc-g);
   font-weight: 600;
-  margin-top: -8px;
   animation: fadeSlideUp 250ms var(--ease) both;
 }
 
