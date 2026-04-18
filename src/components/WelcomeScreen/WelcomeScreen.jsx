@@ -2,6 +2,7 @@ import { useMemo, memo } from 'react'
 import useStore from '../../store/useStore'
 import WordOfDay from '../WordOfDay/WordOfDay'
 import GrammarSection from '../../features/grammar/GrammarSection'
+import { getDueCards } from '../../features/review/spacedRepetition'
 import styles from './WelcomeScreen.module.css'
 
 const WORD_POOL = [
@@ -21,17 +22,42 @@ function shuffle(arr) {
   return a
 }
 
+function ReviewReminder({ dueCount, onGoToReview }) {
+  if (dueCount <= 0) return null
+  return (
+    <div className={styles.reviewReminder}>
+      <span className={styles.reviewReminderIcon}>🔄</span>
+      <div className={styles.reviewReminderText}>
+        <div className={styles.reviewReminderTitle}>
+          You have {dueCount} word{dueCount !== 1 ? 's' : ''} to review today
+        </div>
+        <div className={styles.reviewReminderSub}>
+          Keep your streak going — reviews take 2-3 minutes
+        </div>
+      </div>
+      <button className={styles.reviewReminderBtn} onClick={onGoToReview}>
+        Start →
+      </button>
+    </div>
+  )
+}
+
 function WelcomeScreen({ onSearch }) {
   const words       = useMemo(() => shuffle(WORD_POOL).slice(0, 5), [])
   const todayCount  = useStore(s => s.todayCount)
   const dailyGoal   = useStore(s => s.dailyGoal)
+  const reviewDeck  = useStore(s => s.reviewDeck)
+  const setActivePage = useStore(s => s.setActivePage)
 
   const goalPct     = Math.min(100, Math.round((todayCount / dailyGoal) * 100))
   const goalReached = todayCount >= dailyGoal
+  const dueCount    = getDueCards(reviewDeck).length
 
   return (
     <div className={styles.wrap}>
       <WordOfDay onSearch={onSearch} />
+
+      <ReviewReminder dueCount={dueCount} onGoToReview={() => setActivePage('review')} />
 
       <div className={styles.top}>
         <h2 className={styles.greeting}>What will you learn today?</h2>

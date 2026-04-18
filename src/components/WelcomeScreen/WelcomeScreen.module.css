@@ -104,3 +104,55 @@
   color: var(--acc-a);
 }
 
+/* ── Review reminder ── */
+.reviewReminder {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 169, 77, 0.06);
+  border: 1px solid rgba(255, 169, 77, 0.3);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-top: 16px;
+  animation: bounceIn 400ms var(--ease) both;
+}
+
+.reviewReminderIcon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.reviewReminderText {
+  flex: 1;
+  min-width: 0;
+}
+
+.reviewReminderTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--t1);
+}
+
+.reviewReminderSub {
+  font-size: 12px;
+  color: var(--t3);
+  margin-top: 2px;
+}
+
+.reviewReminderBtn {
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--acc-a);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.reviewReminderBtn:hover { opacity: 0.85; transform: translateY(-1px); }
+

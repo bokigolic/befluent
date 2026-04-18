@@ -283,6 +283,23 @@
   box-shadow: 0 4px 12px rgba(0, 229, 160, 0.25);
 }
 
+/* ── Grammar hint ── */
+.grammarHint {
+  font-size: 13px;
+  color: var(--t2);
+  line-height: 1.55;
+  border-left: 2px solid var(--acc-a);
+  padding-left: 12px;
+  margin-bottom: 4px;
+}
+
+/* ── Review icon button variant ── */
+.reviewBtn {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+}
+
 /* ── Toast ── */
 .toast {
   position: fixed;

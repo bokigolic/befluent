@@ -1,4 +1,4 @@
-import { useState, useRef, memo } from 'react'
+import { useState, useRef, useEffect, memo } from 'react'
 import useDictionary from '../../hooks/useDictionary'
 import useTranslation from '../../hooks/useTranslation'
 import useRelatedWords from '../../hooks/useRelatedWords'
@@ -110,21 +110,57 @@ function MeaningBlock({ meaning, mi, onWordClick }) {
   )
 }
 
+// ── Grammar usage hint ────────────────────────────────────────────────────────
+function GrammarUsage({ meanings }) {
+  if (!meanings?.length) return null
+  const pos = meanings[0]?.partOfSpeech
+  let hint = null
+  if (pos === 'noun')      hint = 'Used with articles: a/an/the. Plural: usually add -s or -es. Can be countable or uncountable.'
+  else if (pos === 'verb') hint = 'Common patterns: [verb] + to infinitive / -ing form / noun. 3rd person singular adds -s.'
+  else if (pos === 'adjective') hint = 'Comparative: [word]er / more [word]. Superlative: the [word]est / the most [word].'
+  else if (pos === 'adverb')    hint = 'Modifies verbs and adjectives. Position: before adjective, after verb.'
+  if (!hint) return null
+  return (
+    <>
+      <div className={styles.pillLabel} style={{ borderColor: 'var(--acc-a)' }}>Grammar Usage</div>
+      <div className={styles.grammarHint}>{hint}</div>
+    </>
+  )
+}
+
 function ResultCard({ word, dictMode, onWordClick }) {
   const { data, isLoading: dictLoading, error } = useDictionary(word)
   const { translation, alternatives, isLoading: transLoading } = useTranslation(word, dictMode)
   const { words: relatedWords } = useRelatedWords(word)
   const { suggestions } = useSuggestions(word, !!error)
-  const savedWords  = useStore(s => s.savedWords)
-  const toggleSaved = useStore(s => s.toggleSaved)
-  const addXP       = useStore(s => s.addXP)
+  const savedWords   = useStore(s => s.savedWords)
+  const toggleSaved  = useStore(s => s.toggleSaved)
+  const addXP        = useStore(s => s.addXP)
+  const addToReview  = useStore(s => s.addToReview)
+  const reviewDeck   = useStore(s => s.reviewDeck)
 
   const [toast, setToast] = useState(null)
   const toastTimer  = useRef(null)
   const pressTimer  = useRef(null)
+  const autoAdded   = useRef(false)
 
-  const isLoading = dictLoading || transLoading
-  const isSaved   = savedWords.includes(word)
+  const isLoading    = dictLoading || transLoading
+  const isSaved      = savedWords.includes(word)
+  const inReviewDeck = reviewDeck.some(c => c.word.toLowerCase() === word.toLowerCase())
+
+  // Auto-add to review deck when translation is ready
+  useEffect(() => {
+    if (!autoAdded.current && translation && word) {
+      autoAdded.current = true
+      addToReview(word, translation, 'vocabulary')
+    }
+  }, [translation, word, addToReview])
+
+  const handleAddToReview = () => {
+    if (inReviewDeck) return
+    addToReview(word, translation || '', 'vocabulary')
+    showToast('Added to review deck!')
+  }
 
   const showToast = (msg) => {
     setToast(msg)
@@ -222,6 +258,14 @@ function ResultCard({ word, dictMode, onWordClick }) {
               </button>
             )}
             <button
+              className={`${styles.iconBtn} ${styles.reviewBtn}`}
+              onClick={handleAddToReview}
+              title={inReviewDeck ? 'In review deck' : 'Add to review deck'}
+              style={inReviewDeck ? { color: 'var(--acc-a)', borderColor: 'rgba(255,169,77,0.3)' } : {}}
+            >
+              {inReviewDeck ? '✓' : '+'}
+            </button>
+            <button
               className={styles.iconBtn}
               onClick={handleShare}
               title="Share word"
@@ -273,6 +317,9 @@ function ResultCard({ word, dictMode, onWordClick }) {
             </div>
           </>
         )}
+
+        <hr className={styles.divider} />
+        <GrammarUsage meanings={data.meanings} />
       </div>
 
       {toast && <div className={styles.toast}>{toast}</div>}

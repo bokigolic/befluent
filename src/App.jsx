@@ -20,6 +20,7 @@ const ProfilePage        = lazy(() => import('./pages/ProfilePage/ProfilePage'))
 const QuizPage           = lazy(() => import('./pages/QuizPage/QuizPage'))
 const IrregularVerbsPage = lazy(() => import('./pages/IrregularVerbsPage/IrregularVerbsPage'))
 const GrammarPage        = lazy(() => import('./pages/GrammarPage/GrammarPage'))
+const ReviewPage         = lazy(() => import('./features/review/ReviewPage'))
 
 const shouldShowSplash = () =>
   !localStorage.getItem('bf_launched') ||
@@ -149,6 +150,12 @@ function App() {
         {activePage === 'grammar' && (
           <Suspense fallback={skelFallback}>
             <GrammarPage />
+          </Suspense>
+        )}
+
+        {activePage === 'review' && (
+          <Suspense fallback={skelFallback}>
+            <ReviewPage />
           </Suspense>
         )}
 

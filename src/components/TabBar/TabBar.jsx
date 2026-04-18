@@ -6,6 +6,7 @@ const TABS = [
   { id: 'dictionary', label: '🔍 Dictionary' },
   { id: 'verbs',      label: '📚 Verbs' },
   { id: 'grammar',    label: '📖 Grammar' },
+  { id: 'review',     label: '🔄 Review' },
   { id: 'history',    label: '🕐 History' },
   { id: 'saved',      label: '🔖 Saved' },
   { id: 'profile',    label: '👤 Profile' },

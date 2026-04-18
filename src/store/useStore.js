@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { calculateNextReview, getDueCards } from '../features/review/spacedRepetition'
 
 const load = (key, fallback) => {
   try {
@@ -33,14 +34,18 @@ export const getXpProgress = (xp) => {
 }
 
 export const ACHIEVEMENTS_DEF = [
-  { id: 'first_search', title: 'First Steps',       desc: 'Search your first word', emoji: '🔍', xpReward: 10 },
-  { id: 'words_10',     title: 'Word Collector',     desc: 'Search 10 words',        emoji: '📚', xpReward: 25 },
-  { id: 'words_50',     title: 'Vocabulary Builder', desc: 'Search 50 words',        emoji: '🏗️', xpReward: 50 },
-  { id: 'streak_3',     title: 'On a Roll',          desc: '3 day streak',           emoji: '🔥', xpReward: 30 },
-  { id: 'streak_7',     title: 'Week Warrior',       desc: '7 day streak',           emoji: '⚡', xpReward: 75 },
-  { id: 'saved_5',      title: 'Bookworm',           desc: 'Save 5 words',           emoji: '🔖', xpReward: 20 },
-  { id: 'translation',  title: 'Bilingual',          desc: 'Use translation mode',   emoji: '🌍', xpReward: 15 },
-  { id: 'master',       title: 'Master',             desc: 'Reach 2000 XP',          emoji: '👑', xpReward: 100 },
+  { id: 'first_search', title: 'First Steps',        desc: 'Search your first word',             emoji: '🔍', xpReward: 10 },
+  { id: 'words_10',     title: 'Word Collector',     desc: 'Search 10 words',                    emoji: '📚', xpReward: 25 },
+  { id: 'words_50',     title: 'Vocabulary Builder', desc: 'Search 50 words',                    emoji: '🏗️', xpReward: 50 },
+  { id: 'streak_3',     title: 'On a Roll',          desc: '3 day streak',                       emoji: '🔥', xpReward: 30 },
+  { id: 'streak_7',     title: 'Week Warrior',       desc: '7 day streak',                       emoji: '⚡', xpReward: 75 },
+  { id: 'saved_5',      title: 'Bookworm',           desc: 'Save 5 words',                       emoji: '🔖', xpReward: 20 },
+  { id: 'translation',  title: 'Bilingual',          desc: 'Use translation mode',               emoji: '🌍', xpReward: 15 },
+  { id: 'master',       title: 'Master',             desc: 'Reach 2000 XP',                      emoji: '👑', xpReward: 100 },
+  { id: 'review_first', title: 'First Review',       desc: 'Complete your first review session', emoji: '🔄', xpReward: 15 },
+  { id: 'review_10',    title: 'Consistent Learner', desc: 'Review 10 sessions total',           emoji: '📅', xpReward: 40 },
+  { id: 'deck_20',      title: 'Deck Builder',       desc: 'Add 20 words to review deck',        emoji: '📦', xpReward: 30 },
+  { id: 'mastered_5',   title: 'Word Master',        desc: 'Master 5 words (21+ day interval)',  emoji: '🏅', xpReward: 50 },
 ]
 
 let _notifId = 0
@@ -67,12 +72,86 @@ const useStore = create((set, get) => ({
     tenses: 0, articles: 0, prepositions: 0,
     conditionals: 0, 'modal-verbs': 0, 'passive-voice': 0,
   }),
-  completedLessons:  load('bf_lessons', []),
-  practiceResults:   load('bf_practice', {}),
+  completedLessons:      load('bf_lessons', []),
+  practiceResults:       load('bf_practice', {}),
   activeGrammarCategory: null,
+  reviewDeck:            load('bf_review', []),
+  reviewSessionsCount:   load('bf_review_sessions', 0),
   notifications:  [],
 
   setActiveGrammarCategory: (id) => set({ activeGrammarCategory: id }),
+
+  addToReview: (word, translation, type = 'vocabulary', lessonId = null) => set(state => {
+    const exists = state.reviewDeck.find(c => c.word.toLowerCase() === word.toLowerCase())
+    if (exists) return {}
+    const today = new Date().toISOString().slice(0, 10)
+    const card = {
+      id: `${Date.now()}-${word}`,
+      word, translation: translation || '', type, lessonId,
+      interval: 1, easeFactor: 2.5, repetitions: 0,
+      nextReview: today, lastReview: null,
+      timesCorrect: 0, timesWrong: 0,
+    }
+    const reviewDeck = [...state.reviewDeck, card]
+    persist('bf_review', reviewDeck)
+
+    let achievements = state.achievements
+    const newNotifs = []
+    if (reviewDeck.length >= 20 && !achievements.includes('deck_20')) {
+      achievements = [...achievements, 'deck_20']
+      persist('bf_achievements', achievements)
+      newNotifs.push(mkNotif('achievement', ACHIEVEMENTS_DEF.find(a => a.id === 'deck_20')))
+    }
+    return { reviewDeck, achievements, notifications: [...state.notifications, ...newNotifs] }
+  }),
+
+  updateReviewCard: (id, quality) => set(state => {
+    const card = state.reviewDeck.find(c => c.id === id)
+    if (!card) return {}
+    const updates = calculateNextReview(card, quality)
+    const updated = {
+      ...card, ...updates,
+      lastReview: new Date().toISOString().slice(0, 10),
+      timesCorrect: quality >= 3 ? card.timesCorrect + 1 : card.timesCorrect,
+      timesWrong:   quality < 3  ? card.timesWrong  + 1 : card.timesWrong,
+    }
+    const reviewDeck = state.reviewDeck.map(c => c.id === id ? updated : c)
+    persist('bf_review', reviewDeck)
+    return { reviewDeck }
+  }),
+
+  completeReviewSession: (correctCount) => set(state => {
+    const reviewSessionsCount = state.reviewSessionsCount + 1
+    persist('bf_review_sessions', reviewSessionsCount)
+
+    let achievements = state.achievements
+    const newNotifs = []
+    const check = (id) => {
+      if (!achievements.includes(id)) {
+        achievements = [...achievements, id]
+        persist('bf_achievements', achievements)
+        newNotifs.push(mkNotif('achievement', ACHIEVEMENTS_DEF.find(a => a.id === id)))
+      }
+    }
+    if (reviewSessionsCount >= 1)  check('review_first')
+    if (reviewSessionsCount >= 10) check('review_10')
+    const mastered = state.reviewDeck.filter(c => c.interval > 21).length
+    if (mastered >= 5) check('mastered_5')
+
+    return { reviewSessionsCount, achievements, notifications: [...state.notifications, ...newNotifs] }
+  }),
+
+  getReviewStats: () => {
+    const { reviewDeck } = useStore.getState()
+    const due      = getDueCards(reviewDeck).length
+    const mastered = reviewDeck.filter(c => c.interval > 21).length
+    return {
+      totalCards: reviewDeck.length,
+      dueToday:   due,
+      mastered,
+      learning:   reviewDeck.length - mastered,
+    }
+  },
 
   updateGrammarProgress: (categoryId, progress) => set(state => {
     const grammarProgress = { ...state.grammarProgress, [categoryId]: progress }
