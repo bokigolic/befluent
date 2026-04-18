@@ -1,3 +1,4 @@
+/* ── Category list overlay ── */
 .overlay {
   position: fixed;
   inset: 0;
@@ -12,8 +13,9 @@
   to   { transform: translateX(0); }
 }
 
-/* ── Header ── */
-.header {
+/* ── Shared header ── */
+.header,
+.lessonHeader {
   position: sticky;
   top: 0;
   z-index: 10;
@@ -60,30 +62,21 @@
   flex-shrink: 0;
 }
 
-/* ── Content ── */
+/* ── Category content ── */
 .content {
-  padding: 32px 20px 60px;
+  padding: 20px 20px 80px;
   max-width: 480px;
   margin: 0 auto;
 }
 
-.comingSoon {
-  text-align: center;
-  color: var(--t3);
-  font-size: 15px;
-  margin-bottom: 32px;
-  padding: 40px 0 20px;
-}
-
-/* ── Lesson list ── */
+/* ── Lesson list cards ── */
 .lessonList {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
-/* ── Skeleton cards ── */
-.skeletonCard {
+.lessonCard {
   background: var(--surface);
   border: 1px solid var(--bord2);
   border-radius: var(--radius-sm);
@@ -91,32 +84,296 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  font-family: inherit;
+  transition: border-color 0.2s var(--ease), transform 0.2s var(--ease);
+  animation: fadeSlideUp 220ms var(--ease) both;
 }
 
-.skeletonCircle {
+.lessonCard:hover {
+  border-color: var(--bord);
+  transform: translateX(3px);
+}
+
+.lessonCircle {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: var(--bord2);
+  background: var(--elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--t2);
   flex-shrink: 0;
-  animation: shimmer 1.4s ease-in-out infinite;
+  transition: background 0.2s, color 0.2s;
 }
 
-.skeletonLines {
+.lessonCircleDone {
+  color: #fff;
+}
+
+.lessonInfo {
   flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 2px;
+}
+
+.lessonTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--t1);
+}
+
+.lessonDuration {
+  font-size: 12px;
+  color: var(--t3);
+}
+
+.lessonChevron {
+  font-size: 22px;
+  color: var(--t3);
+  line-height: 1;
+}
+
+/* ═══════════════════════════════════
+   Lesson Detail View
+═══════════════════════════════════ */
+.lessonOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 310;
+  background: var(--bg);
+  overflow-y: auto;
+  animation: slideInRight 300ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.lessonHeaderTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--t1);
+  flex: 1;
+}
+
+.lessonContent {
+  padding: 20px 20px 80px;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Section label ── */
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin-bottom: 10px;
+}
+
+/* ── Explanation box ── */
+.explanationBox {
+  background: rgba(124, 111, 255, 0.06);
+  border-left: 3px solid var(--acc);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 14px 16px;
+}
+
+.explanationText {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: var(--t1);
+  line-height: 1.65;
+}
+
+/* ── Generic block wrapper ── */
+.block { display: flex; flex-direction: column; }
+
+/* ── Rules list ── */
+.rulesList {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ruleItem {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--t2);
+  line-height: 1.5;
+  align-items: flex-start;
+}
+
+.ruleBullet {
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── Examples ── */
+.examplesList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.exampleCard {
+  background: var(--surface);
+  border: 1px solid var(--bord2);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.exSentence {
+  font-size: 14px;
+  color: var(--t1);
+  line-height: 1.5;
+}
+
+.exHighlight {
+  color: var(--acc);
+  font-weight: 700;
+}
+
+.exNote {
+  font-size: 12px;
+  color: var(--t3);
+  font-style: italic;
+}
+
+/* ── Mistakes ── */
+.mistakesList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mistakeCard {
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--bord2);
+}
+
+.mistakeRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.mistakeWrong,
+.mistakeCorrect {
+  padding: 10px 12px;
+  font-size: 13px;
+  line-height: 1.4;
+  display: flex;
   gap: 6px;
+  align-items: flex-start;
 }
 
-.skeletonLine {
-  height: 10px;
-  border-radius: 999px;
-  background: var(--bord2);
-  animation: shimmer 1.4s ease-in-out infinite;
+.mistakeWrong {
+  background: rgba(255, 107, 157, 0.08);
+  color: var(--t2);
 }
 
-@keyframes shimmer {
-  0%, 100% { opacity: 0.5; }
-  50%       { opacity: 1; }
+.mistakeCorrect {
+  background: rgba(0, 229, 160, 0.08);
+  color: var(--t2);
+}
+
+.mistakeIcon {
+  color: #ff6b9d;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.mistakeIconOk {
+  color: #00e5a0;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.mistakeExplain {
+  padding: 8px 12px;
+  font-size: 12px;
+  color: var(--t3);
+  background: var(--elevated);
+  font-style: italic;
+  line-height: 1.45;
+}
+
+/* ── Tip box ── */
+.tipBox {
+  background: rgba(255, 169, 77, 0.07);
+  border-left: 3px solid var(--acc-a);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 12px 16px;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.tipLabel {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--acc-a);
+  flex-shrink: 0;
+}
+
+.tipText {
+  font-size: 13px;
+  color: var(--t2);
+  line-height: 1.55;
+}
+
+/* ── Complete button ── */
+.completeBtn {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: var(--radius);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+  margin-top: 4px;
+}
+
+.completeBtn:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
+.completeBtn:active:not(:disabled) { transform: scale(0.98); }
+
+.completeBtnDone {
+  background: var(--elevated) !important;
+  color: var(--acc-g);
+  cursor: default;
+}
+
+.xpNote {
+  text-align: center;
+  font-size: 13px;
+  color: var(--acc-g);
+  font-weight: 600;
+  margin-top: -8px;
+  animation: fadeSlideUp 250ms var(--ease) both;
+}
+
+@media (max-width: 480px) {
+  .mistakeRow { grid-template-columns: 1fr; }
+  .mistakeCorrect { border-top: 1px solid var(--bord2); }
 }

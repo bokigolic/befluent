@@ -67,6 +67,7 @@ const useStore = create((set, get) => ({
     tenses: 0, articles: 0, prepositions: 0,
     conditionals: 0, 'modal-verbs': 0, 'passive-voice': 0,
   }),
+  completedLessons: load('bf_lessons', []),
   activeGrammarCategory: null,
   notifications:  [],
 
@@ -76,6 +77,19 @@ const useStore = create((set, get) => ({
     const grammarProgress = { ...state.grammarProgress, [categoryId]: progress }
     persist('bf_grammar_progress', grammarProgress)
     return { grammarProgress }
+  }),
+
+  markLessonComplete: (lessonId, categoryId, categoryLessonIds) => set(state => {
+    if (state.completedLessons.includes(lessonId)) return {}
+    const completedLessons = [...state.completedLessons, lessonId]
+    persist('bf_lessons', completedLessons)
+
+    const doneInCat = categoryLessonIds.filter(id => completedLessons.includes(id)).length
+    const progress = Math.round((doneInCat / categoryLessonIds.length) * 100)
+    const grammarProgress = { ...state.grammarProgress, [categoryId]: progress }
+    persist('bf_grammar_progress', grammarProgress)
+
+    return { completedLessons, grammarProgress }
   }),
 
   dismissNotification: (id) =>
