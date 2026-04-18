@@ -1,0 +1,234 @@
+.page {
+  padding: 16px 0 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Hero row ── */
+.heroRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  animation: fadeSlideUp 280ms var(--ease) both;
+}
+
+.heroCard {
+  background: var(--surface);
+  border: 1px solid var(--bord2);
+  border-radius: var(--radius-sm);
+  padding: 14px 12px;
+  text-align: center;
+}
+
+.heroNum {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--t1);
+}
+
+.heroLabel {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  color: var(--t3);
+  margin-top: 4px;
+}
+
+/* ── Generic block ── */
+.block {
+  background: var(--surface);
+  border: 1px solid var(--bord2);
+  border-radius: var(--radius);
+  padding: 16px;
+  animation: fadeSlideUp 300ms var(--ease) both;
+}
+
+.blockTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--t1);
+  margin-bottom: 14px;
+}
+
+/* ── XP bar ── */
+.xpLevelRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.xpLevelCurrent,
+.xpLevelNext {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--t2);
+}
+
+.xpTrack {
+  height: 10px;
+  background: var(--elevated);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.xpFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--acc), var(--acc-p));
+  border-radius: 999px;
+  transition: width 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  max-width: 100%;
+}
+
+.xpSub {
+  font-size: 12px;
+  color: var(--t3);
+  margin-top: 6px;
+  text-align: center;
+}
+
+/* ── Grammar bars ── */
+.grammarList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.grammarRow {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  animation: fadeSlideUp 250ms var(--ease) both;
+}
+
+.grammarMeta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.grammarEmoji { font-size: 16px; }
+
+.grammarName {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--t1);
+  flex: 1;
+}
+
+.grammarPct {
+  font-size: 12px;
+  color: var(--t3);
+  font-weight: 600;
+}
+
+.grammarTrack {
+  height: 6px;
+  background: var(--elevated);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.grammarFill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+  max-width: 100%;
+}
+
+/* ── Activity calendar ── */
+.calGrid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 3px;
+}
+
+.calCell {
+  aspect-ratio: 1;
+  border-radius: 3px;
+  animation: fadeSlideUp 200ms var(--ease) both;
+}
+
+/* ── 3 column metrics ── */
+.threeCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.metricCard {
+  background: var(--elevated);
+  border-radius: var(--radius-sm);
+  padding: 12px 8px;
+  text-align: center;
+}
+
+.metricNum {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 1;
+}
+
+.metricLabel {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  color: var(--t3);
+  margin-top: 4px;
+}
+
+/* ── Achievements grid ── */
+.achGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.achCard {
+  background: var(--elevated);
+  border: 1px solid var(--bord2);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  transition: border-color 0.2s;
+}
+
+.achDone {
+  opacity: 1;
+  border-color: rgba(0,229,160,0.3);
+}
+
+.achLocked {
+  opacity: 0.4;
+  filter: grayscale(0.5);
+}
+
+.achEmoji { font-size: 28px; margin-bottom: 4px; }
+
+.achTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.achDesc {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: var(--t3);
+  line-height: 1.4;
+}
+
+.achXP {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--acc-a);
+  margin-top: 4px;
+}

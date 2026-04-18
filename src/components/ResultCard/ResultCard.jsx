@@ -4,6 +4,7 @@ import useTranslation from '../../hooks/useTranslation'
 import useRelatedWords from '../../hooks/useRelatedWords'
 import useSuggestions from '../../hooks/useSuggestions'
 import useStore from '../../store/useStore'
+import AIHintCard from '../../features/ai/AIHintCard'
 import styles from './ResultCard.module.css'
 
 const POS_COLORS = {
@@ -200,11 +201,11 @@ function ResultCard({ word, dictMode, onWordClick }) {
       <div className={styles.errorBox}>
         <div className={styles.errorTitle}>
           <span>⚠️</span>
-          <span className={styles.errorText}>Hmm, we couldn't find "{word}"</span>
+          <span className={styles.errorText}>Hmm, we couldn't find that word</span>
         </div>
         {suggestions.length > 0 && (
           <>
-            <p className={styles.errorSub}>Did you mean:</p>
+            <p className={styles.errorSub}>Check the spelling or try one of these:</p>
             <div className={styles.pills}>
               {suggestions.map(s => (
                 <button key={s} className={styles.pill} onClick={() => onWordClick(s)}>{s}</button>
@@ -320,6 +321,12 @@ function ResultCard({ word, dictMode, onWordClick }) {
 
         <hr className={styles.divider} />
         <GrammarUsage meanings={data.meanings} />
+
+        <hr className={styles.divider} />
+        <AIHintCard
+          word={data.word}
+          partOfSpeech={data.meanings?.[0]?.partOfSpeech ?? 'word'}
+        />
       </div>
 
       {toast && <div className={styles.toast}>{toast}</div>}

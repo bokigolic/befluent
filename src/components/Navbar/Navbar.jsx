@@ -3,10 +3,11 @@ import useStore, { getXpProgress } from '../../store/useStore'
 import styles from './Navbar.module.css'
 
 function Navbar() {
-  const xp          = useStore(s => s.xp)
-  const streak      = useStore(s => s.streak)
-  const theme       = useStore(s => s.theme)
-  const toggleTheme = useStore(s => s.toggleTheme)
+  const xp             = useStore(s => s.xp)
+  const streak         = useStore(s => s.streak)
+  const theme          = useStore(s => s.theme)
+  const toggleTheme    = useStore(s => s.toggleTheme)
+  const setShowSettings = useStore(s => s.setShowSettings)
 
   const prevXp   = useRef(xp)
   const fillRef  = useRef(null)
@@ -25,6 +26,14 @@ function Navbar() {
     <nav className={styles.navbar}>
       <span className={styles.logo}>BeFluent</span>
       <div className={styles.badges}>
+        <button
+          className={styles.themeBtn}
+          onClick={() => setShowSettings(true)}
+          title="Settings"
+          aria-label="Settings"
+        >
+          ⚙️
+        </button>
         <button
           className={styles.themeBtn}
           onClick={toggleTheme}

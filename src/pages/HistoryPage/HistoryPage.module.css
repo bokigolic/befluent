@@ -13,6 +13,29 @@
   margin-bottom: 4px;
 }
 
+.emptyIllustration {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.bubble {
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--bord2);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--acc);
+  animation: floatBubble 3s var(--ease) infinite;
+}
+
+@keyframes floatBubble {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
 .emptyTitle {
   font-size: 16px;
   color: var(--t2);

@@ -77,6 +77,9 @@ const useStore = create((set, get) => ({
   activeGrammarCategory: null,
   reviewDeck:            load('bf_review', []),
   reviewSessionsCount:   load('bf_review_sessions', 0),
+  instantSearch:         load('bf_instant', false),
+  showSettings:          false,
+  activityLog:           load('bf_activity', {}),
   notifications:  [],
 
   setActiveGrammarCategory: (id) => set({ activeGrammarCategory: id }),
@@ -152,6 +155,14 @@ const useStore = create((set, get) => ({
       learning:   reviewDeck.length - mastered,
     }
   },
+
+  toggleInstantSearch: () => set(state => {
+    const instantSearch = !state.instantSearch
+    persist('bf_instant', instantSearch)
+    return { instantSearch }
+  }),
+
+  setShowSettings: (v) => set({ showSettings: v }),
 
   updateGrammarProgress: (categoryId, progress) => set(state => {
     const grammarProgress = { ...state.grammarProgress, [categoryId]: progress }
@@ -249,14 +260,18 @@ const useStore = create((set, get) => ({
     const isNewDay = state.lastSearchDate !== today
     const todayCount = isNewDay ? 1 : state.todayCount + 1
 
-    // Weekly data (last 7 days)
+    // Weekly data (last 30 days for calendar)
     const weeklyData = { ...state.weeklyData }
     weeklyData[today] = (weeklyData[today] || 0) + 1
-    const cutoff = new Date(Date.now() - 7 * 86400000)
+    const cutoff = new Date(Date.now() - 30 * 86400000)
     for (const k of Object.keys(weeklyData)) {
       if (new Date(k) < cutoff) delete weeklyData[k]
     }
     persist('bf_weekly', weeklyData)
+
+    // Activity log (same as weeklyData — alias for 30d calendar)
+    const activityLog = weeklyData
+    persist('bf_activity', activityLog)
 
     // Unlock achievements
     const existing = state.achievements
@@ -314,6 +329,7 @@ const useStore = create((set, get) => ({
       achievements,
       xp,
       weeklyData,
+      activityLog,
       notifications: [...state.notifications, ...newNotifs],
     }
   }),

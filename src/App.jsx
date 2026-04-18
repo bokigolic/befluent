@@ -12,6 +12,7 @@ import Achievements from './components/Achievements/Achievements'
 import OfflineBanner from './components/OfflineBanner/OfflineBanner'
 import BackgroundEffects from './components/BackgroundEffects/BackgroundEffects'
 import GrammarDetailPage from './features/grammar/GrammarDetailPage'
+import PWAInstallBanner from './components/PWAInstallBanner/PWAInstallBanner'
 import useStore from './store/useStore'
 
 const HistoryPage        = lazy(() => import('./pages/HistoryPage/HistoryPage'))
@@ -21,6 +22,8 @@ const QuizPage           = lazy(() => import('./pages/QuizPage/QuizPage'))
 const IrregularVerbsPage = lazy(() => import('./pages/IrregularVerbsPage/IrregularVerbsPage'))
 const GrammarPage        = lazy(() => import('./pages/GrammarPage/GrammarPage'))
 const ReviewPage         = lazy(() => import('./features/review/ReviewPage'))
+const ProgressPage       = lazy(() => import('./features/progress/ProgressPage'))
+const SettingsPage       = lazy(() => import('./pages/SettingsPage/SettingsPage'))
 
 const shouldShowSplash = () =>
   !localStorage.getItem('bf_launched') ||
@@ -62,6 +65,8 @@ function App() {
   const addXP          = useStore(s => s.addXP)
 
   const activeGrammarCategory = useStore(s => s.activeGrammarCategory)
+  const showSettings          = useStore(s => s.showSettings)
+  const setShowSettings       = useStore(s => s.setShowSettings)
 
   const [splashDone,    setSplashDone]    = useState(!shouldShowSplash())
   const [onboardDone,   setOnboardDone]   = useState(!shouldShowOnboarding())
@@ -71,6 +76,15 @@ function App() {
   useEffect(() => {
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#09090f')
   }, [])
+
+  // Escape key: close settings overlay
+  useEffect(() => {
+    const handler = (e) => {
+      if (e.key === 'Escape' && showSettings) setShowSettings(false)
+    }
+    document.addEventListener('keydown', handler)
+    return () => document.removeEventListener('keydown', handler)
+  }, [showSettings, setShowSettings])
 
   useEffect(() => {
     const onScroll = () => setShowScrollTop(window.scrollY > 300)
@@ -159,6 +173,12 @@ function App() {
           </Suspense>
         )}
 
+        {activePage === 'progress' && (
+          <Suspense fallback={skelFallback}>
+            <ProgressPage />
+          </Suspense>
+        )}
+
         {activePage === 'profile' && (
           <Suspense fallback={skelFallback}>
             <ProfilePage />
@@ -176,9 +196,16 @@ function App() {
         </button>
       )}
 
+      <PWAInstallBanner />
       <Achievements />
 
       {activeGrammarCategory && <GrammarDetailPage />}
+
+      {showSettings && (
+        <Suspense fallback={null}>
+          <SettingsPage onClose={() => setShowSettings(false)} />
+        </Suspense>
+      )}
 
       {quizOpen && (
         <Suspense fallback={null}>

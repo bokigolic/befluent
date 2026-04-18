@@ -18,9 +18,11 @@ function SavedPage({ onWordClick, onPractice }) {
   if (savedWords.length === 0) {
     return (
       <div className={styles.empty}>
-        <span className={styles.emptyIcon}>🔖</span>
-        <p className={styles.emptyTitle}>No saved words yet</p>
-        <p className={styles.emptySub}>Tap the bookmark icon on any word to save it</p>
+        <div className={styles.emptyBookmark}>
+          <div className={styles.bookmarkShape} />
+        </div>
+        <p className={styles.emptyTitle}>Save words to build your collection</p>
+        <p className={styles.emptySub}>Tap the bookmark icon on any word to save it here</p>
       </div>
     )
   }

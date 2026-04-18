@@ -25,9 +25,13 @@ export default function HistoryPage({ onWordClick }) {
   if (searchHistory.length === 0) {
     return (
       <div className={styles.empty}>
-        <span className={styles.emptyIcon}>📖</span>
-        <p className={styles.emptyTitle}>No searches yet</p>
-        <p className={styles.emptySub}>Start searching to build your history</p>
+        <div className={styles.emptyIllustration}>
+          <div className={styles.bubble} style={{ animationDelay: '0ms' }}>learn</div>
+          <div className={styles.bubble} style={{ animationDelay: '200ms' }}>words</div>
+          <div className={styles.bubble} style={{ animationDelay: '400ms' }}>grow</div>
+        </div>
+        <p className={styles.emptyTitle}>Your search history will appear here</p>
+        <p className={styles.emptySub}>Search a word to get started</p>
       </div>
     )
   }

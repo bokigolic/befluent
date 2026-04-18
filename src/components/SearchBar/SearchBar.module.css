@@ -123,13 +123,44 @@
   border-bottom: none;
 }
 
+/* ── Button row ── */
+.btnRow {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* ── Instant toggle ── */
+.instantToggle {
+  flex-shrink: 0;
+  padding: 0 14px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: var(--elevated);
+  border: 1px solid var(--bord2);
+  color: var(--t2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+
+.instantActive {
+  background: var(--acc);
+  color: #fff;
+  border-color: var(--acc);
+}
+
+.instantToggle:hover:not(.instantActive) { border-color: var(--acc); color: var(--t1); }
+
 /* ── Search button ── */
 .searchBtn {
+  flex: 1;
   position: relative;
   overflow: hidden;
-  width: 100%;
   height: 48px;
-  margin-top: 8px;
   border-radius: var(--radius-sm);
   background: linear-gradient(135deg, var(--acc), #a855f7);
   color: #ffffff;

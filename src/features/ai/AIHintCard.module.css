@@ -1,0 +1,113 @@
+/* ── Trigger button ── */
+.triggerBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid var(--acc);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--acc);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+  animation: pulse 2.5s var(--ease) infinite;
+}
+
+.triggerBtn:hover:not(:disabled) { background: rgba(124,111,255,0.1); }
+.triggerBtn:disabled { opacity: 0.6; cursor: default; animation: none; }
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(124,111,255,0); }
+  50%       { box-shadow: 0 0 0 4px rgba(124,111,255,0.18); }
+}
+
+/* ── Skeleton ── */
+.skelWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.skel {
+  height: 14px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--elevated) 25%, var(--hover) 50%, var(--elevated) 75%);
+  background-size: 400px 100%;
+  animation: shimmer 1.4s infinite linear;
+}
+
+/* ── Error ── */
+.errorBox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--t3);
+  padding: 8px 0;
+}
+
+.retryLink {
+  background: none;
+  border: none;
+  color: var(--acc);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  font-family: inherit;
+}
+
+/* ── Hint card ── */
+.card {
+  background: linear-gradient(135deg, rgba(124,111,255,0.06), rgba(255,107,157,0.04));
+  border: 1px solid rgba(124,111,255,0.2);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: fadeSlideUp 300ms var(--ease) both;
+}
+
+.header {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  background: linear-gradient(135deg, var(--acc), var(--acc-p));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section { display: flex; flex-direction: column; gap: 4px; }
+
+.label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--t1);
+  line-height: 1.6;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--bord2);
+  margin: 0;
+}
+
+.footer {
+  font-size: 11px;
+  color: var(--t3);
+  text-align: right;
+  margin-top: 4px;
+}
