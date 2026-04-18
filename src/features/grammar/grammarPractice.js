@@ -350,4 +350,110 @@ export const GRAMMAR_PRACTICE = {
     { type: 'multiple-choice', sentence: 'This must ___ immediately.', options: ['fix', 'be fixed', 'be fixing', 'fixed'], correct: 1, explanation: 'Modal passive: modal + be + past participle.' },
     { type: 'fill-blank', sentence: 'The mistake ___ have been avoided. (could)', answer: 'could', hint: 'Past modal passive = could have been + pp', explanation: 'Past modal passive: could + have been + past participle.' },
   ],
+
+  /* ── REPORTED SPEECH ─────────────────────────────────────────────── */
+  'rs-intro': [
+    { type: 'multiple-choice', sentence: "'I am tired.' → She said she ___ tired.", options: ['is', 'was', 'were', 'be'], correct: 1, explanation: 'Present simple → past simple in reported speech.' },
+    { type: 'fill-blank', sentence: "'I will help you.' → He said he ___ help me.", answer: 'would', hint: 'will → would in reported speech', explanation: 'Will shifts to would.' },
+    { type: 'rewrite', question: 'Report this statement:', original: "'I have finished my homework.' (she said)", answer: 'She said she had finished her homework.', hint: 'present perfect → past perfect', explanation: 'Have finished → had finished in reported speech.' },
+    { type: 'multiple-choice', sentence: "'We are leaving tomorrow.' → They said they ___ leaving the next day.", options: ['are', 'were', 'will be', 'have been'], correct: 1, explanation: 'Present continuous → past continuous.' },
+    { type: 'fill-blank', sentence: "'I can swim.' → She said she ___ swim.", answer: 'could', hint: 'can → could', explanation: 'Can shifts to could in reported speech.' },
+  ],
+
+  'rs-tense-backshift': [
+    { type: 'multiple-choice', sentence: "'I work in London.' → She said she ___ in London.", options: ['work', 'worked', 'works', 'has worked'], correct: 1, explanation: 'Present simple shifts to past simple.' },
+    { type: 'fill-blank', sentence: "'I have never been to Japan.' → He said he ___ never been to Japan.", answer: 'had', hint: 'have → had (past perfect)', explanation: 'Present perfect shifts to past perfect.' },
+    { type: 'rewrite', question: 'Report with correct backshift:', original: "'It may rain.' (he said)", answer: 'He said it might rain.', hint: 'may → might', explanation: 'May shifts to might in reported speech.' },
+    { type: 'multiple-choice', sentence: "'I can help.' → She said she ___ help.", options: ['can', 'could', 'may', 'will'], correct: 1, explanation: 'Can shifts to could.' },
+    { type: 'fill-blank', sentence: "'I went to Paris last year.' → She said she ___ gone to Paris the year before.", answer: 'had', hint: 'past simple → past perfect', explanation: 'Went → had gone in reported speech.' },
+  ],
+
+  'rs-say-tell': [
+    { type: 'multiple-choice', sentence: 'She ___ me that she was busy.', options: ['said', 'told', 'spoke', 'talked'], correct: 1, explanation: "Tell + person + that. Never 'said me'." },
+    { type: 'multiple-choice', sentence: 'He ___ that he would be late.', options: ['told', 'said', 'spoke', 'told to'], correct: 1, explanation: 'Say + (that) — no person directly after.' },
+    { type: 'rewrite', question: 'Correct the mistake:', original: 'She said me she was tired.', answer: 'She told me she was tired.', hint: 'said me → told me', explanation: 'Tell + person. Say has no person directly after.' },
+    { type: 'fill-blank', sentence: 'Can you ___ me the time please?', answer: 'tell', hint: 'Fixed expression', explanation: 'Tell the time — fixed expression.' },
+    { type: 'multiple-choice', sentence: 'He ___ to me that he was sorry.', options: ['told', 'said', 'spoke', 'talked'], correct: 1, explanation: "Said TO me — with 'to' we use say." },
+  ],
+
+  'rs-questions': [
+    { type: 'multiple-choice', sentence: "'Are you ready?' → She asked ___ I was ready.", options: ['that', 'if', 'what', 'which'], correct: 1, explanation: 'Yes/no question → if/whether.' },
+    { type: 'fill-blank', sentence: "'Where do you live?' → He asked where I ___.", answer: 'lived', hint: 'No auxiliary do, tense shifts back', explanation: 'Remove do, shift present→past.' },
+    { type: 'rewrite', question: 'Report this question:', original: "'What time is it?' (she asked)", answer: 'She asked what time it was.', hint: 'No inversion, no question mark', explanation: 'Normal order: what time it was (not was it).' },
+    { type: 'multiple-choice', sentence: "'Have you eaten?' → He asked if I ___.", options: ['have eaten', 'had eaten', 'ate', 'eat'], correct: 1, explanation: 'Present perfect → past perfect in reported question.' },
+    { type: 'fill-blank', sentence: "'Where does she work?' → He asked where she ___.", answer: 'worked', hint: 'Remove does, shift tense', explanation: 'Does work → worked. No auxiliary in reported questions.' },
+  ],
+
+  'rs-commands': [
+    { type: 'multiple-choice', sentence: "'Sit down!' → The teacher told the students ___ down.", options: ['sit', 'to sit', 'sitting', 'sat'], correct: 1, explanation: 'Commands: told + person + TO + base verb.' },
+    { type: 'fill-blank', sentence: "'Please help me.' → She asked him ___ her.", answer: 'to help', hint: 'Requests: asked + person + to + verb', explanation: 'Request: asked + person + to + base verb.' },
+    { type: 'rewrite', question: 'Report this command:', original: "'Don't touch that!' (he told me)", answer: 'He told me not to touch that.', hint: 'Negative: told + person + not to', explanation: 'Negative command: not to + base verb.' },
+    { type: 'multiple-choice', sentence: "'You should rest.' → The doctor advised her ___ rest.", options: ['to', 'that', 'for to', 'on'], correct: 0, explanation: 'Advised + person + TO + base verb.' },
+    { type: 'fill-blank', sentence: "'Clean your room!' → Mom told me ___ my room.", answer: 'to clean', hint: 'told + person + to + base verb', explanation: 'Command becomes: told + person + TO + base verb.' },
+  ],
+
+  'rs-no-backshift': [
+    { type: 'multiple-choice', sentence: "The teacher said water ___ at 100°C. (scientific fact)", options: ['boiled', 'boils', 'has boiled', 'would boil'], correct: 1, explanation: 'Scientific/permanent facts — no backshift needed.' },
+    { type: 'fill-blank', sentence: 'She says she ___ be here at 8. (present reporting = no shift)', answer: 'will', hint: 'Present reporting verb = no backshift', explanation: 'Present tense reporting verb means no backshift required.' },
+    { type: 'multiple-choice', sentence: 'Which sentence correctly avoids unnecessary backshift?', options: ["He said the sun rose in the east.", "He said the sun rises in the east.", "He said the sun has risen in the east.", "He said the sun would rise in the east."], correct: 1, explanation: 'Permanent truth = present tense kept.' },
+    { type: 'rewrite', question: 'Report WITHOUT backshift (scientific fact):', original: "'Water consists of hydrogen and oxygen.' (she said)", answer: 'She said water consists of hydrogen and oxygen.', hint: 'Scientific fact = no backshift', explanation: 'Permanent facts stay in present tense.' },
+    { type: 'fill-blank', sentence: 'He said he ___ already left when it happened. (past perfect = no further shift)', answer: 'had', hint: 'Already past perfect — stays', explanation: 'Past perfect cannot shift further back.' },
+  ],
+
+  'rs-review': [
+    { type: 'multiple-choice', sentence: "'I will call you tomorrow.' → She said she ___ call me the next day.", options: ['will', 'would', 'shall', 'can'], correct: 1, explanation: 'Will → would. Tomorrow → next day.' },
+    { type: 'fill-blank', sentence: "'Where have you been?' → He asked where I ___ been.", answer: 'had', hint: 'Question: normal order + past perfect', explanation: 'Present perfect → past perfect. Normal word order.' },
+    { type: 'rewrite', question: "Report: 'Don't open that door!' (she told us)", original: "'Don't open that door!' (she told us)", answer: 'She told us not to open that door.', hint: 'Negative command = told + not to', explanation: 'Negative command: told + person + not to + base verb.' },
+    { type: 'multiple-choice', sentence: 'He ___ me where I lived. (reported question)', options: ['said', 'asked', 'told', 'spoke'], correct: 1, explanation: 'Reported questions use asked.' },
+    { type: 'fill-blank', sentence: "'Can you help me?' → She asked if I ___ help her.", answer: 'could', hint: 'Can → could in reported questions', explanation: 'Can shifts to could, if for yes/no question.' },
+  ],
+
+  /* ── RELATIVE CLAUSES ────────────────────────────────────────────── */
+  'rc-intro': [
+    { type: 'multiple-choice', sentence: 'The man ___ called me is my uncle.', options: ['which', 'who', 'whose', 'where'], correct: 1, explanation: 'Person = who.' },
+    { type: 'multiple-choice', sentence: 'The book ___ I bought was expensive.', options: ['who', 'whose', 'which', 'where'], correct: 2, explanation: 'Thing = which or that.' },
+    { type: 'fill-blank', sentence: 'The girl ___ bag was stolen called the police.', answer: 'whose', hint: 'Possession', explanation: 'Possession = whose.' },
+    { type: 'rewrite', question: 'Combine with relative clause:', original: 'I met a woman. She speaks 5 languages.', answer: 'I met a woman who speaks 5 languages.', hint: 'Use who for person', explanation: 'Join with who — person.' },
+    { type: 'multiple-choice', sentence: "That's the city ___ I was born.", options: ['which', 'who', 'where', 'when'], correct: 2, explanation: 'Place = where.' },
+  ],
+
+  'rc-defining': [
+    { type: 'multiple-choice', sentence: 'The student ___ works hardest will get an A.', options: ['which', 'who', 'where', 'whom'], correct: 1, explanation: 'Person = who in defining clause.' },
+    { type: 'fill-blank', sentence: 'The film ___ we watched last night was amazing.', answer: 'that', hint: 'Defining clause, thing — that or which', explanation: 'Defining + thing = which or that.' },
+    { type: 'rewrite', question: 'Make defining relative clause:', original: 'I lost the keys. You gave them to me.', answer: 'I lost the keys that you gave me.', hint: 'that/which for things', explanation: 'Keys = thing → which/that.' },
+    { type: 'multiple-choice', sentence: "Can I omit 'that' in: 'The book that I read was great'?", options: ['Yes — that is the object', 'No — that is the subject', 'Never omit that', 'Only in formal English'], correct: 0, explanation: 'I = subject of read, that = object → can omit.' },
+    { type: 'fill-blank', sentence: 'People ___ exercise regularly live longer.', answer: 'who', hint: 'Person = who or that', explanation: 'Defining clause about people = who or that.' },
+  ],
+
+  'rc-non-defining': [
+    { type: 'multiple-choice', sentence: 'My brother, ___ lives in Paris, is a chef.', options: ['that', 'which', 'who', 'whom'], correct: 2, explanation: "Non-defining + person = who (never that)." },
+    { type: 'rewrite', question: 'Add non-defining relative clause:', original: 'The Eiffel Tower attracts millions. It was built in 1889.', answer: 'The Eiffel Tower, which was built in 1889, attracts millions.', hint: 'Use which + commas for things', explanation: 'Non-defining thing = which, with commas.' },
+    { type: 'multiple-choice', sentence: 'Which sentence is correct?', options: ['My mother, that is a nurse, works hard.', 'My mother who is a nurse works hard.', 'My mother, who is a nurse, works hard.', 'My mother which is a nurse works hard.'], correct: 2, explanation: 'Non-defining: who + commas. Never that.' },
+    { type: 'fill-blank', sentence: 'She gave me this book, ___ I found really useful.', answer: 'which', hint: 'Non-defining, thing = which', explanation: 'Non-defining clause about a thing = which.' },
+    { type: 'rewrite', question: 'Correct the mistake:', original: 'My father, that won an award, was proud.', answer: 'My father, who won an award, was proud.', hint: 'Non-defining cannot use that', explanation: 'Non-defining clauses never use that.' },
+  ],
+
+  'rc-whose-where-when': [
+    { type: 'multiple-choice', sentence: 'The house ___ roof is red belongs to my uncle.', options: ['who', 'which', 'whose', 'that'], correct: 2, explanation: 'Possession (house) = whose.' },
+    { type: 'fill-blank', sentence: "That's the hotel ___ we stayed last summer.", answer: 'where', hint: 'Place = where', explanation: 'Place = where (= in which).' },
+    { type: 'multiple-choice', sentence: "Whose vs Who's — 'The man ___ car was stolen was upset.'", options: ["who's", 'whose', 'which', 'that'], correct: 1, explanation: "Whose = possession. Who's = who is." },
+    { type: 'rewrite', question: 'Use where:', original: 'I visited the town. My grandfather was born there.', answer: 'I visited the town where my grandfather was born.', hint: 'Place = where', explanation: 'There → where in relative clause.' },
+    { type: 'fill-blank', sentence: "That's the reason ___ she quit.", answer: 'why', hint: 'Reason = why', explanation: 'Reason = why (= for which).' },
+  ],
+
+  'rc-omitting': [
+    { type: 'multiple-choice', sentence: "Can you omit 'which' in: 'The book which I bought is great'?", options: ['Yes — which is the object', 'No — which is the subject', 'Never omit which', 'Only in formal style'], correct: 0, explanation: 'I = subject, which = object → can omit.' },
+    { type: 'rewrite', question: 'Remove the pronoun if possible:', original: 'The film that we watched was boring.', answer: 'The film we watched was boring.', hint: 'We = subject → that is object → omit', explanation: 'Object pronoun in defining clause can be omitted.' },
+    { type: 'multiple-choice', sentence: "Can you omit 'who' in: 'The woman who called me was angry'?", options: ['Yes', 'No — who is the subject'], correct: 1, explanation: 'Who = subject of called → cannot omit.' },
+    { type: 'fill-blank', sentence: "Is this the bag ___ you were looking for? (omit if possible)", answer: 'that', hint: 'Object pronoun — can omit or keep', explanation: 'That is the object here — can be omitted or kept.' },
+    { type: 'rewrite', question: 'Correct the mistake:', original: 'The man called me was rude.', answer: 'The man who called me was rude.', hint: 'Cannot omit subject pronoun', explanation: 'Subject relative pronoun cannot be omitted.' },
+  ],
+
+  'rc-review': [
+    { type: 'multiple-choice', sentence: 'The place ___ I was born is beautiful.', options: ['which', 'who', 'where', 'when'], correct: 2, explanation: 'Place = where.' },
+    { type: 'fill-blank', sentence: 'My mother, ___ is a nurse, works night shifts.', answer: 'who', hint: 'Non-defining + person = who', explanation: 'Non-defining clause about a person = who (never that).' },
+    { type: 'rewrite', question: 'Combine sentences (non-defining):', original: 'The Louvre is in Paris. It is the most visited museum in the world.', answer: 'The Louvre, which is the most visited museum in the world, is in Paris.', hint: 'which + commas', explanation: 'Non-defining: which with commas for things.' },
+    { type: 'multiple-choice', sentence: "London, ___ I lived for 5 years, is amazing.", options: ['that', 'which', 'where', 'when'], correct: 2, explanation: 'Place (non-defining) = where.' },
+    { type: 'fill-blank', sentence: 'The teacher ___ taught me English was inspiring.', answer: 'who', hint: 'Person = who or that', explanation: 'Person in defining clause = who or that.' },
+  ],
 }

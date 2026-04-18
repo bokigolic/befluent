@@ -57,6 +57,24 @@ const CATEGORIES = [
     color: '#a78bfa',
     difficulty: 'B1-C1',
   },
+  {
+    id: 'reported-speech',
+    emoji: '💬',
+    title: 'Reported Speech',
+    subtitle: 'Say what others said',
+    lessons: 7,
+    color: '#38bdf8',
+    difficulty: 'B1-C1',
+  },
+  {
+    id: 'relative-clauses',
+    emoji: '🔗',
+    title: 'Relative Clauses',
+    subtitle: 'who, which, that, whose...',
+    lessons: 6,
+    color: '#c084fc',
+    difficulty: 'B1-C1',
+  },
 ]
 
 function hexToRgba(hex, alpha) {

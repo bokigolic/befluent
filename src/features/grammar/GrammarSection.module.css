@@ -47,6 +47,12 @@
   gap: 10px;
 }
 
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 /* ── Card ── */
 .card {
   background: var(--surface);
