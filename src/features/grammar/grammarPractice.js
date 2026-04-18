@@ -148,68 +148,68 @@ export const GRAMMAR_PRACTICE = {
   ],
 
   /* ── PREPOSITIONS ───────────────────────────────────────────────── */
-  'prep-time-in-on-at': [
-    { type: 'fill-blank', sentence: 'The meeting is ___ 3pm.', answer: 'at', hint: 'Exact time = at', explanation: 'Exact time = at.' },
-    { type: 'fill-blank', sentence: 'She was born ___ March.', answer: 'in', hint: 'Month = in', explanation: 'Months use in.' },
-    { type: 'multiple-choice', sentence: '___ Monday we have a meeting.', options: ['at', 'in', 'on', '—'], correct: 2, explanation: 'Days of the week = on.' },
-    { type: 'rewrite', question: 'Fix the preposition:', original: 'See you at Monday.', answer: 'See you on Monday.', hint: 'Days = on', explanation: 'Days use on, not at.' },
-    { type: 'multiple-choice', sentence: 'I exercise ___ the morning.', options: ['at', 'in', 'on', 'by'], correct: 1, explanation: 'Parts of the day (morning/afternoon/evening) = in.' },
+  'prep-time-at-on-in': [
+    { type: 'multiple-choice', sentence: 'The meeting is ___ 3pm.', options: ['in', 'on', 'at', 'by'], correct: 2, explanation: 'Exact time = at.' },
+    { type: 'multiple-choice', sentence: 'I was born ___ July.', options: ['at', 'on', 'in', 'by'], correct: 2, explanation: 'Month = in.' },
+    { type: 'fill-blank', sentence: 'She arrives ___ Monday.', answer: 'on', hint: 'Day of week', explanation: 'Days of week = on.' },
+    { type: 'rewrite', question: 'Correct the preposition:', original: 'See you in Friday.', answer: 'See you on Friday.', hint: 'Friday is a day', explanation: 'Days = on, not in.' },
+    { type: 'multiple-choice', sentence: 'I exercise ___ the morning.', options: ['at', 'in', 'on', 'by'], correct: 1, explanation: 'Parts of day (morning/afternoon/evening) = in.' },
   ],
 
-  'prep-place-in-on-at': [
-    { type: 'multiple-choice', sentence: 'She is ___ the airport.', options: ['in', 'on', 'at', 'by'], correct: 2, explanation: 'Specific location point = at.' },
-    { type: 'fill-blank', sentence: 'The book is ___ the shelf.', answer: 'on', hint: 'Surface = on', explanation: 'On a surface = on.' },
-    { type: 'fill-blank', sentence: 'He lives ___ Belgrade.', answer: 'in', hint: 'Inside a city = in', explanation: 'Cities use in.' },
-    { type: 'multiple-choice', sentence: 'There is a shop ___ the corner.', options: ['in', 'on', 'at', 'by'], correct: 2, explanation: 'Specific point/corner = at.' },
-    { type: 'rewrite', question: 'Fix the preposition:', original: 'I left my phone on the car.', answer: 'I left my phone in the car.', hint: 'Enclosed space = in', explanation: 'Inside a car (enclosed space) = in.' },
-  ],
-
-  'prep-movement': [
-    { type: 'fill-blank', sentence: 'She walked ___ the shop.', answer: 'to', hint: 'Destination = to', explanation: 'Destination = to.' },
-    { type: 'multiple-choice', sentence: 'They drove ___ the tunnel.', options: ['to', 'from', 'through', 'at'], correct: 2, explanation: 'One side to the other = through.' },
-    { type: 'fill-blank', sentence: 'He came ___ Italy.', answer: 'from', hint: 'Origin/starting point = from', explanation: 'Origin = from.' },
-    { type: 'rewrite', question: 'Fix the mistake:', original: 'I go to home.', answer: 'I go home.', hint: 'Home = no preposition needed', explanation: 'Home is used without "to" — it\'s an adverb.' },
-    { type: 'multiple-choice', sentence: 'She jumped ___ the pool.', options: ['in', 'to', 'into', 'at'], correct: 2, explanation: 'Entering an enclosed space = into.' },
-  ],
-
-  'prep-direction': [
-    { type: 'fill-blank', sentence: 'She walked ___ me slowly.', answer: 'towards', hint: 'Moving in my direction', explanation: 'Moving in the direction of someone/something = towards.' },
-    { type: 'multiple-choice', sentence: 'He ran ___ the noise.', options: ['towards', 'away from', 'along', 'past'], correct: 1, explanation: 'Opposite direction = away from.' },
-    { type: 'fill-blank', sentence: 'We strolled ___ the river.', answer: 'along', hint: 'Following the length of the river', explanation: 'Following the length of something = along.' },
-    { type: 'multiple-choice', sentence: 'Turn right just ___ the bank.', options: ['before', 'past', 'towards', 'into'], correct: 1, explanation: 'Beyond a point without stopping = past.' },
-    { type: 'rewrite', question: 'Fix the preposition:', original: 'She walked past to the shop.', answer: 'She walked past the shop.', hint: 'Past already implies movement beyond', explanation: 'Past doesn\'t need "to" — it already implies movement.' },
-  ],
-
-  'prep-transport': [
-    { type: 'fill-blank', sentence: 'I travel ___ train every day.', answer: 'by', hint: 'Method of transport = by', explanation: 'Method of transport = by (no article).' },
-    { type: 'multiple-choice', sentence: 'She is ___ the bus.', options: ['in', 'by', 'on', 'at'], correct: 2, explanation: 'Public transport (bus/train/plane) = on.' },
-    { type: 'fill-blank', sentence: 'They came ___ a taxi.', answer: 'in', hint: 'Small private vehicle = in', explanation: 'Private/small vehicle = in.' },
-    { type: 'multiple-choice', sentence: 'I came ___ car.', options: ['by the', 'by', 'in the', 'on'], correct: 1, explanation: 'Method = by + vehicle (no article).' },
+  'prep-place-at-on-in': [
+    { type: 'multiple-choice', sentence: 'The keys are ___ the table.', options: ['in', 'on', 'at', 'by'], correct: 1, explanation: 'Surface = on.' },
+    { type: 'multiple-choice', sentence: 'She is ___ the bus.', options: ['in', 'on', 'at', 'by'], correct: 1, explanation: 'Public transport = on.' },
+    { type: 'fill-blank', sentence: 'I\'ll meet you ___ the station.', answer: 'at', hint: 'Meeting point', explanation: 'Specific location/meeting point = at.' },
+    { type: 'multiple-choice', sentence: 'He lives ___ London.', options: ['at', 'on', 'in', 'by'], correct: 2, explanation: 'City = in.' },
     { type: 'rewrite', question: 'Fix the preposition:', original: 'She is in the bus.', answer: 'She is on the bus.', hint: 'Public transport = on', explanation: 'Bus (public transport) = on.' },
   ],
 
-  'prep-adjectives': [
-    { type: 'fill-blank', sentence: 'She is afraid ___ spiders.', answer: 'of', hint: 'afraid = always of', explanation: 'Afraid is always followed by of.' },
-    { type: 'multiple-choice', sentence: 'He is very good ___ maths.', options: ['of', 'on', 'at', 'in'], correct: 2, explanation: 'Good at = skill/subject.' },
-    { type: 'fill-blank', sentence: 'I\'m really excited ___ the trip.', answer: 'about', hint: 'excited about = fixed phrase', explanation: 'Excited is always followed by about.' },
-    { type: 'multiple-choice', sentence: 'Are you satisfied ___ the result?', options: ['of', 'at', 'with', 'for'], correct: 2, explanation: 'Satisfied with = fixed combination.' },
-    { type: 'rewrite', question: 'Fix the preposition:', original: 'I am good in English.', answer: 'I am good at English.', hint: 'Skills = good at', explanation: 'Good at is used for skills/subjects.' },
+  'prep-movement': [
+    { type: 'fill-blank', sentence: 'She walked ___ the building.', answer: 'into', hint: 'Entering enclosed space = into', explanation: 'Entering an enclosed space = into.' },
+    { type: 'multiple-choice', sentence: 'He drove ___ the airport.', options: ['into', 'from', 'to', 'at'], correct: 2, explanation: 'Destination = to.' },
+    { type: 'fill-blank', sentence: 'I come ___ Belgrade.', answer: 'from', hint: 'Origin/starting point = from', explanation: 'Origin = from.' },
+    { type: 'rewrite', question: 'Fix the mistake:', original: 'She went to home.', answer: 'She went home.', hint: 'Home never takes "to"', explanation: 'Home is an adverb — no "to" needed.' },
+    { type: 'multiple-choice', sentence: 'The cat jumped ___ the table.', options: ['in', 'to', 'onto', 'at'], correct: 2, explanation: 'Movement to a surface = onto.' },
   ],
 
-  'prep-verbs': [
-    { type: 'fill-blank', sentence: 'She is waiting ___ the bus.', answer: 'for', hint: 'wait always takes for', explanation: 'Wait is always followed by for.' },
-    { type: 'multiple-choice', sentence: 'Please listen ___ me.', options: ['at', 'of', 'to', 'for'], correct: 2, explanation: 'Listen is always followed by to.' },
-    { type: 'fill-blank', sentence: 'He applied ___ the job.', answer: 'for', hint: 'apply always takes for', explanation: 'Apply for = fixed combination.' },
-    { type: 'multiple-choice', sentence: 'Stop laughing ___ me!', options: ['of', 'to', 'at', 'for'], correct: 2, explanation: 'Laugh at = fixed combination.' },
-    { type: 'rewrite', question: 'Fix the preposition:', original: 'Please listen me.', answer: 'Please listen to me.', hint: 'Listen always needs to', explanation: 'Listen always needs to before the object.' },
+  'prep-by-with-without': [
+    { type: 'multiple-choice', sentence: 'I go to work ___ bus.', options: ['with', 'in', 'by', 'on'], correct: 2, explanation: 'Transport method = by.' },
+    { type: 'fill-blank', sentence: 'Finish the report ___ Friday.', answer: 'by', hint: 'Deadline', explanation: 'Deadline = by.' },
+    { type: 'multiple-choice', sentence: 'She drinks coffee ___ milk.', options: ['by', 'with', 'of', 'from'], correct: 1, explanation: 'Accompaniment/ingredient = with.' },
+    { type: 'rewrite', question: 'Use correct preposition:', original: 'Send it until tomorrow.', answer: 'Send it by tomorrow.', hint: 'Deadline not duration', explanation: 'Deadline = by. Until = continuous up to a point.' },
+    { type: 'fill-blank', sentence: 'She left the meeting ___ saying goodbye.', answer: 'without', hint: 'Absence of action', explanation: 'Absence = without.' },
+  ],
+
+  'prep-about-of-for': [
+    { type: 'fill-blank', sentence: 'We talked ___ the project.', answer: 'about', hint: 'Topic = about', explanation: 'Topic/subject = about.' },
+    { type: 'multiple-choice', sentence: 'Give me a glass ___ water please.', options: ['about', 'of', 'for', 'from'], correct: 1, explanation: 'Contents/belonging = of.' },
+    { type: 'fill-blank', sentence: 'This gift is ___ you.', answer: 'for', hint: 'Recipient = for', explanation: 'Recipient = for.' },
+    { type: 'rewrite', question: 'Fix the preposition:', original: 'A cup from tea.', answer: 'A cup of tea.', hint: 'Contents = of', explanation: 'Contents/ingredients = of, not from.' },
+    { type: 'multiple-choice', sentence: 'I\'ve been waiting ___ 2 hours.', options: ['since', 'from', 'for', 'during'], correct: 2, explanation: 'Duration = for.' },
+  ],
+
+  'prep-phrasal': [
+    { type: 'multiple-choice', sentence: 'Can you ___ my dog this weekend? (care for)', options: ['look at', 'look for', 'look after', 'look into'], correct: 2, explanation: 'Look after = care for.' },
+    { type: 'fill-blank', sentence: 'The plane ___ two hours late.', answer: 'took off', hint: 'Phrasal verb: become airborne', explanation: 'Take off = become airborne/depart.' },
+    { type: 'multiple-choice', sentence: 'I can\'t ___ this noise. (tolerate)', options: ['put off', 'put up with', 'put on', 'put down'], correct: 1, explanation: 'Put up with = tolerate.' },
+    { type: 'rewrite', question: 'Fix the phrasal verb order:', original: 'I\'ll think about it over.', answer: 'I\'ll think it over.', hint: 'Separable phrasal verb — object in the middle', explanation: 'Think over is separable: think it over.' },
+    { type: 'multiple-choice', sentence: 'Let\'s ___ the meeting until next week. (postpone)', options: ['put on', 'put off', 'put away', 'put up'], correct: 1, explanation: 'Put off = postpone.' },
+  ],
+
+  'prep-adjective-collocations': [
+    { type: 'fill-blank', sentence: 'She is very good ___ languages.', answer: 'at', hint: 'Good = always at', explanation: 'Good at = fixed collocation for skills.' },
+    { type: 'multiple-choice', sentence: 'I\'m not interested ___ politics.', options: ['of', 'in', 'at', 'with'], correct: 1, explanation: 'Interested in = fixed collocation.' },
+    { type: 'fill-blank', sentence: 'He is proud ___ his children.', answer: 'of', hint: 'Proud = always of', explanation: 'Proud of = fixed combination.' },
+    { type: 'rewrite', question: 'Fix the preposition:', original: 'She is good in math.', answer: 'She is good at math.', hint: 'Skills = good at', explanation: 'Good at — always at, never in for skills.' },
+    { type: 'multiple-choice', sentence: 'Are you familiar ___ this software?', options: ['of', 'in', 'with', 'at'], correct: 2, explanation: 'Familiar with = fixed combination.' },
   ],
 
   'prep-review': [
-    { type: 'multiple-choice', sentence: 'I have a meeting ___ Monday ___ 3pm.', options: ['on / at', 'in / at', 'at / on', 'on / in'], correct: 0, explanation: 'Day = on. Exact time = at.' },
-    { type: 'fill-blank', sentence: 'She is ___ the hospital (inside).', answer: 'in', hint: 'Enclosed space = in', explanation: 'Inside a building = in.' },
-    { type: 'fill-blank', sentence: 'I travel ___ train.', answer: 'by', hint: 'Method of transport', explanation: 'Method = by (no article).' },
-    { type: 'multiple-choice', sentence: 'He is good ___ listening to others.', options: ['in', 'for', 'at', 'of'], correct: 2, explanation: 'Good at = skill/ability.' },
-    { type: 'fill-blank', sentence: 'They waited ___ the doctor for an hour.', answer: 'for', hint: 'wait = always for', explanation: 'Wait for = fixed combination.' },
+    { type: 'multiple-choice', sentence: 'I was born ___ July 4th, ___ 1990.', options: ['in/on', 'on/in', 'at/on', 'in/at'], correct: 1, explanation: 'Date = on. Year = in.' },
+    { type: 'fill-blank', sentence: 'She traveled ___ car.', answer: 'by', hint: 'Method of transport', explanation: 'Method = by (no article).' },
+    { type: 'multiple-choice', sentence: 'I\'ll meet you ___ the cinema.', options: ['in', 'on', 'at', 'by'], correct: 2, explanation: 'Meeting point/location = at.' },
+    { type: 'fill-blank', sentence: 'We have been waiting ___ 2 hours.', answer: 'for', hint: 'Duration = for', explanation: 'Duration = for.' },
+    { type: 'rewrite', question: 'Fix the prepositions:', original: 'I\'ll see you in Friday at the morning.', answer: 'I\'ll see you on Friday in the morning.', hint: 'Days = on, parts of day = in', explanation: 'Days = on. Morning/afternoon/evening = in.' },
   ],
 
   /* ── CONDITIONALS ───────────────────────────────────────────────── */
@@ -312,42 +312,42 @@ export const GRAMMAR_PRACTICE = {
 
   /* ── PASSIVE VOICE ──────────────────────────────────────────────── */
   'passive-intro': [
-    { type: 'fill-blank', sentence: 'The Eiffel Tower ___ (build) in 1889.', answer: 'was built', hint: 'was/were + past participle', explanation: 'Past simple passive: was/were + past participle.' },
-    { type: 'multiple-choice', sentence: 'Active "The chef cooked the meal." → Passive:', options: ['The meal cooked', 'The meal was cooked', 'The meal is cooked', 'The meal has cooked'], correct: 1, explanation: 'Passive: object becomes subject + was/were + pp.' },
-    { type: 'rewrite', question: 'Fix the mistake:', original: 'The house was build in 1990.', answer: 'The house was built in 1990.', hint: 'Must use past participle', explanation: 'Passive needs past participle: build → built.' },
-    { type: 'fill-blank', sentence: 'English ___ (speak) in many countries.', answer: 'is spoken', hint: 'General fact = present simple passive', explanation: 'General fact: is/are + past participle.' },
-    { type: 'multiple-choice', sentence: 'When do we prefer passive?', options: ['When the agent is the most important thing', 'When what happened matters more than who did it', 'Always in formal writing', 'Never — active is always better'], correct: 1, explanation: 'Passive = focus on what happened, not who did it.' },
+    { type: 'multiple-choice', sentence: 'The cake ___ by my mother.', options: ['made', 'was made', 'is making', 'makes'], correct: 1, explanation: 'Past simple passive: was/were + past participle.' },
+    { type: 'fill-blank', sentence: 'English ___ all over the world. (speak)', answer: 'is spoken', hint: 'General fact = is/are + past participle', explanation: 'Present simple passive for general facts: is/are + past participle.' },
+    { type: 'rewrite', question: 'Make passive:', original: 'Someone broke the window.', answer: 'The window was broken.', hint: 'Object becomes subject + was/were + pp', explanation: 'The object (window) becomes the subject; agent can be omitted.' },
+    { type: 'multiple-choice', sentence: 'Which sentence is passive?', options: ['She writes the report.', 'The report was written by her.', 'She is writing the report.', 'She wrote the report.'], correct: 1, explanation: 'Passive = subject receives the action (was written).' },
+    { type: 'fill-blank', sentence: 'The letter ___ (send) yesterday.', answer: 'was sent', hint: 'Past simple passive = was/were + pp', explanation: 'Past simple passive: was/were + past participle.' },
   ],
 
-  'passive-present': [
+  'passive-present-past': [
     { type: 'fill-blank', sentence: 'This product ___ (make) in Germany.', answer: 'is made', hint: 'General fact = is/are + pp', explanation: 'Present simple passive: is/are + past participle.' },
     { type: 'multiple-choice', sentence: 'In progress RIGHT NOW (passive):', options: ['is made', 'is being made', 'has been made', 'was made'], correct: 1, explanation: 'In progress = is/are + being + past participle.' },
-    { type: 'rewrite', question: 'Fix the mistake:', original: 'The car is been repaired.', answer: 'The car is being repaired.', hint: 'Continuous passive = is + being + pp', explanation: 'Present continuous passive: is + BEING + past participle.' },
-    { type: 'fill-blank', sentence: 'The results ___ (just/announce).', answer: 'have been announced', hint: 'Present perfect passive = have/has + been + pp', explanation: 'Present perfect passive: have/has + been + pp.' },
-    { type: 'multiple-choice', sentence: 'General fact passive:', options: ['is + being + pp', 'have been + pp', 'is/are + pp', 'was/were + pp'], correct: 2, explanation: 'General present fact = is/are + past participle.' },
-  ],
-
-  'passive-past': [
     { type: 'fill-blank', sentence: 'Three people ___ (injure) in the accident.', answer: 'were injured', hint: 'Past = was/were + pp', explanation: 'Past simple passive: was/were + past participle.' },
-    { type: 'multiple-choice', sentence: 'Past Simple passive uses:', options: ['is/are + pp', 'was/were + pp', 'have been + pp', 'had been + pp'], correct: 1, explanation: 'Past simple passive = was/were + past participle.' },
-    { type: 'rewrite', question: 'Fix the mistake:', original: 'The building was destroy in 2001.', answer: 'The building was destroyed in 2001.', hint: 'Must use past participle', explanation: 'Was + past participle: destroy → destroyed.' },
+    { type: 'rewrite', question: 'Fix the mistake:', original: 'The car is been repaired.', answer: 'The car is being repaired.', hint: 'Continuous passive = is + being + pp', explanation: 'Present continuous passive: is + BEING + past participle.' },
+    { type: 'multiple-choice', sentence: '"The building ___ destroyed in 2001."', options: ['is', 'was', 'has', 'had'], correct: 1, explanation: 'Past simple passive: was/were + past participle.' },
+  ],
+
+  'passive-other-tenses': [
+    { type: 'multiple-choice', sentence: 'The road ___ right now. (repair)', options: ['is repaired', 'is repairing', 'is being repaired', 'has repaired'], correct: 2, explanation: 'Present continuous passive: is/are + being + past participle.' },
+    { type: 'fill-blank', sentence: 'My phone ___. (steal — present perfect)', answer: 'has been stolen', hint: 'Present perfect passive = have/has + been + pp', explanation: 'Present perfect passive: have/has + been + past participle.' },
+    { type: 'rewrite', question: 'Future passive:', original: 'They will announce the results tomorrow.', answer: 'The results will be announced tomorrow.', hint: 'will + be + past participle', explanation: 'Future passive: will + be + past participle.' },
+    { type: 'multiple-choice', sentence: 'The project ___ finished by next week.', options: ['will', 'will be', 'is being', 'has been'], correct: 1, explanation: 'Future passive: will + be + past participle.' },
     { type: 'fill-blank', sentence: 'By the time we arrived, the decision ___ (already/make).', answer: 'had already been made', hint: 'Past perfect passive = had been + pp', explanation: 'Past perfect passive: had been + past participle.' },
-    { type: 'multiple-choice', sentence: '"The suspect ___ questioned when he escaped."', options: ['was', 'was being', 'had been', 'is'], correct: 1, explanation: 'In progress in the past (interrupted) = was being + pp.' },
   ],
 
-  'passive-modals': [
-    { type: 'fill-blank', sentence: 'This door ___ be kept closed at all times.', answer: 'must', hint: 'Rule/obligation = must', explanation: 'Rule: must + be + past participle.' },
-    { type: 'multiple-choice', sentence: 'Past passive modal structure:', options: ['modal + be + pp', 'modal + been + pp', 'modal + have been + pp', 'be + modal + pp'], correct: 2, explanation: 'Past: modal + have been + past participle.' },
-    { type: 'rewrite', question: 'Fix the mistake:', original: 'It must be fix.', answer: 'It must be fixed.', hint: 'Always past participle after be', explanation: 'Passive: be + past participle (fixed, not fix).' },
-    { type: 'fill-blank', sentence: 'All applications ___ submitted online.', answer: 'should be', hint: 'Instruction = should + be + pp', explanation: 'Instruction: should be + past participle.' },
-    { type: 'multiple-choice', sentence: '"The error ___ have been prevented."', options: ['could prevented', 'could be prevented', 'could have been prevented', 'could have prevented'], correct: 2, explanation: 'Past modal passive: could have been + past participle.' },
+  'passive-reporting': [
+    { type: 'multiple-choice', sentence: 'Reporting verb passive: "It ___ that he is innocent."', options: ['says', 'is said', 'said', 'has said'], correct: 1, explanation: 'Reporting passive: It + is/are + said/believed/thought + that...' },
+    { type: 'fill-blank', sentence: 'He ___ to be the best in his field. (consider)', answer: 'is considered', hint: 'Subject + is/are + past participle + to infinitive', explanation: 'Subject-fronted reporting passive: is/are + pp + to infinitive.' },
+    { type: 'rewrite', question: 'Convert to reporting passive:', original: 'People believe that she is talented.', answer: 'It is believed that she is talented.', hint: 'It + is believed + that...', explanation: 'It is believed/said/thought + that clause.' },
+    { type: 'multiple-choice', sentence: '"Scientists ___ to have discovered a new planet."', options: ['say', 'are said', 'said', 'have said'], correct: 1, explanation: 'Subject-fronted: Scientists are said + to + infinitive.' },
+    { type: 'fill-blank', sentence: 'It ___ (report) that the economy is improving.', answer: 'is reported', hint: 'It + is + past participle', explanation: 'Impersonal reporting passive: It + is reported/said/believed.' },
   ],
 
-  'causative-have-get': [
-    { type: 'fill-blank', sentence: 'I had my hair ___ yesterday.', answer: 'cut', hint: 'have + object + past participle', explanation: 'Causative: have + object + past participle (cut).' },
-    { type: 'multiple-choice', sentence: 'Causative means:', options: ['You do it yourself', 'You arrange for someone else to do it', 'It happens automatically', 'It happened before'], correct: 1, explanation: 'Causative = you arrange it, but someone else does it.' },
-    { type: 'rewrite', question: 'Fix the mistake:', original: 'I had my car fix.', answer: 'I had my car fixed.', hint: 'have + object + past participle', explanation: 'Causative: always past participle after the object.' },
-    { type: 'fill-blank', sentence: 'We\'re having the house ___ next week. (paint)', answer: 'painted', hint: 'Past participle after the object', explanation: 'Have + house + past participle: painted.' },
-    { type: 'multiple-choice', sentence: '"Get + object + pp" means:', options: ['You do it yourself', 'Someone else does it (informal)', 'It was done in the past', 'It must be done'], correct: 1, explanation: 'Get + object + pp = informal causative (someone else does it).' },
+  'passive-review': [
+    { type: 'multiple-choice', sentence: 'Which is correct causative?', options: ['I cut my hair.', 'I had my hair cut.', 'My hair was cutting.', 'My hair cuts.'], correct: 1, explanation: 'Causative have: have + object + past participle.' },
+    { type: 'fill-blank', sentence: 'We ___ the house painted last summer. (have — causative)', answer: 'had', hint: 'Causative past = had + object + pp', explanation: 'Causative past: had + object + past participle.' },
+    { type: 'rewrite', question: 'Make passive (keep the agent):', original: 'Shakespeare wrote Hamlet.', answer: 'Hamlet was written by Shakespeare.', hint: 'by + agent at the end', explanation: 'Passive with agent: was/were + pp + by + agent.' },
+    { type: 'multiple-choice', sentence: 'This must ___ immediately.', options: ['fix', 'be fixed', 'be fixing', 'fixed'], correct: 1, explanation: 'Modal passive: modal + be + past participle.' },
+    { type: 'fill-blank', sentence: 'The mistake ___ have been avoided. (could)', answer: 'could', hint: 'Past modal passive = could have been + pp', explanation: 'Past modal passive: could + have been + past participle.' },
   ],
 }
