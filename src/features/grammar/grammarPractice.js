@@ -34,6 +34,30 @@ export const GRAMMAR_PRACTICE = {
     { type: 'multiple-choice', sentence: '___ you at home last night?', options: ['Did', 'Were', 'Was', 'Have'], correct: 1, explanation: 'Was/were for states in past (no action verb needed).' },
   ],
 
+  'future-perfect': [
+    { type: 'multiple-choice', sentence: 'By 8pm, she ___ finished cooking.', options: ['will finish', 'will have finished', 'has finished', 'is finishing'], correct: 1, explanation: 'By + time = future perfect: will have + pp.' },
+    { type: 'fill-blank', sentence: '___ you ___ (eat) by the time I arrive? (will/have eaten)', answer: 'Will', hint: 'Future perfect question: Will + subject + have + pp', explanation: 'Will + subject + have + past participle for future perfect questions.' },
+    { type: 'rewrite', question: 'Use future perfect:', original: 'I finish the project. Deadline: next Friday.', answer: 'I will have finished the project by next Friday.', hint: 'by + deadline = future perfect', explanation: 'BY next Friday = will have finished.' },
+    { type: 'multiple-choice', sentence: 'By 2030, electric cars ___ the majority of vehicles.', options: ['will become', 'will have become', 'become', 'are becoming'], correct: 1, explanation: 'By 2030 = deadline = future perfect.' },
+    { type: 'fill-blank', sentence: 'She ___ (not/finish) the report by tomorrow.', answer: "won't have finished", hint: 'Negative future perfect', explanation: 'Negative: will not have + past participle.' },
+  ],
+
+  'past-perfect-continuous': [
+    { type: 'multiple-choice', sentence: 'She was tired because she ___ all day.', options: ['worked', 'was working', 'had been working', 'has worked'], correct: 2, explanation: 'Duration before past result = past perfect continuous.' },
+    { type: 'fill-blank', sentence: 'How long ___ you been waiting when the bus arrived?', answer: 'had', hint: 'Duration question in past', explanation: 'How long had you been waiting = duration before past event.' },
+    { type: 'rewrite', question: 'Use past perfect continuous:', original: 'He was exhausted. He had run for 3 hours.', answer: 'He was exhausted because he had been running for 3 hours.', hint: 'had been + verb-ing', explanation: 'Duration before past result = had been running.' },
+    { type: 'multiple-choice', sentence: 'They ___ for 2 hours before they reached an agreement.', options: ['discussed', 'had discussed', 'had been discussing', 'were discussing'], correct: 2, explanation: 'Duration before another past event = past perfect continuous.' },
+    { type: 'fill-blank', sentence: 'She was crying because she ___ (argue) with her friend.', answer: 'had been arguing', hint: 'Explains visible past result with duration', explanation: 'Had been arguing = duration before past emotional state.' },
+  ],
+
+  'reported-speech-tenses': [
+    { type: 'multiple-choice', sentence: "'I am studying.' → She said she ___ studying.", options: ['is', 'was', 'has been', 'had been'], correct: 1, explanation: 'Present continuous → past continuous in reported speech.' },
+    { type: 'fill-blank', sentence: "'I must leave.' → He said he ___ to leave.", answer: 'had', hint: 'Must → had to (special shift)', explanation: 'Must shifts to had to, not would must or musted.' },
+    { type: 'rewrite', question: 'Report with correct tense:', original: "'It may rain.' (she said)", answer: 'She said it might rain.', hint: 'May → might', explanation: 'May shifts to might in reported speech.' },
+    { type: 'multiple-choice', sentence: "'I have never tried sushi.' → He said he ___ never tried sushi.", options: ['has', 'had', 'have', 'did'], correct: 1, explanation: 'Present perfect → past perfect in reported speech.' },
+    { type: 'multiple-choice', sentence: "'I can help.' → She said she ___ help.", options: ['can', 'could', 'would', 'should'], correct: 1, explanation: 'Can → could in reported speech.' },
+  ],
+
   'past-continuous': [
     { type: 'multiple-choice', sentence: 'I ___ when you called.', options: ['sleep', 'sleeping', 'was sleeping', 'am sleeping'], correct: 2, explanation: 'In progress when interrupted = was/were + verb-ing.' },
     { type: 'fill-blank', sentence: 'They ___ (play) all afternoon.', answer: 'were playing', hint: 'They = were + verb-ing', explanation: 'They → were + verb-ing.' },

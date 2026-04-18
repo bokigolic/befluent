@@ -71,8 +71,12 @@ const useStore = create((set, get) => ({
   grammarProgress: load('bf_grammar_progress', {
     tenses: 0, articles: 0, prepositions: 0,
     conditionals: 0, 'modal-verbs': 0, 'passive-voice': 0,
+    'reported-speech': 0, 'relative-clauses': 0,
+    'gerunds-infinitives': 0, conjunctions: 0, 'word-formation': 0,
   }),
   completedLessons:      load('bf_lessons', []),
+  savedLessons:          load('bf_saved_lessons', []),
+  lastStudied:           load('bf_last_studied', {}),
   practiceResults:       load('bf_practice', {}),
   activeGrammarCategory: null,
   reviewDeck:            load('bf_review', []),
@@ -83,6 +87,20 @@ const useStore = create((set, get) => ({
   notifications:  [],
 
   setActiveGrammarCategory: (id) => set({ activeGrammarCategory: id }),
+
+  toggleSavedLesson: (lessonId) => set(state => {
+    const savedLessons = state.savedLessons.includes(lessonId)
+      ? state.savedLessons.filter(id => id !== lessonId)
+      : [...state.savedLessons, lessonId]
+    persist('bf_saved_lessons', savedLessons)
+    return { savedLessons }
+  }),
+
+  updateLastStudied: (categoryId) => set(state => {
+    const lastStudied = { ...state.lastStudied, [categoryId]: new Date().toISOString() }
+    persist('bf_last_studied', lastStudied)
+    return { lastStudied }
+  }),
 
   addToReview: (word, translation, type = 'vocabulary', lessonId = null) => set(state => {
     const exists = state.reviewDeck.find(c => c.word.toLowerCase() === word.toLowerCase())

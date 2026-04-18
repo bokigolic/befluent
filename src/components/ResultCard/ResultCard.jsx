@@ -112,14 +112,40 @@ function MeaningBlock({ meaning, mi, onWordClick }) {
 }
 
 // ── Grammar usage hint ────────────────────────────────────────────────────────
-function GrammarUsage({ meanings }) {
+const GERUND_VERBS = ['enjoy','avoid','finish','suggest','mind','miss','consider','risk','practice','keep','imagine','admit','deny','delay','recommend','involve','resist','appreciate','discuss','mention','postpone','quit','recall']
+const INFINITIVE_VERBS = ['want','need','decide','hope','plan','agree','refuse','manage','fail','seem','appear','tend','offer','promise','choose','expect','learn','wish','afford','arrange','attempt','claim','demand','deserve','pretend','proceed']
+const BOTH_VERBS = ['like','love','hate','prefer','start','begin','continue','remember','forget','stop','try','regret']
+const ADJ_PREP = { interested:'in', good:'at', bad:'at', afraid:'of', proud:'of', tired:'of', responsible:'for', famous:'for', similar:'to', different:'from', married:'to', excited:'about', worried:'about', keen:'on', fond:'of', capable:'of', aware:'of', guilty:'of', satisfied:'with', disappointed:'with', impressed:'by' }
+
+function GrammarUsage({ meanings, word }) {
   if (!meanings?.length) return null
   const pos = meanings[0]?.partOfSpeech
-  let hint = null
-  if (pos === 'noun')      hint = 'Used with articles: a/an/the. Plural: usually add -s or -es. Can be countable or uncountable.'
-  else if (pos === 'verb') hint = 'Common patterns: [verb] + to infinitive / -ing form / noun. 3rd person singular adds -s.'
-  else if (pos === 'adjective') hint = 'Comparative: [word]er / more [word]. Superlative: the [word]est / the most [word].'
-  else if (pos === 'adverb')    hint = 'Modifies verbs and adjectives. Position: before adjective, after verb.'
+  const w   = (word || '').toLowerCase()
+  let hint  = null
+
+  if (pos === 'verb') {
+    if (BOTH_VERBS.includes(w)) {
+      hint = `"${w}" can be followed by -ing or to-infinitive, sometimes with a meaning difference. E.g. "I remember doing it" (past) vs "I remembered to do it" (future task).`
+    } else if (GERUND_VERBS.includes(w)) {
+      hint = `"${w}" is followed by the -ing form (gerund). E.g. "She ${w}s working late." NOT "She ${w}s to work late."`
+    } else if (INFINITIVE_VERBS.includes(w)) {
+      hint = `"${w}" is followed by the to-infinitive. E.g. "They ${w} to leave early." NOT "They ${w} leaving early."`
+    } else {
+      hint = 'Verb patterns: [verb] + to-infinitive / -ing form / noun. 3rd person singular adds -s.'
+    }
+  } else if (pos === 'adjective') {
+    const prep = ADJ_PREP[w]
+    if (prep) {
+      hint = `"${w}" collocates with the preposition "${prep}". E.g. "She is ${w} ${prep} …"`
+    } else {
+      hint = `Comparative: ${w.length <= 5 ? `"${w}er"` : `"more ${w}"`}. Superlative: ${w.length <= 5 ? `"the ${w}est"` : `"the most ${w}"`}. Can be used predicatively (after be/seem) and attributively (before noun).`
+    }
+  } else if (pos === 'noun') {
+    hint = 'Used with articles: a/an (first mention or singular countable), the (specific/known). Plural: usually add -s/-es. Some nouns are uncountable (no article or "some").'
+  } else if (pos === 'adverb') {
+    hint = 'Modifies verbs, adjectives, or other adverbs. Position: before adjective ("very tall"), after verb ("speaks clearly"), or at start of sentence for emphasis.'
+  }
+
   if (!hint) return null
   return (
     <>
@@ -320,7 +346,7 @@ function ResultCard({ word, dictMode, onWordClick }) {
         )}
 
         <hr className={styles.divider} />
-        <GrammarUsage meanings={data.meanings} />
+        <GrammarUsage meanings={data.meanings} word={word} />
 
         <hr className={styles.divider} />
         <AIHintCard

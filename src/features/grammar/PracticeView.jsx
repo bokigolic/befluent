@@ -1,19 +1,27 @@
-import { useState, useRef, useCallback, memo } from 'react'
+import { useState, useRef, useCallback, useEffect, memo } from 'react'
 import useStore from '../../store/useStore'
 import styles from './PracticeView.module.css'
 
-// ── Normalise answer for comparison ──────────────────────────────────────────
 function normalise(str) {
   return str.trim().toLowerCase().replace(/['']/g, "'").replace(/\s+/g, ' ')
 }
 
-// ── Progress bar ──────────────────────────────────────────────────────────────
 function ProgressBar({ current, total }) {
   const pct = Math.round((current / total) * 100)
   return (
     <div className={styles.progressTrack}>
       <div className={styles.progressFill} style={{ width: `${pct}%` }} />
     </div>
+  )
+}
+
+// ── Streak display ────────────────────────────────────────────────────────────
+function StreakBadge({ streak }) {
+  if (streak === 0) return null
+  return (
+    <span className={`${styles.streakBadge} ${streak >= 5 ? styles.streakHot : ''}`}>
+      🔥 {streak} in a row
+    </span>
   )
 }
 
@@ -60,9 +68,9 @@ function MultipleChoiceQ({ exercise, onAnswer, answered }) {
 
 // ── Fill in blank ─────────────────────────────────────────────────────────────
 function FillBlankQ({ exercise, onAnswer, answered }) {
-  const [value, setValue]       = useState('')
+  const [value,    setValue]    = useState('')
   const [showHint, setShowHint] = useState(false)
-  const [result, setResult]     = useState(null) // 'correct' | 'wrong'
+  const [result,   setResult]   = useState(null)
 
   const check = () => {
     if (!value.trim()) return
@@ -71,11 +79,9 @@ function FillBlankQ({ exercise, onAnswer, answered }) {
     onAnswer(correct)
   }
 
-  const displaySentence = exercise.sentence.replace('___', '________')
-
   return (
     <div className={styles.questionBody}>
-      <div className={styles.sentence}>{displaySentence}</div>
+      <div className={styles.sentence}>{exercise.sentence.replace('___', '________')}</div>
       <div className={styles.inputWrap}>
         <input
           className={`${styles.fillInput} ${result === 'correct' ? styles.fillCorrect : ''} ${result === 'wrong' ? styles.fillWrong : ''}`}
@@ -87,26 +93,14 @@ function FillBlankQ({ exercise, onAnswer, answered }) {
           autoCapitalize="none"
         />
         {!answered && (
-          <button className={styles.hintBtn} onClick={() => setShowHint(v => !v)}>
-            💡 Hint
-          </button>
+          <button className={styles.hintBtn} onClick={() => setShowHint(v => !v)}>💡 Hint</button>
         )}
       </div>
-      {showHint && !answered && (
-        <div className={styles.hint}>{exercise.hint}</div>
-      )}
-      {result === 'wrong' && (
-        <div className={styles.correctAnswer}>
-          Correct answer: <strong>{exercise.answer}</strong>
-        </div>
-      )}
-      {result === 'correct' && (
-        <div className={styles.correctMsg}>✓ Correct!</div>
-      )}
+      {showHint && !answered && <div className={styles.hint}>{exercise.hint}</div>}
+      {result === 'wrong'   && <div className={styles.correctAnswer}>Correct: <strong>{exercise.answer}</strong></div>}
+      {result === 'correct' && <div className={styles.correctMsg}>✓ Correct!</div>}
       {!answered && (
-        <button className={styles.checkBtn} onClick={check} disabled={!value.trim()}>
-          Check Answer
-        </button>
+        <button className={styles.checkBtn} onClick={check} disabled={!value.trim()}>Check Answer</button>
       )}
     </div>
   )
@@ -114,9 +108,9 @@ function FillBlankQ({ exercise, onAnswer, answered }) {
 
 // ── Rewrite ───────────────────────────────────────────────────────────────────
 function RewriteQ({ exercise, onAnswer, answered }) {
-  const [value, setValue]   = useState('')
+  const [value,    setValue]    = useState('')
   const [showHint, setShowHint] = useState(false)
-  const [result, setResult] = useState(null)
+  const [result,   setResult]   = useState(null)
 
   const check = () => {
     if (!value.trim()) return
@@ -138,37 +132,26 @@ function RewriteQ({ exercise, onAnswer, answered }) {
       />
       <div className={styles.inputActions}>
         {!answered && (
-          <button className={styles.hintBtn} onClick={() => setShowHint(v => !v)}>
-            💡 Hint
-          </button>
+          <button className={styles.hintBtn} onClick={() => setShowHint(v => !v)}>💡 Hint</button>
         )}
       </div>
-      {showHint && !answered && (
-        <div className={styles.hint}>{exercise.hint}</div>
-      )}
-      {result === 'wrong' && (
-        <div className={styles.correctAnswer}>
-          Correct answer: <strong>{exercise.answer}</strong>
-        </div>
-      )}
-      {result === 'correct' && (
-        <div className={styles.correctMsg}>✓ Correct!</div>
-      )}
+      {showHint && !answered && <div className={styles.hint}>{exercise.hint}</div>}
+      {result === 'wrong'   && <div className={styles.correctAnswer}>Correct: <strong>{exercise.answer}</strong></div>}
+      {result === 'correct' && <div className={styles.correctMsg}>✓ Correct!</div>}
       {!answered && (
-        <button className={styles.checkBtn} onClick={check} disabled={!value.trim()}>
-          Check Answer
-        </button>
+        <button className={styles.checkBtn} onClick={check} disabled={!value.trim()}>Check Answer</button>
       )}
     </div>
   )
 }
 
 // ── Results screen ────────────────────────────────────────────────────────────
-function ResultsScreen({ score, total, cat, onRetry, onBack, onNextLesson }) {
-  const pct = Math.round((score / total) * 100)
-  const addXP = useStore(s => s.addXP)
-  const savePracticeResult = useStore(s => s.savePracticeResult)
-  const xpRef = useRef(false)
+function ResultsScreen({ score, total, cat, history, avgTime, onRetry, onBack, onNextLesson }) {
+  const pct    = Math.round((score / total) * 100)
+  const addXP  = useStore(s => s.addXP)
+  const addToReview = useStore(s => s.addToReview)
+  const xpRef  = useRef(false)
+  const [showReview, setShowReview] = useState(false)
 
   if (!xpRef.current) {
     xpRef.current = true
@@ -181,6 +164,8 @@ function ResultsScreen({ score, total, cat, onRetry, onBack, onNextLesson }) {
   else if (pct >= 40) { grade = 'Keep practicing! 💪'; gradeClass = styles.gradeAmber }
   else { grade = 'Review the lesson 📚'; gradeClass = styles.gradePink }
 
+  const missed = history.filter(h => !h.correct)
+
   return (
     <div className={styles.results}>
       <div className={styles.resultsEmoji}>{cat.emoji}</div>
@@ -188,16 +173,53 @@ function ResultsScreen({ score, total, cat, onRetry, onBack, onNextLesson }) {
       <div className={`${styles.resultsGrade} ${gradeClass}`}>{grade}</div>
       <div className={styles.resultsScore}>{score} / {total} correct</div>
       <div className={styles.resultsXP}>+{score * 5} XP earned</div>
+      {avgTime > 0 && (
+        <div className={styles.resultsTime}>⚡ Avg: {avgTime}s per question</div>
+      )}
+
+      {/* Question review toggle */}
+      {history.length > 0 && (
+        <button className={styles.reviewToggle} onClick={() => setShowReview(v => !v)}>
+          {showReview ? 'Hide review ▲' : `Review answers (${total}) ▼`}
+        </button>
+      )}
+
+      {showReview && (
+        <div className={styles.reviewList}>
+          {history.map((h, i) => (
+            <div key={i} className={`${styles.reviewRow} ${h.correct ? styles.reviewCorrect : styles.reviewWrong}`}>
+              <span className={styles.reviewIcon}>{h.correct ? '✓' : '✗'}</span>
+              <div className={styles.reviewBody}>
+                <div className={styles.reviewQ}>
+                  {h.exercise.sentence || h.exercise.original || h.exercise.question || `Q${i + 1}`}
+                </div>
+                {!h.correct && (
+                  <div className={styles.reviewAnswer}>
+                    Correct: <strong>{h.exercise.answer ?? h.exercise.options?.[h.exercise.correct]}</strong>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {missed.length > 0 && (
+        <button className={styles.studyMissedBtn} onClick={() => {
+          missed.forEach(h => {
+            const word = (h.exercise.sentence || h.exercise.original || '').split(' ')[0] || 'practice'
+            addToReview(word, h.exercise.answer || '', 'grammar')
+          })
+        }}>
+          📚 Study {missed.length} missed question{missed.length > 1 ? 's' : ''}
+        </button>
+      )}
 
       <div className={styles.resultsBtns}>
         <button className={styles.retryBtn} onClick={onRetry}>Practice Again</button>
         <button className={styles.backBtn} onClick={onBack}>Back to Lesson</button>
         {onNextLesson && (
-          <button
-            className={styles.nextBtn}
-            style={{ background: cat.color }}
-            onClick={onNextLesson}
-          >
+          <button className={styles.nextBtn} style={{ background: cat.color }} onClick={onNextLesson}>
             Next Lesson →
           </button>
         )}
@@ -209,39 +231,50 @@ function ResultsScreen({ score, total, cat, onRetry, onBack, onNextLesson }) {
 // ── Main PracticeView ─────────────────────────────────────────────────────────
 function PracticeView({ lesson, cat, exercises, onBack, onNextLesson }) {
   const savePracticeResult = useStore(s => s.savePracticeResult)
-  const markLessonComplete = useStore(s => s.markLessonComplete)
-  const completedLessons   = useStore(s => s.completedLessons)
+  const addXP              = useStore(s => s.addXP)
 
-  const [qIndex, setQIndex]     = useState(0)
+  const [qIndex,   setQIndex]   = useState(0)
   const [answered, setAnswered] = useState(false)
-  const [correct, setCorrect]   = useState(false)
-  const [score, setScore]       = useState(0)
-  const [done, setDone]         = useState(false)
-  const scoreRef = useRef(0)
+  const [correct,  setCorrect]  = useState(false)
+  const [score,    setScore]    = useState(0)
+  const [streak,   setStreak]   = useState(0)
+  const [done,     setDone]     = useState(false)
+  const [microToast, setMicroToast] = useState(null)
+  const [history,  setHistory]  = useState([])
 
-  const total = exercises.length
+  const scoreRef     = useRef(0)
+  const startTimeRef = useRef(Date.now())
+  const timesRef     = useRef([])
+  const total        = exercises.length
+
+  useEffect(() => { startTimeRef.current = Date.now() }, [qIndex])
 
   const handleAnswer = useCallback((isCorrect) => {
+    const elapsed = Math.round((Date.now() - startTimeRef.current) / 1000)
+    timesRef.current.push(elapsed)
     setAnswered(true)
     setCorrect(isCorrect)
+
     if (isCorrect) {
       scoreRef.current += 1
       setScore(s => s + 1)
+      setStreak(s => {
+        const next = s + 1
+        if (next === 3) setMicroToast('On fire! 🔥')
+        else if (next === 5) setMicroToast('Unstoppable! ⚡')
+        if (next === 3 || next === 5) setTimeout(() => setMicroToast(null), 1800)
+        return next
+      })
+    } else {
+      setStreak(0)
     }
-  }, [])
+
+    setHistory(prev => [...prev, { exercise: exercises[qIndex], correct: isCorrect }])
+  }, [exercises, qIndex])
 
   const handleNext = () => {
     if (qIndex + 1 >= total) {
-      // finished
       savePracticeResult(lesson.id, scoreRef.current, total)
-      if (!completedLessons.includes(lesson.id)) {
-        const { lessons } = { lessons: [] }
-        // marking complete handled externally if score >= 60%
-        if (scoreRef.current / total >= 0.6) {
-          const GRAMMAR_DATA = {}
-          // We pass empty array here; parent marks complete via separate button
-        }
-      }
       setDone(true)
     } else {
       setQIndex(i => i + 1)
@@ -255,21 +288,30 @@ function PracticeView({ lesson, cat, exercises, onBack, onNextLesson }) {
     setAnswered(false)
     setCorrect(false)
     setScore(0)
+    setStreak(0)
     setDone(false)
+    setHistory([])
     scoreRef.current = 0
+    timesRef.current = []
   }
+
+  const avgTime = timesRef.current.length > 0
+    ? Math.round(timesRef.current.reduce((a, b) => a + b, 0) / timesRef.current.length)
+    : 0
 
   if (done) {
     return (
       <div className={styles.overlay}>
         <div className={styles.header}>
           <button className={styles.back} onClick={onBack}>← Lesson</button>
-          <span className={styles.headerTitle}>Practice</span>
+          <span className={styles.headerTitle}>Results</span>
         </div>
         <ResultsScreen
           score={scoreRef.current}
           total={total}
           cat={cat}
+          history={history}
+          avgTime={avgTime}
           onRetry={handleRetry}
           onBack={onBack}
           onNextLesson={onNextLesson}
@@ -285,12 +327,17 @@ function PracticeView({ lesson, cat, exercises, onBack, onNextLesson }) {
       <div className={styles.header}>
         <button className={styles.back} onClick={onBack}>← Lesson</button>
         <span className={styles.headerTitle}>Practice</span>
-        <span className={styles.counter} style={{ color: cat.color }}>
-          {qIndex + 1} / {total}
-        </span>
+        <div className={styles.headerRight}>
+          <StreakBadge streak={streak} />
+          <span className={styles.counter} style={{ color: cat.color }}>{qIndex + 1} / {total}</span>
+        </div>
       </div>
 
       <ProgressBar current={qIndex + (answered ? 1 : 0)} total={total} />
+
+      {microToast && (
+        <div className={styles.microToast}>{microToast}</div>
+      )}
 
       <div className={styles.content}>
         <div className={styles.questionCard} key={qIndex}>
@@ -303,25 +350,13 @@ function PracticeView({ lesson, cat, exercises, onBack, onNextLesson }) {
           </div>
 
           {exercise.type === 'multiple-choice' && (
-            <MultipleChoiceQ
-              exercise={exercise}
-              onAnswer={handleAnswer}
-              answered={answered}
-            />
+            <MultipleChoiceQ exercise={exercise} onAnswer={handleAnswer} answered={answered} />
           )}
           {exercise.type === 'fill-blank' && (
-            <FillBlankQ
-              exercise={exercise}
-              onAnswer={handleAnswer}
-              answered={answered}
-            />
+            <FillBlankQ exercise={exercise} onAnswer={handleAnswer} answered={answered} />
           )}
           {exercise.type === 'rewrite' && (
-            <RewriteQ
-              exercise={exercise}
-              onAnswer={handleAnswer}
-              answered={answered}
-            />
+            <RewriteQ exercise={exercise} onAnswer={handleAnswer} answered={answered} />
           )}
 
           {answered && (

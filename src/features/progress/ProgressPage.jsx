@@ -1,6 +1,7 @@
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
 import useStore, { ACHIEVEMENTS_DEF, LEVELS, getLevel, getXpProgress } from '../../store/useStore'
 import { CATEGORIES } from '../grammar/GrammarSection'
+import { GRAMMAR_DATA } from '../grammar/grammarData'
 import styles from './ProgressPage.module.css'
 
 // ── Activity calendar ─────────────────────────────────────────────────────────
@@ -33,6 +34,112 @@ function ActivityCalendar({ activityLog }) {
             title={`${d.key}: ${d.count} searches`}
           />
         ))}
+      </div>
+    </div>
+  )
+}
+
+// ── Grammar overview ──────────────────────────────────────────────────────────
+function GrammarOverview({ grammarProgress, completedLessons, activityLog }) {
+  const totalLessons = useMemo(() =>
+    CATEGORIES.reduce((s, c) => s + (GRAMMAR_DATA[c.id]?.lessons?.length ?? c.lessons), 0), [])
+
+  const totalRemMins = useMemo(() => {
+    return CATEGORIES.reduce((sum, c) => {
+      const lessons = GRAMMAR_DATA[c.id]?.lessons ?? []
+      return sum + lessons
+        .filter(l => !completedLessons.includes(l.id))
+        .reduce((s, l) => s + (parseInt(l.duration) || 0), 0)
+    }, 0)
+  }, [completedLessons])
+
+  const completedCount = completedLessons.length
+  const overallPct     = Math.round((completedCount / totalLessons) * 100)
+
+  const daysActive = useMemo(() => Math.max(1, Object.keys(activityLog).length), [activityLog])
+  const lessonsPerDay = completedCount / daysActive
+  const daysLeft = lessonsPerDay > 0
+    ? Math.ceil((totalLessons - completedCount) / lessonsPerDay)
+    : null
+
+  const remText = totalRemMins === 0
+    ? 'All done! 🎉'
+    : totalRemMins < 60
+    ? `~${totalRemMins} min`
+    : `~${Math.round(totalRemMins / 60)}h ${totalRemMins % 60 > 0 ? `${totalRemMins % 60}m` : ''}`
+
+  return (
+    <div className={styles.block}>
+      <div className={styles.blockTitle}>Grammar Overview</div>
+      <div className={styles.overviewGrid}>
+        <div className={styles.ovCard}>
+          <div className={styles.ovNum} style={{ color: 'var(--acc)' }}>{completedCount}</div>
+          <div className={styles.ovLabel}>Completed</div>
+        </div>
+        <div className={styles.ovCard}>
+          <div className={styles.ovNum} style={{ color: 'var(--acc-g)' }}>{totalLessons - completedCount}</div>
+          <div className={styles.ovLabel}>Remaining</div>
+        </div>
+        <div className={styles.ovCard}>
+          <div className={styles.ovNum} style={{ color: 'var(--acc-p)' }}>{overallPct}%</div>
+          <div className={styles.ovLabel}>Done</div>
+        </div>
+        <div className={styles.ovCard}>
+          <div className={styles.ovNum} style={{ color: 'var(--acc-a)', fontSize: '16px' }}>{remText}</div>
+          <div className={styles.ovLabel}>Time left</div>
+        </div>
+      </div>
+      <div className={styles.grammarTrack} style={{ marginTop: 12 }}>
+        <div className={styles.grammarFill} style={{ width: `${overallPct}%`, background: 'linear-gradient(90deg, var(--acc), var(--acc-p))' }} />
+      </div>
+      {daysLeft !== null && totalRemMins > 0 && (
+        <div className={styles.paceNote}>At your pace: ~{daysLeft} day{daysLeft !== 1 ? 's' : ''} to finish all lessons</div>
+      )}
+    </div>
+  )
+}
+
+// ── Grammar leaderboard ───────────────────────────────────────────────────────
+const MEDALS = ['🥇', '🥈', '🥉']
+
+function GrammarLeaderboard({ grammarProgress }) {
+  const sorted = useMemo(() =>
+    [...CATEGORIES].sort((a, b) => (grammarProgress[b.id] ?? 0) - (grammarProgress[a.id] ?? 0)),
+  [grammarProgress])
+
+  const top3   = sorted.slice(0, 3)
+  const bottom = sorted[sorted.length - 1]
+  const showBottom = bottom && !top3.find(c => c.id === bottom.id)
+
+  return (
+    <div className={styles.block}>
+      <div className={styles.blockTitle}>Category Leaderboard</div>
+      <div className={styles.leaderList}>
+        {top3.map((cat, i) => (
+          <div key={cat.id} className={styles.leaderRow}>
+            <span className={styles.leaderMedal}>{MEDALS[i]}</span>
+            <span className={styles.leaderEmoji}>{cat.emoji}</span>
+            <span className={styles.leaderName}>{cat.title}</span>
+            <div className={styles.leaderBarWrap}>
+              <div className={styles.leaderBar} style={{ width: `${grammarProgress[cat.id] ?? 0}%`, background: cat.color }} />
+            </div>
+            <span className={styles.leaderPct} style={{ color: cat.color }}>{grammarProgress[cat.id] ?? 0}%</span>
+          </div>
+        ))}
+        {showBottom && (
+          <>
+            <div className={styles.leaderDivider}>…</div>
+            <div className={styles.leaderRow}>
+              <span className={styles.leaderMedal} style={{ opacity: 0.4 }}>📍</span>
+              <span className={styles.leaderEmoji}>{bottom.emoji}</span>
+              <span className={styles.leaderName} style={{ color: 'var(--t3)' }}>{bottom.title}</span>
+              <div className={styles.leaderBarWrap}>
+                <div className={styles.leaderBar} style={{ width: `${grammarProgress[bottom.id] ?? 0}%`, background: bottom.color }} />
+              </div>
+              <span className={styles.leaderPct} style={{ color: 'var(--t3)' }}>{grammarProgress[bottom.id] ?? 0}%</span>
+            </div>
+          </>
+        )}
       </div>
     </div>
   )
@@ -174,6 +281,8 @@ function ProgressPage() {
         </div>
       </div>
 
+      <GrammarOverview grammarProgress={grammarProgress} completedLessons={completedLessons} activityLog={activityLog} />
+      <GrammarLeaderboard grammarProgress={grammarProgress} />
       <GrammarProgress grammarProgress={grammarProgress} />
       <ActivityCalendar activityLog={activityLog} />
       <ReviewStats reviewDeck={reviewDeck} reviewSessionsCount={reviewSessionsCount} />

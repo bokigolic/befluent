@@ -464,3 +464,152 @@
 }
 
 .nextBtn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* ── Header right ── */
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* ── Streak badge ── */
+.streakBadge {
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--acc-a);
+  background: rgba(255, 169, 77, 0.12);
+  border: 1px solid rgba(255, 169, 77, 0.25);
+  padding: 3px 9px;
+  border-radius: 999px;
+  white-space: nowrap;
+  animation: fadeSlideUp 200ms var(--ease) both;
+}
+
+.streakHot {
+  color: #ff6b9d;
+  background: rgba(255, 107, 157, 0.12);
+  border-color: rgba(255, 107, 157, 0.3);
+}
+
+/* ── Micro toast ── */
+.microToast {
+  position: fixed;
+  top: 72px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--surface);
+  border: 1px solid var(--bord);
+  border-radius: var(--radius);
+  padding: 8px 20px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--acc-a);
+  z-index: 400;
+  white-space: nowrap;
+  animation: fadeSlideUp 200ms var(--ease) both;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+  pointer-events: none;
+}
+
+/* ── Results time ── */
+.resultsTime {
+  font-size: 13px;
+  color: var(--t3);
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ── Review toggle ── */
+.reviewToggle {
+  background: none;
+  border: 1px solid var(--bord2);
+  border-radius: var(--radius-sm);
+  padding: 9px 18px;
+  color: var(--acc);
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: border-color 0.18s, background 0.18s;
+  margin-top: 4px;
+}
+
+.reviewToggle:hover { border-color: var(--acc); background: rgba(124,111,255,0.06); }
+
+/* ── Review list ── */
+.reviewList {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  animation: fadeSlideUp 200ms var(--ease) both;
+}
+
+.reviewRow {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1px solid var(--bord2);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  width: 100%;
+  text-align: left;
+}
+
+.reviewCorrect { border-left: 3px solid #00e5a0; }
+.reviewWrong   { border-left: 3px solid #ff6b9d; }
+
+.reviewIcon {
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.reviewCorrect .reviewIcon { color: #00e5a0; }
+.reviewWrong   .reviewIcon { color: #ff6b9d; }
+
+.reviewBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.reviewQ {
+  font-size: 13px;
+  color: var(--t2);
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.reviewAnswer {
+  font-size: 12px;
+  color: var(--t3);
+}
+
+.reviewAnswer strong { color: #00e5a0; }
+
+/* ── Study missed button ── */
+.studyMissedBtn {
+  background: rgba(255, 107, 157, 0.08);
+  border: 1px solid rgba(255, 107, 157, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 11px 18px;
+  color: #ff6b9d;
+  font-size: 13px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.18s, border-color 0.18s;
+}
+
+.studyMissedBtn:hover { background: rgba(255,107,157,0.14); border-color: rgba(255,107,157,0.4); }
