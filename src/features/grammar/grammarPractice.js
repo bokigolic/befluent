@@ -408,6 +408,23 @@ export const GRAMMAR_PRACTICE = {
     { type: 'fill-blank', sentence: "'Can you help me?' → She asked if I ___ help her.", answer: 'could', hint: 'Can → could in reported questions', explanation: 'Can shifts to could, if for yes/no question.' },
   ],
 
+  /* ── CONDITIONALS: WISH + ALTERNATIVES ──────────────────────────── */
+  'wish-conditionals': [
+    { type: 'multiple-choice', sentence: 'I wish I ___ the answer. (= I don\'t know it now)', options: ['know', 'knew', 'had known', 'will know'], correct: 1, explanation: 'Wish + past simple for present regret.' },
+    { type: 'fill-blank', sentence: 'If only I ___ (study) harder! (= I didn\'t study, past regret)', answer: 'had studied', hint: 'Past regret = past perfect', explanation: 'Past regret = wish/if only + past perfect (had + pp).' },
+    { type: 'multiple-choice', sentence: 'I wish you ___ stop talking! (annoying habit)', options: ['stop', 'stopped', 'would stop', 'had stopped'], correct: 2, explanation: 'Annoying habit/request = wish + would.' },
+    { type: 'rewrite', question: 'Express present regret with wish:', original: "I don't speak French. (regret)", answer: 'I wish I spoke French.', hint: 'Wish + past simple for present', explanation: 'Present regret: wish + past simple.' },
+    { type: 'multiple-choice', sentence: 'She wishes she ___ taller. (formal)', options: ['is', 'was', 'were', 'had been'], correct: 2, explanation: 'After wish, \'were\' is used for all persons in formal English.' },
+  ],
+
+  'unless-alternatives': [
+    { type: 'multiple-choice', sentence: '___ you could be anyone for a day, who would you be?', options: ['Although', 'Supposing', 'Despite', 'However'], correct: 1, explanation: 'Supposing = imagine if, hypothetical.' },
+    { type: 'fill-blank', sentence: '___ the project is approved, we can start next week.', answer: 'Assuming', hint: 'If we assume = assuming', explanation: 'Assuming (that) = if we assume this is true.' },
+    { type: 'multiple-choice', sentence: "'___ we took a different route?' — informal hypothetical", options: ['Suppose', 'What if', 'Given that', 'Unless'], correct: 1, explanation: 'What if = informal way to suggest hypothetical.' },
+    { type: 'rewrite', question: "Use 'given that':", original: 'She is experienced, so she will manage.', answer: 'Given that she is experienced, she will manage.', hint: 'Given that = considering/since', explanation: 'Given that introduces a known fact as a condition.' },
+    { type: 'multiple-choice', sentence: '___ she has experience, she should handle it fine.', options: ['What if', 'Supposing', 'Given that', 'Unless'], correct: 2, explanation: 'Given that = considering/since — introduces a reason/condition.' },
+  ],
+
   /* ── RELATIVE CLAUSES ────────────────────────────────────────────── */
   'rc-intro': [
     { type: 'multiple-choice', sentence: 'The man ___ called me is my uncle.', options: ['which', 'who', 'whose', 'where'], correct: 1, explanation: 'Person = who.' },
@@ -455,5 +472,168 @@ export const GRAMMAR_PRACTICE = {
     { type: 'rewrite', question: 'Combine sentences (non-defining):', original: 'The Louvre is in Paris. It is the most visited museum in the world.', answer: 'The Louvre, which is the most visited museum in the world, is in Paris.', hint: 'which + commas', explanation: 'Non-defining: which with commas for things.' },
     { type: 'multiple-choice', sentence: "London, ___ I lived for 5 years, is amazing.", options: ['that', 'which', 'where', 'when'], correct: 2, explanation: 'Place (non-defining) = where.' },
     { type: 'fill-blank', sentence: 'The teacher ___ taught me English was inspiring.', answer: 'who', hint: 'Person = who or that', explanation: 'Person in defining clause = who or that.' },
+  ],
+
+  /* ── GERUNDS & INFINITIVES ───────────────────────────────────────── */
+  'gi-intro': [
+    { type: 'multiple-choice', sentence: 'I enjoy ___ to music.', options: ['to listen', 'listen', 'listening', 'listened'], correct: 2, explanation: 'Enjoy + gerund (-ing).' },
+    { type: 'multiple-choice', sentence: 'She decided ___ a new job.', options: ['finding', 'find', 'to finding', 'to find'], correct: 3, explanation: 'Decide + infinitive (to+verb).' },
+    { type: 'fill-blank', sentence: 'Would you mind ___ (close) the window?', answer: 'closing', hint: 'Mind + gerund', explanation: 'Mind always takes gerund (-ing).' },
+    { type: 'rewrite', question: 'Correct the verb form:', original: 'I suggest to go to the cinema.', answer: 'I suggest going to the cinema.', hint: 'Suggest + gerund', explanation: 'Suggest always takes -ing, never infinitive.' },
+    { type: 'multiple-choice', sentence: 'After prepositions, use ___.', options: ['infinitive', 'gerund', 'base verb', 'past participle'], correct: 1, explanation: 'After ANY preposition = always gerund.' },
+  ],
+
+  'gi-gerund-verbs': [
+    { type: 'multiple-choice', sentence: 'She avoided ___ eye contact.', options: ['to make', 'make', 'making', 'made'], correct: 2, explanation: 'Avoid + gerund (-ing).' },
+    { type: 'fill-blank', sentence: "I'm interested ___ learning more about this.", answer: 'in', hint: 'Interested in + gerund', explanation: 'Interested in = preposition in → gerund follows.' },
+    { type: 'rewrite', question: 'Correct the form:', original: 'He admitted to steal the money.', answer: 'He admitted stealing the money.', hint: 'Admit + gerund', explanation: 'Admit always takes gerund (-ing).' },
+    { type: 'multiple-choice', sentence: 'She is good ___ cooking Italian food.', options: ['to', 'for', 'at', 'in'], correct: 2, explanation: 'Good at — preposition at + gerund.' },
+    { type: 'fill-blank', sentence: 'I finished ___ (write) the report an hour ago.', answer: 'writing', hint: 'Finish + gerund', explanation: 'Finish always takes gerund (-ing).' },
+  ],
+
+  'gi-infinitive-verbs': [
+    { type: 'multiple-choice', sentence: 'She managed ___ finish on time.', options: ['finishing', 'finish', 'to finish', 'finished'], correct: 2, explanation: 'Manage + infinitive (to+verb).' },
+    { type: 'fill-blank', sentence: 'He refused ___ (apologize) to her.', answer: 'to apologize', hint: 'Refuse + infinitive', explanation: 'Refuse always takes to + infinitive.' },
+    { type: 'rewrite', question: 'Correct the mistake:', original: 'I want that you come with me.', answer: 'I want you to come with me.', hint: 'Want + object + to + verb', explanation: "Want + person + to + verb. Never 'that'." },
+    { type: 'multiple-choice', sentence: 'They expected her ___ the race.', options: ['winning', 'win', 'to win', 'won'], correct: 2, explanation: 'Expect + object + to + infinitive.' },
+    { type: 'fill-blank', sentence: 'She seems ___ (know) everyone here.', answer: 'to know', hint: 'Seem + infinitive', explanation: 'Seem always takes to + infinitive.' },
+  ],
+
+  'gi-both': [
+    { type: 'multiple-choice', sentence: 'I remember ___ her at the party. (memory)', options: ['to meet', 'meet', 'meeting', 'met'], correct: 2, explanation: 'Memory of past = remember + gerund.' },
+    { type: 'multiple-choice', sentence: 'Remember ___ your homework tonight! (reminder)', options: ['doing', 'do', 'to do', 'done'], correct: 2, explanation: 'Future reminder = remember + infinitive.' },
+    { type: 'fill-blank', sentence: 'He stopped ___ (smoke) last year. (= quit)', answer: 'smoking', hint: 'Stop + gerund = quit the habit', explanation: 'Stop smoking = quit. Stop to smoke = pause to smoke.' },
+    { type: 'multiple-choice', sentence: "'She tried calling him.' This means:", options: ['She attempted but failed', 'She experimented to see if it would help', 'She stopped to call him', 'She remembered calling him'], correct: 1, explanation: 'Try + gerund = experiment/test something.' },
+    { type: 'multiple-choice', sentence: "'I tried to open the door' means:", options: ['She experimented with opening', 'She attempted but maybe failed', 'She stopped to open it', 'She remembered opening it'], correct: 1, explanation: 'Try + infinitive = attempt, possibly with difficulty or failure.' },
+  ],
+
+  'gi-gerund-subject': [
+    { type: 'multiple-choice', sentence: '___ every day improves your vocabulary.', options: ['To read', 'Read', 'Reading', 'Reads'], correct: 2, explanation: 'Gerund as subject is more natural in everyday English.' },
+    { type: 'fill-blank', sentence: 'Her biggest fear is ___ (speak) in public.', answer: 'speaking', hint: 'After is/be = gerund', explanation: 'Gerund as complement after the verb be.' },
+    { type: 'rewrite', question: 'Use gerund as subject:', original: 'To swim every day is healthy.', answer: 'Swimming every day is healthy.', hint: 'Gerund preferred as subject', explanation: 'Gerund (not infinitive) preferred as subject in modern English.' },
+    { type: 'multiple-choice', sentence: "I don't mind ___ for you.", options: ['to wait', 'wait', 'waiting', 'waited'], correct: 2, explanation: "Mind + gerund. 'I don't mind waiting' is correct." },
+    { type: 'fill-blank', sentence: 'Would you like to use the ___ pool? (swim)', answer: 'swimming', hint: 'Gerund in compound noun', explanation: 'Compound noun: swimming pool — gerund + noun.' },
+  ],
+
+  'gi-infinitive-purpose': [
+    { type: 'multiple-choice', sentence: 'I study every day ___ improve my English.', options: ['for', 'so', 'to', 'in order'], correct: 2, explanation: 'Purpose = to + infinitive.' },
+    { type: 'fill-blank', sentence: 'She left early ___ not to miss the bus.', answer: 'in order', hint: 'Negative purpose = in order not to', explanation: 'Negative purpose: in order not to + verb.' },
+    { type: 'rewrite', question: "Correct: 'I went to the shop for buy milk.'", original: 'I went to the shop for buy milk.', answer: 'I went to the shop to buy milk.', hint: 'Human purpose = to + verb', explanation: 'Human purpose uses to + infinitive, not for + verb.' },
+    { type: 'multiple-choice', sentence: 'This knife is ___ cutting bread.', options: ['to', 'for', 'in order to', 'so'], correct: 1, explanation: "Purpose of a thing = for + gerund. 'For cutting' describes what the knife is used for." },
+    { type: 'fill-blank', sentence: "I took notes ___ that I wouldn't forget.", answer: 'so', hint: 'So that + clause = purpose', explanation: 'So that + clause expresses purpose.' },
+  ],
+
+  'gi-review': [
+    { type: 'multiple-choice', sentence: 'I finished ___ and then decided ___ it.', options: ['writing / to send', 'to write / sending', 'write / send', 'writing / sending'], correct: 0, explanation: 'Finish + gerund. Decide + infinitive.' },
+    { type: 'fill-blank', sentence: 'She stopped ___ (worry) and started ___ (enjoy) her holiday.', answer: 'worrying', hint: 'Stop + gerund = quit the habit', explanation: 'Stop + gerund = stop the action.' },
+    { type: 'rewrite', question: 'Fix both errors:', original: 'I suggest to go and I want going there tomorrow.', answer: 'I suggest going and I want to go there tomorrow.', hint: 'Suggest = gerund, want = infinitive', explanation: 'Suggest → going (gerund). Want → to go (infinitive).' },
+    { type: 'multiple-choice', sentence: 'After any preposition, always use ___.', options: ['infinitive', 'gerund', 'base verb', 'past participle'], correct: 1, explanation: 'After prepositions (at, in, of, for, about...) = always gerund.' },
+    { type: 'fill-blank', sentence: 'She managed ___ (finish) the project despite the problems.', answer: 'to finish', hint: 'Manage + infinitive', explanation: 'Manage always takes to + infinitive.' },
+  ],
+
+  /* ── CONJUNCTIONS ────────────────────────────────────────────────── */
+  'conj-coordinating': [
+    { type: 'multiple-choice', sentence: 'I wanted to go, ___ I was too tired.', options: ['so', 'but', 'or', 'nor'], correct: 1, explanation: 'But = contrast between two clauses.' },
+    { type: 'fill-blank', sentence: 'Study hard, ___ you will fail the exam.', answer: 'or', hint: 'Alternative/warning', explanation: 'Or = alternative consequence warning.' },
+    { type: 'rewrite', question: 'Join with correct FANBOYS:', original: 'It was raining. We stayed home.', answer: 'It was raining, so we stayed home.', hint: 'So = result', explanation: 'So joins cause → result.' },
+    { type: 'multiple-choice', sentence: 'She is neither rich ___ famous.', options: ['or', 'and', 'nor', 'but'], correct: 2, explanation: 'Neither...nor = negative addition.' },
+    { type: 'fill-blank', sentence: 'I was tired, ___ I continued working.', answer: 'yet', hint: 'Yet = contrast (= but, formal)', explanation: 'Yet = contrast, slightly more formal than but.' },
+  ],
+
+  'conj-contrast': [
+    { type: 'multiple-choice', sentence: '___ it was raining, we went for a walk.', options: ['Despite', 'However', 'Although', 'Because of'], correct: 2, explanation: 'Although + clause (subject + verb).' },
+    { type: 'multiple-choice', sentence: '___ the rain, we went for a walk.', options: ['Although', 'Despite', 'However', 'Even though'], correct: 1, explanation: 'Despite + noun/gerund (not clause).' },
+    { type: 'fill-blank', sentence: 'She is young. ___, she is very experienced.', answer: 'However', hint: 'Contrast, starts new sentence', explanation: 'However = contrast, starts new sentence, followed by comma.' },
+    { type: 'rewrite', question: 'Correct the mistake:', original: 'Although she was tired, but she kept working.', answer: 'Although she was tired, she kept working.', hint: 'Never although + but together', explanation: 'Although and but both show contrast — never use both.' },
+    { type: 'multiple-choice', sentence: 'He earns a lot, ___ his sister earns very little.', options: ['despite', 'although', 'whereas', 'however'], correct: 2, explanation: 'Whereas = direct contrast between two parallel things.' },
+  ],
+
+  'conj-cause-effect': [
+    { type: 'multiple-choice', sentence: 'We stayed home ___ the bad weather.', options: ['because', 'because of', 'although', 'despite'], correct: 1, explanation: 'Because of + noun. Because + clause.' },
+    { type: 'fill-blank', sentence: 'She failed the exam. ___, she had to retake it.', answer: 'Consequently', hint: 'Formal result connector', explanation: 'Consequently = as a result, formal.' },
+    { type: 'rewrite', question: 'Use because of:', original: 'Because the traffic was heavy, we were late.', answer: 'Because of the heavy traffic, we were late.', hint: 'Because of + noun phrase', explanation: 'Because + clause → Because of + noun phrase.' },
+    { type: 'multiple-choice', sentence: "___ you're here, let's start the meeting.", options: ['Because of', 'So', 'Since', 'Therefore'], correct: 2, explanation: 'Since = because (formal), used when reason is known.' },
+    { type: 'fill-blank', sentence: 'It was ___ a good film that I watched it twice.', answer: 'such', hint: 'Such...that = degree + result', explanation: 'Such + noun phrase + that = result of degree.' },
+  ],
+
+  'conj-condition': [
+    { type: 'multiple-choice', sentence: "___ you apologize, I won't talk to you.", options: ['If not', 'Unless', 'Even if', 'Provided'], correct: 1, explanation: 'Unless = if not (no double negative).' },
+    { type: 'fill-blank', sentence: "Take a jacket ___ it gets cold later.", answer: 'in case', hint: 'Precaution, not condition', explanation: 'In case = precaution. Not the same as if.' },
+    { type: 'rewrite', question: "Replace 'if not' with unless:", original: "If you don't hurry, we'll miss the train.", answer: "Unless you hurry, we'll miss the train.", hint: 'Unless = if not', explanation: "Unless replaces if...not. Don't add another negative!" },
+    { type: 'multiple-choice', sentence: 'You can borrow my car ___ you drive carefully.', options: ['unless', 'in case', 'provided that', 'even if'], correct: 2, explanation: 'Provided that = on condition that.' },
+    { type: 'fill-blank', sentence: "___ if it rains, I'll go to the concert.", answer: 'Even', hint: 'Even if = regardless of outcome', explanation: 'Even if = condition regardless of result.' },
+  ],
+
+  'conj-addition': [
+    { type: 'multiple-choice', sentence: 'The hotel was expensive. ___, the service was terrible.', options: ['However', 'Furthermore', 'Despite', 'Although'], correct: 1, explanation: 'Furthermore = adds a stronger/new point.' },
+    { type: 'rewrite', question: 'Use not only...but also:', original: 'She won. She also broke the record.', answer: 'Not only did she win, but she also broke the record.', hint: 'Inversion after not only', explanation: "Not only at start requires inversion: Not only DID she..." },
+    { type: 'fill-blank', sentence: 'He speaks English ___ French and German.', answer: 'as well as', hint: 'In addition to', explanation: 'As well as = in addition to (connects nouns).' },
+    { type: 'multiple-choice', sentence: "Not only ___ she win, but she also broke the record.", options: ['did', 'does', 'has', 'was'], correct: 0, explanation: 'Not only at start = subject-auxiliary inversion.' },
+    { type: 'fill-blank', sentence: '___, wash the vegetables. ___, chop them. ___, cook.', answer: 'Firstly', hint: 'Sequence listing', explanation: 'Firstly, Secondly, Finally — sequence listing connectors.' },
+  ],
+
+  'conj-review': [
+    { type: 'multiple-choice', sentence: '___ she studied hard, she failed. (contrast)', options: ['Because', 'Despite', 'Although', 'Therefore'], correct: 2, explanation: 'Although + clause = contrast.' },
+    { type: 'fill-blank', sentence: '___ the rain, we continued. (despite + noun)', answer: 'Despite', hint: 'Despite + noun, not clause', explanation: 'Despite + noun/gerund for contrast.' },
+    { type: 'rewrite', question: 'Connect formally:', original: 'She worked hard. She succeeded.', answer: 'She worked hard. Consequently, she succeeded.', hint: 'Formal result connector', explanation: 'Consequently = as a result — formal connector.' },
+    { type: 'multiple-choice', sentence: "___ we act now, the problem will worsen.", options: ['If', 'Unless', 'Although', 'Because'], correct: 1, explanation: 'Unless = if not — condition.' },
+    { type: 'multiple-choice', sentence: 'BECAUSE OF always requires ___.', options: ['a clause (subject + verb)', 'a noun or gerund', 'an infinitive', 'an adjective'], correct: 1, explanation: 'Because of + noun/gerund. Because + clause. Never mix them.' },
+  ],
+
+  /* ── WORD FORMATION ──────────────────────────────────────────────── */
+  'wf-intro': [
+    { type: 'multiple-choice', sentence: "'Un-' in 'unhappy' is a ___.", options: ['suffix', 'root word', 'prefix', 'compound'], correct: 2, explanation: 'Prefix = added BEFORE the root word.' },
+    { type: 'fill-blank', sentence: "happy → ___ (add -ness to make a noun)", answer: 'happiness', hint: '-ness = noun suffix', explanation: 'Happy + ness = happiness (noun).' },
+    { type: 'multiple-choice', sentence: "'Employment' contains which suffix?", options: ['-tion', '-ment', '-ness', '-ity'], correct: 1, explanation: 'Employ + ment = employment. -ment creates nouns.' },
+    { type: 'rewrite', question: 'Give 4 forms of the word CARE:', original: 'care (verb)', answer: 'care (v), careful (adj), carefully (adv), carelessness (n)', hint: 'Noun, verb, adjective, adverb', explanation: 'Word family: all 4 forms.' },
+    { type: 'fill-blank', sentence: "employ → employer → employee → ___ (noun of process)", answer: 'employment', hint: '-ment suffix', explanation: 'Employment = noun form with -ment suffix.' },
+  ],
+
+  'wf-prefixes-negative': [
+    { type: 'fill-blank', sentence: 'The instructions were ___ (not clear).', answer: 'unclear', hint: 'UN- prefix', explanation: 'UN- + clear = unclear.' },
+    { type: 'multiple-choice', sentence: "It's ___ to drive without a seatbelt.", options: ['unlegal', 'illegal', 'inlegal', 'nolegal'], correct: 1, explanation: 'IL- before L: illegal.' },
+    { type: 'fill-blank', sentence: 'He ___ (understood wrongly) what she said.', answer: 'misunderstood', hint: 'MIS- prefix = wrongly', explanation: 'MIS- + understood = misunderstood.' },
+    { type: 'multiple-choice', sentence: 'Choose the correct negative form of \'possible\':', options: ['unpossible', 'impractical', 'unavailable', 'impossible'], correct: 3, explanation: 'IM- before P: impossible.' },
+    { type: 'rewrite', question: 'Add correct negative prefix to each:', original: 'He was honest about his regular, responsible behaviour.', answer: 'He was dishonest about his irregular, irresponsible behaviour.', hint: 'dis- / ir- / ir-', explanation: 'Dishonest (dis-), irregular (ir-), irresponsible (ir-).' },
+  ],
+
+  'wf-noun-suffixes': [
+    { type: 'fill-blank', sentence: 'She showed great kind___ to everyone.', answer: 'kindness', hint: '-ness suffix for adjectives', explanation: 'Kind (adj) + ness = kindness (noun).' },
+    { type: 'multiple-choice', sentence: 'The ___ of the project took three years. (develop)', options: ['developer', 'developing', 'development', 'developed'], correct: 2, explanation: 'Develop + ment = development (noun).' },
+    { type: 'fill-blank', sentence: 'We need better communica___ between teams.', answer: 'communication', hint: '-tion suffix', explanation: 'Communicate → communication (-tion).' },
+    { type: 'rewrite', question: 'Use correct noun form:', original: 'She is very creative and has a lot of creative.', answer: 'She is very creative and has a lot of creativity.', hint: '-ity suffix', explanation: 'Creative (adj) → creativity (noun, -ity).' },
+    { type: 'fill-blank', sentence: 'His ___ (achieve) was recognised with an award.', answer: 'achievement', hint: 'Achieve + ment', explanation: 'Achieve → achievement (-ment noun).' },
+  ],
+
+  'wf-adjective-suffixes': [
+    { type: 'multiple-choice', sentence: 'The situation is very danger___.', options: ['-ful', '-ous', '-less', '-al'], correct: 1, explanation: 'Danger + ous = dangerous.' },
+    { type: 'fill-blank', sentence: 'His help was very use___.', answer: 'useful', hint: '-ful = with/having', explanation: 'Use + ful = useful.' },
+    { type: 'multiple-choice', sentence: 'She is care___ — she always makes mistakes.', options: ['careful', 'careless', 'caring', 'cared'], correct: 1, explanation: 'Care + less = careless (without care).' },
+    { type: 'rewrite', question: 'Add correct suffix:', original: 'The task is manage (can be done).', answer: 'The task is manageable.', hint: '-able = can be done', explanation: 'Manage + able = manageable.' },
+    { type: 'fill-blank', sentence: 'The performance was power___ and emotion___.', answer: 'powerful', hint: 'Power + ful', explanation: 'Powerful (-ful) and emotional (-al) — adjective suffixes.' },
+  ],
+
+  'wf-verb-suffixes': [
+    { type: 'multiple-choice', sentence: 'We need to ___ the system. (= make it modern)', options: ['modern', 'modernity', 'modernize', 'modernly'], correct: 2, explanation: 'Modern + ize = modernize (verb).' },
+    { type: 'fill-blank', sentence: 'We need to ___ (short) the text.', answer: 'shorten', hint: '-en suffix makes verbs from adjectives', explanation: 'Short (adj) + en = shorten (verb).' },
+    { type: 'rewrite', question: 'Correct the error:', original: 'She apologized for misunderstand him.', answer: 'She apologized for misunderstanding him.', hint: "After 'for' = gerund", explanation: "After preposition 'for' = gerund (-ing)." },
+    { type: 'multiple-choice', sentence: "Don't ___ your abilities — you're better than you think.", options: ['overestimate', 'underestimate', 'misestimate', 'reestimate'], correct: 1, explanation: 'Under- = too little: underestimate your abilities.' },
+    { type: 'fill-blank', sentence: 'He ___ (re + write) the report from scratch.', answer: 'rewrote', hint: 'Re- = again, past tense', explanation: 'Re- (again) + wrote = rewrote.' },
+  ],
+
+  'wf-word-families': [
+    { type: 'multiple-choice', sentence: 'She is a ___ person. (= she has success)', options: ['success', 'succeed', 'successfully', 'successful'], correct: 3, explanation: 'Adjective before noun = successful.' },
+    { type: 'fill-blank', sentence: 'The scientist made an important ___. (discover)', answer: 'discovery', hint: 'Noun form of discover', explanation: 'Discover → discovery (noun, -ery).' },
+    { type: 'multiple-choice', sentence: 'He spoke very ___ about the issue. (= with emotion)', options: ['emotion', 'emotional', 'emotionally', 'emotive'], correct: 2, explanation: "Adverb modifying verb 'spoke' = emotionally." },
+    { type: 'rewrite', question: 'Use correct word family member:', original: 'She is a very success businesswoman.', answer: 'She is a very successful businesswoman.', hint: 'Adjective before noun', explanation: 'Success = noun. Successful = adjective needed here.' },
+    { type: 'fill-blank', sentence: "His ___ (creative) led to an important ___ (invent).", answer: 'creativity', hint: 'Noun form of creative', explanation: 'Creativity (-ity) and invention (-tion) — noun forms.' },
+  ],
+
+  'wf-review': [
+    { type: 'multiple-choice', sentence: 'His ___ attempt to reorganize failed. (= not successful)', options: ['unsuccess', 'unsuccessfully', 'unsuccessful', 'unsuccessed'], correct: 2, explanation: 'Un- + success + ful = unsuccessful (adjective).' },
+    { type: 'fill-blank', sentence: 'The ___ (develop) of renewable energy is important.', answer: 'development', hint: 'Develop + ment', explanation: 'Development = noun form (-ment).' },
+    { type: 'multiple-choice', sentence: "The employees showed great ___ with management. (= not satisfied)", options: ['unsatisfied', 'dissatisfaction', 'missatisfaction', 'nonsatisfaction'], correct: 1, explanation: 'Dis- + satisfaction = dissatisfaction (noun).' },
+    { type: 'rewrite', question: 'Fix the word form errors:', original: 'She is a success person who acts very success.', answer: 'She is a successful person who acts very successfully.', hint: 'Adjective + adverb', explanation: 'Successful (adjective before noun). Successfully (adverb modifying verb).' },
+    { type: 'fill-blank', sentence: 'Scientists work ___ (= in a scientific way) to make new ___. (discover)', answer: 'scientifically', hint: 'Science → scientific → scientifically', explanation: 'Adverb form: scientifically. Noun: discoveries.' },
   ],
 }
