@@ -11,6 +11,7 @@ import Onboarding from './components/Onboarding/Onboarding'
 import Achievements from './components/Achievements/Achievements'
 import OfflineBanner from './components/OfflineBanner/OfflineBanner'
 import BackgroundEffects from './components/BackgroundEffects/BackgroundEffects'
+import GrammarDetailPage from './features/grammar/GrammarDetailPage'
 import useStore from './store/useStore'
 
 const HistoryPage        = lazy(() => import('./pages/HistoryPage/HistoryPage'))
@@ -58,6 +59,8 @@ function App() {
   const setCurrentWord = useStore(s => s.setCurrentWord)
   const addToHistory   = useStore(s => s.addToHistory)
   const addXP          = useStore(s => s.addXP)
+
+  const activeGrammarCategory = useStore(s => s.activeGrammarCategory)
 
   const [splashDone,    setSplashDone]    = useState(!shouldShowSplash())
   const [onboardDone,   setOnboardDone]   = useState(!shouldShowOnboarding())
@@ -167,6 +170,8 @@ function App() {
       )}
 
       <Achievements />
+
+      {activeGrammarCategory && <GrammarDetailPage />}
 
       {quizOpen && (
         <Suspense fallback={null}>

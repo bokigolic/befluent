@@ -1,6 +1,7 @@
 import { useMemo, memo } from 'react'
 import useStore from '../../store/useStore'
 import WordOfDay from '../WordOfDay/WordOfDay'
+import GrammarSection from '../../features/grammar/GrammarSection'
 import styles from './WelcomeScreen.module.css'
 
 const WORD_POOL = [
@@ -66,6 +67,8 @@ function WelcomeScreen({ onSearch }) {
           <div className={styles.goalDone}>🎯 Daily goal reached!</div>
         )}
       </div>
+
+      <GrammarSection />
 
     </div>
   )

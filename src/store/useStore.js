@@ -63,7 +63,20 @@ const useStore = create((set, get) => ({
   dailyGoal:      load('bf_daily_goal', 5),
   weeklyData:     load('bf_weekly', {}),
   quizBestScore:  load('bf_quiz_best', 0),
+  grammarProgress: load('bf_grammar_progress', {
+    tenses: 0, articles: 0, prepositions: 0,
+    conditionals: 0, 'modal-verbs': 0, 'passive-voice': 0,
+  }),
+  activeGrammarCategory: null,
   notifications:  [],
+
+  setActiveGrammarCategory: (id) => set({ activeGrammarCategory: id }),
+
+  updateGrammarProgress: (categoryId, progress) => set(state => {
+    const grammarProgress = { ...state.grammarProgress, [categoryId]: progress }
+    persist('bf_grammar_progress', grammarProgress)
+    return { grammarProgress }
+  }),
 
   dismissNotification: (id) =>
     set(state => ({ notifications: state.notifications.filter(n => n.id !== id) })),
