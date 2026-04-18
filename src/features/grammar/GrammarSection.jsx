@@ -102,18 +102,18 @@ function CategoryCard({ cat, progress, onClick }) {
   )
 }
 
-function GrammarSection({ onSeeAll }) {
+function GrammarSection({ onSeeAll, standalone = false }) {
   const grammarProgress          = useStore(s => s.grammarProgress)
   const setActiveGrammarCategory = useStore(s => s.setActiveGrammarCategory)
 
   return (
-    <div className={styles.section}>
+    <div className={standalone ? styles.standalonePage : styles.section}>
       <div className={styles.header}>
         <div>
-          <div className={styles.title}>Grammar</div>
+          <div className={styles.title}>{standalone ? '📖 Grammar Practice' : 'Grammar'}</div>
           <div className={styles.subtitle}>Master English grammar step by step</div>
         </div>
-        <button className={styles.seeAll} onClick={onSeeAll}>See all →</button>
+        {onSeeAll && <button className={styles.seeAll} onClick={onSeeAll}>See all →</button>}
       </div>
 
       <div className={styles.grid}>

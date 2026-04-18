@@ -12,6 +12,7 @@ import Achievements from './components/Achievements/Achievements'
 import OfflineBanner from './components/OfflineBanner/OfflineBanner'
 import BackgroundEffects from './components/BackgroundEffects/BackgroundEffects'
 import GrammarDetailPage from './features/grammar/GrammarDetailPage'
+import GrammarSection from './features/grammar/GrammarSection'
 import PWAInstallBanner from './components/PWAInstallBanner/PWAInstallBanner'
 import useStore from './store/useStore'
 
@@ -162,9 +163,7 @@ function App() {
         )}
 
         {activePage === 'grammar' && (
-          <Suspense fallback={skelFallback}>
-            <GrammarPage />
-          </Suspense>
+          <GrammarSection standalone />
         )}
 
         {activePage === 'review' && (
