@@ -4,9 +4,9 @@ import styles from './TabBar.module.css'
 
 const TABS = [
   { id: 'dictionary', label: '🔍 Dictionary' },
-  { id: 'verbs',      label: '📚 Verbs' },
-  { id: 'grammar',    label: '📖 Grammar' },
+  { id: 'verbs',      label: '📖 Verbs' },
   { id: 'review',     label: '🔄 Review' },
+  { id: 'grammar',    label: '📚 Grammar' },
   { id: 'progress',   label: '📊 Progress' },
   { id: 'history',    label: '🕐 History' },
   { id: 'saved',      label: '🔖 Saved' },

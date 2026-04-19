@@ -1,6 +1,152 @@
 .wrap { padding-top: 8px; }
 
-.top { animation: fadeSlideUp 300ms var(--ease) both; }
+/* ── Featured Word of the Day ── */
+.wotdCard {
+  background: linear-gradient(135deg, rgba(124,111,255,0.14), rgba(255,107,157,0.08));
+  border: 1px solid var(--bord);
+  border-radius: var(--radius);
+  padding: 18px 20px 16px;
+  margin-bottom: 16px;
+  animation: fadeSlideUp 280ms var(--ease) both;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.wotdTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.wotdLabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--acc);
+}
+
+.wotdSave {
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: var(--elevated);
+  border: 1px solid var(--bord2);
+  color: var(--t2);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.18s var(--ease);
+}
+
+.wotdSave:hover { background: var(--hover); border-color: var(--acc); color: var(--t1); }
+.wotdSaveDone   { color: var(--acc-a); border-color: rgba(255,169,77,0.3); background: rgba(255,169,77,0.08); }
+
+.wotdWord {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 28px;
+  color: var(--t1);
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+.wotdPhonetic {
+  font-size: 14px;
+  color: var(--t3);
+  margin-top: 3px;
+  font-style: italic;
+}
+
+.wotdSkeleton {
+  height: 14px;
+  width: 60%;
+  background: var(--bord2);
+  border-radius: 4px;
+  margin-top: 8px;
+  animation: shimmer 1.4s infinite linear;
+}
+
+@keyframes shimmer {
+  0%   { opacity: 0.5; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+.wotdDef {
+  font-size: 13px;
+  color: var(--t2);
+  line-height: 1.55;
+  margin-top: 8px;
+}
+
+.wotdTranslation {
+  font-size: 12px;
+  color: var(--t3);
+  margin-top: 5px;
+}
+
+.wotdLearnBtn {
+  margin-top: 14px;
+  padding: 9px 18px;
+  background: linear-gradient(135deg, var(--acc), var(--acc-p));
+  border: none;
+  border-radius: var(--radius-sm);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.wotdLearnBtn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* ── Review reminder ── */
+.reviewReminder {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 169, 77, 0.06);
+  border: 1px solid rgba(255, 169, 77, 0.3);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  animation: bounceIn 400ms var(--ease) both;
+}
+
+.reviewReminderIcon { font-size: 24px; flex-shrink: 0; }
+
+.reviewReminderText { flex: 1; min-width: 0; }
+
+.reviewReminderTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--t1);
+}
+
+.reviewReminderSub { font-size: 12px; color: var(--t3); margin-top: 2px; }
+
+.reviewReminderBtn {
+  flex-shrink: 0;
+  padding: 8px 14px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--acc-a);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.reviewReminderBtn:hover { opacity: 0.85; transform: translateY(-1px); }
+
+/* ── Greeting ── */
+.top { animation: fadeSlideUp 300ms var(--ease) both; margin-bottom: 4px; }
 
 .greeting {
   font-family: 'Space Grotesk', sans-serif;
@@ -9,21 +155,48 @@
   color: var(--t1);
 }
 
-.sub {
-  font-size: 14px;
-  color: var(--t2);
-  margin-top: 6px;
-}
+.sub { font-size: 14px; color: var(--t2); margin-top: 6px; }
 
-.suggestLabel {
+/* ── Generic section ── */
+.section { margin-top: 20px; }
+
+.sectionLabel {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--t3);
-  margin: 24px 0 10px;
+  margin-bottom: 10px;
   font-weight: 700;
 }
 
+/* ── Recently searched ── */
+.scrollRow {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.scrollRow::-webkit-scrollbar { display: none; }
+
+.recentPill {
+  flex-shrink: 0;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--bord2);
+  background: var(--surface);
+  font-size: 13px;
+  color: var(--t2);
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.18s, color 0.18s, background 0.18s;
+  white-space: nowrap;
+}
+
+.recentPill:hover { border-color: var(--acc); color: var(--acc); background: rgba(124,111,255,0.06); }
+
+/* ── Discover / trending pills ── */
 .pills {
   display: flex;
   flex-wrap: wrap;
@@ -73,10 +246,7 @@
   letter-spacing: 0.06em;
 }
 
-.goalCount {
-  font-size: 13px;
-  color: var(--t3);
-}
+.goalCount { font-size: 13px; color: var(--t3); }
 
 .goalTrack {
   height: 6px;
@@ -93,9 +263,7 @@
   max-width: 100%;
 }
 
-.goalFillDone {
-  background: linear-gradient(90deg, #ffa94d, #ffd200);
-}
+.goalFillDone { background: linear-gradient(90deg, #ffa94d, #ffd200); }
 
 .goalDone {
   margin-top: 6px;
@@ -104,55 +272,39 @@
   color: var(--acc-a);
 }
 
-/* ── Review reminder ── */
-.reviewReminder {
+/* ── Stats row ── */
+.statsRow {
   display: flex;
   align-items: center;
-  gap: 12px;
-  background: rgba(255, 169, 77, 0.06);
-  border: 1px solid rgba(255, 169, 77, 0.3);
+  justify-content: center;
+  gap: 0;
+  margin-top: 24px;
+  padding: 14px 0;
+  background: var(--surface);
+  border: 1px solid var(--bord2);
   border-radius: var(--radius);
-  padding: 14px 16px;
-  margin-top: 16px;
-  animation: bounceIn 400ms var(--ease) both;
+  animation: fadeSlideUp 400ms var(--ease) 120ms both;
 }
 
-.reviewReminderIcon {
-  font-size: 24px;
-  flex-shrink: 0;
-}
-
-.reviewReminderText {
+.statItem {
   flex: 1;
-  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
 }
 
-.reviewReminderTitle {
+.statNum {
   font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 800;
+  font-size: 18px;
   color: var(--t1);
 }
 
-.reviewReminderSub {
-  font-size: 12px;
-  color: var(--t3);
-  margin-top: 2px;
+.statLabel { font-size: 11px; color: var(--t3); }
+
+.statDivider {
+  width: 1px;
+  height: 28px;
+  background: var(--bord2);
 }
-
-.reviewReminderBtn {
-  flex-shrink: 0;
-  padding: 8px 14px;
-  border: none;
-  border-radius: var(--radius-sm);
-  background: var(--acc-a);
-  color: #fff;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: 13px;
-  cursor: pointer;
-  transition: opacity 0.2s, transform 0.15s;
-}
-
-.reviewReminderBtn:hover { opacity: 0.85; transform: translateY(-1px); }
-
