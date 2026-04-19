@@ -2,6 +2,7 @@ import { memo, useMemo } from 'react'
 import useStore, { ACHIEVEMENTS_DEF, LEVELS, getLevel, getXpProgress } from '../../store/useStore'
 import { CATEGORIES } from '../grammar/GrammarSection'
 import { GRAMMAR_DATA } from '../grammar/grammarData'
+import WeeklyReport from '../adaptive/WeeklyReport'
 import styles from './ProgressPage.module.css'
 
 // ── Activity calendar ─────────────────────────────────────────────────────────
@@ -281,6 +282,7 @@ function ProgressPage() {
         </div>
       </div>
 
+      <WeeklyReport />
       <GrammarOverview grammarProgress={grammarProgress} completedLessons={completedLessons} activityLog={activityLog} />
       <GrammarLeaderboard grammarProgress={grammarProgress} />
       <GrammarProgress grammarProgress={grammarProgress} />

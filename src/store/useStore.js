@@ -1,5 +1,9 @@
 import { create } from 'zustand'
 import { calculateNextReview, getDueCards } from '../features/review/spacedRepetition'
+import {
+  getWeakCategories, getStrongCategories, calculateLevel,
+  makeDefaultAdaptiveData,
+} from '../features/adaptive/adaptiveEngine'
 
 const load = (key, fallback) => {
   try {
@@ -78,6 +82,8 @@ const useStore = create((set, get) => ({
   savedLessons:          load('bf_saved_lessons', []),
   lastStudied:           load('bf_last_studied', {}),
   practiceResults:       load('bf_practice', {}),
+  adaptiveData:          load('bf_adaptive', makeDefaultAdaptiveData()),
+  pendingLessonId:       null,
   activeGrammarCategory: null,
   reviewDeck:            load('bf_review', []),
   reviewSessionsCount:   load('bf_review_sessions', 0),
@@ -362,6 +368,74 @@ const useStore = create((set, get) => ({
     persist('bf_history', [])
     set({ searchHistory: [] })
   },
+
+  recordPracticeResult: (categoryId, correct, wrong) => set(state => {
+    const prev = state.adaptiveData
+    const scores = { ...prev.categoryScores }
+    const cur = scores[categoryId] ?? { correct: 0, wrong: 0, lastPracticed: null, weakTopics: [] }
+    scores[categoryId] = {
+      ...cur,
+      correct: cur.correct + correct,
+      wrong:   cur.wrong + wrong,
+      lastPracticed: new Date().toISOString(),
+    }
+    const weakCategories   = getWeakCategories(scores)
+    const strongCategories = getStrongCategories(scores)
+    const prevLevel        = prev.currentLevel
+    const currentLevel     = calculateLevel(scores)
+    const updated = { ...prev, categoryScores: scores, weakCategories, strongCategories, currentLevel }
+    persist('bf_adaptive', updated)
+    const newNotifs = [...state.notifications]
+    if (currentLevel !== prevLevel) {
+      newNotifs.push(mkNotif('adaptiveLevelUp', { level: currentLevel }))
+    }
+    return { adaptiveData: updated, notifications: newNotifs }
+  }),
+
+  generateWeeklyReport: () => set(state => {
+    const { adaptiveData, totalSearches, completedLessons, xp, streak, practiceResults, activityLog } = state
+    const { categoryScores } = adaptiveData
+    const weekStart = new Date(Date.now() - 7 * 86400000).toISOString().slice(0, 10)
+    const weekEnd   = new Date().toISOString().slice(0, 10)
+    const wordsThisWeek = Object.entries(activityLog)
+      .filter(([d]) => d >= weekStart)
+      .reduce((s, [, n]) => s + n, 0)
+    const practicesDone = Object.values(practiceResults).filter(r => {
+      const d = new Date(r.date).toISOString().slice(0, 10)
+      return d >= weekStart
+    }).length
+    const withAcc = Object.entries(categoryScores)
+      .map(([id, d]) => {
+        const total = d.correct + d.wrong
+        const acc   = total > 0 ? Math.round((d.correct / total) * 100) : null
+        return { id, acc, total }
+      })
+      .filter(x => x.acc !== null)
+      .sort((a, b) => b.acc - a.acc)
+    const strongest = withAcc[0] ?? null
+    const weakest   = withAcc[withAcc.length - 1] ?? null
+    let personalMessage = "Every lesson brings you closer to fluency. Keep going!"
+    if (streak >= 7)                personalMessage = "A full week streak! You're unstoppable."
+    else if (completedLessons.length > 5) personalMessage = "Great progress on grammar! Keep it up."
+    else if (wordsThisWeek > 20)    personalMessage = "Outstanding week! You're building serious vocabulary."
+    const report = {
+      weekStart, weekEnd,
+      wordsSearched: wordsThisWeek,
+      lessonsCompleted: completedLessons.length,
+      practicesDone,
+      xpEarned: xp,
+      streakDays: streak,
+      strongestCategory: strongest,
+      weakestCategory: weakest,
+      personalMessage,
+      generatedAt: new Date().toISOString(),
+    }
+    const updated = { ...adaptiveData, lastWeekReport: report }
+    persist('bf_adaptive', updated)
+    return { adaptiveData: updated }
+  }),
+
+  setPendingLessonId: (id) => set({ pendingLessonId: id }),
 
   toggleSaved: (word) => set(state => {
     const isSaved = state.savedWords.includes(word)

@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, lazy, Suspense } from 'react'
+import { useState, useEffect, useCallback, useRef, lazy, Suspense } from 'react'
 import ErrorBoundary from './components/ErrorBoundary'
 import Navbar from './components/Navbar/Navbar'
 import TabBar from './components/TabBar/TabBar'
@@ -13,8 +13,11 @@ import OfflineBanner from './components/OfflineBanner/OfflineBanner'
 import BackgroundEffects from './components/BackgroundEffects/BackgroundEffects'
 import GrammarDetailPage from './features/grammar/GrammarDetailPage'
 import GrammarSection from './features/grammar/GrammarSection'
+import AdaptiveDashboard from './features/adaptive/AdaptiveDashboard'
+import { CATEGORIES } from './features/grammar/GrammarSection'
 import PWAInstallBanner from './components/PWAInstallBanner/PWAInstallBanner'
 import useStore from './store/useStore'
+import { LEVEL_INFO } from './features/adaptive/adaptiveEngine'
 
 const HistoryPage        = lazy(() => import('./pages/HistoryPage/HistoryPage'))
 const SavedPage          = lazy(() => import('./pages/SavedPage/SavedPage'))
@@ -56,6 +59,75 @@ const scrollBtnStyle = {
 
 const skelFallback = <div className="suspenseSkel" />
 
+// ── Level-up overlay (adaptive) ───────────────────────────────────────────────
+const levelUpOverlayStyle = {
+  position: 'fixed', inset: 0, zIndex: 9999,
+  display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+  background: 'rgba(9,9,15,0.88)', backdropFilter: 'blur(16px)',
+  animation: 'fadeSlideUp 300ms var(--ease) both',
+  cursor: 'pointer',
+}
+const levelUpLabelStyle = {
+  fontFamily: "'Space Grotesk', sans-serif", fontWeight: 900, fontSize: 13,
+  letterSpacing: '0.18em', color: 'var(--t3)', textTransform: 'uppercase', marginBottom: 12,
+}
+const levelUpNameStyle = {
+  fontFamily: "'Space Grotesk', sans-serif", fontWeight: 800, fontSize: 48,
+  background: 'linear-gradient(135deg, var(--acc), var(--acc-p))',
+  WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+  lineHeight: 1.1, textAlign: 'center',
+}
+const levelUpSubStyle = {
+  marginTop: 12, fontSize: 14, color: 'var(--t3)',
+}
+
+function LevelUpOverlay({ notification, onDismiss }) {
+  const info = LEVEL_INFO[notification?.level] ?? LEVEL_INFO.beginner
+  useEffect(() => {
+    const t = setTimeout(onDismiss, 2800)
+    return () => clearTimeout(t)
+  }, [onDismiss])
+  return (
+    <div style={levelUpOverlayStyle} onClick={onDismiss}>
+      <div style={levelUpLabelStyle}>LEVEL UP!</div>
+      <div style={levelUpNameStyle}>{info.emoji} {info.label}</div>
+      <div style={levelUpSubStyle}>Tap to continue</div>
+    </div>
+  )
+}
+
+// ── Grammar nudge toast ───────────────────────────────────────────────────────
+const nudgeToastStyle = {
+  position: 'fixed', bottom: 90, left: '50%', transform: 'translateX(-50%)',
+  background: 'var(--surface)', border: '1px solid rgba(255,169,77,0.4)',
+  borderRadius: 'var(--radius)', padding: '12px 16px',
+  display: 'flex', alignItems: 'center', gap: 10, zIndex: 500,
+  boxShadow: '0 8px 32px rgba(0,0,0,0.45)', animation: 'fadeSlideUp 250ms var(--ease) both',
+  maxWidth: 340, width: 'calc(100% - 32px)',
+}
+const nudgeTextStyle = { flex: 1, fontSize: 13, color: 'var(--t2)', lineHeight: 1.4 }
+const nudgeBtnStyle = {
+  flexShrink: 0, padding: '7px 12px', border: 'none', borderRadius: 'var(--radius-sm)',
+  background: 'var(--acc-a)', color: '#fff',
+  fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 12, cursor: 'pointer',
+}
+
+function GrammarNudgeToast({ weakCategory, onPractice, onDismiss }) {
+  useEffect(() => {
+    const t = setTimeout(onDismiss, 6000)
+    return () => clearTimeout(t)
+  }, [onDismiss])
+  return (
+    <div style={nudgeToastStyle}>
+      <span>💪</span>
+      <span style={nudgeTextStyle}>
+        Your weakest area is <strong>{weakCategory}</strong> — practice it today?
+      </span>
+      <button style={nudgeBtnStyle} onClick={onPractice}>Go</button>
+    </div>
+  )
+}
+
 function App() {
   const activePage     = useStore(s => s.activePage)
   const setActivePage  = useStore(s => s.setActivePage)
@@ -64,6 +136,10 @@ function App() {
   const setCurrentWord = useStore(s => s.setCurrentWord)
   const addToHistory   = useStore(s => s.addToHistory)
   const addXP          = useStore(s => s.addXP)
+  const notifications  = useStore(s => s.notifications)
+  const dismissNotification = useStore(s => s.dismissNotification)
+  const adaptiveData   = useStore(s => s.adaptiveData)
+  const setActiveGrammarCategory = useStore(s => s.setActiveGrammarCategory)
 
   const activeGrammarCategory = useStore(s => s.activeGrammarCategory)
   const showSettings          = useStore(s => s.showSettings)
@@ -73,6 +149,23 @@ function App() {
   const [onboardDone,   setOnboardDone]   = useState(!shouldShowOnboarding())
   const [showScrollTop, setShowScrollTop] = useState(false)
   const [quizOpen,      setQuizOpen]      = useState(false)
+  const [showNudge,     setShowNudge]     = useState(false)
+  const nudgeShownRef = useRef(false)
+
+  // Grammar nudge: show once per day when opening grammar tab and weak areas exist
+  useEffect(() => {
+    if (activePage !== 'grammar') return
+    const today = new Date().toDateString()
+    const lastNudge = localStorage.getItem('bf_adaptive_nudge_date')
+    if (lastNudge === today || nudgeShownRef.current) return
+    if (adaptiveData.weakCategories.length > 0) {
+      nudgeShownRef.current = true
+      localStorage.setItem('bf_adaptive_nudge_date', today)
+      setShowNudge(true)
+    }
+  }, [activePage, adaptiveData.weakCategories])
+
+  const levelUpNotif = notifications.find(n => n.type === 'adaptiveLevelUp')
 
   useEffect(() => {
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#09090f')
@@ -163,7 +256,10 @@ function App() {
         )}
 
         {activePage === 'grammar' && (
-          <GrammarSection standalone />
+          <>
+            <AdaptiveDashboard />
+            <GrammarSection standalone />
+          </>
         )}
 
         {activePage === 'review' && (
@@ -199,6 +295,25 @@ function App() {
       <Achievements />
 
       {activeGrammarCategory && <GrammarDetailPage />}
+
+      {levelUpNotif && (
+        <LevelUpOverlay
+          notification={levelUpNotif}
+          onDismiss={() => dismissNotification(levelUpNotif.id)}
+        />
+      )}
+
+      {showNudge && adaptiveData.weakCategories.length > 0 && (() => {
+        const catId = adaptiveData.weakCategories[0]
+        const cat   = CATEGORIES.find(c => c.id === catId)
+        return (
+          <GrammarNudgeToast
+            weakCategory={cat?.title ?? catId}
+            onPractice={() => { setShowNudge(false); setActivePage('grammar'); setActiveGrammarCategory(catId) }}
+            onDismiss={() => setShowNudge(false)}
+          />
+        )
+      })()}
 
       {showSettings && (
         <Suspense fallback={null}>

@@ -291,8 +291,17 @@ function GrammarDetailPage() {
   const completedLessons         = useStore(s => s.completedLessons)
   const savedLessons             = useStore(s => s.savedLessons)
   const updateLastStudied        = useStore(s => s.updateLastStudied)
+  const pendingLessonId          = useStore(s => s.pendingLessonId)
+  const setPendingLessonId       = useStore(s => s.setPendingLessonId)
 
   const [activeLessonId, setActiveLessonId] = useState(null)
+
+  useEffect(() => {
+    if (pendingLessonId && !activeLessonId) {
+      setActiveLessonId(pendingLessonId)
+      setPendingLessonId(null)
+    }
+  }, [pendingLessonId, activeLessonId, setPendingLessonId])
 
   const cat = CATEGORIES.find(c => c.id === activeGrammarCategory)
   if (!cat) return null

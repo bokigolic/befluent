@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback, useEffect, memo } from 'react'
 import useStore from '../../store/useStore'
+import { CATEGORY_TIPS } from '../adaptive/adaptiveEngine'
 import styles from './PracticeView.module.css'
 
 function normalise(str) {
@@ -147,11 +148,15 @@ function RewriteQ({ exercise, onAnswer, answered }) {
 
 // ── Results screen ────────────────────────────────────────────────────────────
 function ResultsScreen({ score, total, cat, history, avgTime, onRetry, onBack, onNextLesson }) {
-  const pct    = Math.round((score / total) * 100)
-  const addXP  = useStore(s => s.addXP)
+  const pct         = Math.round((score / total) * 100)
+  const addXP       = useStore(s => s.addXP)
   const addToReview = useStore(s => s.addToReview)
+  const adaptiveData = useStore(s => s.adaptiveData)
   const xpRef  = useRef(false)
   const [showReview, setShowReview] = useState(false)
+
+  const justMastered = pct >= 80 && adaptiveData.strongCategories.includes(cat.id)
+  const tip = CATEGORY_TIPS[cat.id] ?? null
 
   if (!xpRef.current) {
     xpRef.current = true
@@ -175,6 +180,33 @@ function ResultsScreen({ score, total, cat, history, avgTime, onRetry, onBack, o
       <div className={styles.resultsXP}>+{score * 5} XP earned</div>
       {avgTime > 0 && (
         <div className={styles.resultsTime}>⚡ Avg: {avgTime}s per question</div>
+      )}
+
+      {/* Post-practice feedback */}
+      {pct > 85 && (
+        <div className={styles.celebrationCard}>
+          <div className={styles.celebrationTitle}>🏆 Excellent performance!</div>
+          {justMastered && (
+            <div className={styles.celebrationSub}>
+              You've moved <strong>{cat.title}</strong> from weak to strong areas! 🎉
+            </div>
+          )}
+        </div>
+      )}
+      {pct < 60 && (
+        <div className={styles.encouragementCard}>
+          <div className={styles.encouragementTitle}>
+            Don't worry — {cat.title} is one of the trickiest parts of English.
+          </div>
+          <div className={styles.encouragementSub}>
+            Keep practicing and we'll show you more exercises until you master it.
+          </div>
+          {tip && (
+            <div className={styles.encouragementTip}>
+              <span className={styles.tipIcon}>💡</span> {tip}
+            </div>
+          )}
+        </div>
       )}
 
       {/* Question review toggle */}
@@ -230,8 +262,9 @@ function ResultsScreen({ score, total, cat, history, avgTime, onRetry, onBack, o
 
 // ── Main PracticeView ─────────────────────────────────────────────────────────
 function PracticeView({ lesson, cat, exercises, onBack, onNextLesson }) {
-  const savePracticeResult = useStore(s => s.savePracticeResult)
-  const addXP              = useStore(s => s.addXP)
+  const savePracticeResult    = useStore(s => s.savePracticeResult)
+  const recordPracticeResult  = useStore(s => s.recordPracticeResult)
+  const addXP                 = useStore(s => s.addXP)
 
   const [qIndex,   setQIndex]   = useState(0)
   const [answered, setAnswered] = useState(false)
@@ -275,6 +308,7 @@ function PracticeView({ lesson, cat, exercises, onBack, onNextLesson }) {
   const handleNext = () => {
     if (qIndex + 1 >= total) {
       savePracticeResult(lesson.id, scoreRef.current, total)
+      recordPracticeResult(cat.id, scoreRef.current, total - scoreRef.current)
       setDone(true)
     } else {
       setQIndex(i => i + 1)
