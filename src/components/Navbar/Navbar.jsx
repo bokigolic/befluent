@@ -48,7 +48,22 @@ function Navbar() {
 
   return (
     <nav className={styles.navbar}>
-      <span className={styles.logo}>BeFluent</span>
+      <div className={styles.logo}>
+        <div className={styles.logoIcon}>
+          <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
+            <defs>
+              <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#3b82f6"/>
+                <stop offset="100%" stopColor="#06b6d4"/>
+              </linearGradient>
+            </defs>
+            <rect width="28" height="28" rx="8" fill="url(#logoGrad)"/>
+            <text x="14" y="20" textAnchor="middle" fill="white"
+                  fontSize="14" fontWeight="800" fontFamily="Space Grotesk, sans-serif">BF</text>
+          </svg>
+        </div>
+        <span className={styles.logoText}>BeFluent</span>
+      </div>
 
       <div className={styles.levelWrap}>
         <div className={styles.levelName} style={{ color: levelInfo.color }}>

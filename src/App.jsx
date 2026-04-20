@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback, useRef, lazy, Suspense } from 'react'
 import ErrorBoundary from './components/ErrorBoundary'
+import CustomCursor from './components/CustomCursor/CustomCursor'
+import ParallaxBackground from './components/ParallaxBackground/ParallaxBackground'
 import Navbar from './components/Navbar/Navbar'
 import TabBar from './components/TabBar/TabBar'
 import FlagSwitcher from './components/FlagSwitcher/FlagSwitcher'
@@ -215,6 +217,8 @@ function App() {
 
   return (
     <ErrorBoundary>
+      <CustomCursor />
+      <ParallaxBackground />
       <BackgroundEffects />
       <Navbar />
       <OfflineBanner />
