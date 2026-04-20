@@ -225,6 +225,83 @@ function ReviewStats({ reviewDeck, reviewSessionsCount }) {
   )
 }
 
+// ── Writing stats ─────────────────────────────────────────────────────────────
+function WritingStats({ writingHistory }) {
+  const total   = writingHistory.length
+  const avgScore = total > 0
+    ? Math.round(writingHistory.reduce((s, e) => s + (e.score ?? 0), 0) / total)
+    : 0
+  const best = total > 0 ? Math.max(...writingHistory.map(e => e.score ?? 0)) : 0
+
+  const errorTypes = useMemo(() => {
+    const counts = {}
+    writingHistory.forEach(e => {
+      if (e.topErrorType) counts[e.topErrorType] = (counts[e.topErrorType] ?? 0) + 1
+    })
+    return Object.entries(counts).sort((a, b) => b[1] - a[1])
+  }, [writingHistory])
+
+  const last10 = writingHistory.slice(0, 10).reverse()
+  const maxScore = last10.length > 0 ? Math.max(...last10.map(e => e.score ?? 0), 1) : 100
+
+  if (total === 0) {
+    return (
+      <div className={styles.block}>
+        <div className={styles.blockTitle}>Writing Stats</div>
+        <div className={styles.writingEmptyHint}>No writing exercises yet — try the Writing tab!</div>
+      </div>
+    )
+  }
+
+  return (
+    <div className={styles.block}>
+      <div className={styles.blockTitle}>Writing Stats</div>
+      <div className={styles.writingMetrics}>
+        <div className={styles.writingMetricCard}>
+          <div className={styles.writingMetricNum} style={{ color: 'var(--acc)' }}>{total}</div>
+          <div className={styles.writingMetricLabel}>Submissions</div>
+        </div>
+        <div className={styles.writingMetricCard}>
+          <div className={styles.writingMetricNum} style={{ color: 'var(--acc-g)' }}>{avgScore}</div>
+          <div className={styles.writingMetricLabel}>Avg score</div>
+        </div>
+        <div className={styles.writingMetricCard}>
+          <div className={styles.writingMetricNum} style={{ color: 'var(--acc-p)' }}>{best}</div>
+          <div className={styles.writingMetricLabel}>Best score</div>
+        </div>
+        <div className={styles.writingMetricCard}>
+          <div className={styles.writingMetricNum} style={{ color: 'var(--acc-a)', fontSize: 14 }}>
+            {errorTypes[0] ? errorTypes[0][0] : '—'}
+          </div>
+          <div className={styles.writingMetricLabel}>Common error</div>
+        </div>
+      </div>
+
+      {last10.length > 1 && (
+        <>
+          <div className={styles.writingChartTitle}>Last {last10.length} scores</div>
+          <div className={styles.writingChartWrap}>
+            <div className={styles.writingChart}>
+              {last10.map((e, i) => {
+                const pct = Math.round(((e.score ?? 0) / maxScore) * 100)
+                const color = e.score >= 90 ? 'var(--acc-g)' : e.score >= 75 ? 'var(--acc)' : e.score >= 60 ? 'var(--acc-a)' : 'var(--acc-p)'
+                return (
+                  <div
+                    key={i}
+                    className={styles.writingBar}
+                    style={{ height: `${Math.max(6, pct)}%`, background: color }}
+                    title={`${e.score}/100`}
+                  />
+                )
+              })}
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  )
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 function ProgressPage() {
   const xp                 = useStore(s => s.xp)
@@ -236,6 +313,7 @@ function ProgressPage() {
   const activityLog        = useStore(s => s.activityLog)
   const reviewDeck         = useStore(s => s.reviewDeck)
   const reviewSessionsCount = useStore(s => s.reviewSessionsCount)
+  const writingHistory     = useStore(s => s.writingHistory)
 
   const level    = getLevel(xp)
   const progress = getXpProgress(xp)
@@ -288,6 +366,7 @@ function ProgressPage() {
       <GrammarProgress grammarProgress={grammarProgress} />
       <ActivityCalendar activityLog={activityLog} />
       <ReviewStats reviewDeck={reviewDeck} reviewSessionsCount={reviewSessionsCount} />
+      <WritingStats writingHistory={writingHistory} />
       <AchievementsGrid unlocked={achievements} />
     </div>
   )

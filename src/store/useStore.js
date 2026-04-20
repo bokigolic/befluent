@@ -38,18 +38,22 @@ export const getXpProgress = (xp) => {
 }
 
 export const ACHIEVEMENTS_DEF = [
-  { id: 'first_search', title: 'First Steps',        desc: 'Search your first word',             emoji: '🔍', xpReward: 10 },
-  { id: 'words_10',     title: 'Word Collector',     desc: 'Search 10 words',                    emoji: '📚', xpReward: 25 },
-  { id: 'words_50',     title: 'Vocabulary Builder', desc: 'Search 50 words',                    emoji: '🏗️', xpReward: 50 },
-  { id: 'streak_3',     title: 'On a Roll',          desc: '3 day streak',                       emoji: '🔥', xpReward: 30 },
-  { id: 'streak_7',     title: 'Week Warrior',       desc: '7 day streak',                       emoji: '⚡', xpReward: 75 },
-  { id: 'saved_5',      title: 'Bookworm',           desc: 'Save 5 words',                       emoji: '🔖', xpReward: 20 },
-  { id: 'translation',  title: 'Bilingual',          desc: 'Use translation mode',               emoji: '🌍', xpReward: 15 },
-  { id: 'master',       title: 'Master',             desc: 'Reach 2000 XP',                      emoji: '👑', xpReward: 100 },
-  { id: 'review_first', title: 'First Review',       desc: 'Complete your first review session', emoji: '🔄', xpReward: 15 },
-  { id: 'review_10',    title: 'Consistent Learner', desc: 'Review 10 sessions total',           emoji: '📅', xpReward: 40 },
-  { id: 'deck_20',      title: 'Deck Builder',       desc: 'Add 20 words to review deck',        emoji: '📦', xpReward: 30 },
-  { id: 'mastered_5',   title: 'Word Master',        desc: 'Master 5 words (21+ day interval)',  emoji: '🏅', xpReward: 50 },
+  { id: 'first_search',   title: 'First Steps',        desc: 'Search your first word',             emoji: '🔍', xpReward: 10 },
+  { id: 'words_10',       title: 'Word Collector',     desc: 'Search 10 words',                    emoji: '📚', xpReward: 25 },
+  { id: 'words_50',       title: 'Vocabulary Builder', desc: 'Search 50 words',                    emoji: '🏗️', xpReward: 50 },
+  { id: 'streak_3',       title: 'On a Roll',          desc: '3 day streak',                       emoji: '🔥', xpReward: 30 },
+  { id: 'streak_7',       title: 'Week Warrior',       desc: '7 day streak',                       emoji: '⚡', xpReward: 75 },
+  { id: 'saved_5',        title: 'Bookworm',           desc: 'Save 5 words',                       emoji: '🔖', xpReward: 20 },
+  { id: 'translation',    title: 'Bilingual',          desc: 'Use translation mode',               emoji: '🌍', xpReward: 15 },
+  { id: 'master',         title: 'Master',             desc: 'Reach 2000 XP',                      emoji: '👑', xpReward: 100 },
+  { id: 'review_first',   title: 'First Review',       desc: 'Complete your first review session', emoji: '🔄', xpReward: 15 },
+  { id: 'review_10',      title: 'Consistent Learner', desc: 'Review 10 sessions total',           emoji: '📅', xpReward: 40 },
+  { id: 'deck_20',        title: 'Deck Builder',       desc: 'Add 20 words to review deck',        emoji: '📦', xpReward: 30 },
+  { id: 'mastered_5',     title: 'Word Master',        desc: 'Master 5 words (21+ day interval)',  emoji: '🏅', xpReward: 50 },
+  { id: 'first_writing',  title: 'First Draft',        desc: 'Complete your first writing check',  emoji: '✍️', xpReward: 15 },
+  { id: 'great_writer',   title: 'Great Writer',       desc: 'Score 90+ on a writing exercise',    emoji: '🌟', xpReward: 30 },
+  { id: 'perfect_writer', title: 'Perfect Writer',     desc: 'Score 100 on a writing exercise',    emoji: '💎', xpReward: 50 },
+  { id: 'writing_10',     title: 'Prolific Writer',    desc: 'Complete 10 writing exercises',      emoji: '📝', xpReward: 40 },
 ]
 
 let _notifId = 0
@@ -90,6 +94,7 @@ const useStore = create((set, get) => ({
   instantSearch:         load('bf_instant', false),
   showSettings:          false,
   activityLog:           load('bf_activity', {}),
+  writingHistory:        load('bf_writing', []),
   notifications:  [],
 
   setActiveGrammarCategory: (id) => set({ activeGrammarCategory: id }),
@@ -436,6 +441,37 @@ const useStore = create((set, get) => ({
   }),
 
   setPendingLessonId: (id) => set({ pendingLessonId: id }),
+
+  addWritingEntry: (entry) => set(state => {
+    const writingHistory = [entry, ...state.writingHistory].slice(0, 20)
+    persist('bf_writing', writingHistory)
+    return { writingHistory }
+  }),
+
+  deleteWritingEntry: (id) => set(state => {
+    const writingHistory = state.writingHistory.filter(e => e.id !== id)
+    persist('bf_writing', writingHistory)
+    return { writingHistory }
+  }),
+
+  checkAchievements: () => set(state => {
+    const { writingHistory, achievements } = state
+    const newIds = []
+    const total = writingHistory.length
+    const best  = writingHistory.reduce((m, e) => Math.max(m, e.score ?? 0), 0)
+    if (total >= 1  && !achievements.includes('first_writing'))  newIds.push('first_writing')
+    if (best  >= 90 && !achievements.includes('great_writer'))   newIds.push('great_writer')
+    if (best  >= 100 && !achievements.includes('perfect_writer')) newIds.push('perfect_writer')
+    if (total >= 10 && !achievements.includes('writing_10'))     newIds.push('writing_10')
+    if (newIds.length === 0) return {}
+    const updated = [...achievements, ...newIds]
+    persist('bf_achievements', updated)
+    const newNotifs = newIds.map(id => {
+      const def = ACHIEVEMENTS_DEF.find(a => a.id === id)
+      return mkNotif('achievement', def)
+    })
+    return { achievements: updated, notifications: [...state.notifications, ...newNotifs] }
+  }),
 
   toggleSaved: (word) => set(state => {
     const isSaved = state.savedWords.includes(word)

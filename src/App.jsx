@@ -28,6 +28,7 @@ const GrammarPage        = lazy(() => import('./pages/GrammarPage/GrammarPage'))
 const ReviewPage         = lazy(() => import('./features/review/ReviewPage'))
 const ProgressPage       = lazy(() => import('./features/progress/ProgressPage'))
 const SettingsPage       = lazy(() => import('./pages/SettingsPage/SettingsPage'))
+const WritingPage        = lazy(() => import('./features/writing/WritingPage'))
 
 const shouldShowSplash = () =>
   !localStorage.getItem('bf_launched') ||
@@ -260,6 +261,12 @@ function App() {
             <AdaptiveDashboard />
             <GrammarSection standalone />
           </>
+        )}
+
+        {activePage === 'writing' && (
+          <Suspense fallback={skelFallback}>
+            <WritingPage />
+          </Suspense>
         )}
 
         {activePage === 'review' && (
