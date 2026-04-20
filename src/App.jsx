@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback, useRef, lazy, Suspense } from 'react'
 import ErrorBoundary from './components/ErrorBoundary'
 import CustomCursor from './components/CustomCursor/CustomCursor'
 import ParallaxBackground from './components/ParallaxBackground/ParallaxBackground'
+import BottomNav from './components/BottomNav/BottomNav'
+import ShortcutsOverlay from './components/ShortcutsOverlay/ShortcutsOverlay'
 import Navbar from './components/Navbar/Navbar'
 import TabBar from './components/TabBar/TabBar'
 import FlagSwitcher from './components/FlagSwitcher/FlagSwitcher'
@@ -148,12 +150,27 @@ function App() {
   const showSettings          = useStore(s => s.showSettings)
   const setShowSettings       = useStore(s => s.setShowSettings)
 
-  const [splashDone,    setSplashDone]    = useState(!shouldShowSplash())
-  const [onboardDone,   setOnboardDone]   = useState(!shouldShowOnboarding())
-  const [showScrollTop, setShowScrollTop] = useState(false)
-  const [quizOpen,      setQuizOpen]      = useState(false)
-  const [showNudge,     setShowNudge]     = useState(false)
-  const nudgeShownRef = useRef(false)
+  const [splashDone,      setSplashDone]      = useState(!shouldShowSplash())
+  const [onboardDone,     setOnboardDone]     = useState(!shouldShowOnboarding())
+  const [showScrollTop,   setShowScrollTop]   = useState(false)
+  const [quizOpen,        setQuizOpen]        = useState(false)
+  const [showNudge,       setShowNudge]       = useState(false)
+  const [showShortcuts,   setShowShortcuts]   = useState(false)
+  const nudgeShownRef   = useRef(false)
+  const touchStartX     = useRef(0)
+  const touchStartTime  = useRef(0)
+
+  const TAB_ORDER = ['dictionary','verbs','review','grammar','writing','progress','history','saved','profile']
+
+  const goToNextTab = useCallback(() => {
+    const idx = TAB_ORDER.indexOf(activePage)
+    if (idx < TAB_ORDER.length - 1) setActivePage(TAB_ORDER[idx + 1])
+  }, [activePage, setActivePage])
+
+  const goToPrevTab = useCallback(() => {
+    const idx = TAB_ORDER.indexOf(activePage)
+    if (idx > 0) setActivePage(TAB_ORDER[idx - 1])
+  }, [activePage, setActivePage])
 
   // Grammar nudge: show once per day when opening grammar tab and weak areas exist
   useEffect(() => {
@@ -182,6 +199,45 @@ function App() {
     document.addEventListener('keydown', handler)
     return () => document.removeEventListener('keydown', handler)
   }, [showSettings, setShowSettings])
+
+  // Global keyboard shortcuts
+  useEffect(() => {
+    const TAB_KEYS = { '1':'dictionary','2':'grammar','3':'writing','4':'review','5':'progress' }
+    const handler = (e) => {
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return
+      if (e.key === '?') { e.preventDefault(); setShowShortcuts(v => !v); return }
+      if (e.key === 'Escape') { setShowShortcuts(false); return }
+      if (TAB_KEYS[e.key]) { setActivePage(TAB_KEYS[e.key]); return }
+      if (e.key === '/' && activePage === 'dictionary') {
+        e.preventDefault()
+        document.querySelector('input[type="search"], input[type="text"]')?.focus()
+      }
+    }
+    document.addEventListener('keydown', handler)
+    return () => document.removeEventListener('keydown', handler)
+  }, [activePage, setActivePage])
+
+  // Touch swipe for tab switching
+  useEffect(() => {
+    const onStart = (e) => {
+      touchStartX.current    = e.touches[0].clientX
+      touchStartTime.current = Date.now()
+    }
+    const onEnd = (e) => {
+      const dx = e.changedTouches[0].clientX - touchStartX.current
+      const dt = Date.now() - touchStartTime.current
+      if (Math.abs(dx) > 50 && dt < 300) {
+        if (dx < 0) goToNextTab()
+        else        goToPrevTab()
+      }
+    }
+    document.addEventListener('touchstart', onStart, { passive: true })
+    document.addEventListener('touchend',   onEnd,   { passive: true })
+    return () => {
+      document.removeEventListener('touchstart', onStart)
+      document.removeEventListener('touchend',   onEnd)
+    }
+  }, [goToNextTab, goToPrevTab])
 
   useEffect(() => {
     const onScroll = () => setShowScrollTop(window.scrollY > 300)
@@ -302,6 +358,7 @@ function App() {
         </button>
       )}
 
+      <BottomNav />
       <PWAInstallBanner />
       <Achievements />
 
@@ -331,6 +388,14 @@ function App() {
           <SettingsPage onClose={() => setShowSettings(false)} />
         </Suspense>
       )}
+
+      {showShortcuts && (
+        <ShortcutsOverlay onClose={() => setShowShortcuts(false)} />
+      )}
+
+      <div style={{ textAlign: 'center', padding: '4px 0 8px', fontSize: 11, color: 'var(--t3)', userSelect: 'none' }}>
+        Press <kbd style={{ fontFamily: 'monospace', background: 'var(--elevated)', border: '1px solid var(--bord2)', borderRadius: 4, padding: '1px 5px', fontSize: 10 }}>?</kbd> for shortcuts
+      </div>
 
       {quizOpen && (
         <Suspense fallback={null}>

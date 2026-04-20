@@ -92,6 +92,9 @@ const useStore = create((set, get) => ({
   reviewDeck:            load('bf_review', []),
   reviewSessionsCount:   load('bf_review_sessions', 0),
   instantSearch:         load('bf_instant', false),
+  soundEnabled:          load('bf_sound', false),
+  avatar:                load('bf_avatar', '🧑‍💻'),
+  memberSince:           load('bf_member_since', new Date().toISOString().slice(0, 10)),
   showSettings:          false,
   activityLog:           load('bf_activity', {}),
   writingHistory:        load('bf_writing', []),
@@ -189,6 +192,17 @@ const useStore = create((set, get) => ({
     const instantSearch = !state.instantSearch
     persist('bf_instant', instantSearch)
     return { instantSearch }
+  }),
+
+  toggleSound: () => set(state => {
+    const soundEnabled = !state.soundEnabled
+    persist('bf_sound', soundEnabled)
+    return { soundEnabled }
+  }),
+
+  setAvatar: (emoji) => set(() => {
+    persist('bf_avatar', emoji)
+    return { avatar: emoji }
   }),
 
   setShowSettings: (v) => set({ showSettings: v }),

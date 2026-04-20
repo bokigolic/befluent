@@ -59,6 +59,10 @@
   animation: bounceIn 0.28s var(--ease);
 }
 
+@media (max-width: 767px) {
+  .tabbar { display: none; }
+}
+
 @media (max-width: 480px) {
   .tabbar {
     padding: 8px 12px 0;
