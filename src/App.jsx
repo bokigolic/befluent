@@ -35,6 +35,7 @@ const SettingsPage       = lazy(() => import('./pages/SettingsPage/SettingsPage'
 const WritingPage        = lazy(() => import('./features/writing/WritingPage'))
 const TopicsPage         = lazy(() => import('./features/topics/TopicsPage'))
 const NewsPage           = lazy(() => import('./features/news/NewsPage'))
+const IdiomsPage         = lazy(() => import('./features/idioms/IdiomsPage'))
 
 const shouldShowSplash = () =>
   !localStorage.getItem('bf_launched') ||
@@ -340,6 +341,12 @@ function App() {
         {activePage === 'news' && (
           <Suspense fallback={skelFallback}>
             <NewsPage />
+          </Suspense>
+        )}
+
+        {activePage === 'idioms' && (
+          <Suspense fallback={skelFallback}>
+            <IdiomsPage />
           </Suspense>
         )}
 

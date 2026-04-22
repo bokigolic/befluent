@@ -3,6 +3,7 @@ import useStore from '../../store/useStore'
 import useDictionary from '../../hooks/useDictionary'
 import useTranslation from '../../hooks/useTranslation'
 import { getDueCards } from '../../features/review/spacedRepetition'
+import { getIdiomOfDay } from '../../features/idioms/idiomsData'
 import styles from './WelcomeScreen.module.css'
 
 const WOTD_POOL = [
@@ -65,6 +66,21 @@ function FeaturedWordCard({ onSearch }) {
       <button className={styles.wotdLearnBtn} onClick={() => onSearch(word)}>
         Learn this word →
       </button>
+    </div>
+  )
+}
+
+// ── Idiom of the Day mini card ────────────────────────────────────────────────
+function IdiomMiniCard({ onGoToIdioms }) {
+  const idiom = useMemo(() => getIdiomOfDay(), [])
+  return (
+    <div className={styles.idiomCard}>
+      <div className={styles.idiomCardTop}>
+        <span className={styles.idiomCardLabel}>💬 Idiom of the Day</span>
+        <button className={styles.idiomCardLink} onClick={onGoToIdioms}>See more →</button>
+      </div>
+      <div className={styles.idiomCardIdiom}>{idiom.idiom}</div>
+      <div className={styles.idiomCardMeaning}>{idiom.meaning}</div>
     </div>
   )
 }
@@ -149,6 +165,8 @@ function WelcomeScreen({ onSearch }) {
   return (
     <div className={styles.wrap}>
       <FeaturedWordCard onSearch={onSearch} />
+
+      <IdiomMiniCard onGoToIdioms={() => setActivePage('idioms')} />
 
       <ReviewReminder dueCount={dueCount} onGoToReview={() => setActivePage('review')} />
 

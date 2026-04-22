@@ -10,6 +10,7 @@ const TABS = [
   { id: 'writing',    label: '✍️ Writing' },
   { id: 'topics',     label: '🗂️ Topics' },
   { id: 'news',       label: '📰 News' },
+  { id: 'idioms',     label: '💬 Idioms' },
   { id: 'progress',   label: '📊 Progress' },
   { id: 'history',    label: '🕐 History' },
   { id: 'saved',      label: '🔖 Saved' },

@@ -54,6 +54,10 @@ export const ACHIEVEMENTS_DEF = [
   { id: 'great_writer',   title: 'Great Writer',       desc: 'Score 90+ on a writing exercise',    emoji: '🌟', xpReward: 30 },
   { id: 'perfect_writer', title: 'Perfect Writer',     desc: 'Score 100 on a writing exercise',    emoji: '💎', xpReward: 50 },
   { id: 'writing_10',     title: 'Prolific Writer',    desc: 'Complete 10 writing exercises',      emoji: '📝', xpReward: 40 },
+  { id: 'first_idiom',    title: 'Idiom Explorer',     desc: 'Learn your first idiom',             emoji: '💬', xpReward: 10 },
+  { id: 'idioms_20',      title: 'Idiom Master',       desc: 'Save 20 idioms',                     emoji: '🎭', xpReward: 30 },
+  { id: 'idiom_quiz_perfect', title: 'Idiom Champion', desc: 'Score 10/10 on idiom quiz',          emoji: '🏆', xpReward: 50 },
+  { id: 'slang_master',   title: 'Slang Expert',       desc: 'Save all slang idioms',              emoji: '😎', xpReward: 25 },
 ]
 
 let _notifId = 0
@@ -101,6 +105,8 @@ const useStore = create((set, get) => ({
   learnedTopicWords:     load('bf_topic_words', {}),
   readArticles:          load('bf_news_read', {}),
   bookmarkedArticles:    load('bf_news_bookmarks', []),
+  savedIdioms:           load('bf_idioms_saved', []),
+  idiomQuizHistory:      load('bf_idiom_quiz', []),
   notifications:  [],
 
   setActiveGrammarCategory: (id) => set({ activeGrammarCategory: id }),
@@ -217,6 +223,44 @@ const useStore = create((set, get) => ({
     }
     persist('bf_news_read', readArticles)
     return { readArticles }
+  }),
+
+  toggleSavedIdiom: (idiomId) => set(state => {
+    const savedIdioms = state.savedIdioms.includes(idiomId)
+      ? state.savedIdioms.filter(id => id !== idiomId)
+      : [...state.savedIdioms, idiomId]
+    persist('bf_idioms_saved', savedIdioms)
+
+    let { achievements, notifications } = state
+    const newNotifs = []
+    const check = (id) => {
+      if (!achievements.includes(id)) {
+        achievements = [...achievements, id]
+        persist('bf_achievements', achievements)
+        newNotifs.push(mkNotif('achievement', ACHIEVEMENTS_DEF.find(a => a.id === id)))
+      }
+    }
+    if (savedIdioms.length >= 1)  check('first_idiom')
+    if (savedIdioms.length >= 20) check('idioms_20')
+    // slang master: all 20 slang idioms saved
+    const SLANG_IDS = ['s1','s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s20']
+    if (SLANG_IDS.every(id => savedIdioms.includes(id))) check('slang_master')
+
+    return { savedIdioms, achievements, notifications: [...notifications, ...newNotifs] }
+  }),
+
+  addIdiomQuizResult: (result) => set(state => {
+    const idiomQuizHistory = [result, ...state.idiomQuizHistory].slice(0, 50)
+    persist('bf_idiom_quiz', idiomQuizHistory)
+
+    let { achievements, notifications } = state
+    const newNotifs = []
+    if (result.score === 10 && !achievements.includes('idiom_quiz_perfect')) {
+      achievements = [...achievements, 'idiom_quiz_perfect']
+      persist('bf_achievements', achievements)
+      newNotifs.push(mkNotif('achievement', ACHIEVEMENTS_DEF.find(a => a.id === 'idiom_quiz_perfect')))
+    }
+    return { idiomQuizHistory, achievements, notifications: [...notifications, ...newNotifs] }
   }),
 
   toggleBookmarkArticle: (articleId) => set(state => {

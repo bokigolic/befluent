@@ -9,6 +9,7 @@ const NAV_ITEMS = [
   { id: 'writing',    icon: '✍️', label: 'Writing' },
   { id: 'topics',     icon: '🗂️', label: 'Topics' },
   { id: 'news',       icon: '📰', label: 'News' },
+  { id: 'idioms',     icon: '💬', label: 'Idioms' },
   { id: 'review',     icon: '🔄', label: 'Review' },
   { id: 'profile',    icon: '👤', label: 'Profile' },
 ]

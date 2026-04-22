@@ -1,0 +1,570 @@
+.page {
+  padding-top: 8px;
+  padding-bottom: 80px;
+  animation: fadeSlideUp 280ms var(--ease) both;
+}
+
+/* ── Header ── */
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.pageTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--t1);
+  margin: 0 0 4px;
+}
+
+.pageSubtitle {
+  font-size: 12px;
+  color: var(--t3);
+  margin: 0;
+}
+
+.headerActions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.savedToggle {
+  padding: 7px 12px;
+  border: 1px solid var(--bord2);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--t3);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', 'DM Sans', sans-serif;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.savedToggle:hover { border-color: var(--acc-a); color: var(--acc-a); }
+.savedToggleActive { border-color: var(--acc-a); color: var(--acc-a); background: rgba(245,158,11,0.1); }
+
+.quizBtn {
+  padding: 7px 14px;
+  border: 1px solid rgba(59,130,246,0.3);
+  border-radius: var(--radius-sm);
+  background: rgba(59,130,246,0.08);
+  color: var(--acc);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.quizBtn:hover { background: rgba(59,130,246,0.15); }
+
+/* ── Idiom of the Day ── */
+.iotdCard {
+  background: rgba(13,18,32,0.9);
+  border: 1px solid var(--iotd-color, var(--acc));
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+  position: relative;
+  box-shadow: 0 0 24px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.03) inset;
+}
+
+.iotdLabel {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--t3);
+  margin-bottom: 10px;
+}
+
+.iotdQuote {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 48px;
+  color: var(--iotd-color, var(--acc));
+  opacity: 0.3;
+  line-height: 0.7;
+  margin-bottom: 4px;
+  user-select: none;
+}
+
+.iotdIdiom {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--t1);
+  margin-bottom: 4px;
+}
+
+.iotdMeaning {
+  font-size: 15px;
+  color: var(--acc-g);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.iotdExample {
+  font-size: 14px;
+  color: var(--t2);
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.iotdOrigin {
+  font-size: 12px;
+  color: var(--t3);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.iotdSerbian {
+  font-size: 13px;
+  color: var(--acc2);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.iotdReviewBtn {
+  padding: 8px 16px;
+  border: 1px solid var(--iotd-color, var(--acc));
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--iotd-color, var(--acc));
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Inter', 'DM Sans', sans-serif;
+  transition: all 0.15s;
+}
+.iotdReviewBtn:hover { background: rgba(59,130,246,0.1); }
+
+/* ── Search ── */
+.searchBar {
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(13,18,32,0.85);
+  border: 1px solid var(--bord2);
+  border-radius: var(--radius-sm);
+  color: var(--t1);
+  font-size: 14px;
+  font-family: 'Inter', 'DM Sans', sans-serif;
+  outline: none;
+  margin-bottom: 12px;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+.searchBar:focus { border-color: var(--acc); }
+.searchBar::placeholder { color: var(--t3); }
+
+/* ── Category filter ── */
+.filterScroll {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+  scrollbar-width: none;
+}
+.filterScroll::-webkit-scrollbar { display: none; }
+
+.catPill {
+  padding: 5px 12px;
+  border: 1px solid var(--bord2);
+  border-radius: 999px;
+  background: none;
+  color: var(--t3);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', 'DM Sans', sans-serif;
+  transition: all 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.catPill:hover { border-color: var(--acc); color: var(--acc); }
+.catPillActive { /* styles applied inline */ }
+
+.catCount {
+  font-size: 10px;
+  opacity: 0.7;
+  margin-left: 2px;
+}
+
+/* ── Level filter ── */
+.levelRow {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.levelPill {
+  padding: 5px 12px;
+  border: 1px solid var(--bord2);
+  border-radius: 999px;
+  background: none;
+  color: var(--t3);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', 'DM Sans', sans-serif;
+  transition: all 0.15s;
+}
+.levelPill:hover { border-color: var(--acc); color: var(--acc); }
+.levelPillActive { border-color: var(--acc); color: var(--acc); background: rgba(59,130,246,0.1); }
+
+/* ── Quiz result banner ── */
+.quizBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: rgba(16,217,160,0.08);
+  border: 1px solid rgba(16,217,160,0.25);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--acc-g);
+  font-weight: 600;
+  margin-bottom: 12px;
+  animation: fadeSlideUp 200ms var(--ease) both;
+}
+
+.quizBannerClose {
+  background: none;
+  border: none;
+  color: var(--t3);
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* ── Results count ── */
+.resultsCount {
+  font-size: 11px;
+  color: var(--t3);
+  margin-bottom: 8px;
+}
+
+/* ── Idiom list ── */
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.empty {
+  text-align: center;
+  color: var(--t3);
+  font-size: 14px;
+  padding: 40px 0;
+}
+
+/* ── Idiom card ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--bord2);
+  border-left: 3px solid var(--cat-color, var(--acc));
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.3); }
+.cardOpen { box-shadow: 0 4px 20px rgba(0,0,0,0.35); }
+
+.cardHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.cardLeft { flex: 1; min-width: 0; }
+
+.cardIdiom {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--t1);
+  margin-bottom: 2px;
+}
+
+.cardMeaning {
+  font-size: 13px;
+  color: var(--acc-g);
+  font-style: italic;
+}
+
+.cardRight {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.levelBadge {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 999px;
+  padding: 2px 7px;
+  color: var(--t3);
+}
+
+.catBadge {
+  font-size: 10px;
+  font-weight: 600;
+  background: rgba(255,255,255,0.04);
+  border-radius: 999px;
+  padding: 2px 7px;
+}
+
+.chevron {
+  font-size: 10px;
+  color: var(--t3);
+  margin-left: 2px;
+}
+
+/* ── Card expanded body ── */
+.cardBody {
+  padding: 0 16px 14px;
+  animation: fadeSlideUp 150ms var(--ease) both;
+}
+
+.divider {
+  height: 1px;
+  background: var(--bord2);
+  margin-bottom: 12px;
+}
+
+.exampleRow {
+  font-size: 14px;
+  color: var(--t2);
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.originRow {
+  font-size: 12px;
+  color: var(--t3);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.originLabel {
+  color: var(--t2);
+  font-weight: 600;
+}
+
+.serbianRow {
+  font-size: 13px;
+  color: var(--acc2);
+  margin-bottom: 10px;
+}
+
+.serbianLabel {
+  font-weight: 600;
+  color: var(--t2);
+}
+
+.tags {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.tag {
+  font-size: 10px;
+  color: var(--t3);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--bord2);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+.cardActions {
+  display: flex;
+  gap: 8px;
+}
+
+.cardActionBtn {
+  padding: 7px 14px;
+  border: 1px solid var(--bord2);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--t3);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', 'DM Sans', sans-serif;
+  transition: all 0.15s;
+}
+.cardActionBtn:hover { border-color: var(--acc); color: var(--acc); }
+.savedBtn { border-color: var(--acc-a); color: var(--acc-a); background: rgba(245,158,11,0.08); }
+
+/* ── Quiz overlay ── */
+.quizOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8,12,20,0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  animation: fadeSlideUp 200ms var(--ease) both;
+}
+
+.quizBox {
+  background: var(--surface);
+  border: 1px solid rgba(59,130,246,0.2);
+  border-radius: var(--radius);
+  padding: 24px;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+}
+
+.quizHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.quizTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--t1);
+}
+
+.quizClose {
+  background: none;
+  border: none;
+  color: var(--t3);
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.quizProgress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.quizProgressBar {
+  flex: 1;
+  height: 3px;
+  background: var(--bord2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.quizProgressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--acc), var(--acc2));
+  border-radius: 999px;
+  transition: width 0.4s var(--ease);
+}
+
+.quizCounter {
+  font-size: 12px;
+  color: var(--t3);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.quizQuestion {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--t1);
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+
+.quizOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quizOption {
+  text-align: left;
+  padding: 12px 16px;
+  border: 1px solid var(--bord2);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--t2);
+  font-size: 14px;
+  cursor: pointer;
+  font-family: 'Inter', 'DM Sans', sans-serif;
+  transition: all 0.15s;
+  line-height: 1.35;
+}
+.quizOption:hover { border-color: var(--acc); color: var(--acc); }
+
+.qSelected { border-color: var(--acc); color: var(--acc); background: rgba(59,130,246,0.1); }
+.qCorrect  { border-color: var(--acc-g) !important; color: var(--acc-g) !important; background: rgba(16,217,160,0.1) !important; }
+.qWrong    { border-color: var(--acc-pink) !important; color: var(--acc-pink) !important; background: rgba(236,72,153,0.08) !important; }
+
+/* ── Quiz result ── */
+.quizResult {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 24px 0;
+  text-align: center;
+}
+
+.quizResultScore {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 40px;
+  color: var(--t1);
+}
+
+.quizResultPct {
+  font-size: 16px;
+  color: var(--t2);
+}
+
+.quizResultXP {
+  font-size: 14px;
+  color: var(--acc-g);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.quizDoneBtn {
+  padding: 12px 32px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--acc), var(--acc2));
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+}

@@ -1,5 +1,56 @@
 .wrap { padding-top: 8px; }
 
+/* ── Idiom of the Day mini card ── */
+.idiomCard {
+  background: rgba(236,72,153,0.06);
+  border: 1px solid rgba(236,72,153,0.2);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin-bottom: 14px;
+  animation: fadeSlideUp 300ms var(--ease) both;
+}
+
+.idiomCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.idiomCardLabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #ec4899;
+}
+
+.idiomCardLink {
+  background: none;
+  border: none;
+  color: var(--acc);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  font-family: 'Inter', 'DM Sans', sans-serif;
+}
+.idiomCardLink:hover { opacity: 0.75; }
+
+.idiomCardIdiom {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--t1);
+  margin-bottom: 2px;
+}
+
+.idiomCardMeaning {
+  font-size: 13px;
+  color: #ec4899;
+  font-style: italic;
+}
+
 /* ── Featured Word of the Day ── */
 .wotdCard {
   background: linear-gradient(135deg, rgba(124,111,255,0.14), rgba(255,107,157,0.08));

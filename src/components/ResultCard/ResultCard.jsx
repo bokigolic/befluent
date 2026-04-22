@@ -1,10 +1,11 @@
-import { useState, useRef, useEffect, memo } from 'react'
+import { useState, useRef, useEffect, useMemo, memo } from 'react'
 import useDictionary from '../../hooks/useDictionary'
 import useTranslation from '../../hooks/useTranslation'
 import useRelatedWords from '../../hooks/useRelatedWords'
 import useSuggestions from '../../hooks/useSuggestions'
 import useStore from '../../store/useStore'
 import AIHintCard from '../../features/ai/AIHintCard'
+import { findIdiomsForWord } from '../../features/idioms/idiomsData'
 import styles from './ResultCard.module.css'
 
 const POS_COLORS = {
@@ -155,6 +156,22 @@ function GrammarUsage({ meanings, word }) {
   )
 }
 
+function IdiomBanner({ word }) {
+  const setActivePage = useStore(s => s.setActivePage)
+  const matches = useMemo(() => findIdiomsForWord(word), [word])
+  if (!matches.length) return null
+  const idiom = matches[0]
+  return (
+    <div className={styles.idiomBanner} onClick={() => setActivePage('idioms')}>
+      <span className={styles.idiomBannerIcon}>💬</span>
+      <span className={styles.idiomBannerText}>
+        "<strong>{idiom.idiom}</strong>" — {idiom.meaning}
+      </span>
+      <span className={styles.idiomBannerArrow}>→</span>
+    </div>
+  )
+}
+
 function ResultCard({ word, dictMode, onWordClick }) {
   const { data, isLoading: dictLoading, error } = useDictionary(word)
   const { translation, alternatives, isLoading: transLoading } = useTranslation(word, dictMode)
@@ -250,6 +267,8 @@ function ResultCard({ word, dictMode, onWordClick }) {
 
   return (
     <>
+      <IdiomBanner word={word} />
+
       {showTranslation && (
         <div className={styles.translationBox}>
           <div className={styles.transLabel}>{transLabel}</div>

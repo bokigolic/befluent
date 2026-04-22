@@ -1,3 +1,34 @@
+/* ── Idiom banner ── */
+.idiomBanner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(236,72,153,0.07);
+  border: 1px solid rgba(236,72,153,0.22);
+  border-radius: var(--radius-sm);
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+  animation: fadeSlideUp 220ms var(--ease) both;
+}
+.idiomBanner:hover { background: rgba(236,72,153,0.12); }
+
+.idiomBannerIcon { font-size: 14px; flex-shrink: 0; }
+
+.idiomBannerText {
+  flex: 1;
+  font-size: 13px;
+  color: var(--t2);
+  line-height: 1.4;
+}
+
+.idiomBannerArrow {
+  font-size: 13px;
+  color: var(--acc);
+  flex-shrink: 0;
+}
+
 /* ── Skeleton ── */
 .skelWrap { padding: 20px 0; }
 
