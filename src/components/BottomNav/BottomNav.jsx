@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { id: 'grammar',    icon: '📚', label: 'Grammar' },
   { id: 'writing',    icon: '✍️', label: 'Writing' },
   { id: 'topics',     icon: '🗂️', label: 'Topics' },
+  { id: 'news',       icon: '📰', label: 'News' },
   { id: 'review',     icon: '🔄', label: 'Review' },
   { id: 'profile',    icon: '👤', label: 'Profile' },
 ]

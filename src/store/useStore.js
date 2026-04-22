@@ -99,6 +99,8 @@ const useStore = create((set, get) => ({
   activityLog:           load('bf_activity', {}),
   writingHistory:        load('bf_writing', []),
   learnedTopicWords:     load('bf_topic_words', {}),
+  readArticles:          load('bf_news_read', {}),
+  bookmarkedArticles:    load('bf_news_bookmarks', []),
   notifications:  [],
 
   setActiveGrammarCategory: (id) => set({ activeGrammarCategory: id }),
@@ -207,6 +209,23 @@ const useStore = create((set, get) => ({
   }),
 
   setShowSettings: (v) => set({ showSettings: v }),
+
+  markArticleRead: (articleId, quizScore) => set(state => {
+    const readArticles = {
+      ...state.readArticles,
+      [articleId]: { readAt: new Date().toISOString(), quizScore },
+    }
+    persist('bf_news_read', readArticles)
+    return { readArticles }
+  }),
+
+  toggleBookmarkArticle: (articleId) => set(state => {
+    const bookmarkedArticles = state.bookmarkedArticles.includes(articleId)
+      ? state.bookmarkedArticles.filter(id => id !== articleId)
+      : [...state.bookmarkedArticles, articleId]
+    persist('bf_news_bookmarks', bookmarkedArticles)
+    return { bookmarkedArticles }
+  }),
 
   markTopicWord: (topicId, word) => set(state => {
     const topicWords = { ...(state.learnedTopicWords[topicId] ?? {}) }
