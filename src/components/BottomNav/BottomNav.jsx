@@ -3,11 +3,11 @@ import useStore from '../../store/useStore'
 import styles from './BottomNav.module.css'
 
 const NAV_ITEMS = [
-  { id: 'dictionary', icon: '🔍', label: 'Search'  },
-  { id: 'grammar',    icon: '📚', label: 'Grammar' },
-  { id: 'writing',    icon: '✍️', label: 'Write'   },
-  { id: 'review',     icon: '🔄', label: 'Review'  },
-  { id: 'topics',     icon: '📖', label: 'Topics'  },
+  { id: 'dictionary', icon: '🔍', label: 'Search'   },
+  { id: 'learn',      icon: '📖', label: 'Learn'    },
+  { id: 'practice',   icon: '🎯', label: 'Practice' },
+  { id: 'progress',   icon: '📊', label: 'Progress' },
+  { id: 'profile',    icon: '👤', label: 'Profile'  },
 ]
 
 function BottomNav() {

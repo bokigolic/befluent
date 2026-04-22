@@ -1,0 +1,192 @@
+.path {
+  padding: 8px 0 24px;
+  position: relative;
+}
+
+/* ── Level separator ── */
+.levelSep {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0 8px;
+}
+
+.levelLine {
+  flex: 1;
+  height: 1px;
+  background: var(--bord2);
+}
+
+.levelBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--elevated);
+  border: 1px solid var(--bord2);
+  border-radius: 999px;
+  padding: 5px 14px;
+  white-space: nowrap;
+}
+
+.levelNum {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  color: var(--acc);
+}
+
+.levelName {
+  font-size: 11px;
+  color: var(--t3);
+}
+
+.stars {
+  display: flex;
+  gap: 1px;
+}
+
+.starFilled {
+  font-size: 13px;
+  color: var(--acc-a);
+}
+
+.starEmpty {
+  font-size: 13px;
+  color: var(--t3);
+  opacity: 0.4;
+}
+
+/* ── Nodes ── */
+.levelGroup {
+  margin-bottom: 4px;
+}
+
+.nodes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.nodeRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.nodeOffset {
+  width: 0;
+}
+
+.nodeWrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 6px 0;
+  width: 100%;
+  max-width: 360px;
+}
+
+.nodeWrapActive {
+  animation: fadeSlideUp 300ms var(--ease) both;
+}
+
+/* Node circle */
+.node {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s var(--ease), box-shadow 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.node:active { transform: scale(0.92); }
+
+.node_completed {
+  background: linear-gradient(135deg, var(--acc), var(--acc2));
+  color: #fff;
+  font-size: 22px;
+  box-shadow: 0 4px 16px rgba(59,130,246,0.35);
+}
+
+.node_active {
+  background: var(--surface);
+  border: 3px solid var(--acc);
+  box-shadow: 0 0 0 4px rgba(59,130,246,0.15), 0 4px 16px rgba(59,130,246,0.2);
+  animation: nodePulse 2s ease-in-out infinite;
+}
+
+@keyframes nodePulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(59,130,246,0.15), 0 4px 16px rgba(59,130,246,0.2); }
+  50%       { box-shadow: 0 0 0 8px rgba(59,130,246,0.08), 0 4px 20px rgba(59,130,246,0.3); }
+}
+
+.node_locked {
+  background: var(--elevated);
+  color: var(--t3);
+  cursor: default;
+  box-shadow: none;
+  font-size: 20px;
+  opacity: 0.6;
+}
+
+/* Node label */
+.nodeLabel {
+  flex: 1;
+  min-width: 0;
+}
+
+.nodeTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--t1);
+  line-height: 1.3;
+}
+
+.nodeSub {
+  font-size: 12px;
+  color: var(--t3);
+  margin-top: 2px;
+}
+
+/* Connector line */
+.connector {
+  width: 2px;
+  height: 20px;
+  background: var(--bord2);
+  border-left: 2px dashed var(--bord2);
+  margin: 0 auto;
+}
+
+.connectorDone {
+  border-left-color: var(--acc);
+  opacity: 0.5;
+}
+
+/* ── Locked toast ── */
+.toast {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--elevated);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm);
+  padding: 10px 20px;
+  font-size: 13px;
+  color: var(--t2);
+  z-index: 500;
+  white-space: nowrap;
+  animation: fadeSlideUp 200ms var(--ease) both;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}

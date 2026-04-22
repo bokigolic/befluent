@@ -1,0 +1,419 @@
+.page {
+  padding-bottom: 80px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.backBtn {
+  background: none;
+  border: 1px solid var(--bord2);
+  color: var(--t2);
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+.backBtn:hover { border-color: var(--acc); color: var(--acc); }
+
+.title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 22px;
+  color: var(--t1);
+  margin: 0;
+}
+
+/* ── Tab switcher ── */
+.tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--bord2);
+  padding-bottom: 0;
+}
+
+.tabBtn {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--t3);
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.tabBtn:hover { color: var(--t1); }
+.tabActive {
+  color: var(--acc);
+  border-bottom-color: var(--acc);
+}
+
+/* ── Controls ── */
+.tabContent {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.searchInput {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  background: var(--surface);
+  border: 1px solid var(--bord);
+  border-radius: var(--radius-sm);
+  color: var(--t1);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.searchInput:focus { border-color: var(--acc); }
+.searchInput::placeholder { color: var(--t3); }
+
+.pills {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  padding: 4px 12px;
+  border: 1px solid var(--bord2);
+  border-radius: 999px;
+  background: none;
+  color: var(--t3);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+  white-space: nowrap;
+  text-transform: capitalize;
+}
+.pill:hover { border-color: var(--acc); color: var(--acc); }
+.pillActive  { border-color: var(--acc); color: var(--acc); background: rgba(59,130,246,0.1); }
+
+.viewToggle {
+  display: flex;
+  gap: 6px;
+}
+
+.viewBtn {
+  padding: 5px 14px;
+  border: 1px solid var(--bord2);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--t3);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+.viewBtn:hover { border-color: var(--acc); color: var(--acc); }
+.viewBtnActive { border-color: var(--acc); color: var(--acc); background: rgba(59,130,246,0.08); }
+
+.count {
+  font-size: 11px;
+  color: var(--t3);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+/* ── Table view ── */
+.tableWrap {
+  overflow-x: auto;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--bord2);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  color: var(--t3);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  padding: 10px 14px;
+  text-align: left;
+  background: var(--elevated);
+  border-bottom: 1px solid var(--bord2);
+  white-space: nowrap;
+}
+
+.row {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.row:nth-child(odd) { background: var(--surface); }
+.row:nth-child(even) { background: var(--elevated); }
+.row:hover { background: var(--hover); }
+.rowExpanded { background: var(--hover) !important; }
+
+.cellBase {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--acc);
+  padding: 11px 14px;
+  white-space: nowrap;
+}
+
+.cellForm {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--t2);
+  padding: 11px 14px;
+  white-space: nowrap;
+}
+
+.cellSerbian {
+  font-size: 13px;
+  color: var(--acc-g);
+  font-style: italic;
+  padding: 11px 14px;
+}
+
+.cellLevel {
+  padding: 11px 14px;
+}
+
+.exampleRow td {
+  padding: 0;
+  background: rgba(59,130,246,0.04);
+  border-bottom: 1px solid var(--bord2);
+}
+
+.examples {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.exLine {
+  font-size: 13px;
+  color: var(--t2);
+  line-height: 1.5;
+}
+
+.exLabel {
+  font-weight: 700;
+  color: var(--t3);
+  margin-right: 6px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.addReviewBtn {
+  margin-top: 6px;
+  padding: 5px 14px;
+  border: 1px solid rgba(59,130,246,0.3);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--acc);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: background 0.15s;
+  align-self: flex-start;
+}
+.addReviewBtn:hover { background: rgba(59,130,246,0.1); }
+
+/* ── Card view ── */
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+@media (min-width: 480px) { .cardGrid { grid-template-columns: repeat(3, 1fr); } }
+
+.verbCard {
+  perspective: 800px;
+  cursor: pointer;
+  height: 140px;
+}
+
+.verbCardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.5s var(--ease);
+}
+
+.verbCardFlipped { transform: rotateY(180deg); }
+
+.verbCardFront,
+.verbCardBack {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: var(--surface);
+  border: 1px solid var(--bord2);
+  border-radius: var(--radius-sm);
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.verbCardBack {
+  transform: rotateY(180deg);
+  gap: 6px;
+  font-size: 11px;
+}
+
+.verbBase {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--acc);
+  line-height: 1;
+  margin-top: 4px;
+}
+
+.verbForms {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--t2);
+}
+
+.verbSerbian {
+  font-size: 12px;
+  color: var(--acc-g);
+  font-style: italic;
+}
+
+/* ── Level badges ── */
+.levelBadge {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 999px;
+  align-self: flex-start;
+}
+.levelA1 { background: rgba(16,217,160,0.15); color: var(--acc-g); }
+.levelA2 { background: rgba(59,130,246,0.15); color: var(--acc); }
+.levelB1 { background: rgba(129,140,248,0.15); color: var(--acc-p); }
+.levelB2 { background: rgba(236,72,153,0.15); color: var(--acc-pink); }
+
+/* ── Phrasal verbs ── */
+.phrasalList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.phrasalCard {
+  background: var(--surface);
+  border: 1px solid var(--bord2);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.phrasalCard:hover { border-color: var(--bord); background: var(--elevated); }
+.phrasalCardOpen { border-color: rgba(59,130,246,0.3); }
+
+.phrasalTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.phrasalVerb {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--acc);
+  margin-right: 8px;
+}
+
+.phrasalMeaning {
+  font-size: 13px;
+  color: var(--t2);
+}
+
+.phrasalBadges {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.sepBadge {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(245,158,11,0.15);
+  color: var(--acc-a);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.catBadge {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.06);
+  color: var(--t3);
+  text-transform: capitalize;
+}
+
+.phrasalDetails {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--bord2);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  animation: fadeSlideUp 180ms var(--ease) both;
+}
+
+.phrasalSerbian {
+  font-size: 13px;
+  color: var(--acc-g);
+  font-style: italic;
+}
+
+.phrasalExample {
+  font-size: 13px;
+  color: var(--t2);
+  line-height: 1.5;
+}

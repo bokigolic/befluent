@@ -3,7 +3,8 @@
     "allow": [
       "Bash(npm install *)",
       "Bash(npm run *)",
-      "Bash(node scripts/generate-icons.js)"
+      "Bash(node scripts/generate-icons.js)",
+      "Bash(node -e ' *)"
     ]
   }
 }

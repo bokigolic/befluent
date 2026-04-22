@@ -107,9 +107,55 @@ const useStore = create((set, get) => ({
   bookmarkedArticles:    load('bf_news_bookmarks', []),
   savedIdioms:           load('bf_idioms_saved', []),
   idiomQuizHistory:      load('bf_idiom_quiz', []),
-  notifications:  [],
+  notifications:         [],
+
+  // Navigation
+  activeLearnSection:    null,
+
+  // Course path
+  pathProgress:          load('bf_path_progress', {}),
+
+  // User profile
+  userLevel:             load('bf_user_level', null),
+  dailyGoalMinutes:      load('bf_daily_minutes', 10),
+
+  // Daily path
+  dailyPath:             [],
+  completedDailyPath:    load('bf_daily_path_done', { date: '', completed: [] }),
 
   setActiveGrammarCategory: (id) => set({ activeGrammarCategory: id }),
+
+  setActiveLearnSection: (section) => set({ activeLearnSection: section }),
+
+  setUserLevel: (level) => set(() => {
+    persist('bf_user_level', level)
+    return { userLevel: level }
+  }),
+
+  setDailyGoalMinutes: (mins) => set(() => {
+    persist('bf_daily_minutes', mins)
+    return { dailyGoalMinutes: mins }
+  }),
+
+  unlockNode: (nodeId, score) => set(state => {
+    const pathProgress = {
+      ...state.pathProgress,
+      [nodeId]: { completed: true, score: score ?? 100, date: new Date().toISOString() },
+    }
+    persist('bf_path_progress', pathProgress)
+    return { pathProgress }
+  }),
+
+  setDailyPath: (path) => set({ dailyPath: path }),
+
+  completeDailyActivity: (activityId) => set(state => {
+    const today = new Date().toDateString()
+    const prev  = state.completedDailyPath
+    const completed = prev.date === today ? [...prev.completed, activityId] : [activityId]
+    const completedDailyPath = { date: today, completed }
+    persist('bf_daily_path_done', completedDailyPath)
+    return { completedDailyPath }
+  }),
 
   toggleSavedLesson: (lessonId) => set(state => {
     const savedLessons = state.savedLessons.includes(lessonId)

@@ -4,17 +4,10 @@ import styles from './TabBar.module.css'
 
 const TABS = [
   { id: 'dictionary', label: '🔍 Dictionary' },
-  { id: 'verbs',      label: '📖 Verbs' },
-  { id: 'review',     label: '🔄 Review' },
-  { id: 'grammar',    label: '📚 Grammar' },
-  { id: 'writing',    label: '✍️ Writing' },
-  { id: 'topics',     label: '🗂️ Topics' },
-  { id: 'news',       label: '📰 News' },
-  { id: 'idioms',     label: '💬 Idioms' },
-  { id: 'progress',   label: '📊 Progress' },
-  { id: 'history',    label: '🕐 History' },
-  { id: 'saved',      label: '🔖 Saved' },
-  { id: 'profile',    label: '👤 Profile' },
+  { id: 'learn',      label: '📖 Learn'      },
+  { id: 'practice',   label: '🎯 Practice'   },
+  { id: 'progress',   label: '📊 Progress'   },
+  { id: 'profile',    label: '👤 Profile'    },
 ]
 
 function TabBar() {

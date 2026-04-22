@@ -1,0 +1,292 @@
+.hub {
+  padding-bottom: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: fadeSlideUp 280ms var(--ease) both;
+}
+
+/* ── Header ── */
+.hubHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.hubTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  color: var(--t1);
+  margin: 0 0 2px;
+}
+
+.hubSub {
+  font-size: 13px;
+  color: var(--t3);
+  margin: 0;
+}
+
+.levelBadge {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  padding: 5px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--t1);
+}
+
+/* ── Continue card ── */
+.continueCard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(59,130,246,0.06);
+  border: 1px solid rgba(59,130,246,0.2);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  text-align: left;
+  width: 100%;
+}
+.continueCard:hover { border-color: rgba(59,130,246,0.4); background: rgba(59,130,246,0.1); }
+
+.continueIcon { font-size: 28px; flex-shrink: 0; }
+
+.continueLabel {
+  font-size: 11px;
+  color: var(--t3);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.continueTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--acc);
+}
+
+/* ── Daily path card ── */
+.dailyCard {
+  background: var(--surface);
+  border: 1px solid var(--bord2);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dailyHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dailyTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--t1);
+}
+
+.dailyProgress {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--t3);
+}
+
+.dailyBar {
+  height: 4px;
+  background: var(--bord2);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.dailyBarFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--acc), var(--acc2));
+  border-radius: 99px;
+  transition: width 0.4s var(--ease);
+}
+
+.dailyComplete {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--acc-g);
+  text-align: center;
+  padding: 6px 0;
+  animation: bounceIn 400ms var(--ease) both;
+}
+
+.dailyActivities {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.actCard {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--elevated);
+  border: 1px solid var(--bord2);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  text-align: left;
+  width: 100%;
+}
+.actCard:hover:not(.actDone) { border-color: var(--acc); background: var(--hover); }
+
+.actDone {
+  opacity: 0.5;
+  cursor: default;
+  text-decoration: line-through;
+}
+
+.actIcon { font-size: 20px; flex-shrink: 0; }
+
+.actTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--t1);
+}
+
+.actMeta {
+  font-size: 11px;
+  color: var(--t3);
+  margin-top: 1px;
+}
+
+.actCheck {
+  margin-left: auto;
+  color: var(--acc-g);
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* ── Section label ── */
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--t3);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.pathSection {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ── Section grid ── */
+.sectionGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+@media (min-width: 640px) {
+  .sectionGrid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.sectionCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px 12px;
+  background: var(--surface);
+  border: 1px solid var(--bord2);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  text-align: left;
+}
+.sectionCard:hover {
+  border-color: var(--sec-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3), 0 0 0 1px color-mix(in srgb, var(--sec-color) 20%, transparent);
+}
+
+.secIcon { font-size: 28px; display: block; }
+
+.secBody { flex: 1; }
+
+.secTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--t1);
+  margin-bottom: 3px;
+}
+
+.secSub {
+  font-size: 11px;
+  color: var(--t2);
+  line-height: 1.4;
+}
+
+.progressBar {
+  height: 3px;
+  background: var(--bord2);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--sec-color);
+  border-radius: 99px;
+  transition: width 0.5s var(--ease);
+}
+
+.secLevel {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  color: var(--t3);
+  align-self: flex-end;
+}
+
+/* ── Section view wrapper ── */
+.sectionView {
+  animation: slideIn 260ms var(--ease) both;
+}
+
+@keyframes slideIn {
+  from { transform: translateX(20px); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+.sectionBackBar {
+  margin-bottom: 12px;
+}
+
+.backBtn {
+  background: none;
+  border: 1px solid var(--bord2);
+  color: var(--t2);
+  padding: 7px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+.backBtn:hover { border-color: var(--acc); color: var(--acc); }
