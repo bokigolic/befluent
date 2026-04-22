@@ -102,11 +102,16 @@ export default function SearchBar({ onSearch }) {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={handleKeyDown}
-          onFocus={() => setFocused(true)}
+          onFocus={() => {
+            setFocused(true)
+            setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100)
+          }}
           onBlur={() => { setFocused(false); setTimeout(() => setOpen(false), 120) }}
           placeholder={placeholder}
           autoComplete="off"
           spellCheck={false}
+          inputMode="search"
+          enterKeyHint="search"
         />
         {value && (
           <button

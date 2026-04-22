@@ -1,9 +1,10 @@
-import { useState, memo, useCallback, useMemo } from 'react'
+import { useState, memo, useCallback, useMemo, useRef } from 'react'
 import { NEWS_ARTICLES, NEWS_CATEGORIES, NEWS_LEVELS } from './newsData'
 import useStore from '../../store/useStore'
 import styles from './NewsPage.module.css'
 
 const LEVEL_COLOR = { A2: '#10b981', B1: '#3b82f6', B2: '#8b5cf6', C1: '#ec4899' }
+const IS_MOBILE = window.matchMedia('(pointer: coarse)').matches
 const CATEGORY_EMOJI = {
   Technology: '💻', Science: '🔬', Health: '🏥',
   Environment: '🌿', Business: '💼', World: '🌍',
@@ -36,13 +37,57 @@ function WordPopup({ word, definition, serbian, onClose }) {
   )
 }
 
-function ArticleContent({ article, vocabMap }) {
-  const [activeWord, setActiveWord] = useState(null)
+function WordBottomSheet({ word, definition, serbian, onClose }) {
+  const sheetRef = useRef(null)
+  const dragStartY = useRef(0)
+
+  const onTouchStart = (e) => { dragStartY.current = e.touches[0].clientY }
+  const onTouchEnd = (e) => {
+    if (e.changedTouches[0].clientY - dragStartY.current > 60) onClose()
+  }
+
+  return (
+    <div className={styles.sheetOverlay} onClick={onClose}>
+      <div
+        ref={sheetRef}
+        className={styles.sheet}
+        onClick={e => e.stopPropagation()}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
+        <div className={styles.sheetHandle} />
+        <div className={styles.sheetWord}>{word}</div>
+        <div className={styles.sheetDef}>{definition}</div>
+        <div className={styles.sheetSerbian}>{serbian}</div>
+      </div>
+    </div>
+  )
+}
+
+function ArticleContent({ article, vocabMap, fontSize }) {
+  const [activeWord, setActiveWord]       = useState(null)
+  const [sheetEntry, setSheetEntry]       = useState(null)
 
   const paragraphs = article.content.split('\n\n').filter(Boolean)
 
+  const handleWordClick = useCallback((key, entry, wordKey) => {
+    if (IS_MOBILE) {
+      setSheetEntry(entry)
+    } else {
+      setActiveWord(wordKey)
+    }
+  }, [])
+
   return (
-    <div className={styles.articleContent}>
+    <div className={styles.articleContent} style={{ fontSize }}>
+      {sheetEntry && (
+        <WordBottomSheet
+          word={sheetEntry.word}
+          definition={sheetEntry.definition}
+          serbian={sheetEntry.serbian}
+          onClose={() => setSheetEntry(null)}
+        />
+      )}
       {paragraphs.map((para, pi) => {
         const segments = parseContent(para)
         return (
@@ -52,7 +97,8 @@ function ArticleContent({ article, vocabMap }) {
               const key = seg.value.toLowerCase()
               const entry = vocabMap[key]
               if (!entry) return <span key={si} className={styles.boldWord}>{seg.value}</span>
-              const isActive = activeWord === `${pi}-${si}`
+              const wordKey = `${pi}-${si}`
+              const isActive = activeWord === wordKey
               return isActive ? (
                 <WordPopup
                   key={si}
@@ -65,7 +111,7 @@ function ArticleContent({ article, vocabMap }) {
                 <span
                   key={si}
                   className={styles.clickableWord}
-                  onClick={() => setActiveWord(`${pi}-${si}`)}
+                  onClick={() => handleWordClick(key, entry, wordKey)}
                 >
                   {seg.value}
                 </span>
@@ -145,6 +191,7 @@ function QuizSection({ quiz, onComplete }) {
 function ArticleDetail({ article, onBack }) {
   const [tab, setTab]               = useState('read')
   const [quizDone, setQuizDone]     = useState(false)
+  const [fontSize, setFontSize]     = useState(16)
   const markArticleRead             = useStore(s => s.markArticleRead)
   const toggleBookmarkArticle       = useStore(s => s.toggleBookmarkArticle)
   const readArticles                = useStore(s => s.readArticles)
@@ -217,8 +264,14 @@ function ArticleDetail({ article, onBack }) {
 
       {tab === 'read' && (
         <div>
-          <div className={styles.vocabHint}>💡 Tap highlighted words to see definitions</div>
-          <ArticleContent article={article} vocabMap={vocabMap} />
+          <div className={styles.readToolbar}>
+            <span className={styles.vocabHint}>💡 Tap highlighted words</span>
+            <div className={styles.fontControls}>
+              <button className={styles.fontBtn} onClick={() => setFontSize(s => Math.max(13, s - 1))} aria-label="Decrease font size">A−</button>
+              <button className={styles.fontBtn} onClick={() => setFontSize(s => Math.min(22, s + 1))} aria-label="Increase font size">A+</button>
+            </div>
+          </div>
+          <ArticleContent article={article} vocabMap={vocabMap} fontSize={fontSize} />
         </div>
       )}
 

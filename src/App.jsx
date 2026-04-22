@@ -22,6 +22,7 @@ import { CATEGORIES } from './features/grammar/GrammarSection'
 import PWAInstallBanner from './components/PWAInstallBanner/PWAInstallBanner'
 import useStore from './store/useStore'
 import { LEVEL_INFO } from './features/adaptive/adaptiveEngine'
+import { useSwipeNavigation } from './hooks/useSwipeNavigation'
 
 const HistoryPage        = lazy(() => import('./pages/HistoryPage/HistoryPage'))
 const SavedPage          = lazy(() => import('./pages/SavedPage/SavedPage'))
@@ -162,6 +163,9 @@ function App() {
   const nudgeShownRef   = useRef(false)
   const touchStartX     = useRef(0)
   const touchStartTime  = useRef(0)
+  const mainRef         = useRef(null)
+
+  useSwipeNavigation(mainRef)
 
   const TAB_ORDER = ['dictionary','verbs','review','grammar','writing','progress','history','saved','profile']
 
@@ -220,27 +224,7 @@ function App() {
     return () => document.removeEventListener('keydown', handler)
   }, [activePage, setActivePage])
 
-  // Touch swipe for tab switching
-  useEffect(() => {
-    const onStart = (e) => {
-      touchStartX.current    = e.touches[0].clientX
-      touchStartTime.current = Date.now()
-    }
-    const onEnd = (e) => {
-      const dx = e.changedTouches[0].clientX - touchStartX.current
-      const dt = Date.now() - touchStartTime.current
-      if (Math.abs(dx) > 50 && dt < 300) {
-        if (dx < 0) goToNextTab()
-        else        goToPrevTab()
-      }
-    }
-    document.addEventListener('touchstart', onStart, { passive: true })
-    document.addEventListener('touchend',   onEnd,   { passive: true })
-    return () => {
-      document.removeEventListener('touchstart', onStart)
-      document.removeEventListener('touchend',   onEnd)
-    }
-  }, [goToNextTab, goToPrevTab])
+  // Touch swipe handled by useSwipeNavigation hook
 
   useEffect(() => {
     const onScroll = () => setShowScrollTop(window.scrollY > 300)
@@ -283,7 +267,7 @@ function App() {
       <OfflineBanner />
       <TabBar />
 
-      <div className="wrap" key={activePage}>
+      <div className="wrap" key={activePage} ref={mainRef}>
         {activePage === 'dictionary' && (
           <>
             <FlagSwitcher />

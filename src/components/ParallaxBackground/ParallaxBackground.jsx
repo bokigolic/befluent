@@ -75,8 +75,8 @@ export default function ParallaxBackground() {
         willChange: 'transform',
       }} />
 
-      {/* Floating particles */}
-      {PARTICLES.map((p, i) => (
+      {/* Floating particles — fewer on mobile */}
+      {(window.matchMedia('(pointer: coarse)').matches ? PARTICLES.slice(0, 3) : PARTICLES).map((p, i) => (
         <div key={i} style={{
           position: 'absolute',
           left: p.x,

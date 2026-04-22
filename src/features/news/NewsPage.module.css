@@ -555,3 +555,104 @@
   font-size: 14px;
   color: var(--t2);
 }
+
+/* ── Read toolbar (hint + font controls) ── */
+.readToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.vocabHint {
+  font-size: 11px;
+  color: var(--t3);
+  font-style: italic;
+}
+
+.fontControls {
+  display: flex;
+  gap: 4px;
+}
+
+.fontBtn {
+  background: var(--elevated);
+  border: 1px solid var(--bord2);
+  color: var(--t2);
+  border-radius: var(--radius-sm);
+  padding: 3px 9px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  transition: border-color 0.15s, color 0.15s;
+  min-height: 0;
+  min-width: 0;
+}
+.fontBtn:hover { border-color: var(--acc); color: var(--acc); }
+
+/* ── Word bottom sheet (mobile) ── */
+.sheetOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(0,0,0,0.5);
+  animation: fadeIn 150ms var(--ease) both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.sheet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--elevated);
+  border-top: 1px solid var(--bord);
+  border-radius: 20px 20px 0 0;
+  padding: 12px 20px max(24px, env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 160px;
+  animation: slideUpSheet 250ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.sheetHandle {
+  width: 36px;
+  height: 4px;
+  background: var(--bord2);
+  border-radius: 99px;
+  margin: 0 auto 10px;
+}
+
+.sheetWord {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--acc);
+}
+
+.sheetDef {
+  font-size: 14px;
+  color: var(--t1);
+  line-height: 1.5;
+}
+
+.sheetSerbian {
+  font-size: 13px;
+  color: var(--acc2);
+  font-style: italic;
+}
+
+/* ── Mobile quiz options ── */
+@media (max-width: 480px) {
+  .option {
+    min-height: 52px;
+    padding: 13px 14px;
+    font-size: 14px;
+  }
+}

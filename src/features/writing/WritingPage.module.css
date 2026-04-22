@@ -362,3 +362,34 @@
   color: var(--acc-p);
   font-weight: 600;
 }
+
+@media (max-width: 480px) {
+  .modeRow {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .modeCard {
+    flex-direction: row;
+    text-align: left;
+    padding: 12px 14px;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .modeEmoji { font-size: 22px; flex-shrink: 0; }
+
+  .modeTitle { font-size: 13px; }
+
+  .modeBadge { margin-top: 0; }
+
+  .submitBtn {
+    padding: 16px;
+    font-size: 16px;
+    min-height: 52px;
+  }
+
+  .textarea {
+    font-size: 16px;
+  }
+}

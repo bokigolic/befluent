@@ -200,3 +200,15 @@
 .searchBtnPress {
   transform: scale(0.96);
 }
+
+@media (max-width: 480px) {
+  .dropdown {
+    max-height: 40vh;
+    overflow-y: auto;
+  }
+
+  .item {
+    font-size: 13px;
+    padding: 13px 16px;
+  }
+}

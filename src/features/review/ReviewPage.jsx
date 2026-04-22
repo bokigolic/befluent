@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, memo } from 'react'
+import { useState, useRef, useCallback, memo, useEffect } from 'react'
 import useStore from '../../store/useStore'
 import { getDueCards, sortByPriority, previewInterval } from './spacedRepetition'
 import styles from './ReviewPage.module.css'
@@ -44,9 +44,35 @@ function StatsHeader({ stats }) {
 }
 
 // ── Flashcard (3D flip) ───────────────────────────────────────────────────────
-function FlashCard({ card, flipped, onFlip }) {
+function FlashCard({ card, flipped, onFlip, onSwipe }) {
+  const touchStartX = useRef(0)
+  const touchStartY = useRef(0)
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX
+    touchStartY.current = e.touches[0].clientY
+  }
+
+  const handleTouchEnd = (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX.current
+    const dy = e.changedTouches[0].clientY - touchStartY.current
+    if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (flipped && onSwipe) {
+        onSwipe(dx > 0 ? 4 : 0)
+        navigator.vibrate?.(8)
+      }
+    } else if (!flipped) {
+      onFlip()
+    }
+  }
+
   return (
-    <div className={styles.cardScene} onClick={!flipped ? onFlip : undefined}>
+    <div
+      className={styles.cardScene}
+      onClick={!flipped ? onFlip : undefined}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <div className={`${styles.cardInner} ${flipped ? styles.cardFlipped : ''}`}>
         {/* Front */}
         <div className={styles.cardFront}>
@@ -57,6 +83,8 @@ function FlashCard({ card, flipped, onFlip }) {
         {/* Back */}
         <div className={styles.cardBack}>
           <div className={styles.cardType}>{card.type === 'grammar' ? '📖 Grammar' : '📝 Vocabulary'}</div>
+          <span className={styles.swipeHintLeft}>← Again</span>
+          <span className={styles.swipeHintRight}>Good →</span>
           <div className={styles.cardTranslation}>{card.translation || '—'}</div>
           <div className={styles.cardWordSmall}>{card.word}</div>
           {card.lessonId && (
@@ -210,7 +238,7 @@ function ReviewSession({ initialCards, onClose }) {
       </div>
 
       <div className={styles.sessionContent}>
-        <FlashCard card={card} flipped={flipped} onFlip={() => setFlipped(true)} />
+        <FlashCard card={card} flipped={flipped} onFlip={() => setFlipped(true)} onSwipe={handleDifficulty} />
         {flipped && <DifficultyButtons card={card} onSelect={handleDifficulty} />}
         {!flipped && (
           <button className={styles.revealBtn} onClick={() => setFlipped(true)}>

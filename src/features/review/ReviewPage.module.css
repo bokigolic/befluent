@@ -502,3 +502,47 @@
 }
 
 .backBtn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+/* ── Swipe hints (visible only on back face) ── */
+.swipeHintLeft,
+.swipeHintRight {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: var(--t3);
+  font-style: italic;
+  pointer-events: none;
+  opacity: 0;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .swipeHintLeft  { opacity: 1; left: 12px; }
+  .swipeHintRight { opacity: 1; right: 12px; }
+}
+
+@media (max-width: 480px) {
+  .cardScene  { min-height: 200px; }
+  .cardInner  { min-height: 200px; }
+
+  .diffButtons {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .diffBtn {
+    padding: 14px;
+    font-size: 14px;
+  }
+
+  .diffPreview {
+    flex-direction: column;
+    gap: 6px;
+    margin-top: -4px;
+  }
+
+  .diffPreviewItem {
+    text-align: left;
+    padding-left: 4px;
+  }
+}

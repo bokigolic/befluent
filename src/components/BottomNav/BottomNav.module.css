@@ -9,62 +9,54 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: calc(64px + env(safe-area-inset-bottom));
+    height: 60px;
     padding-bottom: env(safe-area-inset-bottom);
-    background: rgba(8,12,20,0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-top: 1px solid var(--bord2);
+    background: rgba(8,12,20,0.96);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-top: 1px solid rgba(59,130,246,0.12);
     z-index: 300;
-    box-shadow: 0 -8px 32px rgba(0,0,0,0.4);
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
+    box-shadow: 0 -4px 24px rgba(0,0,0,0.4);
   }
-  .nav::-webkit-scrollbar { display: none; }
 }
 
 .item {
   flex: 1;
-  min-width: 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 3px;
-  padding: 8px 0 0;
+  padding: 6px 0;
   background: none;
   border: none;
   cursor: pointer;
   color: var(--t3);
-  transition: color 0.2s;
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: color 0.15s;
   position: relative;
+  min-height: 44px;
 }
 
-.item:active { opacity: 0.7; }
-
-.tapping {
-  animation: navTap 0.25s var(--ease);
-}
-
-@keyframes navTap {
-  0%   { transform: scale(1); }
-  40%  { transform: scale(0.82); }
-  100% { transform: scale(1); }
+.item:active .icon {
+  transform: scale(0.85);
 }
 
 .icon {
   font-size: 22px;
   line-height: 1;
-  transition: filter 0.2s, transform 0.2s;
+  transition: transform 0.15s, filter 0.2s;
+  display: block;
 }
 
 .label {
   font-family: 'Inter', 'DM Sans', sans-serif;
   font-size: 10px;
   font-weight: 500;
+  letter-spacing: 0.02em;
   line-height: 1;
+  transition: color 0.15s;
 }
 
 .active {
@@ -72,6 +64,20 @@
 }
 
 .active .icon {
-  filter: drop-shadow(0 0 8px rgba(59,130,246,0.7));
-  transform: translateY(-1px);
+  filter: drop-shadow(0 0 8px rgba(59,130,246,0.6));
+}
+
+.active .label {
+  color: var(--acc);
+}
+
+@keyframes navBounce {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(0.82); }
+  65%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.tapping .icon {
+  animation: navBounce 0.25s var(--ease) both;
 }
