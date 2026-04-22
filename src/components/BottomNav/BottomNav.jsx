@@ -4,6 +4,7 @@ import styles from './BottomNav.module.css'
 
 const NAV_ITEMS = [
   { id: 'dictionary', icon: '🔍', label: 'Search' },
+  { id: 'verbs',      icon: '📖', label: 'Verbs' },
   { id: 'grammar',    icon: '📚', label: 'Grammar' },
   { id: 'writing',    icon: '✍️', label: 'Writing' },
   { id: 'review',     icon: '🔄', label: 'Review' },
