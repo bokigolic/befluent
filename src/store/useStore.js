@@ -98,6 +98,7 @@ const useStore = create((set, get) => ({
   showSettings:          false,
   activityLog:           load('bf_activity', {}),
   writingHistory:        load('bf_writing', []),
+  learnedTopicWords:     load('bf_topic_words', {}),
   notifications:  [],
 
   setActiveGrammarCategory: (id) => set({ activeGrammarCategory: id }),
@@ -206,6 +207,14 @@ const useStore = create((set, get) => ({
   }),
 
   setShowSettings: (v) => set({ showSettings: v }),
+
+  markTopicWord: (topicId, word) => set(state => {
+    const topicWords = { ...(state.learnedTopicWords[topicId] ?? {}) }
+    topicWords[word] = !topicWords[word]
+    const learnedTopicWords = { ...state.learnedTopicWords, [topicId]: topicWords }
+    persist('bf_topic_words', learnedTopicWords)
+    return { learnedTopicWords }
+  }),
 
   updateGrammarProgress: (categoryId, progress) => set(state => {
     const grammarProgress = { ...state.grammarProgress, [categoryId]: progress }

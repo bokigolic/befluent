@@ -33,6 +33,7 @@ const ReviewPage         = lazy(() => import('./features/review/ReviewPage'))
 const ProgressPage       = lazy(() => import('./features/progress/ProgressPage'))
 const SettingsPage       = lazy(() => import('./pages/SettingsPage/SettingsPage'))
 const WritingPage        = lazy(() => import('./features/writing/WritingPage'))
+const TopicsPage         = lazy(() => import('./features/topics/TopicsPage'))
 
 const shouldShowSplash = () =>
   !localStorage.getItem('bf_launched') ||
@@ -326,6 +327,12 @@ function App() {
         {activePage === 'writing' && (
           <Suspense fallback={skelFallback}>
             <WritingPage />
+          </Suspense>
+        )}
+
+        {activePage === 'topics' && (
+          <Suspense fallback={skelFallback}>
+            <TopicsPage />
           </Suspense>
         )}
 

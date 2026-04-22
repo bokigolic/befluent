@@ -8,6 +8,7 @@ const TABS = [
   { id: 'review',     label: '🔄 Review' },
   { id: 'grammar',    label: '📚 Grammar' },
   { id: 'writing',    label: '✍️ Writing' },
+  { id: 'topics',     label: '🗂️ Topics' },
   { id: 'progress',   label: '📊 Progress' },
   { id: 'history',    label: '🕐 History' },
   { id: 'saved',      label: '🔖 Saved' },
