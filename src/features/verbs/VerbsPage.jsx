@@ -5,40 +5,40 @@ import styles from './VerbsPage.module.css'
 
 // ── Irregular Verbs ──────────────────────────────────────────────────────────
 
-function VerbRow({ verb, expanded, onToggle }) {
+function VerbListItem({ verb, expanded, onToggle }) {
   const addToReview = useStore(s => s.addToReview)
   return (
-    <>
-      <tr
-        className={`${styles.row} ${expanded ? styles.rowExpanded : ''}`}
-        onClick={onToggle}
-      >
-        <td className={styles.cellBase}>{verb.base}</td>
-        <td className={styles.cellForm}>{verb.past}</td>
-        <td className={styles.cellForm}>{verb.participle}</td>
-        <td className={styles.cellSerbian}>{verb.serbian}</td>
-        <td className={styles.cellLevel}>
+    <div className={`${styles.verbListItem} ${expanded ? styles.verbListItemOpen : ''}`}>
+      <div className={styles.verbItemMain} onClick={onToggle}>
+        <div className={styles.verbItemHeader}>
           <span className={`${styles.levelBadge} ${styles['level' + verb.level]}`}>{verb.level}</span>
-        </td>
-      </tr>
+        </div>
+        <div className={styles.verbFormsRow}>
+          <span className={styles.verbFormBase}>{verb.base}</span>
+          <span className={styles.verbArrow}>→</span>
+          <span className={styles.verbFormPast}>{verb.past}</span>
+          <span className={styles.verbArrow}>→</span>
+          <span className={styles.verbFormParticiple}>{verb.participle}</span>
+        </div>
+        <div className={styles.verbSerbianRow}>
+          <span>🇷🇸</span>
+          <span className={styles.verbSerbianText}>{verb.serbian}</span>
+        </div>
+      </div>
       {expanded && (
-        <tr className={styles.exampleRow}>
-          <td colSpan={5}>
-            <div className={styles.examples}>
-              <div className={styles.exLine}><span className={styles.exLabel}>Present:</span> {verb.example}</div>
-              <div className={styles.exLine}><span className={styles.exLabel}>Past:</span> {verb.pastExample}</div>
-              <div className={styles.exLine}><span className={styles.exLabel}>Perfect:</span> {verb.participleExample}</div>
-              <button
-                className={styles.addReviewBtn}
-                onClick={e => { e.stopPropagation(); addToReview(verb.base, verb.serbian, 'vocabulary') }}
-              >
-                + Add to Review
-              </button>
-            </div>
-          </td>
-        </tr>
+        <div className={styles.verbItemExamples}>
+          <div className={styles.exLine}><span className={styles.exLabel}>Present:</span> {verb.example}</div>
+          <div className={styles.exLine}><span className={styles.exLabel}>Past:</span> {verb.pastExample}</div>
+          <div className={styles.exLine}><span className={styles.exLabel}>Perfect:</span> {verb.participleExample}</div>
+          <button
+            className={styles.addReviewBtn}
+            onClick={e => { e.stopPropagation(); addToReview(verb.base, verb.serbian, 'vocabulary') }}
+          >
+            + Add to Review
+          </button>
+        </div>
       )}
-    </>
+    </div>
   )
 }
 
@@ -118,28 +118,15 @@ function IrregularVerbsTab() {
       <div className={styles.count}>{filtered.length} verbs</div>
 
       {view === 'table' ? (
-        <div className={styles.tableWrap}>
-          <table className={styles.table}>
-            <thead>
-              <tr>
-                <th>Base</th>
-                <th>Past Simple</th>
-                <th>Past Participle</th>
-                <th>Serbian</th>
-                <th>Level</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filtered.map(v => (
-                <VerbRow
-                  key={v.base}
-                  verb={v}
-                  expanded={expandedRow === v.base}
-                  onToggle={() => setExpanded(x => x === v.base ? null : v.base)}
-                />
-              ))}
-            </tbody>
-          </table>
+        <div className={styles.verbList}>
+          {filtered.map(v => (
+            <VerbListItem
+              key={v.base}
+              verb={v}
+              expanded={expandedRow === v.base}
+              onToggle={() => setExpanded(x => x === v.base ? null : v.base)}
+            />
+          ))}
         </div>
       ) : (
         <div className={styles.cardGrid}>

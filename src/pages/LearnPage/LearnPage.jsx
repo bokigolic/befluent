@@ -216,24 +216,50 @@ function LearnHubContent({ onSectionOpen, onNodeOpen }) {
   )
 }
 
+function BackBar({ onBack }) {
+  return (
+    <div className={styles.sectionBackBar}>
+      <button className={styles.backBtn} onClick={onBack}>← Learn</button>
+    </div>
+  )
+}
+
 function SectionWrapper({ section, onBack }) {
   return (
     <div className={styles.sectionView}>
       <Suspense fallback={skel}>
         {section === 'grammar'  && (
           <>
-            <div className={styles.sectionBackBar}>
-              <button className={styles.backBtn} onClick={onBack}>← Learn</button>
-            </div>
+            <BackBar onBack={onBack} />
             <GrammarSection standalone />
             <GrammarDetailPage />
           </>
         )}
-        {section === 'verbs'    && <VerbsPage onBack={onBack} />}
-        {section === 'topics'   && <TopicsPage />}
-        {section === 'news'     && <NewsPage />}
-        {section === 'idioms'   && <IdiomsPage />}
-        {section === 'writing'  && <WritingPage />}
+        {section === 'verbs'   && <VerbsPage onBack={onBack} />}
+        {section === 'topics'  && (
+          <>
+            <BackBar onBack={onBack} />
+            <TopicsPage />
+          </>
+        )}
+        {section === 'news'    && (
+          <>
+            <BackBar onBack={onBack} />
+            <NewsPage />
+          </>
+        )}
+        {section === 'idioms'  && (
+          <>
+            <BackBar onBack={onBack} />
+            <IdiomsPage />
+          </>
+        )}
+        {section === 'writing' && (
+          <>
+            <BackBar onBack={onBack} />
+            <WritingPage />
+          </>
+        )}
       </Suspense>
     </div>
   )

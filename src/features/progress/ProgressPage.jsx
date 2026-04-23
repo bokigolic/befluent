@@ -2,6 +2,8 @@ import { memo, useMemo } from 'react'
 import useStore, { ACHIEVEMENTS_DEF, LEVELS, getLevel, getXpProgress } from '../../store/useStore'
 import { CATEGORIES } from '../grammar/GrammarSection'
 import { GRAMMAR_DATA } from '../grammar/grammarData'
+import { TOPICS } from '../topics/topicsData'
+import { NEWS_ARTICLES } from '../news/newsData'
 import WeeklyReport from '../adaptive/WeeklyReport'
 import styles from './ProgressPage.module.css'
 
@@ -302,6 +304,61 @@ function WritingStats({ writingHistory }) {
   )
 }
 
+// ── Section completion overview ───────────────────────────────────────────────
+function SectionCompletion({ completedLessons, learnedTopicWords, readArticles, savedIdioms, writingHistory, reviewDeck }) {
+  const totalGrammarLessons = useMemo(() =>
+    CATEGORIES.reduce((s, c) => s + (GRAMMAR_DATA[c.id]?.lessons?.length ?? c.lessons), 0), [])
+  const totalTopicWords = useMemo(() => TOPICS.reduce((s, t) => s + t.wordCount, 0), [])
+
+  const topicWordsDone = useMemo(() =>
+    Object.values(learnedTopicWords).reduce((sum, topicMap) =>
+      sum + Object.values(topicMap).filter(Boolean).length, 0), [learnedTopicWords])
+
+  const writingAvg = writingHistory.length > 0
+    ? Math.round(writingHistory.reduce((s, e) => s + (e.score ?? 0), 0) / writingHistory.length)
+    : null
+
+  const verbsInReview = reviewDeck.filter(c => c.type === 'vocabulary').length
+
+  const sections = [
+    { icon: '📚', label: 'Grammar',  done: completedLessons.length, total: totalGrammarLessons, unit: 'lessons', color: '#6366f1' },
+    { icon: '⚡', label: 'Verbs',    done: verbsInReview, total: 220, unit: 'in review', color: '#3b82f6' },
+    { icon: '🗂️', label: 'Topics',   done: topicWordsDone, total: totalTopicWords, unit: 'words', color: '#10b981' },
+    { icon: '📰', label: 'News',     done: Object.keys(readArticles).length, total: NEWS_ARTICLES.length, unit: 'articles', color: '#f59e0b' },
+    { icon: '💬', label: 'Idioms',   done: savedIdioms.length, total: 120, unit: 'saved', color: '#ec4899' },
+    { icon: '✍️', label: 'Writing',  done: writingHistory.length, total: null, unit: writingAvg !== null ? `sessions · ${writingAvg}% avg` : 'sessions', color: '#8b5cf6' },
+  ]
+
+  return (
+    <div className={styles.block}>
+      <div className={styles.blockTitle}>Section Overview</div>
+      <div className={styles.secOverviewList}>
+        {sections.map(sec => {
+          const pct = sec.total ? Math.min(100, Math.round((sec.done / sec.total) * 100)) : null
+          return (
+            <div key={sec.label} className={styles.secOverviewRow}>
+              <div className={styles.secOverviewLeft}>
+                <span className={styles.secOverviewIcon}>{sec.icon}</span>
+                <span className={styles.secOverviewLabel}>{sec.label}</span>
+              </div>
+              <div className={styles.secOverviewRight}>
+                <span className={styles.secOverviewStat} style={{ color: sec.color }}>
+                  {sec.done}{sec.total !== null ? `/${sec.total}` : ''} {sec.unit}
+                </span>
+                {pct !== null && (
+                  <div className={styles.secOverviewBar}>
+                    <div className={styles.secOverviewFill} style={{ width: `${pct}%`, background: sec.color }} />
+                  </div>
+                )}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 function ProgressPage() {
   const xp                 = useStore(s => s.xp)
@@ -314,6 +371,9 @@ function ProgressPage() {
   const reviewDeck         = useStore(s => s.reviewDeck)
   const reviewSessionsCount = useStore(s => s.reviewSessionsCount)
   const writingHistory     = useStore(s => s.writingHistory)
+  const learnedTopicWords  = useStore(s => s.learnedTopicWords)
+  const readArticles       = useStore(s => s.readArticles)
+  const savedIdioms        = useStore(s => s.savedIdioms)
 
   const level    = getLevel(xp)
   const progress = getXpProgress(xp)
@@ -361,6 +421,14 @@ function ProgressPage() {
       </div>
 
       <WeeklyReport />
+      <SectionCompletion
+        completedLessons={completedLessons}
+        learnedTopicWords={learnedTopicWords}
+        readArticles={readArticles}
+        savedIdioms={savedIdioms}
+        writingHistory={writingHistory}
+        reviewDeck={reviewDeck}
+      />
       <GrammarOverview grammarProgress={grammarProgress} completedLessons={completedLessons} activityLog={activityLog} />
       <GrammarLeaderboard grammarProgress={grammarProgress} />
       <GrammarProgress grammarProgress={grammarProgress} />

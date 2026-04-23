@@ -141,73 +141,85 @@
   letter-spacing: 0.07em;
 }
 
-/* ── Table view ── */
-.tableWrap {
-  overflow-x: auto;
-  border-radius: var(--radius-sm);
+/* ── List view (replaces table, no horizontal scroll) ── */
+.verbList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.verbListItem {
+  background: var(--surface);
   border: 1px solid var(--bord2);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.verbListItem:hover { border-color: var(--bord); }
+.verbListItemOpen { border-color: rgba(59,130,246,0.35); }
+
+.verbItemMain {
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.table {
-  width: 100%;
-  border-collapse: collapse;
+.verbItemHeader {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 2px;
 }
 
-.table th {
+.verbFormsRow {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.verbFormBase {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--acc);
+}
+
+.verbArrow {
+  color: var(--t3);
+  font-size: 14px;
+}
+
+.verbFormPast,
+.verbFormParticiple {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
-  font-size: 11px;
-  color: var(--t3);
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  padding: 10px 14px;
-  text-align: left;
-  background: var(--elevated);
-  border-bottom: 1px solid var(--bord2);
-  white-space: nowrap;
+  font-size: 16px;
+  color: var(--t1);
 }
 
-.row {
-  cursor: pointer;
-  transition: background 0.15s;
-}
-.row:nth-child(odd) { background: var(--surface); }
-.row:nth-child(even) { background: var(--elevated); }
-.row:hover { background: var(--hover); }
-.rowExpanded { background: var(--hover) !important; }
-
-.cellBase {
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--acc);
-  padding: 11px 14px;
-  white-space: nowrap;
+.verbSerbianRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
 }
 
-.cellForm {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
-  color: var(--t2);
-  padding: 11px 14px;
-  white-space: nowrap;
-}
-
-.cellSerbian {
+.verbSerbianText {
   font-size: 13px;
   color: var(--acc-g);
   font-style: italic;
-  padding: 11px 14px;
 }
 
-.cellLevel {
-  padding: 11px 14px;
-}
-
-.exampleRow td {
-  padding: 0;
+.verbItemExamples {
+  padding: 12px 14px;
+  border-top: 1px solid var(--bord2);
   background: rgba(59,130,246,0.04);
-  border-bottom: 1px solid var(--bord2);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  animation: fadeSlideUp 180ms var(--ease) both;
 }
 
 .examples {

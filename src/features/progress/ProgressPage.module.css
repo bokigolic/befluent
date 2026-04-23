@@ -425,3 +425,63 @@
   font-weight: 700;
   color: var(--acc-p);
 }
+
+/* ── Section completion overview ── */
+.secOverviewList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.secOverviewRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.secOverviewLeft {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  min-width: 100px;
+}
+
+.secOverviewIcon { font-size: 16px; }
+
+.secOverviewLabel {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--t2);
+}
+
+.secOverviewRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  flex: 1;
+}
+
+.secOverviewStat {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.secOverviewBar {
+  height: 4px;
+  background: var(--elevated);
+  border-radius: 99px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.secOverviewFill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
