@@ -1,7 +1,7 @@
 import { useEffect, useMemo, lazy, Suspense } from 'react'
-import useStore from '../../store/useStore'
-import { getLevel } from '../../store/useStore'
+import useStore, { getLevel } from '../../store/useStore'
 import { getDueCards } from '../../features/review/spacedRepetition'
+import { NEWS_ARTICLES } from '../../features/news/newsData'
 import CoursePath from '../../features/path/CoursePath'
 import GrammarSection from '../../features/grammar/GrammarSection'
 import GrammarDetailPage from '../../features/grammar/GrammarDetailPage'
@@ -137,7 +137,6 @@ function LearnHubContent({ onSectionOpen, onNodeOpen }) {
         title: 'Grammar lesson', time: 5, xp: 10 })
     }
     const readIds = Object.keys(readArticles)
-    const { NEWS_ARTICLES } = require('../../features/news/newsData')
     const unread = NEWS_ARTICLES.filter(a => !readIds.includes(a.id))
     if (unread.length > 0) {
       const art = unread[Math.floor(Date.now() / 86400000) % unread.length]
