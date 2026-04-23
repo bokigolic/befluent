@@ -1,7 +1,7 @@
 import { useEffect, useRef, useCallback } from 'react'
 import useStore from '../store/useStore'
 
-const PAGES_ORDER = ['dictionary', 'grammar', 'writing', 'review', 'topics']
+const PAGES_ORDER = ['dictionary', 'learn', 'practice', 'progress', 'profile']
 
 export function useSwipeNavigation(containerRef) {
   const activePage    = useStore(s => s.activePage)

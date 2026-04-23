@@ -143,3 +143,51 @@
 .nextBtn:active {
   transform: scale(0.97);
 }
+
+/* ── Option cards (level / goal slides) ── */
+.optionGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.optCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.2s, background 0.2s, transform 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.optCard:hover { border-color: rgba(59,130,246,0.4); background: rgba(59,130,246,0.06); }
+.optSelected {
+  border-color: var(--acc) !important;
+  background: rgba(59,130,246,0.12) !important;
+  transform: scale(1.02);
+}
+
+.optEmoji {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.optLabel {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--t1);
+}
+
+.optSub {
+  font-size: 11px;
+  color: var(--t3);
+  line-height: 1.3;
+}
