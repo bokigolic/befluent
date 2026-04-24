@@ -12,6 +12,7 @@ export default defineConfig({
         name: 'BeFluent — English Dictionary',
         short_name: 'BeFluent',
         description: 'English dictionary with Serbian translation. Learn English words, phrases and more.',
+        version: '1.2.0',
         theme_color: '#09090f',
         background_color: '#09090f',
         display: 'standalone',
@@ -25,6 +26,8 @@ export default defineConfig({
         ],
       },
       workbox: {
+        skipWaiting: true,
+        clientsClaim: true,
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
         runtimeCaching: [
           {

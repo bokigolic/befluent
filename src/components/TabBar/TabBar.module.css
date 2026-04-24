@@ -8,11 +8,11 @@
   border-bottom: 1px solid rgba(59,130,246,0.1);
   padding: 8px 16px 0;
   display: flex;
+  justify-content: center;
   gap: 2px;
   overflow-x: auto;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
-  position: relative;
 }
 
 .tabbar::-webkit-scrollbar {

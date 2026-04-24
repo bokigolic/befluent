@@ -5,6 +5,20 @@ import App from './App.jsx'
 import './styles/globals.css'
 import './styles/index.css'
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.ready.then(reg => {
+    reg.addEventListener('updatefound', () => {
+      const newWorker = reg.installing
+      newWorker.addEventListener('statechange', () => {
+        if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+          newWorker.postMessage({ type: 'SKIP_WAITING' })
+          window.location.reload()
+        }
+      })
+    })
+  })
+}
+
 // Apply saved theme before first render to prevent flash
 try {
   const saved = localStorage.getItem('bf_theme')
