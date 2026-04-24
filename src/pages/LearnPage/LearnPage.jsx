@@ -146,16 +146,16 @@ function LearnHubContent({ onSectionOpen, onNodeOpen }) {
       acts.push({ id: `news-${art.id}`, type: 'news', icon: '📰',
         title: `Read: ${art.title.slice(0, 35)}…`, time: art.readTime?.replace(' min read','') ?? 4, xp: 15 })
     }
-    acts.push({ id: 'idioms-daily', type: 'idioms', icon: '💬',
-      title: 'Explore 3 new idioms', time: 2, xp: 9 })
-
-    // Suggest a conversation scenario
+    // Suggest a conversation scenario (added before idioms so it always makes the cut)
     const seenScenarios = new Set((conversationHistory ?? []).map(c => c.scenarioId))
     const suggestedScenarioId = conversationHistory.length === 0
       ? 'cafe'
       : (['cafe','airport','shopping','directions','restaurant'].find(id => !seenScenarios.has(id)) ?? 'cafe')
     acts.push({ id: `conv-${suggestedScenarioId}`, type: 'conversations', icon: '🗣️',
       title: `Conversation: ${suggestedScenarioId.replace(/-/g, ' ')}`, time: 5, xp: 20 })
+
+    acts.push({ id: 'idioms-daily', type: 'idioms', icon: '💬',
+      title: 'Explore 3 new idioms', time: 2, xp: 9 })
 
     setDailyPath(acts.slice(0, 4))
   }, [])

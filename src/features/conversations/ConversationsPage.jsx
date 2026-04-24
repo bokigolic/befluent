@@ -27,6 +27,11 @@ function ScenarioCard({ scenario, onClick }) {
 function ScenarioGrid({ onBack, onSelect }) {
   return (
     <div className={styles.page}>
+      {onBack && (
+        <div className={styles.backBar}>
+          <button className={styles.backBtn} onClick={onBack}>← Learn</button>
+        </div>
+      )}
       <div className={styles.header}>
         <h1 className={styles.title}>🗣️ Conversation Practice</h1>
         <p className={styles.subtitle}>Practice real English with an AI partner</p>
