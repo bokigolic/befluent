@@ -156,7 +156,8 @@ function WelcomeScreen({ onSearch }) {
   const dailyGoal     = useStore(s => s.dailyGoal)
   const reviewDeck    = useStore(s => s.reviewDeck)
   const searchHistory = useStore(s => s.searchHistory)
-  const setActivePage = useStore(s => s.setActivePage)
+  const setActivePage        = useStore(s => s.setActivePage)
+  const setActiveLearnSection = useStore(s => s.setActiveLearnSection)
 
   const goalPct     = Math.min(100, Math.round((todayCount / dailyGoal) * 100))
   const goalReached = todayCount >= dailyGoal
@@ -166,9 +167,9 @@ function WelcomeScreen({ onSearch }) {
     <div className={styles.wrap}>
       <FeaturedWordCard onSearch={onSearch} />
 
-      <IdiomMiniCard onGoToIdioms={() => setActivePage('idioms')} />
+      <IdiomMiniCard onGoToIdioms={() => { setActivePage('learn'); setActiveLearnSection('idioms') }} />
 
-      <ReviewReminder dueCount={dueCount} onGoToReview={() => setActivePage('review')} />
+      <ReviewReminder dueCount={dueCount} onGoToReview={() => setActivePage('practice')} />
 
       <div className={styles.top}>
         <h2 className={styles.greeting}>What will you learn today?</h2>

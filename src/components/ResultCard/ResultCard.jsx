@@ -4,7 +4,6 @@ import useTranslation from '../../hooks/useTranslation'
 import useRelatedWords from '../../hooks/useRelatedWords'
 import useSuggestions from '../../hooks/useSuggestions'
 import useStore from '../../store/useStore'
-import AIHintCard from '../../features/ai/AIHintCard'
 import { findIdiomsForWord } from '../../features/idioms/idiomsData'
 import styles from './ResultCard.module.css'
 
@@ -157,12 +156,13 @@ function GrammarUsage({ meanings, word }) {
 }
 
 function IdiomBanner({ word }) {
-  const setActivePage = useStore(s => s.setActivePage)
+  const setActivePage        = useStore(s => s.setActivePage)
+  const setActiveLearnSection = useStore(s => s.setActiveLearnSection)
   const matches = useMemo(() => findIdiomsForWord(word), [word])
   if (!matches.length) return null
   const idiom = matches[0]
   return (
-    <div className={styles.idiomBanner} onClick={() => setActivePage('idioms')}>
+    <div className={styles.idiomBanner} onClick={() => { setActivePage('learn'); setActiveLearnSection('idioms') }}>
       <span className={styles.idiomBannerIcon}>💬</span>
       <span className={styles.idiomBannerText}>
         "<strong>{idiom.idiom}</strong>" — {idiom.meaning}
@@ -367,11 +367,6 @@ function ResultCard({ word, dictMode, onWordClick }) {
         <hr className={styles.divider} />
         <GrammarUsage meanings={data.meanings} word={word} />
 
-        <hr className={styles.divider} />
-        <AIHintCard
-          word={data.word}
-          partOfSpeech={data.meanings?.[0]?.partOfSpeech ?? 'word'}
-        />
       </div>
 
       {toast && <div className={styles.toast}>{toast}</div>}
