@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { callWithRetry } from '../../utils/apiRetry'
 
 const API_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY ?? ''
 
@@ -47,35 +48,45 @@ Rules:
 }
 
 export function useWritingCheck() {
-  const [result,    setResult]    = useState(null)
-  const [isLoading, setIsLoading] = useState(false)
-  const [error,     setError]     = useState(null)
+  const [result,      setResult]      = useState(null)
+  const [isLoading,   setIsLoading]   = useState(false)
+  const [error,       setError]       = useState(null)
+  const [retryStatus, setRetryStatus] = useState(null)
 
   const checkWriting = async (text, mode, prompt) => {
     if (!text.trim()) return
     setIsLoading(true)
     setError(null)
     setResult(null)
+    setRetryStatus(null)
 
     const targetGrammar = prompt?.targetGrammar ?? 'general'
     const difficulty    = prompt?.difficulty ?? 'B1'
 
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': API_KEY,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true',
-        },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-5',
-          max_tokens: 1200,
-          system: SYSTEM_PROMPT,
-          messages: [{ role: 'user', content: buildUserPrompt(text, mode, targetGrammar, difficulty) }],
+      const res = await callWithRetry(
+        () => fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-api-key': API_KEY,
+            'anthropic-version': '2023-06-01',
+            'anthropic-dangerous-direct-browser-access': 'true',
+          },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-5',
+            max_tokens: 1200,
+            system: SYSTEM_PROMPT,
+            messages: [{ role: 'user', content: buildUserPrompt(text, mode, targetGrammar, difficulty) }],
+          }),
         }),
-      })
+        {
+          onRetry: (attempt, secs) =>
+            setRetryStatus(`Claude AI is busy right now. Retrying in ${secs}s… (${attempt}/2)`),
+        }
+      )
+
+      setRetryStatus(null)
 
       if (!res.ok) {
         const body = await res.text()
@@ -88,7 +99,6 @@ export function useWritingCheck() {
       if (!match) throw new Error('Unexpected response format')
 
       const parsed = JSON.parse(match[0])
-      // Clamp score
       parsed.overallScore = Math.max(0, Math.min(100, parsed.overallScore ?? 70))
       parsed.xpEarned     = Math.max(5, Math.min(20, parsed.xpEarned ?? 10))
       parsed.errors       = Array.isArray(parsed.errors) ? parsed.errors : []
@@ -96,13 +106,16 @@ export function useWritingCheck() {
       parsed.suggestions  = Array.isArray(parsed.suggestions) ? parsed.suggestions : []
       setResult(parsed)
     } catch (e) {
-      setError(e.message)
+      setRetryStatus(null)
+      setError(e.isOverloaded
+        ? 'AI is currently overloaded. Please try again in a minute.'
+        : e.message)
     } finally {
       setIsLoading(false)
     }
   }
 
-  const reset = () => { setResult(null); setError(null) }
+  const reset = () => { setResult(null); setError(null); setRetryStatus(null) }
 
-  return { result, isLoading, error, checkWriting, reset }
+  return { result, isLoading, error, retryStatus, checkWriting, reset }
 }

@@ -3,10 +3,6 @@
   top: 0;
   z-index: 200;
   height: 58px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
   background: rgba(8,12,20,0.80);
   backdrop-filter: blur(32px);
   -webkit-backdrop-filter: blur(32px);
@@ -14,10 +10,16 @@
   box-shadow: 0 1px 0 rgba(255,255,255,0.04);
 }
 
-@media (min-width: 900px) {
-  .navbar {
-    padding: 0 max(20px, calc((100% - 1200px) / 2 + 20px));
-  }
+/* inner wrapper mirrors the .wrap max-width so navbar items
+   align with page content at all viewport sizes */
+.navInner {
+  max-width: 680px;
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
 }
 
 [data-theme="light"] .navbar {

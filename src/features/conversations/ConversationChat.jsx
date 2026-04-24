@@ -116,7 +116,7 @@ function PhraseHelper({ phrases, onSelect }) {
 
 // ── Main ConversationChat ─────────────────────────────────────────────────────
 function ConversationChat({ scenario, onBack }) {
-  const { messages, isLoading, turnCount, conversationComplete, startConversation, sendMessage, reset } =
+  const { messages, isLoading, turnCount, conversationComplete, retryStatus, startConversation, sendMessage, reset } =
     useConversation(scenario)
 
   const [input,         setInput]       = useState('')
@@ -234,7 +234,12 @@ function ConversationChat({ scenario, onBack }) {
         {messages.map(msg => (
           <MessageItem key={msg.id} msg={msg} scenario={scenario} />
         ))}
-        {isLoading && <TypingIndicator scenario={scenario} />}
+        {isLoading && !retryStatus && <TypingIndicator scenario={scenario} />}
+        {retryStatus && (
+          <div style={{ textAlign:'center', padding:'12px 16px', fontSize:13, color:'var(--t3)', background:'rgba(245,158,11,0.08)', borderRadius:'var(--radius)', margin:'0 16px', border:'1px solid rgba(245,158,11,0.2)' }}>
+            ⏳ {retryStatus}
+          </div>
+        )}
       </div>
 
       {/* ── Phrase helper ── */}

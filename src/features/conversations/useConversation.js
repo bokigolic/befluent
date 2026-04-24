@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from 'react'
+import { callWithRetry } from '../../utils/apiRetry'
 
 const API_KEY = import.meta.env.VITE_ANTHROPIC_API_KEY ?? ''
 
@@ -43,28 +44,35 @@ export function useConversation(scenario) {
   const [turnCount,            setTurnCount]            = useState(0)
   const [conversationComplete, setConversationComplete] = useState(false)
   const [error,                setError]                = useState(null)
+  const [retryStatus,          setRetryStatus]          = useState(null)
 
-  // Tracks the alternating user/assistant history sent to the API
   const apiHistoryRef = useRef([
     { role: 'user', content: 'Start the conversation now. Open with a natural greeting in character.' },
   ])
 
   const callAPI = useCallback(async (history) => {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': API_KEY,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true',
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 500,
-        system: buildSystemPrompt(scenario),
-        messages: history,
+    const res = await callWithRetry(
+      () => fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': API_KEY,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true',
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 500,
+          system: buildSystemPrompt(scenario),
+          messages: history,
+        }),
       }),
-    })
+      {
+        onRetry: (attempt, secs) =>
+          setRetryStatus(`Claude AI is busy right now. Retrying in ${secs}s… (${attempt}/2)`),
+      }
+    )
+    setRetryStatus(null)
     if (!res.ok) {
       const body = await res.text()
       throw new Error(`API ${res.status}: ${body.slice(0, 100)}`)
@@ -76,6 +84,7 @@ export function useConversation(scenario) {
   const startConversation = useCallback(async () => {
     setIsLoading(true)
     setError(null)
+    setRetryStatus(null)
     try {
       const rawText = await callAPI(apiHistoryRef.current)
       const { mainText } = parseResponse(rawText)
@@ -91,22 +100,27 @@ export function useConversation(scenario) {
         timestamp: Date.now(),
       }])
     } catch (e) {
-      setError(e.message)
+      const msg = e.isOverloaded
+        ? 'AI is currently overloaded. Please try again in a minute.'
+        : '🔌 Could not connect. Check your internet connection or API key.'
+      setError(msg)
       setMessages([{
         id: 'err-0',
         role: 'assistant',
-        content: '🔌 Could not connect. Check your internet connection or API key.',
+        content: msg,
         feedback: null,
         timestamp: Date.now(),
       }])
     } finally {
       setIsLoading(false)
+      setRetryStatus(null)
     }
   }, [callAPI])
 
   const sendMessage = useCallback(async (text) => {
     if (!text.trim() || isLoading || conversationComplete) return
     setError(null)
+    setRetryStatus(null)
 
     const userMsg = {
       id: `u-${Date.now()}`,
@@ -137,16 +151,20 @@ export function useConversation(scenario) {
 
       if (isComplete || newTurn >= 10) setConversationComplete(true)
     } catch (e) {
-      setError(e.message)
+      const msg = e.isOverloaded
+        ? 'AI is currently overloaded. Please try again in a minute.'
+        : '⚠️ Connection error. Please try again.'
+      setError(msg)
       setMessages(prev => [...prev, {
         id: `err-${Date.now()}`,
         role: 'assistant',
-        content: '⚠️ Connection error. Please try again.',
+        content: msg,
         feedback: null,
         timestamp: Date.now(),
       }])
     } finally {
       setIsLoading(false)
+      setRetryStatus(null)
     }
   }, [isLoading, conversationComplete, callAPI, turnCount])
 
@@ -159,7 +177,8 @@ export function useConversation(scenario) {
     setTurnCount(0)
     setConversationComplete(false)
     setError(null)
+    setRetryStatus(null)
   }, [])
 
-  return { messages, isLoading, turnCount, conversationComplete, error, startConversation, sendMessage, reset }
+  return { messages, isLoading, turnCount, conversationComplete, error, retryStatus, startConversation, sendMessage, reset }
 }

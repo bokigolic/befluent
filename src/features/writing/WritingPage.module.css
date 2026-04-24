@@ -239,6 +239,35 @@
   background: rgba(255,107,157,0.08);
   border-radius: var(--radius-sm);
   padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.retryBtn {
+  margin-left: auto;
+  padding: 4px 10px;
+  border: 1px solid rgba(255,107,157,0.4);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--acc-p);
+  font-size: 12px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.retryBtn:hover { background: rgba(255,107,157,0.12); }
+
+.retryMsg {
+  font-size: 13px;
+  color: #f59e0b;
+  background: rgba(245,158,11,0.08);
+  border: 1px solid rgba(245,158,11,0.2);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  text-align: center;
 }
 
 .submitBtn {

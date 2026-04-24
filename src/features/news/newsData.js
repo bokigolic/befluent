@@ -591,6 +591,356 @@ Solutions are being pursued at multiple levels. The United Kingdom appointed the
       { question: 'What was the United Kingdom first in the world to do?', options: ['Ban social media for under-16s', 'Appoint a Minister for Loneliness', 'Prescribe social activities on the NHS', 'Redesign cities for social interaction'], correct: 1, explanation: 'The UK appointed the world\'s first Minister for Loneliness in 2018.' },
     ],
   },
+  {
+    id: 'n16',
+    title: 'The Rise of Remote Work: Is the Office Dead?',
+    category: 'Business',
+    level: 'B1',
+    date: '2024-04-01',
+    readTime: '3 min',
+    summary: 'Companies around the world are rethinking the traditional office as remote work becomes permanent.',
+    content: `The traditional nine-to-five office job is [changing] [dramatically]. Since the [pandemic], millions of workers have [discovered] that they can do their jobs from home — and many do not want to go back.
+
+[Companies] like Twitter, Spotify, and Airbnb have [announced] that employees can work from [anywhere] [permanently]. Other companies, like Apple and Amazon, have [required] workers to return to the office at least three days a week. This has caused [significant] [tension] between [employers] and [employees].
+
+The [debate] is not just about [convenience]. Research shows that some workers are more [productive] at home, while others struggle with [isolation] and lack of [structure]. Young workers who are new to their [careers] often [benefit] from being in the office, where they can learn from more [experienced] [colleagues].
+
+Cities are also [affected]. [Commercial] [property] in major cities has [dropped] in value as office [buildings] sit [empty]. [Coffee] shops, [restaurants], and small [businesses] that [depended] on office workers have [suffered]. Meanwhile, smaller towns and [rural] areas have seen [growth] as remote workers [move] away from expensive cities.
+
+"The office is not dead — it is [evolving]," said Dr Mark Richardson, a [workplace] [expert]. "The best companies are [creating] offices that people want to come to, not offices that people have to come to."`,
+    vocabulary: [
+      { word: 'dramatically', definition: 'in a sudden and striking way', serbian: 'dramatično' },
+      { word: 'pandemic', definition: 'a disease spreading across many countries', serbian: 'pandemija' },
+      { word: 'permanently', definition: 'in a way that lasts forever', serbian: 'trajno' },
+      { word: 'tension', definition: 'a feeling of anxiety between people', serbian: 'napetost' },
+      { word: 'isolation', definition: 'the state of being separated from others', serbian: 'izolacija' },
+      { word: 'commercial', definition: 'relating to business and trade', serbian: 'komercijalni' },
+      { word: 'evolving', definition: 'gradually developing or changing', serbian: 'razvija se' },
+    ],
+    quiz: [
+      { question: 'Which companies said employees can work from anywhere permanently?', options: ['Apple and Amazon', 'Twitter, Spotify and Airbnb', 'Google and Microsoft', 'Netflix and Meta'], correct: 1, explanation: 'Twitter, Spotify and Airbnb announced permanent work-from-anywhere policies.' },
+      { question: 'Who benefits most from being in the office?', options: ['Senior managers', 'Remote workers', 'Young workers new to their careers', 'Part-time employees'], correct: 2, explanation: 'Young workers benefit from being in the office to learn from experienced colleagues.' },
+      { question: 'What happened to commercial property in cities?', options: ['It increased in value', 'It stayed the same', 'It dropped in value', 'It was converted to housing'], correct: 2, explanation: 'Commercial property dropped in value as office buildings sat empty.' },
+    ],
+  },
+  {
+    id: 'n17',
+    title: 'Plastic Pollution: The Ocean Crisis',
+    category: 'Environment',
+    level: 'B1',
+    date: '2024-04-02',
+    readTime: '3 min',
+    summary: 'Eight million tonnes of plastic enter the world\'s oceans every year, threatening marine life.',
+    content: `Every year, approximately eight million [tonnes] of plastic [waste] enter the world's oceans. This is [equivalent] to [dumping] a [garbage] truck full of plastic into the sea every minute. The [consequences] for [marine] life are [devastating].
+
+Plastic does not [disappear] — it [breaks] down into smaller and smaller [pieces] called [microplastics]. These tiny [particles] are now found [everywhere] in the ocean, from the [surface] to the [deepest] [trenches]. Fish and other [marine] animals [mistake] microplastics for food, which can [block] their [digestive] systems and cause [starvation].
+
+[Seabirds] are particularly [vulnerable]. Studies have found that 90% of seabirds have [consumed] plastic. [Turtles] often [mistake] plastic bags for [jellyfish] — one of their [favourite] foods. [Whales] have been found dead on [beaches] with [stomachs] full of plastic bags.
+
+The problem is not only [environmental]. [Scientists] have found microplastics in human blood, lungs, and even [unborn] babies. The long-term health [effects] are still not fully [understood], but [researchers] are [concerned].
+
+[Solutions] include [reducing] [single-use] plastics, [improving] waste [management] [systems], and [developing] new [biodegradable] [materials]. Some countries have [banned] plastic bags and [straws]. [Ocean] [cleanup] projects are trying to remove plastic already in the sea.
+
+"We created this problem and we have to [solve] it," said Dr Elena Martinez, a [marine] [biologist]. "But [prevention] is always better than [cleanup]."`,
+    vocabulary: [
+      { word: 'tonnes', definition: 'units of weight equal to 1000 kilograms', serbian: 'tone' },
+      { word: 'equivalent', definition: 'equal in value or amount', serbian: 'ekvivalentno' },
+      { word: 'microplastics', definition: 'tiny plastic particles less than 5mm', serbian: 'mikroplastika' },
+      { word: 'marine', definition: 'relating to the sea', serbian: 'morski' },
+      { word: 'vulnerable', definition: 'exposed to harm or risk', serbian: 'ranjiv' },
+      { word: 'biodegradable', definition: 'able to be broken down naturally', serbian: 'biorazgradiv' },
+      { word: 'prevention', definition: 'stopping something before it happens', serbian: 'prevencija' },
+    ],
+    quiz: [
+      { question: 'How much plastic enters oceans every year?', options: ['1 million tonnes', '4 million tonnes', '8 million tonnes', '20 million tonnes'], correct: 2, explanation: 'Approximately eight million tonnes of plastic enter the oceans every year.' },
+      { question: 'What do turtles often mistake plastic bags for?', options: ['Fish', 'Seaweed', 'Jellyfish', 'Crabs'], correct: 2, explanation: 'Turtles often mistake plastic bags for jellyfish, one of their favourite foods.' },
+      { question: 'Where have scientists found microplastics in humans?', options: ['Only in the stomach', 'In blood, lungs and unborn babies', 'Only in the digestive system', 'Only in older people'], correct: 1, explanation: 'Scientists have found microplastics in human blood, lungs, and even unborn babies.' },
+    ],
+  },
+  {
+    id: 'n18',
+    title: 'The Mental Health Crisis Among Young People',
+    category: 'Health',
+    level: 'B2',
+    date: '2024-04-03',
+    readTime: '4 min',
+    summary: 'Rates of anxiety and depression among teenagers have reached record levels worldwide.',
+    content: `Mental health problems among young people have reached [alarming] levels. In the United Kingdom, one in six children aged five to sixteen has a [diagnosable] mental health [condition]. In the United States, emergency room visits for [self-harm] among teenagers [increased] by 188% between 2006 and 2021. Similar trends have been [documented] across [developed] nations.
+
+[Experts] [disagree] about the causes. Some [point] to [academic] [pressure] — the intense [competition] for [university] places and good grades that many young people [experience]. Others [highlight] [economic] [uncertainty]: young people today face [unstable] [housing] markets, [student] debt, and [job] [insecurity] in ways that [previous] [generations] did not.
+
+The role of social media remains [hotly] [debated]. Psychologist Jean Twenge has [documented] a sharp [increase] in [depression] and [anxiety] among teenagers that [coincided] with the [widespread] [adoption] of [smartphones]. She [argues] that social media [exposes] young people to [harmful] [social] [comparison] and [cyberbullying], while [displacing] the face-to-face [interaction] that is [essential] for [wellbeing].
+
+[Schools] and [universities] are [struggling] to [respond]. [Waiting] times for mental health [treatment] on the NHS can [exceed] a year. [University] [counselling] services are [overwhelmed]. Many young people [receive] no [professional] support at all.
+
+[Governments] are [beginning] to act. England has [announced] mental health [support] teams in schools. Several countries are [considering] [restricting] social media [access] for under-16s. And there is growing [recognition] that [addressing] the mental health crisis requires [tackling] its [structural] causes — [inequality], [poverty], and lack of [opportunity].
+
+"We are [pathologising] [normal] [responses] to [abnormal] [circumstances]," said Professor Sarah Jones. "Young people are [struggling] because the world is [genuinely] [difficult]. We need to [change] the world, not just [medicate] the young."`,
+    vocabulary: [
+      { word: 'alarming', definition: 'causing worry or fear', serbian: 'zabrinjavajući' },
+      { word: 'diagnosable', definition: 'able to be identified as a medical condition', serbian: 'dijagnosticiran' },
+      { word: 'academic', definition: 'relating to education and study', serbian: 'akademski' },
+      { word: 'documented', definition: 'recorded with evidence', serbian: 'dokumentovan' },
+      { word: 'coincided', definition: 'happened at the same time', serbian: 'poklopilo se' },
+      { word: 'overwhelmed', definition: 'having too much to cope with', serbian: 'preopterećen' },
+      { word: 'inequality', definition: 'unfair differences between people', serbian: 'nejednakost' },
+    ],
+    quiz: [
+      { question: 'What fraction of UK children aged 5-16 has a diagnosable mental health condition?', options: ['One in ten', 'One in six', 'One in four', 'One in three'], correct: 1, explanation: 'One in six children aged five to sixteen in the UK has a diagnosable mental health condition.' },
+      { question: 'What does Jean Twenge argue about social media?', options: ['It helps young people connect', 'It has no effect on mental health', 'It exposes young people to harmful comparison and cyberbullying', 'Only adults are affected'], correct: 2, explanation: 'Twenge argues social media exposes young people to harmful social comparison and cyberbullying.' },
+      { question: 'What does Professor Jones say about young people\'s struggles?', options: ['They are too sensitive', 'They are responding normally to abnormal circumstances', 'Social media is entirely to blame', 'Parents are responsible'], correct: 1, explanation: 'She says young people are pathologising normal responses to abnormal circumstances.' },
+      { question: 'What waiting time can mental health treatment on the NHS exceed?', options: ['One month', 'Three months', 'Six months', 'One year'], correct: 3, explanation: 'Waiting times for mental health treatment on the NHS can exceed a year.' },
+    ],
+  },
+  {
+    id: 'n19',
+    title: 'Space Tourism: The New Frontier for the Super-Rich',
+    category: 'Science',
+    level: 'B1',
+    date: '2024-04-04',
+    readTime: '3 min',
+    summary: 'Private companies are making space travel a reality for wealthy customers.',
+    content: `For most of human [history], only [trained] [astronauts] selected by [governments] could travel to space. Now, for the first time, [private] [companies] are [offering] [ordinary] — though extremely wealthy — people the chance to [experience] space.
+
+[Companies] like SpaceX, Blue Origin, and Virgin Galactic are [competing] to [become] the [leaders] of a new space [tourism] [industry]. Blue Origin, [founded] by Amazon [billionaire] Jeff Bezos, has already [carried] paying [passengers] to the [edge] of space. Virgin Galactic [offers] [suborbital] flights where [passengers] experience a few minutes of [weightlessness] and can see the [curvature] of the Earth. A ticket [currently] costs around $450,000.
+
+SpaceX has even more [ambitious] plans. The company has [already] [sent] [private] [individuals] on trips around the Earth and is [planning] [missions] to the Moon and eventually Mars. Elon Musk, SpaceX's [founder], believes humans must become a [multi-planetary] [species] to [ensure] the long-term [survival] of [civilisation].
+
+[Critics] [argue] that space tourism is an [obscene] [luxury] when [millions] of people [lack] basic [necessities] like food and [clean] water. They also [raise] [environmental] [concerns] — rocket [launches] [produce] significant [carbon] [emissions] and could damage the [atmosphere].
+
+[Supporters] [counter] that space tourism [drives] [technological] [innovation] that [benefits] everyone, and that the [industry] will [create] thousands of [jobs]. They also [argue] that humans have always [explored] new [frontiers], and space is simply the next one.
+
+"The question is not whether humans will [colonise] space," said Dr Rachel Kim. "It is who will get to go — and whether the [benefits] will be [shared] [fairly]."`,
+    vocabulary: [
+      { word: 'astronauts', definition: 'people trained to travel in space', serbian: 'astronauti' },
+      { word: 'suborbital', definition: 'not reaching a full orbit of the Earth', serbian: 'suborbitalni' },
+      { word: 'weightlessness', definition: 'the feeling of having no weight in space', serbian: 'bestežinsko stanje' },
+      { word: 'curvature', definition: 'the curved shape of something', serbian: 'zakrivljenost' },
+      { word: 'multi-planetary', definition: 'living on more than one planet', serbian: 'višeplanetarni' },
+      { word: 'obscene', definition: 'morally offensive or shocking', serbian: 'sramotan' },
+      { word: 'colonise', definition: 'to settle in and take control of a place', serbian: 'kolonizirati' },
+    ],
+    quiz: [
+      { question: 'How much does a Virgin Galactic ticket currently cost?', options: ['$45,000', '$145,000', '$450,000', '$4,500,000'], correct: 2, explanation: 'A Virgin Galactic ticket currently costs around $450,000.' },
+      { question: 'What is Elon Musk\'s main argument for space exploration?', options: ['It creates jobs', 'Humans must become multi-planetary to survive', 'It drives tourism', 'It is cheaper than expected'], correct: 1, explanation: 'Musk believes humans must become a multi-planetary species to ensure long-term survival.' },
+      { question: 'What environmental concern do critics raise?', options: ['Noise pollution', 'Water waste', 'Rocket launches produce significant carbon emissions', 'Space debris'], correct: 2, explanation: 'Critics raise concerns that rocket launches produce significant carbon emissions.' },
+      { question: 'Who founded Blue Origin?', options: ['Elon Musk', 'Richard Branson', 'Jeff Bezos', 'Mark Zuckerberg'], correct: 2, explanation: 'Blue Origin was founded by Amazon billionaire Jeff Bezos.' },
+    ],
+  },
+  {
+    id: 'n20',
+    title: 'Bitcoin and Cryptocurrency: Revolution or Gamble?',
+    category: 'Business',
+    level: 'B2',
+    date: '2024-04-05',
+    readTime: '4 min',
+    summary: 'Digital currencies have transformed finance, but experts disagree on their long-term value.',
+    content: `When Bitcoin was created in 2009 by the [mysterious] [pseudonymous] creator Satoshi Nakamoto, it was [dismissed] by most [economists] and [financial] [experts] as a [curiosity] at best and a [fraud] at worst. Fifteen years later, Bitcoin has a market [capitalisation] of over one trillion dollars, and [cryptocurrencies] have [spawned] an entirely new [financial] [ecosystem].
+
+[Proponents] of cryptocurrency [argue] that it [represents] a [revolutionary] [technology]. [Blockchain] — the [distributed] [ledger] [technology] that [underlies] Bitcoin — [allows] [transactions] to be [recorded] [transparently] and [securely] without [requiring] a central [authority] like a bank. This could [potentially] [transform] everything from [international] money [transfers] to [voting] [systems] to [property] [registration].
+
+The investment case is also [compelling] to some. Bitcoin's [supply] is [mathematically] [limited] to 21 million [coins], which [proponents] argue makes it a [hedge] against [inflation] — a "digital gold" that [retains] value as [governments] print more [currency].
+
+[Critics], however, are [equally] [forceful]. They [point] to Bitcoin's [extraordinary] price [volatility] — it lost 65% of its value in 2022 alone. They [highlight] the [enormous] energy [consumption] of [cryptocurrency] [mining], which [rivals] that of entire countries. And they [note] that cryptocurrencies have [become] [associated] with [financial] [crime], [fraud], and [speculation] rather than [legitimate] commerce.
+
+[Regulatory] [responses] have varied [dramatically]. El Salvador [adopted] Bitcoin as [legal] [tender]. China [banned] it [entirely]. The European Union and United States are [developing] [comprehensive] [regulatory] [frameworks].
+
+"Cryptocurrency is [either] the future of [finance] or the [greatest] [speculative] [bubble] in [history]," said Professor David Chen. "At this point, [nobody] knows which."`,
+    vocabulary: [
+      { word: 'pseudonymous', definition: 'using a false name', serbian: 'pseudoniman' },
+      { word: 'capitalisation', definition: 'total market value of a company or asset', serbian: 'kapitalizacija' },
+      { word: 'blockchain', definition: 'a digital record of transactions', serbian: 'blockchain' },
+      { word: 'distributed', definition: 'spread across many locations', serbian: 'distribuiran' },
+      { word: 'volatility', definition: 'tendency to change rapidly and unpredictably', serbian: 'volatilnost' },
+      { word: 'speculation', definition: 'buying assets hoping for profit despite risk', serbian: 'špekulacija' },
+      { word: 'regulatory', definition: 'relating to official rules and control', serbian: 'regulatorni' },
+    ],
+    quiz: [
+      { question: 'When was Bitcoin created?', options: ['2005', '2009', '2012', '2015'], correct: 1, explanation: 'Bitcoin was created in 2009 by the pseudonymous Satoshi Nakamoto.' },
+      { question: 'What is Bitcoin\'s maximum supply?', options: ['10 million coins', '21 million coins', '100 million coins', 'Unlimited'], correct: 1, explanation: 'Bitcoin\'s supply is mathematically limited to 21 million coins.' },
+      { question: 'Which country adopted Bitcoin as legal tender?', options: ['USA', 'China', 'El Salvador', 'Japan'], correct: 2, explanation: 'El Salvador adopted Bitcoin as legal tender.' },
+      { question: 'What do critics say about Bitcoin\'s energy use?', options: ['It is very efficient', 'It rivals that of entire countries', 'It uses less than smartphones', 'It runs on renewable energy'], correct: 1, explanation: 'Critics highlight that cryptocurrency mining uses energy rivalling that of entire countries.' },
+    ],
+  },
+  {
+    id: 'n21',
+    title: 'The Future of Nuclear Energy',
+    category: 'Science',
+    level: 'B2',
+    date: '2024-04-06',
+    readTime: '4 min',
+    summary: 'Nuclear power is experiencing a comeback as countries seek clean energy alternatives to fossil fuels.',
+    content: `Nuclear energy is [experiencing] a [renaissance]. After decades of being [controversial] following [disasters] at Chernobyl in 1986 and Fukushima in 2011, many governments are [reconsidering] nuclear energy as a key part of their [climate] strategy.
+
+The [argument] for nuclear is [compelling]. A nuclear power plant [produces] enormous amounts of electricity without [emitting] carbon dioxide. A single plant can [power] millions of homes for decades. Unlike solar and wind [energy], nuclear produces electricity [consistently] regardless of weather conditions.
+
+France has long been a nuclear [champion], [generating] about 70% of its electricity from nuclear plants. Now, countries including Japan, South Korea, and the United Kingdom are [announcing] plans to build new [reactors]. In the United States, existing plants are [receiving] life [extensions] rather than [closing].
+
+The new [generation] of nuclear technology is [significantly] different from the old. Small [modular] reactors [promise] to be cheaper and faster to build than traditional large plants. Some new designs use [molten] salt or helium instead of water, which [proponents] say makes them [inherently] safer.
+
+[Critics], however, remain [unconvinced]. The problem of nuclear [waste] — which remains [radioactive] for thousands of years — has still not been [solved]. Nuclear plants take 10–15 years to build, far too slow for the [urgent] [climate] [crisis]. And [capital] costs are [enormous] — the UK's Hinkley Point C reactor is now [estimated] to cost over £30 billion.
+
+"Nuclear is not a [silver] bullet," said Dr Anna Fischer, an energy [economist]. "But it may be part of the [solution]. The [question] is whether we can [afford] to [dismiss] it."`,
+    vocabulary: [
+      { word: 'renaissance', definition: 'a revival or renewed interest in something', serbian: 'preporod' },
+      { word: 'controversial', definition: 'causing disagreement or strong opinions', serbian: 'kontroverzan' },
+      { word: 'reactor', definition: 'a device that produces nuclear energy', serbian: 'reaktor' },
+      { word: 'modular', definition: 'made of separate units that can be combined', serbian: 'modularni' },
+      { word: 'radioactive', definition: 'emitting harmful radiation', serbian: 'radioaktivan' },
+      { word: 'proponents', definition: 'people who support an idea or policy', serbian: 'zagovornici' },
+      { word: 'inherently', definition: 'in a way that is a permanent, essential quality', serbian: 'inherentno/po prirodi' },
+      { word: 'emissions', definition: 'gases released into the atmosphere', serbian: 'emisije' },
+    ],
+    quiz: [
+      { question: 'What percentage of France\'s electricity comes from nuclear plants?', options: ['30%', '50%', '70%', '90%'], correct: 2, explanation: 'France generates about 70% of its electricity from nuclear plants.' },
+      { question: 'What advantage do small modular reactors offer?', options: ['They produce more waste', 'They are cheaper and faster to build', 'They use coal as backup', 'They only work in cold countries'], correct: 1, explanation: 'Small modular reactors promise to be cheaper and faster to build than traditional large plants.' },
+      { question: 'What is a key unsolved problem with nuclear energy?', options: ['It produces too much electricity', 'Radioactive waste lasts thousands of years', 'It requires too many workers', 'It cannot be built near cities'], correct: 1, explanation: 'The problem of nuclear waste, which remains radioactive for thousands of years, has not been solved.' },
+      { question: 'What disaster happened at Fukushima?', options: ['An earthquake only', 'A nuclear accident in 2011', 'A flood in 1986', 'A terrorist attack'], correct: 1, explanation: 'The Fukushima nuclear disaster occurred in 2011, one of two major accidents cited in the article.' },
+    ],
+  },
+  {
+    id: 'n22',
+    title: 'How Social Media Changed Politics',
+    category: 'World',
+    level: 'C1',
+    date: '2024-04-07',
+    readTime: '4 min',
+    summary: 'Social media has transformed political campaigns and elections — but not always for the better.',
+    content: `When Barack Obama used social media in his 2008 presidential [campaign], it seemed [revolutionary]. He raised millions in small [donations] from ordinary people and [mobilised] young voters who had never [participated] before. Social media, it seemed, was [democratising] politics.
+
+Fifteen years later, many [observers] are less [optimistic]. Social media has [transformed] politics, but not always in the ways [envisioned]. It has [amplified] [extremism], [accelerated] the spread of [misinformation], and [contributed] to the [polarisation] of [democratic] societies.
+
+The [mechanisms] are now well [understood]. Social media [algorithms] are [designed] to [maximise] [engagement]. [Content] that [provokes] [anger] or [outrage] is more [engaging] than [nuanced] [analysis]. As a result, [extreme] and [sensational] content [spreads] faster than [moderate], [factual] reporting.
+
+[Misinformation] has become a [systemic] [problem]. During the COVID-19 [pandemic], [false] [claims] about vaccines [circulated] [rapidly] on Facebook and Twitter. In the 2016 US election, Russian [operatives] used social media to [interfere] in the democratic [process] — creating fake [accounts], spreading [divisive] content, and [amplifying] [existing] [tensions].
+
+Politicians have [adapted]. Donald Trump [pioneered] a style of direct, [aggressive] Twitter [communication] that [bypassed] traditional media [gatekeepers]. Now [populist] politicians across the world use social media to speak directly to [supporters], spreading messages that [mainstream] media might not [broadcast].
+
+[Regulators] are struggling to respond. The EU's Digital Services Act [attempts] to hold platforms [accountable] for [harmful] content. But [policies] lag far [behind] the pace of [technological] change.
+
+"Social media has not [created] political [polarisation]," said Dr Emma Davis. "But it has [poured] [petrol] on [existing] [divisions] and made them much harder to [bridge]."`,
+    vocabulary: [
+      { word: 'polarisation', definition: 'division into two opposing groups', serbian: 'polarizacija' },
+      { word: 'algorithm', definition: 'a set of rules used by a computer program', serbian: 'algoritam' },
+      { word: 'misinformation', definition: 'false or inaccurate information', serbian: 'dezinformacija' },
+      { word: 'amplified', definition: 'made louder or stronger', serbian: 'pojačano' },
+      { word: 'operatives', definition: 'people working secretly for an organisation', serbian: 'agenti/operativci' },
+      { word: 'populist', definition: 'appealing to ordinary people against elites', serbian: 'populistički' },
+      { word: 'systemic', definition: 'relating to an entire system', serbian: 'sistemski' },
+      { word: 'accountability', definition: 'responsibility for one\'s actions', serbian: 'odgovornost' },
+    ],
+    quiz: [
+      { question: 'What did Russian operatives do in the 2016 US election?', options: ['Hacked voting machines', 'Used social media to spread divisive content', 'Bribed politicians', 'Shut down TV channels'], correct: 1, explanation: 'Russian operatives used social media to interfere in the democratic process by spreading divisive content.' },
+      { question: 'Why does extreme content spread faster on social media?', options: ['It is better written', 'Algorithms maximise engagement and anger drives engagement', 'Moderate content is banned', 'Extreme users pay for promotion'], correct: 1, explanation: 'Social media algorithms maximise engagement, and content that provokes anger or outrage is more engaging.' },
+      { question: 'What is the EU\'s Digital Services Act designed to do?', options: ['Ban social media', 'Hold platforms accountable for harmful content', 'Create a European social network', 'Tax digital companies'], correct: 1, explanation: 'The EU\'s Digital Services Act attempts to hold platforms accountable for harmful content.' },
+      { question: 'Who pioneered direct, aggressive Twitter communication as a political tool?', options: ['Barack Obama', 'Emmanuel Macron', 'Donald Trump', 'Boris Johnson'], correct: 2, explanation: 'Donald Trump pioneered a style of direct, aggressive Twitter communication that bypassed traditional media.' },
+    ],
+  },
+  {
+    id: 'n23',
+    title: 'The Gig Economy: Freedom or Exploitation?',
+    category: 'Business',
+    level: 'B2',
+    date: '2024-04-08',
+    readTime: '4 min',
+    summary: 'Millions work for apps like Uber and Deliveroo — but debate rages over whether this is freedom or exploitation.',
+    content: `When Uber [launched] in 2010, it [promised] a new kind of work. [Drivers] would be their own [bosses], [choosing] their own hours, working when they wanted and resting when they liked. The gig [economy] — work based on short-term [contracts] and [freelance] [assignments] — seemed to offer the best of both worlds: [flexibility] for workers, [affordable] services for consumers.
+
+Now, more than a decade later, the [debate] about the gig economy has become more [complicated]. In the UK, Uber [drivers] [successfully] [sued] for workers' [rights] — including [minimum] wage and holiday pay — and the Supreme Court [agreed] they were not truly self-[employed]. Similar [battles] are being [fought] across Europe and the United States.
+
+The [central] [question] is who has the real power. Gig companies [argue] that their [platforms] offer [flexibility] that traditional [employment] cannot. Many workers, [particularly] students, parents, and those with second jobs, [value] this [flexibility] [genuinely].
+
+But [critics] [point] to what they call "false [flexibility]." In practice, many gig workers have no [meaningful] choice about when to work if they want to [earn] enough. [Algorithmic] management — computer systems [controlling] who gets work, when, and at what [price] — can be [brutal]. A single negative review can [dramatically] [reduce] a worker's [earnings]. There is no sick pay, no [pension], no guaranteed [income].
+
+Deliveroo, Amazon Flex, and Uber Eats [collectively] [employ] — or "engage" — millions of people across Europe. For many of these workers, the gig economy is not a choice but a [necessity] created by [insufficient] traditional employment [opportunities].
+
+"Flexibility without [security] is not freedom," said Professor Jeremias Prassl of Oxford University. "It is [precariousness] wearing a [modern] [costume]."`,
+    vocabulary: [
+      { word: 'freelance', definition: 'self-employed, working for different clients', serbian: 'slobodnjak/freelancer' },
+      { word: 'flexibility', definition: 'ability to change or adapt easily', serbian: 'fleksibilnost' },
+      { word: 'algorithmic', definition: 'controlled by computer algorithms', serbian: 'algoritmički' },
+      { word: 'precariousness', definition: 'state of being uncertain and insecure', serbian: 'nesigurnost/prekarnost' },
+      { word: 'minimum wage', definition: 'the lowest pay an employer can legally pay', serbian: 'minimalna plata' },
+      { word: 'collectively', definition: 'as a group, together', serbian: 'kolektivno' },
+      { word: 'necessity', definition: 'something that is essential or unavoidable', serbian: 'nužnost' },
+    ],
+    quiz: [
+      { question: 'What did the UK Supreme Court decide about Uber drivers?', options: ['They were self-employed', 'They had no rights', 'They were workers entitled to minimum wage and holiday pay', 'They had to pay for the app'], correct: 2, explanation: 'The UK Supreme Court agreed that Uber drivers were workers entitled to minimum wage and holiday pay.' },
+      { question: 'What is "algorithmic management"?', options: ['A human manager using computers', 'Computer systems controlling who gets work and when', 'A training programme for gig workers', 'A type of employment contract'], correct: 1, explanation: 'Algorithmic management means computer systems controlling who gets work, when, and at what price.' },
+      { question: 'According to the article, what do many gig workers lack?', options: ['Internet access', 'A driving licence', 'Sick pay, pension and guaranteed income', 'A bank account'], correct: 2, explanation: 'Gig workers typically have no sick pay, no pension and no guaranteed income.' },
+      { question: 'What does Professor Prassl say flexibility without security is?', options: ['Freedom', 'A good deal', 'Precariousness in a modern costume', 'The future of work'], correct: 2, explanation: 'He says flexibility without security is precariousness wearing a modern costume.' },
+    ],
+  },
+  {
+    id: 'n24',
+    title: 'Meditation and Mindfulness: Science or Trend?',
+    category: 'Health',
+    level: 'B1',
+    date: '2024-04-09',
+    readTime: '3 min',
+    summary: 'Mindfulness has gone from Buddhist monasteries to corporate offices — but what does the science really say?',
+    content: `[Mindfulness] has [moved] from Buddhist [monasteries] to corporate [boardrooms]. Apps like Headspace and Calm have been [downloaded] hundreds of millions of times. Google, Apple, and even the US Army teach [mindfulness] to their employees and [soldiers]. But what does the science actually say?
+
+[Mindfulness] is the [practice] of paying [attention] to the [present] moment without [judgment]. It typically [involves] sitting quietly, [focusing] on the breath, and [observing] thoughts without [following] them. [Meditation] is a broader term for mental [training] [practices].
+
+The [scientific] [evidence] is [genuinely] [promising]. Hundreds of [studies] show that [regular] mindfulness [practice] can [reduce] [symptoms] of [anxiety] and [depression]. Research from Harvard Medical School found that eight weeks of mindfulness [meditation] actually [changed] the physical [structure] of the brain, [increasing] [density] in areas [associated] with [learning] and [memory], and [reducing] density in the [amygdala] — the brain's [stress] [response] centre.
+
+[Mindfulness-based] [cognitive] [therapy] is now [recommended] by the UK's NHS as a [treatment] for [recurrent] [depression]. Several studies suggest it is as [effective] as [antidepressant] [medication] for [preventing] [relapse].
+
+[Critics], however, [urge] [caution]. Much mindfulness research is of [poor] [quality] — with small sample sizes and no [control] groups. Some studies have found that meditation can have [negative] [effects] in a minority of people, [triggering] [anxiety] or [disturbing] [memories]. And there is [concern] that the [corporate] version of mindfulness has [stripped] the [practice] of its [deeper] [ethical] [context].
+
+"Mindfulness is a powerful [tool]," said Dr Sara Lazar of Harvard. "But like any tool, it needs to be used [correctly] and [thoughtfully]."`,
+    vocabulary: [
+      { word: 'mindfulness', definition: 'awareness of the present moment without judgment', serbian: 'svjesnost/mindfulness' },
+      { word: 'meditation', definition: 'a practice of focused mental training', serbian: 'meditacija' },
+      { word: 'amygdala', definition: 'the brain region that processes stress and fear', serbian: 'amigdala' },
+      { word: 'cognitive', definition: 'relating to mental processes like thinking', serbian: 'kognitivni' },
+      { word: 'recurrent', definition: 'happening again repeatedly', serbian: 'ponavljajući' },
+      { word: 'relapse', definition: 'a return to illness after recovery', serbian: 'recidiv/povratak bolesti' },
+      { word: 'evidence', definition: 'facts that help prove something', serbian: 'dokazi' },
+    ],
+    quiz: [
+      { question: 'What does mindfulness involve?', options: ['Vigorous exercise', 'Paying attention to the present moment without judgment', 'Taking medication', 'Talking to a therapist'], correct: 1, explanation: 'Mindfulness is the practice of paying attention to the present moment without judgment.' },
+      { question: 'What did Harvard research find about eight weeks of meditation?', options: ['No effect on the brain', 'It changed the physical structure of the brain', 'It increased blood pressure', 'It improved vision'], correct: 1, explanation: 'Harvard research found that eight weeks of mindfulness meditation changed the physical structure of the brain.' },
+      { question: 'What is the amygdala associated with?', options: ['Memory and learning', 'Stress response', 'Language processing', 'Vision'], correct: 1, explanation: 'The amygdala is the brain\'s stress response centre.' },
+      { question: 'What concern do critics raise about corporate mindfulness?', options: ['It is too expensive', 'It has stripped the practice of its deeper ethical context', 'It takes too much time', 'It only works for executives'], correct: 1, explanation: 'Critics are concerned that corporate mindfulness has stripped the practice of its deeper ethical context.' },
+    ],
+  },
+  {
+    id: 'n25',
+    title: 'The Housing Crisis: Why Young People Cannot Afford Homes',
+    category: 'World',
+    level: 'B1',
+    date: '2024-04-10',
+    readTime: '3 min',
+    summary: 'In many cities, house prices have risen so fast that an entire generation may never own a home.',
+    content: `In London, the [average] house price is now more than twelve times the [average] [annual] [salary]. In Sydney, it is eleven times. In Vancouver, New York, and Paris, the [figures] are similarly [alarming]. For many young people, [homeownership] — once considered a [normal] [milestone] of adult life — has become an [impossible] dream.
+
+The causes are [complex] but [well-understood]. For [decades], many cities have not built enough homes to [meet] the [demand] of growing [populations]. [Planning] [regulations] have made [construction] [difficult]. Existing [homeowners] have often [opposed] new [development] in their [neighbourhoods].
+
+At the same time, [low] interest rates following the 2008 financial [crisis] made [borrowing] very cheap. This pushed [house] prices up as people could [afford] to [borrow] more. [Investors] bought [properties] as [financial] [assets], [reducing] the [supply] [available] to first-time buyers.
+
+The [consequences] for young people are [significant]. Many spend [enormous] [proportions] of their [income] on rent, leaving little for [savings]. [Renting] rather than [buying] means no [accumulation] of [wealth] through [property]. Some young people [rely] on [financial] [support] from parents — [widening] the [gap] between those from [wealthy] [families] and those without such [support].
+
+[Governments] have tried various [solutions]. [Tax] on [investment] [properties], [affordable] housing [quotas] for new [developments], and first-buyer [schemes] have all been [attempted] with [limited] [success].
+
+"The [fundamental] problem is [supply]," said housing [economist] Dr James Williams. "We need to build far more homes in the [places] where people want to live. [Everything] else is just [treating] [symptoms]."`,
+    vocabulary: [
+      { word: 'homeownership', definition: 'the state of owning the home you live in', serbian: 'vlasništvo nad nekretninom' },
+      { word: 'milestone', definition: 'an important event or achievement', serbian: 'prekretnica' },
+      { word: 'regulation', definition: 'an official rule controlling something', serbian: 'regulativa/propis' },
+      { word: 'accumulation', definition: 'gradually gathering or collecting', serbian: 'akumulacija' },
+      { word: 'proportion', definition: 'a part or share of a whole', serbian: 'udio/proporcija' },
+      { word: 'mortgage', definition: 'a loan used to buy property', serbian: 'hipoteka' },
+      { word: 'investors', definition: 'people who put money into assets to make profit', serbian: 'investitori' },
+    ],
+    quiz: [
+      { question: 'How many times the average salary is the average London house price?', options: ['Four times', 'Eight times', 'Twelve times', 'Twenty times'], correct: 2, explanation: 'In London, the average house price is more than twelve times the average annual salary.' },
+      { question: 'Why did low interest rates after 2008 push up house prices?', options: ['People earned more money', 'People could afford to borrow more', 'Fewer houses were built', 'Foreign investors left'], correct: 1, explanation: 'Low interest rates made borrowing cheap, so people could afford to borrow more, pushing prices up.' },
+      { question: 'What advantage does homeownership give over renting?', options: ['Cheaper monthly payments', 'Accumulation of wealth through property', 'Easier to move', 'Better schools nearby'], correct: 1, explanation: 'Renting rather than buying means no accumulation of wealth through property.' },
+      { question: 'What does Dr Williams say is the fundamental problem?', options: ['Lack of demand', 'Too many investors', 'Insufficient supply of homes', 'Planning departments'], correct: 2, explanation: 'Dr Williams says the fundamental problem is supply — not enough homes being built.' },
+    ],
+  },
 ]
 
 export const NEWS_CATEGORIES = ['All', 'Technology', 'Science', 'Health', 'Environment', 'Business', 'World']

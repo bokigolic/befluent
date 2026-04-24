@@ -89,7 +89,7 @@ function WritingPage() {
   const [showExample,  setShowExample]  = useState(false)
   const textareaRef = useRef(null)
 
-  const { result, isLoading, error, checkWriting, reset } = useWritingCheck()
+  const { result, isLoading, error, retryStatus, checkWriting, reset } = useWritingCheck()
 
   const addXP             = useStore(s => s.addXP)
   const checkAchievements = useStore(s => s.checkAchievements)
@@ -225,8 +225,18 @@ function WritingPage() {
             style={{ minHeight: currentMode?.minHeight ?? 120 }}
           />
 
+          {/* Retry status */}
+          {retryStatus && (
+            <div className={styles.retryMsg}>⏳ {retryStatus}</div>
+          )}
+
           {/* Error */}
-          {error && <div className={styles.errorMsg}>⚠️ {error}</div>}
+          {error && (
+            <div className={styles.errorMsg}>
+              ⚠️ {error}
+              <button className={styles.retryBtn} onClick={() => handleSubmit()}>Try again</button>
+            </div>
+          )}
 
           {/* Submit */}
           <button
@@ -235,7 +245,7 @@ function WritingPage() {
             disabled={!canSubmit}
           >
             {isLoading ? (
-              <><span className={styles.spinner} />Analyzing…</>
+              <><span className={styles.spinner} />{retryStatus ? 'Retrying…' : 'Analyzing…'}</>
             ) : '✨ Check my writing'}
           </button>
         </div>

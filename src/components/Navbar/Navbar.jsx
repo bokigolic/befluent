@@ -48,6 +48,7 @@ function Navbar() {
 
   return (
     <nav className={styles.navbar}>
+      <div className={styles.navInner}>
       <div className={styles.logo}>
         <div className={styles.logoIcon}>
           <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true">
@@ -98,6 +99,7 @@ function Navbar() {
           <span className={styles.streak}>🔥 {streak}</span>
         )}
       </div>
+      </div>{/* navInner */}
       <div className={styles.xpBar}>
         <div ref={fillRef} className={styles.xpFill} style={{ width: `${xpProgress}%` }} />
       </div>
