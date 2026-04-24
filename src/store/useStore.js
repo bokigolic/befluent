@@ -39,6 +39,10 @@ export const getXpProgress = (xp) => {
 
 export const ACHIEVEMENTS_DEF = [
   { id: 'first_search',   title: 'First Steps',        desc: 'Search your first word',             emoji: '🔍', xpReward: 10 },
+  { id: 'first_conversation',  title: 'First Chat',          desc: 'Complete your first conversation',   emoji: '🗣️', xpReward: 15 },
+  { id: 'conversation_5',      title: 'Chatterbox',          desc: 'Complete 5 conversations',           emoji: '💬', xpReward: 40 },
+  { id: 'perfect_conversation',title: 'Perfect Conversation',desc: 'Score 90+ average in any conversation', emoji: '🌟', xpReward: 60 },
+  { id: 'all_scenarios',       title: 'World Traveller',     desc: 'Try all 12 scenarios',               emoji: '🌍', xpReward: 100 },
   { id: 'words_10',       title: 'Word Collector',     desc: 'Search 10 words',                    emoji: '📚', xpReward: 25 },
   { id: 'words_50',       title: 'Vocabulary Builder', desc: 'Search 50 words',                    emoji: '🏗️', xpReward: 50 },
   { id: 'streak_3',       title: 'On a Roll',          desc: '3 day streak',                       emoji: '🔥', xpReward: 30 },
@@ -123,6 +127,9 @@ const useStore = create((set, get) => ({
   dailyPath:             [],
   completedDailyPath:    load('bf_daily_path_done', { date: '', completed: [] }),
 
+  // Conversations
+  conversationHistory:   load('bf_conversations', []),
+
   setActiveGrammarCategory: (id) => set({ activeGrammarCategory: id }),
 
   setActiveLearnSection: (section) => set({ activeLearnSection: section }),
@@ -155,6 +162,28 @@ const useStore = create((set, get) => ({
     const completedDailyPath = { date: today, completed }
     persist('bf_daily_path_done', completedDailyPath)
     return { completedDailyPath }
+  }),
+
+  addConversation: (conv) => set(state => {
+    const conversationHistory = [conv, ...state.conversationHistory].slice(0, 100)
+    persist('bf_conversations', conversationHistory)
+
+    const seenScenarios = new Set(conversationHistory.map(c => c.scenarioId))
+    let achievements = state.achievements
+    const newNotifs  = []
+    const check = (id) => {
+      if (!achievements.includes(id)) {
+        achievements = [...achievements, id]
+        persist('bf_achievements', achievements)
+        newNotifs.push(mkNotif('achievement', ACHIEVEMENTS_DEF.find(a => a.id === id)))
+      }
+    }
+    if (conversationHistory.length >= 1)   check('first_conversation')
+    if (conversationHistory.length >= 5)   check('conversation_5')
+    if (conv.averageScore >= 90)           check('perfect_conversation')
+    if (seenScenarios.size >= 12)          check('all_scenarios')
+
+    return { conversationHistory, achievements, notifications: [...state.notifications, ...newNotifs] }
   }),
 
   toggleSavedLesson: (lessonId) => set(state => {

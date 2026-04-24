@@ -7,21 +7,23 @@ import GrammarSection from '../../features/grammar/GrammarSection'
 import GrammarDetailPage from '../../features/grammar/GrammarDetailPage'
 import styles from './LearnPage.module.css'
 
-const TopicsPage      = lazy(() => import('../../features/topics/TopicsPage'))
-const NewsPage        = lazy(() => import('../../features/news/NewsPage'))
-const IdiomsPage      = lazy(() => import('../../features/idioms/IdiomsPage'))
-const WritingPage     = lazy(() => import('../../features/writing/WritingPage'))
-const VerbsPage       = lazy(() => import('../../features/verbs/VerbsPage'))
+const TopicsPage         = lazy(() => import('../../features/topics/TopicsPage'))
+const NewsPage           = lazy(() => import('../../features/news/NewsPage'))
+const IdiomsPage         = lazy(() => import('../../features/idioms/IdiomsPage'))
+const WritingPage        = lazy(() => import('../../features/writing/WritingPage'))
+const VerbsPage          = lazy(() => import('../../features/verbs/VerbsPage'))
+const ConversationsPage  = lazy(() => import('../../features/conversations/ConversationsPage'))
 
 const skel = <div className="suspenseSkel" />
 
 const SECTIONS = [
-  { id: 'grammar',  icon: '📚', title: 'Grammar',             sub: '81 lessons · 11 categories',    color: '#6366f1', level: 'A1–C1' },
-  { id: 'verbs',    icon: '⚡', title: 'Verbs',               sub: '118 irregular · 100+ phrasal',  color: '#3b82f6', level: 'A1–B2' },
-  { id: 'topics',   icon: '🗂️', title: 'Vocabulary Topics',   sub: '12 topics · 480 words',          color: '#10b981', level: 'A2–B2' },
-  { id: 'news',     icon: '📰', title: 'News in English',     sub: '15 articles · A2–C1',            color: '#f59e0b', level: 'A2–C1' },
-  { id: 'idioms',   icon: '💬', title: 'Idioms & Slang',      sub: '120 idioms · 8 categories',      color: '#ec4899', level: 'A2–C1' },
-  { id: 'writing',  icon: '✍️', title: 'Writing Practice',    sub: 'AI-powered feedback',            color: '#8b5cf6', level: 'B1–C1' },
+  { id: 'grammar',       icon: '📚', title: 'Grammar',             sub: '81 lessons · 11 categories',    color: '#6366f1', level: 'A1–C1' },
+  { id: 'verbs',         icon: '⚡', title: 'Verbs',               sub: '118 irregular · 100+ phrasal',  color: '#3b82f6', level: 'A1–B2' },
+  { id: 'topics',        icon: '🗂️', title: 'Vocabulary Topics',   sub: '12 topics · 480 words',          color: '#10b981', level: 'A2–B2' },
+  { id: 'news',          icon: '📰', title: 'News in English',     sub: '15 articles · A2–C1',            color: '#f59e0b', level: 'A2–C1' },
+  { id: 'idioms',        icon: '💬', title: 'Idioms & Slang',      sub: '120 idioms · 8 categories',      color: '#ec4899', level: 'A2–C1' },
+  { id: 'writing',       icon: '✍️', title: 'Writing Practice',    sub: 'AI-powered feedback',            color: '#8b5cf6', level: 'B1–C1' },
+  { id: 'conversations', icon: '🗣️', title: 'Conversations',       sub: 'Practice real-life scenarios with AI', color: '#06b6d4', level: 'A2–C1' },
 ]
 
 function SectionCard({ sec, onClick, progress }) {
@@ -114,6 +116,7 @@ function LearnHubContent({ onSectionOpen, onNodeOpen }) {
   const activeLearnSection   = useStore(s => s.activeLearnSection)
   const addXP                = useStore(s => s.addXP)
   const completeDailyAct     = useStore(s => s.completeDailyActivity)
+  const conversationHistory  = useStore(s => s.conversationHistory)
 
   const level = getLevel(xp)
 
@@ -145,6 +148,15 @@ function LearnHubContent({ onSectionOpen, onNodeOpen }) {
     }
     acts.push({ id: 'idioms-daily', type: 'idioms', icon: '💬',
       title: 'Explore 3 new idioms', time: 2, xp: 9 })
+
+    // Suggest a conversation scenario
+    const seenScenarios = new Set((conversationHistory ?? []).map(c => c.scenarioId))
+    const suggestedScenarioId = conversationHistory.length === 0
+      ? 'cafe'
+      : (['cafe','airport','shopping','directions','restaurant'].find(id => !seenScenarios.has(id)) ?? 'cafe')
+    acts.push({ id: `conv-${suggestedScenarioId}`, type: 'conversations', icon: '🗣️',
+      title: `Conversation: ${suggestedScenarioId.replace(/-/g, ' ')}`, time: 5, xp: 20 })
+
     setDailyPath(acts.slice(0, 4))
   }, [])
 
@@ -154,10 +166,11 @@ function LearnHubContent({ onSectionOpen, onNodeOpen }) {
   const handleActivityStart = (act) => {
     completeDailyAct(act.id)
     addXP(act.xp)
-    if (act.type === 'review')  { onSectionOpen?.('review') }
-    else if (act.type === 'grammar') { onSectionOpen?.('grammar') }
-    else if (act.type === 'news')    { onSectionOpen?.('news') }
-    else if (act.type === 'idioms')  { onSectionOpen?.('idioms') }
+    if (act.type === 'review')              { onSectionOpen?.('review') }
+    else if (act.type === 'grammar')        { onSectionOpen?.('grammar') }
+    else if (act.type === 'news')           { onSectionOpen?.('news') }
+    else if (act.type === 'idioms')         { onSectionOpen?.('idioms') }
+    else if (act.type === 'conversations')  { onSectionOpen?.('conversations') }
   }
 
   const avgGrammarProgress = useMemo(() => {
@@ -260,6 +273,9 @@ function SectionWrapper({ section, onBack }) {
             <WritingPage />
           </>
         )}
+        {section === 'conversations' && (
+          <ConversationsPage onBack={onBack} />
+        )}
       </Suspense>
     </div>
   )
@@ -274,12 +290,13 @@ export default function LearnPage() {
   const handleBack        = () => setActiveLearnSection(null)
 
   const handleNodeOpen = (node) => {
-    if (node.type === 'grammar')  setActiveLearnSection('grammar')
-    else if (node.type === 'verbs')   setActiveLearnSection('verbs')
-    else if (node.type === 'topics')  setActiveLearnSection('topics')
-    else if (node.type === 'news')    setActiveLearnSection('news')
-    else if (node.type === 'idioms')  setActiveLearnSection('idioms')
-    else if (node.type === 'writing') setActiveLearnSection('writing')
+    if (node.type === 'grammar')        setActiveLearnSection('grammar')
+    else if (node.type === 'verbs')         setActiveLearnSection('verbs')
+    else if (node.type === 'topics')        setActiveLearnSection('topics')
+    else if (node.type === 'news')          setActiveLearnSection('news')
+    else if (node.type === 'idioms')        setActiveLearnSection('idioms')
+    else if (node.type === 'writing')       setActiveLearnSection('writing')
+    else if (node.type === 'conversations') setActiveLearnSection('conversations')
   }
 
   if (activeLearnSection && activeLearnSection !== 'review') {

@@ -359,6 +359,52 @@ function SectionCompletion({ completedLessons, learnedTopicWords, readArticles, 
   )
 }
 
+// ── Conversation stats ────────────────────────────────────────────────────────
+function ConversationStats({ history }) {
+  const total    = history.length
+  const avgScore = total > 0
+    ? Math.round(history.reduce((s, c) => s + (c.averageScore ?? 0), 0) / total)
+    : 0
+  const scenarioCounts = {}
+  history.forEach(c => { scenarioCounts[c.scenarioId] = (scenarioCounts[c.scenarioId] ?? 0) + 1 })
+  const favorite = Object.entries(scenarioCounts).sort((a, b) => b[1] - a[1])[0]
+  const totalTurns = history.reduce((s, c) => s + (c.turnCount ?? 0), 0)
+
+  if (total === 0) {
+    return (
+      <div className={styles.block}>
+        <div className={styles.blockTitle}>Conversation Practice</div>
+        <div className={styles.writingEmptyHint}>No conversations yet — try the Conversations section!</div>
+      </div>
+    )
+  }
+
+  return (
+    <div className={styles.block}>
+      <div className={styles.blockTitle}>Conversation Practice</div>
+      <div className={styles.threeCol}>
+        <div className={styles.metricCard}>
+          <div className={styles.metricNum} style={{ color: '#06b6d4' }}>{total}</div>
+          <div className={styles.metricLabel}>Conversations</div>
+        </div>
+        <div className={styles.metricCard}>
+          <div className={styles.metricNum} style={{ color: 'var(--acc-g)' }}>{avgScore}%</div>
+          <div className={styles.metricLabel}>Avg score</div>
+        </div>
+        <div className={styles.metricCard}>
+          <div className={styles.metricNum} style={{ color: 'var(--acc-a)' }}>{totalTurns}</div>
+          <div className={styles.metricLabel}>Total turns</div>
+        </div>
+      </div>
+      {favorite && (
+        <div style={{ marginTop: 10, fontSize: 12, color: 'var(--t3)', textAlign: 'center' }}>
+          Most practiced: <strong style={{ color: 'var(--t2)' }}>{favorite[0].replace(/-/g, ' ')}</strong> ({favorite[1]}×)
+        </div>
+      )}
+    </div>
+  )
+}
+
 // ── Main ──────────────────────────────────────────────────────────────────────
 function ProgressPage() {
   const xp                 = useStore(s => s.xp)
@@ -374,6 +420,7 @@ function ProgressPage() {
   const learnedTopicWords  = useStore(s => s.learnedTopicWords)
   const readArticles       = useStore(s => s.readArticles)
   const savedIdioms        = useStore(s => s.savedIdioms)
+  const conversationHistory = useStore(s => s.conversationHistory)
 
   const level    = getLevel(xp)
   const progress = getXpProgress(xp)
@@ -435,6 +482,7 @@ function ProgressPage() {
       <ActivityCalendar activityLog={activityLog} />
       <ReviewStats reviewDeck={reviewDeck} reviewSessionsCount={reviewSessionsCount} />
       <WritingStats writingHistory={writingHistory} />
+      <ConversationStats history={conversationHistory} />
       <AchievementsGrid unlocked={achievements} />
     </div>
   )
