@@ -290,6 +290,8 @@ function ArticleDetail({ article, onBack }) {
       {tab === 'quiz' && (
         <QuizSection quiz={article.quiz} onComplete={handleQuizComplete} />
       )}
+
+      <button className={styles.backBtn} onClick={onBack} style={{ marginTop: 8 }}>← Back to Articles</button>
     </div>
   )
 }

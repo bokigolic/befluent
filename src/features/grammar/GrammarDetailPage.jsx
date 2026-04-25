@@ -256,6 +256,8 @@ function LessonDetailView({ lesson, cat, lessons, currentIndex, onBack, onNextLe
         )}
       </div>
 
+      <button className={styles.back} onClick={onBack} style={{ marginTop: 8 }}>← Back to Lessons</button>
+
       {toast && <div className={styles.toast}>{toast}</div>}
     </div>
   )

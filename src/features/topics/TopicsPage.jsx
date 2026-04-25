@@ -167,6 +167,8 @@ function TopicDetail({ topic, topicProgress, onBack }) {
           onPrev={() => setFlashIdx(i => Math.max(i - 1, 0))}
         />
       )}
+
+      <button className={styles.backBtn} onClick={onBack} style={{ marginTop: 12 }}>← Back to Topics</button>
     </div>
   )
 }
