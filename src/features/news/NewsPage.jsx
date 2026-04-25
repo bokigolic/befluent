@@ -1,4 +1,4 @@
-import { useState, memo, useCallback, useMemo, useRef } from 'react'
+import { useState, memo, useCallback, useMemo, useRef, useEffect } from 'react'
 import { NEWS_ARTICLES, NEWS_CATEGORIES, NEWS_LEVELS } from './newsData'
 import useStore from '../../store/useStore'
 import styles from './NewsPage.module.css'
@@ -24,68 +24,108 @@ function parseContent(text) {
   return parts
 }
 
-function WordPopup({ word, definition, serbian, onClose }) {
-  return (
-    <span className={styles.popupWrap}>
-      <span className={styles.clickableWord} onClick={onClose}>{word}</span>
-      <span className={styles.popup}>
-        <span className={styles.popupWord}>{word}</span>
-        <span className={styles.popupDef}>{definition}</span>
-        <span className={styles.popupSerbian}>{serbian}</span>
-      </span>
-    </span>
-  )
-}
-
-function WordBottomSheet({ word, definition, serbian, onClose }) {
-  const sheetRef = useRef(null)
+// ── Unified word definition panel (fixed overlay) ────────────────────────────
+function WordDefinitionPanel({ word, definition, serbian, loading, onClose, onAddToReview, inReview }) {
   const dragStartY = useRef(0)
 
+  useEffect(() => {
+    const handler = (e) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', handler)
+    return () => document.removeEventListener('keydown', handler)
+  }, [onClose])
+
   const onTouchStart = (e) => { dragStartY.current = e.touches[0].clientY }
-  const onTouchEnd = (e) => {
+  const onTouchEnd   = (e) => {
     if (e.changedTouches[0].clientY - dragStartY.current > 60) onClose()
   }
 
   return (
-    <div className={styles.sheetOverlay} onClick={onClose}>
+    <div className={styles.panelOverlay} onClick={onClose}>
       <div
-        ref={sheetRef}
-        className={styles.sheet}
+        className={IS_MOBILE ? styles.panelSheet : styles.panelFixed}
         onClick={e => e.stopPropagation()}
         onTouchStart={onTouchStart}
         onTouchEnd={onTouchEnd}
       >
-        <div className={styles.sheetHandle} />
-        <div className={styles.sheetWord}>{word}</div>
-        <div className={styles.sheetDef}>{definition}</div>
-        <div className={styles.sheetSerbian}>{serbian}</div>
+        {IS_MOBILE && <div className={styles.sheetHandle} />}
+        <div className={styles.panelHeader}>
+          <span className={styles.panelWord}>{word}</span>
+          <button className={styles.panelClose} onClick={onClose} aria-label="Close">×</button>
+        </div>
+
+        {loading ? (
+          <div className={styles.panelSpinner}>
+            <span className={styles.spinner} />
+            <span className={styles.spinnerText}>Loading…</span>
+          </div>
+        ) : (
+          <>
+            <p className={styles.panelDef}>{definition || 'No definition found.'}</p>
+            {serbian && <p className={styles.panelSerbian}>{serbian}</p>}
+          </>
+        )}
+
+        <button
+          className={`${styles.addReviewBtn} ${inReview ? styles.addReviewDone : ''}`}
+          onClick={onAddToReview}
+          disabled={inReview || loading}
+        >
+          {inReview ? '✓ In review deck' : '+ Add to Review'}
+        </button>
       </div>
     </div>
   )
 }
 
 function ArticleContent({ article, vocabMap, fontSize }) {
-  const [activeWord, setActiveWord]       = useState(null)
-  const [sheetEntry, setSheetEntry]       = useState(null)
+  const [panel,   setPanel]   = useState(null) // { word, definition, serbian, loading }
+  const addToReview  = useStore(s => s.addToReview)
+  const reviewDeck   = useStore(s => s.reviewDeck)
 
   const paragraphs = article.content.split('\n\n').filter(Boolean)
 
-  const handleWordClick = useCallback((key, entry, wordKey) => {
-    if (IS_MOBILE) {
-      setSheetEntry(entry)
-    } else {
-      setActiveWord(wordKey)
+  const fetchDefinition = useCallback(async (word) => {
+    try {
+      const res  = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`)
+      if (!res.ok) return null
+      const data = await res.json()
+      return data?.[0]?.meanings?.[0]?.definitions?.[0]?.definition ?? null
+    } catch {
+      return null
     }
   }, [])
 
+  const handleWordClick = useCallback(async (word, entry) => {
+    if (entry) {
+      setPanel({ word: entry.word ?? word, definition: entry.definition, serbian: entry.serbian, loading: false })
+    } else {
+      setPanel({ word, definition: '', serbian: '', loading: true })
+      const def = await fetchDefinition(word)
+      setPanel(prev => prev?.word === word ? { ...prev, definition: def ?? 'No definition found.', loading: false } : prev)
+    }
+  }, [fetchDefinition])
+
+  const handleClose = useCallback(() => setPanel(null), [])
+
+  const handleAddToReview = useCallback(() => {
+    if (!panel) return
+    addToReview(panel.word, panel.serbian || panel.definition || '', 'vocabulary')
+    setPanel(prev => prev ? { ...prev } : null)
+  }, [panel, addToReview])
+
+  const inReview = panel ? reviewDeck.some(c => c.word.toLowerCase() === panel.word.toLowerCase()) : false
+
   return (
     <div className={styles.articleContent} style={{ fontSize }}>
-      {sheetEntry && (
-        <WordBottomSheet
-          word={sheetEntry.word}
-          definition={sheetEntry.definition}
-          serbian={sheetEntry.serbian}
-          onClose={() => setSheetEntry(null)}
+      {panel && (
+        <WordDefinitionPanel
+          word={panel.word}
+          definition={panel.definition}
+          serbian={panel.serbian}
+          loading={panel.loading}
+          onClose={handleClose}
+          onAddToReview={handleAddToReview}
+          inReview={inReview}
         />
       )}
       {paragraphs.map((para, pi) => {
@@ -94,24 +134,13 @@ function ArticleContent({ article, vocabMap, fontSize }) {
           <p key={pi} className={styles.paragraph}>
             {segments.map((seg, si) => {
               if (seg.type === 'text') return <span key={si}>{seg.value}</span>
-              const key = seg.value.toLowerCase()
-              const entry = vocabMap[key]
-              if (!entry) return <span key={si} className={styles.boldWord}>{seg.value}</span>
-              const wordKey = `${pi}-${si}`
-              const isActive = activeWord === wordKey
-              return isActive ? (
-                <WordPopup
-                  key={si}
-                  word={seg.value}
-                  definition={entry.definition}
-                  serbian={entry.serbian}
-                  onClose={() => setActiveWord(null)}
-                />
-              ) : (
+              const entry = vocabMap[seg.value.toLowerCase()]
+              return (
                 <span
                   key={si}
-                  className={styles.clickableWord}
-                  onClick={() => handleWordClick(key, entry, wordKey)}
+                  className={entry ? styles.clickableWord : styles.boldWord}
+                  onClick={entry || true ? () => handleWordClick(seg.value, entry ?? null) : undefined}
+                  style={!entry ? { cursor: 'pointer' } : {}}
                 >
                   {seg.value}
                 </span>

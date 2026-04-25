@@ -2,26 +2,142 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#080c14" />
-    <meta name="description" content="English dictionary with Serbian translation" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="BeFluent" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-TileColor" content="#080c14" />
-    <meta name="msapplication-TileImage" content="/icons/icon-144.png" />
-    <title>BeFluent</title>
+
+    <!-- PRIMARY META -->
+    <title>BeFluent — English Dictionary & Grammar for Serbian Speakers</title>
+    <meta name="description" content="Free English learning app for Serbian speakers. 400,000+ words, grammar lessons, idioms, news in English, AI conversation practice and more. Learn English online."/>
+    <meta name="keywords" content="engleski recnik, ucenje engleskog, english dictionary serbian, engleski za srpski, gramatika engleski, befluent, engleski jezik, prevod engleski srpski"/>
+    <meta name="author" content="BG-DEV"/>
+    <meta name="robots" content="index, follow"/>
+    <link rel="canonical" href="https://be-fluent.netlify.app/"/>
+
+    <!-- OPEN GRAPH -->
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://be-fluent.netlify.app/"/>
+    <meta property="og:title" content="BeFluent — Učite engleski sa AI asistentom"/>
+    <meta property="og:description" content="400.000+ engleskih reči, 81 lekcija gramatike, AI konverzacija, vijesti na engleskom. Besplatan engleski rečnik za srpsko govorno područje."/>
+    <meta property="og:image" content="https://be-fluent.netlify.app/icons/icon-512.png"/>
+    <meta property="og:image:width" content="512"/>
+    <meta property="og:image:height" content="512"/>
+    <meta property="og:locale" content="sr_RS"/>
+    <meta property="og:locale:alternate" content="en_US"/>
+    <meta property="og:site_name" content="BeFluent"/>
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:url" content="https://be-fluent.netlify.app/"/>
+    <meta name="twitter:title" content="BeFluent — English Dictionary & Learning App"/>
+    <meta name="twitter:description" content="Learn English with AI. Dictionary, grammar, conversations, news. Free for Serbian speakers."/>
+    <meta name="twitter:image" content="https://be-fluent.netlify.app/icons/icon-512.png"/>
+
+    <!-- PWA -->
+    <meta name="theme-color" content="#09090f"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+    <meta name="apple-mobile-web-app-title" content="BeFluent"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="application-name" content="BeFluent"/>
+    <meta name="msapplication-TileColor" content="#09090f"/>
+    <meta name="msapplication-TileImage" content="/icons/icon-144.png"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <link rel="apple-touch-icon" href="/icons/icon-192.png"/>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png"/>
+    <link rel="manifest" href="/manifest.webmanifest"/>
+
+    <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+
+    <!-- JSON-LD: WebApplication -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "BeFluent",
+  "url": "https://be-fluent.netlify.app",
+  "description": "English learning app for Serbian speakers with 400,000+ words, grammar lessons, AI conversation practice and more.",
+  "applicationCategory": "EducationApplication",
+  "operatingSystem": "Web, Android, iOS",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "BG-DEV"
+  },
+  "inLanguage": ["en", "sr"],
+  "featureList": [
+    "English-Serbian Dictionary",
+    "Grammar Lessons",
+    "AI Conversation Practice",
+    "News in English",
+    "Idioms and Slang",
+    "Vocabulary Topics",
+    "Writing Practice",
+    "Spaced Repetition Review"
+  ]
+}
+    </script>
+
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Šta je BeFluent?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "BeFluent je besplatna aplikacija za učenje engleskog jezika namijenjena srpskom govornom području. Sadrži rečnik sa 400.000+ reči, lekcije gramatike, AI konverzacijsku praksu i više."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Da li je BeFluent besplatan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "BeFluent je trenutno u beta verziji i dostupan je besplatno na be-fluent.netlify.app."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Koje funkcije ima BeFluent?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "BeFluent nudi englesko-srpski rečnik, 81 lekciju gramatike, AI konverzacijske scenarije, vijesti na engleskom, 200 idioma, vježbe pisanja sa AI povratnom informacijom i sistem ponavljanja s razmacima."
+      }
+    }
+  ]
+}
+    </script>
   </head>
   <body>
+    <!-- SEO content: readable by crawlers, hidden visually -->
+    <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
+      <h1>BeFluent - Engleski Rečnik i Učenje Engleskog</h1>
+      <h2>Englesko-srpski rečnik sa 400.000 reči</h2>
+      <p>BeFluent je moderna aplikacija za učenje engleskog jezika. Sadrži kompletan englesko-srpski rečnik, lekcije gramatike, AI konverzacijsku praksu, vijesti na engleskom prilagođene različitim nivoima (A2-C1), 200 idioma i sleng izraza, vježbe pisanja sa AI povratnom informacijom, i sistem ponavljanja s razmacima za pamćenje vokabulara.</p>
+      <p>Učite engleski sa AI asistentom. Vježbajte konverzaciju u realnim scenarijima poput kafića, aerodroma, posla, doktora i više. Pratite napredak sa XP sistemom i dostignućima.</p>
+      <ul>
+        <li>Engleski rečnik - 400.000 reči</li>
+        <li>Engleska gramatika - 81 lekcija</li>
+        <li>Nepravilni glagoli - 120 glagola</li>
+        <li>Frazalni glagoli - 80 glagola</li>
+        <li>Engleski idiomi - 200 izraza</li>
+        <li>Vijesti na engleskom - 35 članaka</li>
+        <li>AI konverzacijska praksa</li>
+        <li>Vježbe pisanja sa AI</li>
+      </ul>
+    </div>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
