@@ -26,7 +26,6 @@ import LevelTest    from './features/leveltest/LevelTest'
 const ProfilePage  = lazy(() => import('./pages/ProfilePage/ProfilePage'))
 const ProgressPage = lazy(() => import('./features/progress/ProgressPage'))
 const SettingsPage = lazy(() => import('./pages/SettingsPage/SettingsPage'))
-const QuizPage     = lazy(() => import('./pages/QuizPage/QuizPage'))
 
 const shouldShowSplash = () =>
   !localStorage.getItem('bf_launched') ||
@@ -293,11 +292,6 @@ function App() {
         Press <kbd style={{ fontFamily:'monospace', background:'var(--elevated)', border:'1px solid var(--bord2)', borderRadius:4, padding:'1px 5px', fontSize:10 }}>?</kbd> for shortcuts
       </div>
 
-      {quizOpen && (
-        <Suspense fallback={null}>
-          <QuizPage onClose={() => setQuizOpen(false)} />
-        </Suspense>
-      )}
     </ErrorBoundary>
   )
 }
