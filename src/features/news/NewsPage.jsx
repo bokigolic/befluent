@@ -217,8 +217,8 @@ function QuizSection({ quiz, onComplete }) {
   )
 }
 
-function ArticleDetail({ article, onBack }) {
-  const [tab, setTab]               = useState('read')
+function ArticleDetail({ article, onBack, initialTab = 'read' }) {
+  const [tab, setTab]               = useState(initialTab)
   const [quizDone, setQuizDone]     = useState(false)
   const [fontSize, setFontSize]     = useState(16)
   const markArticleRead             = useStore(s => s.markArticleRead)
@@ -348,7 +348,7 @@ function ArticleCard({ article, isRead, isBookmarked, onClick }) {
   )
 }
 
-function NewsPage() {
+function NewsPage({ autoOpenQuiz = false }) {
   const [selectedId, setSelectedId]   = useState(null)
   const [category, setCategory]       = useState('All')
   const [level, setLevel]             = useState('All')
@@ -365,9 +365,16 @@ function NewsPage() {
 
   const readCount = Object.keys(readArticles).length
 
+  useEffect(() => {
+    if (autoOpenQuiz && NEWS_ARTICLES.length) {
+      const rnd = NEWS_ARTICLES[Math.floor(Math.random() * NEWS_ARTICLES.length)]
+      setSelectedId(rnd.id)
+    }
+  }, [autoOpenQuiz])
+
   if (selectedId) {
     const article = NEWS_ARTICLES.find(a => a.id === selectedId)
-    return <ArticleDetail article={article} onBack={() => setSelectedId(null)} />
+    return <ArticleDetail article={article} onBack={() => setSelectedId(null)} initialTab={autoOpenQuiz ? 'quiz' : 'read'} />
   }
 
   return (

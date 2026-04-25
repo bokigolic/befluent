@@ -10,7 +10,7 @@ import SearchBar from './components/SearchBar/SearchBar'
 import ResultCard from './components/ResultCard/ResultCard'
 import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen'
 import SplashScreen from './components/SplashScreen/SplashScreen'
-import Onboarding from './components/Onboarding/Onboarding'
+import LandingScreen from './components/LandingScreen/LandingScreen'
 import Achievements from './components/Achievements/Achievements'
 import OfflineBanner from './components/OfflineBanner/OfflineBanner'
 import BackgroundEffects from './components/BackgroundEffects/BackgroundEffects'
@@ -187,7 +187,7 @@ function App() {
   }, [setCurrentWord, addToHistory, addXP, dictMode])
 
   if (!splashDone) return <SplashScreen onDone={() => setSplashDone(true)} />
-  if (!onboardDone) return <Onboarding onDone={() => setOnboardDone(true)} />
+  if (!onboardDone) return <LandingScreen onDone={() => setOnboardDone(true)} />
 
   return (
     <ErrorBoundary>

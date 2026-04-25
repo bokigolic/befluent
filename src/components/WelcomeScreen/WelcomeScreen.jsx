@@ -165,6 +165,9 @@ function WelcomeScreen({ onSearch }) {
 
   return (
     <div className={styles.wrap}>
+      <p className={styles.hint}>
+        Search any English word to get definitions, examples, pronunciation and Serbian translation.
+      </p>
       <FeaturedWordCard onSearch={onSearch} />
 
       <IdiomMiniCard onGoToIdioms={() => { setActivePage('learn'); setActiveLearnSection('idioms') }} />
@@ -179,7 +182,7 @@ function WelcomeScreen({ onSearch }) {
       <RecentlySearched history={searchHistory} onSearch={onSearch} />
 
       <div className={styles.section}>
-        <div className={styles.sectionLabel}>✨ Discover</div>
+        <div className={styles.sectionLabel}>✨ Try these:</div>
         <div className={styles.pills}>
           {TRENDING.map((w, i) => (
             <button

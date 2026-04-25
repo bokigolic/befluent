@@ -1,5 +1,13 @@
 .wrap { padding-top: 8px; }
 
+.hint {
+  font-size: 14px;
+  color: var(--t3);
+  text-align: center;
+  margin: 0 0 12px;
+  line-height: 1.5;
+}
+
 /* ── Idiom of the Day mini card ── */
 .idiomCard {
   background: rgba(236,72,153,0.06);
@@ -55,6 +63,7 @@
 .wotdCard {
   background: linear-gradient(135deg, rgba(124,111,255,0.14), rgba(255,107,157,0.08));
   border: 1px solid var(--bord);
+  border-left: 3px solid var(--acc);
   border-radius: var(--radius);
   padding: 18px 20px 16px;
   margin-bottom: 16px;

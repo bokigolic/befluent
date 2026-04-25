@@ -140,10 +140,10 @@ function PracticePage() {
 
   if (active === 'review')  return modeView(<ReviewPage />)
   if (active === 'grammar') return modeView(<QuizPage onClose={handleBack} />)
-  if (active === 'idioms')  return modeView(<IdiomsPage />)
+  if (active === 'idioms')  return modeView(<IdiomsPage autoStartQuiz />)
   if (active === 'writing') return modeView(<WritingPage />)
-  if (active === 'news')    return modeView(<NewsPage />)
-  if (active === 'topics')  return modeView(<TopicsPage />)
+  if (active === 'news')    return modeView(<NewsPage autoOpenQuiz />)
+  if (active === 'topics')  return modeView(<TopicsPage autoOpenQuiz />)
 
   return (
     <>

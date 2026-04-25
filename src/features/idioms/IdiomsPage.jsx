@@ -1,4 +1,4 @@
-import { useState, useMemo, memo, useCallback } from 'react'
+import { useState, useMemo, memo, useCallback, useEffect } from 'react'
 import { IDIOMS, IDIOM_CATEGORIES, CATEGORY_COLOR, getIdiomOfDay } from './idiomsData'
 import useStore from '../../store/useStore'
 import styles from './IdiomsPage.module.css'
@@ -197,7 +197,7 @@ function IdiomQuiz({ onClose, onComplete }) {
 }
 
 // ── Main page ─────────────────────────────────────────────────────────────────
-function IdiomsPage() {
+function IdiomsPage({ autoStartQuiz = false }) {
   const savedIdioms        = useStore(s => s.savedIdioms)
   const toggleSavedIdiom   = useStore(s => s.toggleSavedIdiom)
   const addToReview        = useStore(s => s.addToReview)
@@ -208,6 +208,8 @@ function IdiomsPage() {
   const [showSaved, setShowSaved] = useState(false)
   const [quizOpen, setQuizOpen]   = useState(false)
   const [quizResult, setQuizResult] = useState(null)
+
+  useEffect(() => { if (autoStartQuiz) setQuizOpen(true) }, [autoStartQuiz])
 
   const iotd = useMemo(() => getIdiomOfDay(), [])
 

@@ -1,4 +1,4 @@
-import { useState, memo, useCallback } from 'react'
+import { useState, memo, useCallback, useEffect } from 'react'
 import { TOPICS } from './topicsData'
 import useStore from '../../store/useStore'
 import styles from './TopicsPage.module.css'
@@ -98,8 +98,8 @@ function FlashCard({ word: w, onNext, onPrev, current, total, onToggleLearn, lea
   )
 }
 
-function TopicDetail({ topic, topicProgress, onBack }) {
-  const [mode, setMode] = useState('browse')
+function TopicDetail({ topic, topicProgress, onBack, initialMode = 'browse' }) {
+  const [mode, setMode] = useState(initialMode)
   const [flashIdx, setFlashIdx] = useState(0)
   const markTopicWord = useStore(s => s.markTopicWord)
   const addToReview   = useStore(s => s.addToReview)
@@ -173,9 +173,16 @@ function TopicDetail({ topic, topicProgress, onBack }) {
   )
 }
 
-function TopicsPage() {
+function TopicsPage({ autoOpenQuiz = false }) {
   const [selectedTopic, setSelectedTopic] = useState(null)
   const learnedTopicWords = useStore(s => s.learnedTopicWords)
+
+  useEffect(() => {
+    if (autoOpenQuiz && TOPICS.length) {
+      const rnd = TOPICS[Math.floor(Math.random() * TOPICS.length)]
+      setSelectedTopic(rnd.id)
+    }
+  }, [autoOpenQuiz])
 
   if (selectedTopic) {
     const topic = TOPICS.find(t => t.id === selectedTopic)
@@ -184,6 +191,7 @@ function TopicsPage() {
         topic={topic}
         topicProgress={learnedTopicWords[selectedTopic]}
         onBack={() => setSelectedTopic(null)}
+        initialMode={autoOpenQuiz ? 'flash' : 'browse'}
       />
     )
   }
