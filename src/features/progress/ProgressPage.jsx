@@ -4,6 +4,7 @@ import { CATEGORIES } from '../grammar/GrammarSection'
 import { GRAMMAR_DATA } from '../grammar/grammarData'
 import { TOPICS } from '../topics/topicsData'
 import { NEWS_ARTICLES } from '../news/newsData'
+import { IDIOMS } from '../idioms/idiomsData'
 import WeeklyReport from '../adaptive/WeeklyReport'
 import styles from './ProgressPage.module.css'
 
@@ -187,6 +188,7 @@ function AchievementsGrid({ unlocked }) {
           const done = unlocked.includes(a.id)
           return (
             <div key={a.id} className={`${styles.achCard} ${done ? styles.achDone : styles.achLocked}`}>
+              {!done && <span className={styles.achLockIcon}>🔒</span>}
               <div className={styles.achEmoji}>{a.emoji}</div>
               <div className={styles.achTitle}>{a.title}</div>
               <div className={styles.achDesc}>{a.desc}</div>
@@ -325,7 +327,7 @@ function SectionCompletion({ completedLessons, learnedTopicWords, readArticles, 
     { icon: '⚡', label: 'Verbs',    done: verbsInReview, total: 220, unit: 'in review', color: '#3b82f6' },
     { icon: '🗂️', label: 'Topics',   done: topicWordsDone, total: totalTopicWords, unit: 'words', color: '#10b981' },
     { icon: '📰', label: 'News',     done: Object.keys(readArticles).length, total: NEWS_ARTICLES.length, unit: 'articles', color: '#f59e0b' },
-    { icon: '💬', label: 'Idioms',   done: savedIdioms.length, total: 120, unit: 'saved', color: '#ec4899' },
+    { icon: '💬', label: 'Idioms',   done: savedIdioms.length, total: IDIOMS.length, unit: 'saved', color: '#ec4899' },
     { icon: '✍️', label: 'Writing',  done: writingHistory.length, total: null, unit: writingAvg !== null ? `sessions · ${writingAvg}% avg` : 'sessions', color: '#8b5cf6' },
   ]
 

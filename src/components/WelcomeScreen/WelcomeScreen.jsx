@@ -143,8 +143,8 @@ function StatsRow() {
       </div>
       <div className={styles.statDivider} />
       <div className={styles.statItem}>
-        <span className={styles.statNum}>Free</span>
-        <span className={styles.statLabel}>forever</span>
+        <span className={styles.statNum}>PWA</span>
+        <span className={styles.statLabel}>offline</span>
       </div>
     </div>
   )

@@ -122,8 +122,10 @@ function ConversationChat({ scenario, onBack }) {
   const [input,         setInput]       = useState('')
   const [showBanner,    setShowBanner]  = useState(true)
   const [showReview,    setShowReview]  = useState(false)
-  const textareaRef = useRef(null)
-  const messagesRef = useRef(null)
+  const [slowWarning,   setSlowWarning] = useState(false)
+  const textareaRef   = useRef(null)
+  const messagesRef   = useRef(null)
+  const slowTimerRef  = useRef(null)
 
   // Start conversation on mount
   useEffect(() => {
@@ -136,6 +138,17 @@ function ConversationChat({ scenario, onBack }) {
       messagesRef.current.scrollTop = messagesRef.current.scrollHeight
     }
   }, [messages, isLoading])
+
+  // Slow-response warning: show after 8s of waiting
+  useEffect(() => {
+    clearTimeout(slowTimerRef.current)
+    if (isLoading) {
+      slowTimerRef.current = setTimeout(() => setSlowWarning(true), 8000)
+    } else {
+      setSlowWarning(false)
+    }
+    return () => clearTimeout(slowTimerRef.current)
+  }, [isLoading])
 
   // Auto-show review when conversation completes
   useEffect(() => {
@@ -235,6 +248,11 @@ function ConversationChat({ scenario, onBack }) {
           <MessageItem key={msg.id} msg={msg} scenario={scenario} />
         ))}
         {isLoading && !retryStatus && <TypingIndicator scenario={scenario} />}
+        {isLoading && slowWarning && !retryStatus && (
+          <div style={{ textAlign:'center', padding:'10px 16px', fontSize:12, color:'var(--t3)', margin:'0 16px' }}>
+            AI is thinking… this might take a moment
+          </div>
+        )}
         {retryStatus && (
           <div style={{ textAlign:'center', padding:'12px 16px', fontSize:13, color:'var(--t3)', background:'rgba(245,158,11,0.08)', borderRadius:'var(--radius)', margin:'0 16px', border:'1px solid rgba(245,158,11,0.2)' }}>
             ⏳ {retryStatus}

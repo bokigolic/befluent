@@ -111,6 +111,24 @@ function MeaningBlock({ meaning, mi, onWordClick }) {
   )
 }
 
+// ── Comparative / Superlative helper ─────────────────────────────────────────
+function getComparativeForm(w) {
+  const vowels = 'aeiou'
+  if (w.endsWith('e')) return `"${w}r" / "the ${w}st"`
+  if (w.endsWith('y') && w.length > 2 && !vowels.includes(w[w.length - 2])) {
+    const stem = w.slice(0, -1)
+    return `"${stem}ier" / "the ${stem}iest"`
+  }
+  if (w.length >= 3) {
+    const last = w[w.length - 1], prev = w[w.length - 2], prev2 = w[w.length - 3]
+    if (!vowels.includes(last) && vowels.includes(prev) && !vowels.includes(prev2)) {
+      return `"${w}${last}er" / "the ${w}${last}est"`
+    }
+  }
+  if (w.length > 6) return `"more ${w}" / "the most ${w}"`
+  return `"${w}er" / "the ${w}est"`
+}
+
 // ── Grammar usage hint ────────────────────────────────────────────────────────
 const GERUND_VERBS = ['enjoy','avoid','finish','suggest','mind','miss','consider','risk','practice','keep','imagine','admit','deny','delay','recommend','involve','resist','appreciate','discuss','mention','postpone','quit','recall']
 const INFINITIVE_VERBS = ['want','need','decide','hope','plan','agree','refuse','manage','fail','seem','appear','tend','offer','promise','choose','expect','learn','wish','afford','arrange','attempt','claim','demand','deserve','pretend','proceed']
@@ -138,7 +156,8 @@ function GrammarUsage({ meanings, word }) {
     if (prep) {
       hint = `"${w}" collocates with the preposition "${prep}". E.g. "She is ${w} ${prep} …"`
     } else {
-      hint = `Comparative: ${w.length <= 5 ? `"${w}er"` : `"more ${w}"`}. Superlative: ${w.length <= 5 ? `"the ${w}est"` : `"the most ${w}"`}. Can be used predicatively (after be/seem) and attributively (before noun).`
+      const comp = getComparativeForm(w)
+      hint = `Comparative / Superlative: ${comp}. Can be used predicatively (after be/seem) and attributively (before noun).`
     }
   } else if (pos === 'noun') {
     hint = 'Used with articles: a/an (first mention or singular countable), the (specific/known). Plural: usually add -s/-es. Some nouns are uncountable (no article or "some").'

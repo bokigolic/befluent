@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, memo, useEffect } from 'react'
+import { useState, useRef, useCallback, memo } from 'react'
 import useStore from '../../store/useStore'
 import { getDueCards, sortByPriority, previewInterval } from './spacedRepetition'
 import styles from './ReviewPage.module.css'
@@ -326,22 +326,28 @@ function ReviewPage() {
         <span className={styles.pageSubtitle}>Spaced repetition</span>
       </div>
 
-      <StatsHeader stats={stats} />
-
-      <button
-        className={`${styles.startBtn} ${!hasDue ? styles.startBtnDisabled : ''}`}
-        disabled={!hasDue}
-        onClick={() => hasDue && setSessionActive(true)}
-      >
-        {!hasDeck
-          ? 'Search words to build your deck'
-          : hasDue
-            ? `Review ${dueCards.length} word${dueCards.length !== 1 ? 's' : ''} due`
-            : 'No reviews due today ✓'
-        }
-      </button>
-
-      <WordList deck={reviewDeck} />
+      {!hasDeck ? (
+        <div className={styles.emptyState}>
+          <div className={styles.emptyIcon}>📭</div>
+          <div className={styles.emptyTitle}>Your review deck is empty</div>
+          <div className={styles.emptyText}>Search for words in the Dictionary and tap <strong>+</strong> to add them here.</div>
+        </div>
+      ) : (
+        <>
+          <StatsHeader stats={stats} />
+          <button
+            className={`${styles.startBtn} ${!hasDue ? styles.startBtnDisabled : ''}`}
+            disabled={!hasDue}
+            onClick={() => hasDue && setSessionActive(true)}
+          >
+            {hasDue
+              ? `Review ${dueCards.length} word${dueCards.length !== 1 ? 's' : ''} due`
+              : 'No reviews due today ✓'
+            }
+          </button>
+          <WordList deck={reviewDeck} />
+        </>
+      )}
     </div>
   )
 }

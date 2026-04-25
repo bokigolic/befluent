@@ -70,8 +70,13 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'react-vendor': ['react', 'react-dom'],
-          'state-vendor': ['zustand', '@tanstack/react-query'],
+          'react-vendor':  ['react', 'react-dom'],
+          'state-vendor':  ['zustand', '@tanstack/react-query'],
+          'grammar-data':  ['./src/features/grammar/grammarData.js', './src/features/grammar/grammarPractice.js'],
+          'idioms-data':   ['./src/features/idioms/idiomsData.js'],
+          'news-data':     ['./src/features/news/newsData.js'],
+          'writing-data':  ['./src/features/writing/writingPrompts.js'],
+          'verbs-data':    ['./src/features/verbs/verbsData.js'],
         },
       },
     },

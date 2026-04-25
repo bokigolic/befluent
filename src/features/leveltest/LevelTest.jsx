@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback } from 'react'
-import useStore from '../../store/useStore'
+import useStore, { ACHIEVEMENTS_DEF } from '../../store/useStore'
 import styles from './LevelTest.module.css'
 
 const QUESTIONS = [
@@ -162,7 +162,10 @@ function ResultsScreen({ score, onGoSection, onClose }) {
         </div>
       </div>
 
-      <div className={styles.xpEarned}>🎉 +20 XP earned · Achievement unlocked: Self-Aware 🎯</div>
+      {(() => {
+        const ach = ACHIEVEMENTS_DEF.find(a => a.id === 'level_test')
+        return <div className={styles.xpEarned}>🎉 +{ach?.xpReward ?? 20} XP earned · Achievement unlocked: {ach?.title ?? 'Self-Aware'} {ach?.emoji ?? '🎯'}</div>
+      })()}
 
       <button className={styles.closeBtn} onClick={onClose}>Go to Learn Hub</button>
     </div>

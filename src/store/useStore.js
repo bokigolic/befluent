@@ -4,6 +4,7 @@ import {
   getWeakCategories, getStrongCategories, calculateLevel,
   makeDefaultAdaptiveData,
 } from '../features/adaptive/adaptiveEngine'
+import { IDIOMS } from '../features/idioms/idiomsData'
 
 const load = (key, fallback) => {
   try {
@@ -145,7 +146,6 @@ const useStore = create((set, get) => ({
 
   saveTestResult: (result) => set(state => {
     persist('bf_test_result', result)
-    localStorage.setItem('bf_level_tested', 'true')
     const achs = state.achievements.includes('level_test')
       ? state.achievements
       : [...state.achievements, 'level_test']
@@ -154,7 +154,6 @@ const useStore = create((set, get) => ({
   }),
 
   clearTestResult: () => set(() => {
-    localStorage.removeItem('bf_level_tested')
     persist('bf_test_result', null)
     return { testResult: null }
   }),
@@ -337,9 +336,8 @@ const useStore = create((set, get) => ({
     }
     if (savedIdioms.length >= 1)  check('first_idiom')
     if (savedIdioms.length >= 20) check('idioms_20')
-    // slang master: all 20 slang idioms saved
-    const SLANG_IDS = ['s1','s2','s3','s4','s5','s6','s7','s8','s9','s10','s11','s12','s13','s14','s15','s16','s17','s18','s19','s20']
-    if (SLANG_IDS.every(id => savedIdioms.includes(id))) check('slang_master')
+    const slangIdioms = IDIOMS.filter(i => i.category === 'slang')
+    if (slangIdioms.length > 0 && slangIdioms.every(i => savedIdioms.includes(i.id))) check('slang_master')
 
     return { savedIdioms, achievements, notifications: [...notifications, ...newNotifs] }
   }),
