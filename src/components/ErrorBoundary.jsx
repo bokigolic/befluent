@@ -3,11 +3,15 @@ import { Component } from 'react'
 export default class ErrorBoundary extends Component {
   constructor(props) {
     super(props)
-    this.state = { hasError: false }
+    this.state = { hasError: false, error: null }
   }
 
-  static getDerivedStateFromError() {
-    return { hasError: true }
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error }
+  }
+
+  componentDidCatch(error, info) {
+    console.error('[ErrorBoundary]', error, info)
   }
 
   render() {
@@ -30,6 +34,11 @@ export default class ErrorBoundary extends Component {
             Something went wrong
           </p>
           <p style={{ fontSize: 14, color: 'var(--t3)' }}>Please refresh the page to continue.</p>
+          {this.state.error && (
+            <p style={{ fontSize: 11, color: 'var(--t3)', fontFamily: 'monospace', maxWidth: 320, wordBreak: 'break-word', opacity: 0.7 }}>
+              {this.state.error.message}
+            </p>
+          )}
           <button
             onClick={() => window.location.reload()}
             style={{

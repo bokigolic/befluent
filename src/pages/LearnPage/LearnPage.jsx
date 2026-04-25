@@ -121,7 +121,7 @@ function LearnHubContent({ onSectionOpen, onOpenLevelTest }) {
   const level = getLevel(xp)
 
   const avgGrammarProgress = useMemo(() => {
-    const vals = Object.values(grammarProgress).filter(v => v > 0)
+    const vals = Object.values(grammarProgress ?? {}).filter(v => v > 0)
     return vals.length ? Math.round(vals.reduce((a, b) => a + b, 0) / vals.length) : 0
   }, [grammarProgress])
 
@@ -129,8 +129,8 @@ function LearnHubContent({ onSectionOpen, onOpenLevelTest }) {
     grammar:       avgGrammarProgress,
     verbs:         0,
     topics:        0,
-    news:          Math.round((Object.keys(readArticles).length / NEWS_ARTICLES.length) * 100),
-    idioms:        Math.round((savedIdioms.length / 200) * 100),
+    news:          Math.round((Object.keys(readArticles ?? {}).length / NEWS_ARTICLES.length) * 100),
+    idioms:        Math.round(((savedIdioms ?? []).length / 200) * 100),
     conversations: Math.min(100, Math.round(((conversationHistory?.length ?? 0) / 12) * 100)),
   }
 
