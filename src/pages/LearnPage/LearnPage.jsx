@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, lazy, Suspense } from 'react'
+import { useEffect, useMemo, useRef, useState, lazy, Suspense } from 'react'
 import useStore, { getLevel } from '../../store/useStore'
 import { getDueCards } from '../../features/review/spacedRepetition'
 import { NEWS_ARTICLES } from '../../features/news/newsData'
@@ -345,11 +345,16 @@ export default function LearnPage() {
     )
   }
 
-  if (activeLearnSection === 'review') {
-    setActiveLearnSection(null)
-    setActivePage('practice')
-    return null
-  }
+  const reviewRedirectDone = useRef(false)
+  useEffect(() => {
+    if (activeLearnSection === 'review' && !reviewRedirectDone.current) {
+      reviewRedirectDone.current = true
+      setActiveLearnSection(null)
+      setActivePage('practice')
+    }
+  }, [activeLearnSection, setActiveLearnSection, setActivePage])
+
+  if (activeLearnSection === 'review') return null
 
   return (
     <>

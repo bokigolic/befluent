@@ -118,7 +118,6 @@ function App() {
   const [splashDone,       setSplashDone]       = useState(!shouldShowSplash())
   const [onboardDone,      setOnboardDone]      = useState(!shouldShowOnboarding())
   const [showScrollTop,    setShowScrollTop]    = useState(false)
-  const [quizOpen,         setQuizOpen]         = useState(false)
   const [showNudge,        setShowNudge]        = useState(false)
   const [showShortcuts,    setShowShortcuts]    = useState(false)
   const [profileLevelTest, setProfileLevelTest] = useState(false)
@@ -229,7 +228,10 @@ function App() {
         {/* ── Profile ── */}
         {activePage === 'profile' && (
           <Suspense fallback={skelFallback}>
-            <ProfilePage onOpenLevelTest={() => setProfileLevelTest(true)} />
+            <ProfilePage
+              onOpenLevelTest={() => setProfileLevelTest(true)}
+              onGoProgress={() => setActivePage('progress')}
+            />
           </Suspense>
         )}
       </div>

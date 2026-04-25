@@ -236,7 +236,7 @@ function ArticleDetail({ article, onBack }) {
             onClick={() => toggleBookmarkArticle(article.id)}
             title={isBookmarked ? 'Remove bookmark' : 'Bookmark'}
           >
-            {isBookmarked ? '🔖' : '🔖'}
+            {isBookmarked ? '🔖' : '🤍'}
           </button>
           {!isRead && (
             <button className={styles.actionBtn} onClick={handleMarkRead} title="Mark as read">

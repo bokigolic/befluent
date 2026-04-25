@@ -237,7 +237,7 @@ function IdiomsPage() {
       <div className={styles.pageHeader}>
         <div>
           <h2 className={styles.pageTitle}>Idioms &amp; Slang</h2>
-          <p className={styles.pageSubtitle}>120 idioms · 8 categories · A2–B2</p>
+          <p className={styles.pageSubtitle}>{IDIOMS.length} idioms · {IDIOM_CATEGORIES.filter(c => c.id !== 'all').length} categories · A2–C1</p>
         </div>
         <div className={styles.headerActions}>
           <button

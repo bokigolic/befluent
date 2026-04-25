@@ -26,7 +26,7 @@ const MODE_OPTIONS  = [
 ]
 const AVATARS = ['👨‍💻','👩‍💻','🧑‍🎓','👨‍🎓','👩‍🎓','🦁','🐯','🦊','🐺','🦋','🌟','⚡','🔥','💎','🚀','🎯','🏆','👑','🌊','🎸']
 
-function ProfilePage({ onOpenSettings, onOpenLevelTest }) {
+function ProfilePage({ onOpenSettings, onOpenLevelTest, onGoProgress }) {
   const xp             = useStore(s => s.xp)
   const streak         = useStore(s => s.streak)
   const achievements   = useStore(s => s.achievements)
@@ -168,7 +168,7 @@ function ProfilePage({ onOpenSettings, onOpenLevelTest }) {
               </div>
             ))}
           </div>
-          <button className={styles.viewAllBtn} onClick={() => {}}>
+          <button className={styles.viewAllBtn} onClick={() => onGoProgress?.()}>
             View all {achievements.length} achievements →
           </button>
         </div>

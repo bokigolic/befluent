@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { useState, memo } from 'react'
 import useStore from '../../store/useStore'
 import styles from './CoursePath.module.css'
 
@@ -175,5 +175,4 @@ function CoursePath({ onNodeOpen }) {
   )
 }
 
-import { useState } from 'react'
 export default memo(CoursePath)

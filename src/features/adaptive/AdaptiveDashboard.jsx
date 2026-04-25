@@ -85,7 +85,7 @@ function AdaptiveDashboard() {
               <div className={styles.metricLabel}>Overall accuracy</div>
             </div>
             <div className={styles.metricCard}>
-              <div className={styles.metricNum} style={{ color: 'var(--acc)' }}>{catPracticed}/11</div>
+              <div className={styles.metricNum} style={{ color: 'var(--acc)' }}>{catPracticed}/{CATEGORIES.length}</div>
               <div className={styles.metricLabel}>Categories tried</div>
             </div>
             <div className={styles.metricCard}>
