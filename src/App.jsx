@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback, useRef, lazy, Suspense } from 'react'
 import ErrorBoundary from './components/ErrorBoundary'
-import CustomCursor from './components/CustomCursor/CustomCursor'
 import ParallaxBackground from './components/ParallaxBackground/ParallaxBackground'
 import BottomNav from './components/BottomNav/BottomNav'
 import ShortcutsOverlay from './components/ShortcutsOverlay/ShortcutsOverlay'
@@ -192,7 +191,6 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <CustomCursor />
       <ParallaxBackground />
       <BackgroundEffects />
       <Navbar />

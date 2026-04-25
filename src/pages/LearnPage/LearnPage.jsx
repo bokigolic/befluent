@@ -20,8 +20,8 @@ const SECTIONS = [
   { id: 'grammar',       icon: '📚', title: 'Grammar',             sub: '81 lessons · 11 categories',    color: '#6366f1', level: 'A1–C1' },
   { id: 'verbs',         icon: '⚡', title: 'Verbs',               sub: '118 irregular · 100+ phrasal',  color: '#3b82f6', level: 'A1–B2' },
   { id: 'topics',        icon: '🗂️', title: 'Vocabulary Topics',   sub: '12 topics · 480 words',          color: '#10b981', level: 'A2–B2' },
-  { id: 'news',          icon: '📰', title: 'News in English',     sub: '15 articles · A2–C1',            color: '#f59e0b', level: 'A2–C1' },
-  { id: 'idioms',        icon: '💬', title: 'Idioms & Slang',      sub: '120 idioms · 8 categories',      color: '#ec4899', level: 'A2–C1' },
+  { id: 'news',          icon: '📰', title: 'News in English',     sub: '35 articles · A2–C1',            color: '#f59e0b', level: 'A2–C1' },
+  { id: 'idioms',        icon: '💬', title: 'Idioms & Slang',      sub: '200 idioms · 11 categories',     color: '#ec4899', level: 'A2–C1' },
   { id: 'writing',       icon: '✍️', title: 'Writing Practice',    sub: 'AI-powered feedback',            color: '#8b5cf6', level: 'B1–C1' },
   { id: 'conversations', icon: '🗣️', title: 'Conversations',       sub: 'Practice real-life scenarios with AI', color: '#06b6d4', level: 'A2–C1' },
 ]
@@ -182,8 +182,8 @@ function LearnHubContent({ onSectionOpen, onNodeOpen }) {
     grammar: avgGrammarProgress,
     verbs:   0,
     topics:  0,
-    news:    Math.round((Object.keys(readArticles).length / 15) * 100),
-    idioms:  Math.round((savedIdioms.length / 120) * 100),
+    news:    Math.round((Object.keys(readArticles).length / 35) * 100),
+    idioms:  Math.round((savedIdioms.length / 200) * 100),
     writing: 0,
   }
 

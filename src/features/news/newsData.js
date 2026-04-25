@@ -941,6 +941,336 @@ The [consequences] for young people are [significant]. Many spend [enormous] [pr
       { question: 'What does Dr Williams say is the fundamental problem?', options: ['Lack of demand', 'Too many investors', 'Insufficient supply of homes', 'Planning departments'], correct: 2, explanation: 'Dr Williams says the fundamental problem is supply — not enough homes being built.' },
     ],
   },
+  {
+    id: 'n26',
+    title: 'The World\'s Dying Languages',
+    category: 'World',
+    level: 'B2',
+    date: '2024-04-11',
+    readTime: '3 min',
+    summary: 'More than half the world\'s 7,000 languages could disappear by 2100. What is lost when a language dies?',
+    content: `Of the [approximately] 7,000 languages [spoken] in the world today, [linguists] [estimate] that between 50 and 90 per cent will have [disappeared] by the end of this century. A language [dies] when its last [native] [speaker] dies. Currently, one language goes [extinct] every two weeks.
+
+The [consequences] go far beyond [communication]. Languages [encode] [unique] ways of [understanding] the world. The Pirahã people of the Amazon, for example, have no words for numbers or [specific] colours — their language [reflects] a [remarkably] [present-focused] [worldview]. Many indigenous languages [contain] [detailed] [ecological] knowledge about local plants, animals, and [medicines] that [exists] nowhere else.
+
+When a language [disappears], so does [irreplaceable] [cultural] knowledge. Stories, songs, [ceremonies], and ways of [thinking] are [permanently] lost. For [speakers] of [endangered] languages, there is often a profound [sense] of [identity] and belonging tied to their mother tongue.
+
+[Efforts] to [revive] or [preserve] dying languages have had [mixed] [results]. Welsh, Hebrew, and Māori are [considered] [success] stories — all have been [revitalised] through [education] [policies] and [cultural] [programmes]. But [revival] requires [communities] to want to speak a language, not just [academics] to study it.
+
+[Technology] is now playing a role. [Linguists] are [recording] and [documenting] endangered languages at [unprecedented] speed. Google and Amazon are [developing] speech [recognition] for small languages. But [digital] [presence] alone cannot keep a language alive if no [children] are learning to speak it.`,
+    vocabulary: [
+      { word: 'linguist', definition: 'a person who studies language', serbian: 'lingvist' },
+      { word: 'extinct', definition: 'no longer existing', serbian: 'izumro' },
+      { word: 'indigenous', definition: 'native to a particular region', serbian: 'autohtoni/domorodački' },
+      { word: 'irreplaceable', definition: 'impossible to replace', serbian: 'nezamjenjiv' },
+      { word: 'revitalise', definition: 'give new life or energy to something', serbian: 'revitalizirati' },
+      { word: 'endangered', definition: 'at risk of disappearing', serbian: 'ugrožen' },
+      { word: 'encode', definition: 'to contain or express in a particular form', serbian: 'kodirati/sadržavati' },
+    ],
+    quiz: [
+      { question: 'How often does a language go extinct?', options: ['Every day', 'Every week', 'Every two weeks', 'Every month'], correct: 2, explanation: 'Currently, one language goes extinct every two weeks.' },
+      { question: 'What unique feature do the Pirahã people\'s language have?', options: ['No verbs', 'No words for numbers or specific colours', 'No past tense', 'No pronouns'], correct: 1, explanation: 'The Pirahã language has no words for numbers or specific colours.' },
+      { question: 'Which language is considered a revival success story?', options: ['Latin', 'Sanskrit', 'Welsh', 'Ancient Greek'], correct: 2, explanation: 'Welsh, Hebrew, and Māori are considered language revival success stories.' },
+      { question: 'What is needed for a language revival to succeed?', options: ['Government funding', 'Digital dictionaries', 'Communities wanting to speak the language', 'International recognition'], correct: 2, explanation: 'Revival requires communities to want to speak a language, not just academics to study it.' },
+    ],
+  },
+  {
+    id: 'n27',
+    title: 'Fast Fashion: The True Cost of Cheap Clothes',
+    category: 'Environment',
+    level: 'B1',
+    date: '2024-04-12',
+    readTime: '3 min',
+    summary: 'The fashion industry produces 92 million tonnes of waste per year. Is sustainable fashion the solution?',
+    content: `The average person today buys [approximately] 60 per cent more [clothing] than fifteen years ago and keeps each item for half as long. This is fast [fashion] — a business model built on rapid [production] of cheap, [disposable] clothes inspired by the latest [trends].
+
+The [environmental] [impact] is [enormous]. The fashion [industry] is [responsible] for about 10 per cent of global [carbon] [emissions] — more than [aviation] and [shipping] [combined]. It [consumes] 93 billion cubic [metres] of water every year. Textile [dyeing] is the world's second-largest [polluter] of clean water. A [single] [polyester] shirt can take up to 200 years to [decompose].
+
+The [human] [cost] is also [significant]. Most fast fashion is [manufactured] in [developing] countries where [wages] are low and [working] [conditions] can be [dangerous]. The 2013 Rana Plaza [factory] [collapse] in Bangladesh, which killed 1,134 garment workers, [highlighted] these risks dramatically.
+
+[Sustainable] fashion [offers] [alternatives]. "Slow fashion" [encourages] buying fewer, better-quality [items] that last longer. [Second-hand] and [vintage] [clothing] has [grown] [dramatically] in [popularity]. Several [brands] now offer take-back [schemes] — [collecting] old clothes to [recycle] or [resell].
+
+But [genuine] change [requires] more than [consumer] [choices]. [Experts] [argue] that [regulation] is [necessary] — making [producers] [responsible] for the full lifecycle of their products and [banning] the [destruction] of unsold [stock].`,
+    vocabulary: [
+      { word: 'disposable', definition: 'designed to be thrown away after use', serbian: 'jednokratan' },
+      { word: 'emission', definition: 'gases released into the atmosphere', serbian: 'emisija' },
+      { word: 'textile', definition: 'cloth or woven fabric', serbian: 'tekstil' },
+      { word: 'decompose', definition: 'to break down naturally over time', serbian: 'razgraditi se' },
+      { word: 'sustainable', definition: 'causing little or no environmental damage', serbian: 'održiv' },
+      { word: 'vintage', definition: 'old but high quality or stylish', serbian: 'vintage/starinski' },
+      { word: 'regulation', definition: 'official rules controlling an activity', serbian: 'regulativa' },
+    ],
+    quiz: [
+      { question: 'How much more clothing does the average person buy today compared to 15 years ago?', options: ['20% more', '40% more', '60% more', 'Twice as much'], correct: 2, explanation: 'The average person today buys approximately 60% more clothing than fifteen years ago.' },
+      { question: 'What percentage of global carbon emissions does the fashion industry produce?', options: ['2%', '5%', '10%', '20%'], correct: 2, explanation: 'The fashion industry is responsible for about 10% of global carbon emissions.' },
+      { question: 'What was the Rana Plaza disaster?', options: ['A chemical spill', 'A factory collapse killing 1,134 workers', 'A textile fire', 'A shipping accident'], correct: 1, explanation: 'The 2013 Rana Plaza factory collapse in Bangladesh killed 1,134 garment workers.' },
+      { question: 'What does "slow fashion" encourage?', options: ['Buying more clothes slowly', 'Buying fewer, better-quality items that last longer', 'Only buying second-hand clothes', 'Making your own clothes'], correct: 1, explanation: 'Slow fashion encourages buying fewer, better-quality items that last longer.' },
+    ],
+  },
+  {
+    id: 'n28',
+    title: 'Why Sleep Is More Important Than You Think',
+    category: 'Health',
+    level: 'B1',
+    date: '2024-04-13',
+    readTime: '3 min',
+    summary: 'Sleep deprivation affects millions of people. Scientists are now discovering just how damaging a lack of sleep can be.',
+    content: `Most adults need between seven and nine hours of sleep per night. Yet [surveys] in many countries show that [significant] [proportions] of the [population] regularly get less than six. We live in a culture that often [celebrates] [productivity] over rest — but [scientists] say this is a [serious] mistake.
+
+During sleep, the brain does far more than [simply] rest. It [consolidates] [memories], [clearing] waste [products] from the day. The [glymphatic] system — the brain's [cleaning] [mechanism] — is [particularly] [active] during [deep] sleep, [flushing] out [proteins] [associated] with Alzheimer's disease. This may explain why people who [consistently] sleep poorly have a higher risk of [developing] the [condition].
+
+Sleep [deprivation] also [affects] [physical] health. The [immune] system [weakens] without [adequate] sleep, making people more [susceptible] to infections. [Chronic] sleep loss has been [linked] to obesity, type 2 [diabetes], and [cardiovascular] disease. After 24 hours without sleep, [cognitive] [performance] is [equivalent] to having a blood [alcohol] level of 0.10 per cent — above the legal [driving] limit in most countries.
+
+Mental health is also [deeply] affected. Poor sleep [worsens] [anxiety] and [depression], which in turn make sleeping [harder] — creating a [vicious] [cycle].
+
+[Experts] [recommend] [consistent] sleep [schedules], [limiting] [screen] time before bed, and keeping [bedrooms] cool and dark. "[Sleep] is not [optional]," says [neuroscientist] Dr Matthew Walker. "It is the single most effective thing we can do to reset our [brain] and body health each day."`,
+    vocabulary: [
+      { word: 'deprivation', definition: 'being without something necessary', serbian: 'uskraćivanje/nedostatak' },
+      { word: 'consolidate', definition: 'to make stronger and more stable', serbian: 'konsolidirati/učvrstiti' },
+      { word: 'glymphatic', definition: 'relating to the brain\'s waste-clearing system', serbian: 'glimfatički' },
+      { word: 'chronic', definition: 'persisting for a long time', serbian: 'kronični' },
+      { word: 'cardiovascular', definition: 'relating to the heart and blood vessels', serbian: 'kardiovaskularni' },
+      { word: 'susceptible', definition: 'likely to be affected by something', serbian: 'podložan' },
+      { word: 'vicious cycle', definition: 'a situation where one problem makes another worse', serbian: 'začarani krug' },
+    ],
+    quiz: [
+      { question: 'How many hours of sleep do most adults need?', options: ['5–6 hours', '6–7 hours', '7–9 hours', '9–11 hours'], correct: 2, explanation: 'Most adults need between seven and nine hours of sleep per night.' },
+      { question: 'What does the glymphatic system do?', options: ['Processes emotions', 'Flushes waste from the brain', 'Controls breathing during sleep', 'Regulates blood pressure'], correct: 1, explanation: 'The glymphatic system is the brain\'s cleaning mechanism, flushing out proteins associated with Alzheimer\'s.' },
+      { question: 'After 24 hours without sleep, what is cognitive performance equivalent to?', options: ['Being mildly tired', 'Blood alcohol of 0.05%', 'Blood alcohol of 0.10%', 'Blood alcohol of 0.20%'], correct: 2, explanation: 'After 24 hours without sleep, cognitive performance is equivalent to a blood alcohol level of 0.10%.' },
+      { question: 'What expert advice is given for better sleep?', options: ['Exercise intensely before bed', 'Eat a large meal at night', 'Maintain consistent sleep schedules', 'Sleep in a warm room'], correct: 2, explanation: 'Experts recommend consistent sleep schedules, limiting screen time, and keeping bedrooms cool and dark.' },
+    ],
+  },
+  {
+    id: 'n29',
+    title: 'Robots at Work: The Future of Employment',
+    category: 'Technology',
+    level: 'B2',
+    date: '2024-04-14',
+    readTime: '4 min',
+    summary: 'Automation and AI are transforming the workforce. Which jobs are safe — and which are not?',
+    content: `In 2013, Oxford [economists] Carl Benedikt Frey and Michael Osborne [published] a [study] [claiming] that 47 per cent of US jobs were at high risk of [automation] within 20 years. The [prediction] [sparked] global [debate] about the future of work.
+
+A decade later, [robots] and [artificial] [intelligence] have indeed [transformed] many [industries]. [Automated] [checkout] [machines] have replaced [cashiers]. [Software] writes [financial] [reports], translates documents, and [diagnoses] [medical] [conditions]. [Warehouses] used by Amazon and Alibaba are now largely operated by [autonomous] robots.
+
+Yet the [catastrophic] [unemployment] predicted by some [economists] has not [materialised]. Instead, [automation] tends to [eliminate] [specific] [tasks] within jobs, not entire [occupations]. New roles have [emerged] — from [data] [analysts] to [drone] [operators] — that did not exist a generation ago. [Historically], every wave of [technological] change has [eventually] created more jobs than it [destroyed].
+
+The [concern] is not [unemployment] itself, but [inequality]. [Automation] [tends] to replace [routine], [middle-skill] jobs. Workers in those roles may [struggle] to [transition] into new work without [significant] [retraining]. This [risk] falls [disproportionately] on [older] workers, those in [certain] [geographic] areas, and those without [university] education.
+
+[Governments] and [businesses] face [pressure] to [invest] in [lifelong] [learning] [programmes]. "[Technology] has always changed work," says [economist] Dr Dario Acemoglu. "The [challenge] today is to ensure those [changes] [benefit] everyone, not just [shareholders] and [highly-skilled] workers."`,
+    vocabulary: [
+      { word: 'automation', definition: 'using machines instead of humans to do work', serbian: 'automatizacija' },
+      { word: 'materialise', definition: 'to happen or become real', serbian: 'ostvariti se/materijalizirati se' },
+      { word: 'autonomous', definition: 'able to operate independently', serbian: 'autonomni' },
+      { word: 'disproportionately', definition: 'to a degree that is too large or too small', serbian: 'neproporcionalno' },
+      { word: 'transition', definition: 'the process of changing from one state to another', serbian: 'tranzicija/prelazak' },
+      { word: 'retraining', definition: 'learning new skills for a different job', serbian: 'prekvalifikacija' },
+      { word: 'inequality', definition: 'unfair differences between people or groups', serbian: 'nejednakost' },
+    ],
+    quiz: [
+      { question: 'What did the 2013 Oxford study predict?', options: ['10% of US jobs at risk', '47% of US jobs at risk of automation', 'All manual jobs would be automated', 'Technology would create more jobs'], correct: 1, explanation: 'The Oxford study claimed 47% of US jobs were at high risk of automation within 20 years.' },
+      { question: 'What has actually happened with employment since automation increased?', options: ['Massive unemployment', 'Jobs eliminated but new roles emerged', 'No change at all', 'Only skilled workers were affected'], correct: 1, explanation: 'Automation tends to eliminate specific tasks, not entire occupations, and new roles have emerged.' },
+      { question: 'Which workers face the biggest risk from automation?', options: ['Highly-skilled workers', 'Those in routine, middle-skill jobs', 'Young workers', 'Workers in large cities'], correct: 1, explanation: 'Automation tends to replace routine, middle-skill jobs, and those workers struggle to transition.' },
+      { question: 'What do experts say governments need to invest in?', options: ['More robots', 'Tax on automation', 'Lifelong learning programmes', 'Shorter working weeks'], correct: 2, explanation: 'Governments face pressure to invest in lifelong learning programmes for workers displaced by automation.' },
+    ],
+  },
+  {
+    id: 'n30',
+    title: 'The Mediterranean Diet: Eating for a Longer Life',
+    category: 'Health',
+    level: 'A2',
+    date: '2024-04-15',
+    readTime: '3 min',
+    summary: 'Doctors and scientists agree: the Mediterranean diet is one of the healthiest ways to eat. What is in it?',
+    content: `People who live near the [Mediterranean] Sea — in countries like Greece, Italy, and Spain — have [traditionally] had very long, healthy lives. [Scientists] now [believe] their diet is a big reason for this. The [Mediterranean] diet is now one of the most [studied] and [recommended] diets in the world.
+
+So what do people eat? The diet [includes] a lot of fruit, [vegetables], [nuts], seeds, and [olive] oil. People eat fish and [seafood] [regularly] — at least two or three times a week. They also eat [whole] [grains], [legumes] like [beans] and [lentils], and small [amounts] of [dairy] [products] like [cheese] and [yoghurt]. Meat — especially red meat — is eaten only sometimes.
+
+[Importantly], the [Mediterranean] diet does not [count] [calories] or [restrict] food [groups]. [Instead], it is about eating [natural], [unprocessed] foods and enjoying meals [slowly] with [family] and [friends].
+
+The [health] [benefits] are [impressive]. Research shows the [Mediterranean] diet [reduces] the risk of heart disease, [stroke], type 2 diabetes, and some [cancers]. A large Spanish study found it [reduced] the risk of [cardiovascular] [events] by 30 per cent. It also [helps] [maintain] a healthy weight and [improves] brain health in older people.
+
+[Experts] say you do not need to live in Greece to eat this way. [Anyone] can [choose] [olive] oil [instead] of [butter], eat more fish and [vegetables], and [enjoy] [meals] without [rushing]. "[Small] changes [make] a big [difference]," says [nutritionist] Dr Elena Papadopoulos. "[Start] with what you [enjoy]."`,
+    vocabulary: [
+      { word: 'Mediterranean', definition: 'relating to the sea between Europe and Africa', serbian: 'mediteranski' },
+      { word: 'legumes', definition: 'plants that produce pods with seeds (beans, peas)', serbian: 'mahunarke' },
+      { word: 'whole grains', definition: 'grains that contain all parts of the seed', serbian: 'cijele žitarice' },
+      { word: 'unprocessed', definition: 'natural, not changed by industrial methods', serbian: 'neprerađeni' },
+      { word: 'cardiovascular', definition: 'relating to the heart and blood vessels', serbian: 'kardiovaskularni' },
+      { word: 'nutritionist', definition: 'an expert in food and its effects on health', serbian: 'nutricionista' },
+      { word: 'dairy', definition: 'food products made from milk', serbian: 'mliječni proizvodi' },
+    ],
+    quiz: [
+      { question: 'Which countries are traditionally associated with the Mediterranean diet?', options: ['France, Germany, England', 'Greece, Italy, Spain', 'Japan, China, Korea', 'Brazil, Argentina, Chile'], correct: 1, explanation: 'People in Mediterranean countries like Greece, Italy, and Spain have traditionally eaten this diet.' },
+      { question: 'What oil is central to the Mediterranean diet?', options: ['Sunflower oil', 'Palm oil', 'Olive oil', 'Coconut oil'], correct: 2, explanation: 'The Mediterranean diet includes a lot of olive oil.' },
+      { question: 'How much did a large Spanish study find the Mediterranean diet reduced cardiovascular risk?', options: ['10%', '20%', '30%', '50%'], correct: 2, explanation: 'A large Spanish study found the Mediterranean diet reduced the risk of cardiovascular events by 30%.' },
+      { question: 'What does the Mediterranean diet NOT involve?', options: ['Eating fish regularly', 'Eating vegetables', 'Counting calories strictly', 'Eating whole grains'], correct: 2, explanation: 'The Mediterranean diet does not count calories or restrict food groups.' },
+    ],
+  },
+  {
+    id: 'n31',
+    title: 'Dark Tourism: Visiting the World\'s Darkest Places',
+    category: 'World',
+    level: 'C1',
+    date: '2024-04-16',
+    readTime: '4 min',
+    summary: 'Millions of tourists visit sites of death, tragedy, and disaster. Is this respectful remembrance or morbid curiosity?',
+    content: `Every year, [millions] of tourists visit Auschwitz [concentration] [camp] in Poland, the 9/11 [memorial] in New York, and the [killing] fields of Cambodia. They [queue] to see the ruins of Pompeii, [photograph] Chernobyl's [abandoned] [buildings], and [walk] through the dark [underground] [tunnels] of the Cu Chi [complex] in Vietnam. This is "dark [tourism]" — and it is one of the fastest-growing [sectors] of the [travel] [industry].
+
+The term was [coined] by Scottish [academics] John Lennon and Malcolm Foley in 1996. They [defined] it as travel to sites of [death], [tragedy], [atrocity], and [disaster]. Dark tourism is not new — the [Victorian] public [flocked] to [executions], and [Grand] Tour [travellers] [visited] the [ruins] of [civilisations]. But its scale has grown [enormously] with [increased] [mobility] and [global] media.
+
+[Motivations] are [complex] and varied. Some visitors come to [pay] [respects] to victims, to [remember] historical [events], or to understand [atrocities] so they are not [repeated]. Others are [driven] by [curiosity], [thrill], or the [desire] for [dramatic] [content] for social media. For many, the boundary between these [motivations] is unclear.
+
+[Critics] raise [serious] [concerns] about [exploitation]. When [tourists] smile and pose for [selfies] at a [concentration] camp or treat a [disaster] zone as a [backdrop] for [entertainment], it can be deeply [disrespectful] to victims and their [descendants].
+
+[Site] [managers] face the [challenge] of [preserving] [memory] while [managing] [mass] [tourism]. "Dark tourism [done] [responsibly] can be deeply [educational]," says Dr Philip Stone of the Institute for Dark Tourism Research. "Done [thoughtlessly], it can be [obscene]."`,
+    vocabulary: [
+      { word: 'atrocity', definition: 'an extremely cruel or violent act', serbian: 'zločin/strahota' },
+      { word: 'coined', definition: 'invented a new word or phrase', serbian: 'skovati/uvesti termin' },
+      { word: 'exploitation', definition: 'using a situation for personal gain unfairly', serbian: 'eksploatacija/iskorištavanje' },
+      { word: 'morbid', definition: 'having an unusual interest in death or unpleasant things', serbian: 'morbidan' },
+      { word: 'descendants', definition: 'a person\'s children, grandchildren etc.', serbian: 'potomci' },
+      { word: 'commemoration', definition: 'marking the memory of something', serbian: 'komemoracija/sjećanje' },
+      { word: 'obscene', definition: 'morally offensive or shocking', serbian: 'opscen/uvredljiv' },
+    ],
+    quiz: [
+      { question: 'Who coined the term "dark tourism"?', options: ['American academics in 2001', 'Scottish academics Lennon and Foley in 1996', 'British journalists in 2005', 'UNESCO in 1990'], correct: 1, explanation: 'The term was coined by Scottish academics John Lennon and Malcolm Foley in 1996.' },
+      { question: 'Which of these is NOT an example of dark tourism destination?', options: ['Auschwitz', 'Chernobyl', 'Disneyland', 'The 9/11 memorial'], correct: 2, explanation: 'Disneyland is an entertainment destination, not a site of death or tragedy.' },
+      { question: 'What do critics say about tourists posing for selfies at concentration camps?', options: ['It is acceptable if respectful', 'It helps spread awareness', 'It is disrespectful to victims', 'It should be encouraged'], correct: 2, explanation: 'Critics say posing for selfies at concentration camps is deeply disrespectful to victims and descendants.' },
+      { question: 'According to Dr Philip Stone, when is dark tourism problematic?', options: ['When it is educational', 'When done thoughtlessly', 'When sites are well managed', 'When tourists pay an entry fee'], correct: 1, explanation: 'Dr Stone says dark tourism done thoughtlessly can be obscene.' },
+    ],
+  },
+  {
+    id: 'n32',
+    title: 'Sugar: The Sweet Poison?',
+    category: 'Health',
+    level: 'B1',
+    date: '2024-04-17',
+    readTime: '3 min',
+    summary: 'We eat far more sugar than our bodies need. Scientists are now linking excess sugar to a wide range of diseases.',
+    content: `The [average] American [consumes] around 17 [teaspoons] of added sugar per day — nearly three times the [recommended] [amount]. In the UK, [figures] are only [slightly] lower. [Excess] sugar [consumption] has become one of the most [pressing] [public] health [concerns] of our time.
+
+Sugar is not [inherently] [dangerous]. Our bodies need [glucose] — a type of sugar — to [function]. The problem is the [enormous] [quantity] of added [sugars] in [processed] [foods] and [beverages]. A single can of [fizzy] drink can [contain] up to ten teaspoons of sugar. Many [supposedly] [healthy] [products] — [breakfast] [cereals], [flavoured] yoghurts, [sauces] — are [packed] with hidden sugars.
+
+The health [consequences] are [serious]. [Excess] sugar [contributes] to tooth [decay], obesity, and type 2 diabetes. [Research] has [linked] high sugar [intake] to [increased] risk of heart disease, [even] in people who are not [overweight]. Some [scientists] [argue] that [fructose] — a type of sugar found in [soft] drinks and many [processed] foods — [damages] the liver in ways similar to [alcohol].
+
+[Sugar] also [affects] the brain. It [triggers] the [release] of [dopamine], the brain's [reward] [chemical] — the same [system] [activated] by some [drugs]. This may explain why [sugary] foods can be [genuinely] difficult to [resist].
+
+[Reducing] sugar does not mean [eliminating] it [completely]. [Experts] [recommend] cutting back on [processed] foods, [replacing] [sugary] drinks with water, and [reading] food [labels]. "[Small], [sustained] [changes] are more [effective] than extreme [diets]," says [nutritionist] Dr Sarah [Davies].`,
+    vocabulary: [
+      { word: 'glucose', definition: 'a simple sugar that provides energy to the body', serbian: 'glukoza' },
+      { word: 'fructose', definition: 'a natural sugar found in fruits and some processed foods', serbian: 'fruktoza' },
+      { word: 'dopamine', definition: 'a brain chemical associated with reward and pleasure', serbian: 'dopamin' },
+      { word: 'processed', definition: 'food that has been changed from its natural state', serbian: 'prerađeni' },
+      { word: 'excess', definition: 'an amount that is more than necessary', serbian: 'višak/pretjerani' },
+      { word: 'inherently', definition: 'naturally, by its basic nature', serbian: 'inherentno/po svojoj prirodi' },
+      { word: 'sustained', definition: 'continuing for a long time without stopping', serbian: 'održiv/dugotrajan' },
+    ],
+    quiz: [
+      { question: 'How many teaspoons of added sugar does the average American consume per day?', options: ['5 teaspoons', '10 teaspoons', '17 teaspoons', '25 teaspoons'], correct: 2, explanation: 'The average American consumes around 17 teaspoons of added sugar per day.' },
+      { question: 'What does fructose damage, according to some scientists?', options: ['The kidneys', 'The liver', 'The heart', 'The lungs'], correct: 1, explanation: 'Some scientists argue fructose damages the liver in ways similar to alcohol.' },
+      { question: 'Why can sugary foods be difficult to resist?', options: ['They contain caffeine', 'They trigger dopamine release in the brain', 'They are very salty', 'They expand the stomach'], correct: 1, explanation: 'Sugar triggers dopamine release — the brain\'s reward chemical — making sugary foods hard to resist.' },
+      { question: 'What do experts recommend for reducing sugar?', options: ['Complete elimination of all sugar', 'Cutting back on processed foods and sugary drinks', 'Eating more fruit instead', 'Taking sugar supplements'], correct: 1, explanation: 'Experts recommend cutting back on processed foods, replacing sugary drinks with water, and reading labels.' },
+    ],
+  },
+  {
+    id: 'n33',
+    title: 'Music and the Brain: Why We Love Music',
+    category: 'Science',
+    level: 'B1',
+    date: '2024-04-18',
+    readTime: '3 min',
+    summary: 'Music is found in every human culture. Scientists are beginning to understand why it affects us so deeply.',
+    content: `[Music] is [universal]. Every known human [culture] — from the most [isolated] [tribal] [societies] to the most [technologically] advanced [civilisations] — makes and [appreciates] music. [Archaeologists] have found [flutes] [carved] from [bird] [bones] 43,000 years old. Why is music so [fundamental] to human [experience]?
+
+[Neuroscience] is [providing] some answers. When we listen to music we enjoy, the brain [releases] [dopamine] — the same [reward] [chemical] released by food, sex, and [addictive] [drugs]. Brain [imaging] studies show that music [activates] a [remarkably] large network of brain areas, [including] those for [emotion], [memory], [movement], and [language].
+
+This [may] explain why music is so effective at [triggering] [powerful] [memories]. Hearing a song from your [childhood] can [instantly] [transport] you back [decades], with [vivid] [emotional] [detail]. [Researchers] call this the "music-evoked [autobiographical] [memory]" [effect].
+
+Music also has [real] [medical] [applications]. Listening to music before [surgery] [reduces] [anxiety] better than [anti-anxiety] [medication] in some studies. Music [therapy] helps [stroke] [patients] [recover] [speech] and [movement]. It [significantly] [reduces] [pain] in [patients] with [chronic] [conditions]. For people with [dementia], music can [unlock] [memories] and [emotions] when [other] [forms] of [communication] have [been lost].
+
+[Evolutionary] [biologists] [debate] why music [evolved]. Some [argue] it was [selected] for [social] [bonding] — [singing] and playing together [strengthens] group [cohesion]. "[Music] is as [basic] to humanity as [language]," says [musicologist] Dr Stefan [Koelsch].`,
+    vocabulary: [
+      { word: 'neuroscience', definition: 'the scientific study of the brain and nervous system', serbian: 'neurologija/neuroznanost' },
+      { word: 'autobiographical', definition: 'relating to one\'s own life story', serbian: 'autobiografski' },
+      { word: 'therapy', definition: 'treatment intended to relieve a condition', serbian: 'terapija' },
+      { word: 'dementia', definition: 'a condition causing memory loss and confusion in older age', serbian: 'demencija' },
+      { word: 'evolutionary', definition: 'relating to the gradual development of species', serbian: 'evolucijski' },
+      { word: 'cohesion', definition: 'the quality of forming a united group', serbian: 'kohezija/jedinstvenost' },
+      { word: 'universal', definition: 'existing in or applying to all places', serbian: 'universalan' },
+    ],
+    quiz: [
+      { question: 'How old are the oldest known musical instruments?', options: ['10,000 years', '25,000 years', '43,000 years', '100,000 years'], correct: 2, explanation: 'Archaeologists have found flutes carved from bird bones 43,000 years old.' },
+      { question: 'What chemical does the brain release when listening to enjoyable music?', options: ['Serotonin', 'Adrenaline', 'Dopamine', 'Cortisol'], correct: 2, explanation: 'When we listen to music we enjoy, the brain releases dopamine — the reward chemical.' },
+      { question: 'What is the "music-evoked autobiographical memory" effect?', options: ['Music helps you learn new information', 'Music from childhood can instantly trigger vivid memories', 'Music helps the brain repair itself', 'Music improves mathematical thinking'], correct: 1, explanation: 'Hearing a song from your childhood can instantly transport you back decades with vivid emotional detail.' },
+      { question: 'How does music help surgery patients according to research?', options: ['It speeds up recovery', 'It reduces anxiety better than anti-anxiety medication', 'It eliminates the need for anaesthesia', 'It improves blood pressure'], correct: 1, explanation: 'Listening to music before surgery reduces anxiety better than anti-anxiety medication in some studies.' },
+    ],
+  },
+  {
+    id: 'n34',
+    title: 'Tiny Houses: Living Big in a Small Space',
+    category: 'World',
+    level: 'A2',
+    date: '2024-04-19',
+    readTime: '2 min',
+    summary: 'More and more people are choosing to live in tiny houses. Why are they doing this — and what is it like?',
+    content: `A [typical] American home is about 232 square [metres]. A tiny house is usually between 14 and 46 square [metres]. That is [smaller] than many [people's] [bedrooms]. But more and more people — especially young people — are [choosing] to live in these very small homes. Why?
+
+The most [common] [reason] is [money]. [Buying] or [renting] a [regular] home is [extremely] [expensive] in many [cities]. A tiny house [costs] much less — often between $20,000 and $60,000 to build. Some people [build] them [themselves] at [weekends]. Without a large [mortgage], people can [save] money, work less, and [have] more [freedom].
+
+Another [reason] is the [environment]. Tiny houses use much less [energy] than big homes. They [produce] less [waste]. Many have [solar] [panels] and [rainwater] [collection] [systems]. People who [choose] tiny living often [want] to [reduce] their [impact] on the planet.
+
+But tiny living has [challenges]. [Storage] is very [limited]. Having [guests] is difficult. Some people [feel] [frustrated] by the small [space] [after] a few months. [Building] [regulations] in many [places] make it hard to [park] or [live] in a tiny house [legally].
+
+[Still], for many people, tiny houses give [something] [important]: [freedom] from [debt], more time for [travel] and [hobbies], and a [simpler] life. "I [thought] I would miss my big house," says [architect] [Jamie] [Chen], who [moved] into a 28-square-metre home. "Now I [can't] [imagine] going back."`,
+    vocabulary: [
+      { word: 'mortgage', definition: 'a loan used to buy a home', serbian: 'hipoteka/stambeni kredit' },
+      { word: 'solar panels', definition: 'devices that convert sunlight into electricity', serbian: 'solarni paneli' },
+      { word: 'regulations', definition: 'official rules', serbian: 'propisi/regulativa' },
+      { word: 'minimalism', definition: 'a lifestyle with very few possessions', serbian: 'minimalizam' },
+      { word: 'storage', definition: 'space for keeping things', serbian: 'prostor za odlaganje/pohrana' },
+      { word: 'sustainable', definition: 'good for the environment long-term', serbian: 'održiv' },
+      { word: 'debt', definition: 'money you owe to someone', serbian: 'dug' },
+    ],
+    quiz: [
+      { question: 'How big is a typical tiny house?', options: ['Less than 5 square metres', '14 to 46 square metres', '50 to 80 square metres', '100 square metres'], correct: 1, explanation: 'A tiny house is usually between 14 and 46 square metres.' },
+      { question: 'What is the most common reason people choose tiny houses?', options: ['They are fashionable', 'Money — they cost much less than regular homes', 'They are easier to clean', 'They are safer'], correct: 1, explanation: 'The most common reason is money — tiny houses cost much less to buy or build.' },
+      { question: 'What environmental feature do many tiny houses have?', options: ['Underground heating', 'Solar panels and rainwater collection', 'Large gardens', 'Double glazing'], correct: 1, explanation: 'Many tiny houses have solar panels and rainwater collection systems.' },
+      { question: 'What is a challenge of living in a tiny house?', options: ['Too much space', 'High energy bills', 'Very limited storage', 'Too many rooms'], correct: 2, explanation: 'Storage is very limited in tiny houses, and having guests is also difficult.' },
+    ],
+  },
+  {
+    id: 'n35',
+    title: 'The Psychology of Colour',
+    category: 'Science',
+    level: 'B1',
+    date: '2024-04-20',
+    readTime: '3 min',
+    summary: 'Colours affect how we think, feel, and behave. Marketers and designers have known this for decades.',
+    content: `Walk into a McDonald's and you will see red and yellow. Visit a spa and you will find soft blues and greens. Stay in a budget hotel and the walls will probably be beige. These colour [choices] are not [accidental]. [Decades] of [research] show that colours [significantly] [influence] human [emotions], [behaviour], and [decision-making].
+
+Colour [psychology] is a branch of [environmental] psychology that [studies] how colours [affect] human [responses]. The [field] began in [earnest] in the 1940s when Swiss [psychologist] Max Lüscher [developed] a [colour] [test] that claimed to [reveal] [personality] [traits] and [psychological] [states].
+
+[Research] shows some [broadly] [consistent] patterns. Red [tends] to [increase] heart [rate] and [create] a [sense] of [urgency] — which is why it is used in [clearance] [sales] and fast-food [branding]. Blue is [associated] with [trust], [calm], and [competence] — which is why it [dominates] [banking] and [technology] [logos]. Green [evokes] [nature] and health. Yellow [creates] [optimism] but too much can [cause] [anxiety].
+
+[Marketers] use these [insights] extensively. Research suggests that up to 90 per cent of snap [consumer] [judgments] about a product are based on colour [alone]. Changing a [website] button from green to red [reportedly] [increased] clicks by 34 per cent in one study.
+
+[However], colour [psychology] is not simple. [Cultural] [context] [matters] [enormously]. White [symbolises] [purity] in [Western] [cultures] but [mourning] in some Asian [traditions]. Red [means] good [fortune] in China but [danger] in many Western [countries]. [Individual] [experience] also [shapes] colour [responses] in ways that [universal] [theories] cannot [fully] [account] for.`,
+    vocabulary: [
+      { word: 'psychology', definition: 'the study of the mind and behaviour', serbian: 'psihologija' },
+      { word: 'evoke', definition: 'to bring a feeling or memory to mind', serbian: 'evocirati/izazvati' },
+      { word: 'competence', definition: 'ability to do something successfully', serbian: 'kompetentnost' },
+      { word: 'judgement', definition: 'an opinion formed after consideration', serbian: 'prosudba/sud' },
+      { word: 'symbolise', definition: 'to represent something', serbian: 'simbolizirati' },
+      { word: 'mourning', definition: 'sadness and respect after someone has died', serbian: 'žalovanje' },
+      { word: 'urgency', definition: 'the need to do something quickly', serbian: 'hitnost' },
+    ],
+    quiz: [
+      { question: 'What effect does red tend to have on people?', options: ['Calms them down', 'Increases heart rate and urgency', 'Makes them feel sad', 'Reduces appetite'], correct: 1, explanation: 'Red tends to increase heart rate and create a sense of urgency — used in sales and fast-food branding.' },
+      { question: 'Why is blue so common in banking and technology logos?', options: ['It is the cheapest to print', 'It is associated with trust and competence', 'It stands out most', 'It was popular historically'], correct: 1, explanation: 'Blue is associated with trust, calm, and competence, which is why it dominates banking and technology logos.' },
+      { question: 'What percentage of snap consumer judgements about a product are based on colour alone?', options: ['30%', '50%', '70%', 'Up to 90%'], correct: 3, explanation: 'Research suggests up to 90% of snap consumer judgements about a product are based on colour alone.' },
+      { question: 'What does white symbolise in some Asian cultures?', options: ['Purity', 'Luck', 'Mourning', 'Wealth'], correct: 2, explanation: 'White symbolises purity in Western cultures but mourning in some Asian traditions.' },
+    ],
+  },
 ]
 
 export const NEWS_CATEGORIES = ['All', 'Technology', 'Science', 'Health', 'Environment', 'Business', 'World']
