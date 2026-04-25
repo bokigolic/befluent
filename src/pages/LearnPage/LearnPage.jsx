@@ -336,15 +336,6 @@ export default function LearnPage() {
     else if (node.type === 'conversations') setActiveLearnSection('conversations')
   }
 
-  if (activeLearnSection && activeLearnSection !== 'review') {
-    return (
-      <SectionWrapper
-        section={activeLearnSection}
-        onBack={handleBack}
-      />
-    )
-  }
-
   const reviewRedirectDone = useRef(false)
   useEffect(() => {
     if (activeLearnSection === 'review' && !reviewRedirectDone.current) {
@@ -353,6 +344,15 @@ export default function LearnPage() {
       setActivePage('practice')
     }
   }, [activeLearnSection, setActiveLearnSection, setActivePage])
+
+  if (activeLearnSection && activeLearnSection !== 'review') {
+    return (
+      <SectionWrapper
+        section={activeLearnSection}
+        onBack={handleBack}
+      />
+    )
+  }
 
   if (activeLearnSection === 'review') return null
 
