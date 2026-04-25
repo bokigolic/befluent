@@ -2,6 +2,22 @@ import { useState, memo } from 'react'
 import useStore, { LEVELS, ACHIEVEMENTS_DEF, getLevel, getXpProgress } from '../../store/useStore'
 import styles from './ProfilePage.module.css'
 
+const FEATURES = [
+  '400,000+ English words',
+  'Grammar: 81 lessons · 11 categories',
+  'Verbs: 118 irregular · 100+ phrasal',
+  'Vocabulary: 12 topics · 480 words',
+  'News in English: 35 articles A2–C1',
+  'Idioms & Slang: 200 idioms · 11 categories',
+  'AI Writing Practice with feedback',
+  'AI Conversation Simulator',
+  'Spaced Repetition review system',
+  'Adaptive learning engine',
+  'English Level Test (A1–C1)',
+  'Gamification: XP · Streaks · Achievements',
+  'Offline support (PWA)',
+]
+
 const GOAL_OPTIONS  = [3, 5, 10, 20]
 const MODE_OPTIONS  = [
   { id: 'en-en', label: 'EN→EN' },
@@ -10,7 +26,7 @@ const MODE_OPTIONS  = [
 ]
 const AVATARS = ['👨‍💻','👩‍💻','🧑‍🎓','👨‍🎓','👩‍🎓','🦁','🐯','🦊','🐺','🦋','🌟','⚡','🔥','💎','🚀','🎯','🏆','👑','🌊','🎸']
 
-function ProfilePage({ onOpenSettings }) {
+function ProfilePage({ onOpenSettings, onOpenLevelTest }) {
   const xp             = useStore(s => s.xp)
   const streak         = useStore(s => s.streak)
   const achievements   = useStore(s => s.achievements)
@@ -30,6 +46,8 @@ function ProfilePage({ onOpenSettings }) {
   const avatar         = useStore(s => s.avatar)
   const setAvatar      = useStore(s => s.setAvatar)
   const memberSince    = useStore(s => s.memberSince)
+  const testResult     = useStore(s => s.testResult)
+  const clearTestResult = useStore(s => s.clearTestResult)
 
   const [showAvatarPicker, setShowAvatarPicker] = useState(false)
   const [showReset, setShowReset]               = useState(false)
@@ -214,6 +232,29 @@ function ProfilePage({ onOpenSettings }) {
         </div>
       </div>
 
+      {/* ── Level Test ── */}
+      <div className={styles.section}>
+        <div className={styles.sectionTitle}>English Level Test</div>
+        {testResult ? (
+          <div className={styles.ltResultRow}>
+            <div className={styles.ltResultInfo}>
+              <span className={styles.ltResultBadge}>✅ {testResult.level} — {testResult.name}</span>
+              <span className={styles.ltResultScore}>{testResult.score}/20 correct</span>
+            </div>
+            <div className={styles.ltBtnGroup}>
+              <button className={styles.ltRetakeBtn} onClick={() => { clearTestResult(); onOpenLevelTest?.() }}>
+                🔄 Retake Test
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div className={styles.ltNotDone}>
+            <span className={styles.ltNotDoneText}>🎯 Discover your English level — takes ~5 minutes</span>
+            <button className={styles.ltStartBtn} onClick={() => onOpenLevelTest?.()}>Start Test →</button>
+          </div>
+        )}
+      </div>
+
       {/* ── Data ── */}
       <div className={styles.section}>
         <div className={styles.sectionTitle}>Data</div>
@@ -236,6 +277,49 @@ function ProfilePage({ onOpenSettings }) {
               </button>
             </div>
           )}
+        </div>
+      </div>
+
+      {/* ── About ── */}
+      <div className={styles.section}>
+        <div className={styles.sectionTitle}>About</div>
+
+        <div className={styles.aboutHeader}>
+          <div className={styles.aboutLogo}>📖</div>
+          <div className={styles.aboutAppName}>BeFluent</div>
+          <div className={styles.aboutTagline}>English Learning Platform</div>
+        </div>
+
+        <div className={styles.aboutMeta}>
+          <div className={styles.aboutMetaRow}><span>Version</span><span>3.12</span></div>
+          <div className={styles.aboutMetaRow}><span>Build</span><span>BG-DEV</span></div>
+          <div className={styles.aboutMetaRow}><span>Platform</span><span>Web · PWA</span></div>
+          <div className={styles.aboutMetaRow}><span>Status</span><span className={styles.betaBadge}>Beta</span></div>
+        </div>
+
+        <div className={styles.aboutFeaturesTitle}>Features</div>
+        <div className={styles.featuresGrid}>
+          {FEATURES.map((f, i) => (
+            <div key={i} className={styles.featureItem}>
+              <span className={styles.featureCheck}>✓</span>
+              <span>{f}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className={styles.creditsTitle}>Credits</div>
+        <div className={styles.creditsList}>
+          <div className={styles.creditItem}><span className={styles.creditDot} />Dictionary API — Free Dictionary</div>
+          <div className={styles.creditItem}><span className={styles.creditDot} />Translation — MyMemory API</div>
+          <div className={styles.creditItem}><span className={styles.creditDot} />Word suggestions — Datamuse API</div>
+          <div className={styles.creditItem}><span className={styles.creditDot} />AI features — Claude by Anthropic</div>
+          <div className={styles.creditItem}><span className={styles.creditDot} />Hosting — Netlify</div>
+        </div>
+
+        <div className={styles.legal}>
+          BeFluent is a beta product. Features and content may change. All learning content is for educational purposes only.
+          <br /><br />
+          © 2026 BG-DEV. All rights reserved.
         </div>
       </div>
 

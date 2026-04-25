@@ -1,10 +1,11 @@
-import { useEffect, useMemo, lazy, Suspense } from 'react'
+import { useEffect, useMemo, useState, lazy, Suspense } from 'react'
 import useStore, { getLevel } from '../../store/useStore'
 import { getDueCards } from '../../features/review/spacedRepetition'
 import { NEWS_ARTICLES } from '../../features/news/newsData'
 import CoursePath from '../../features/path/CoursePath'
 import GrammarSection from '../../features/grammar/GrammarSection'
 import GrammarDetailPage from '../../features/grammar/GrammarDetailPage'
+import LevelTest from '../../features/leveltest/LevelTest'
 import styles from './LearnPage.module.css'
 
 const TopicsPage         = lazy(() => import('../../features/topics/TopicsPage'))
@@ -102,7 +103,34 @@ function ContinueCard({ lastSection, onContinue }) {
   )
 }
 
-function LearnHubContent({ onSectionOpen, onNodeOpen }) {
+function LevelTestCard({ testResult, onStart, onRetake }) {
+  if (testResult) {
+    return (
+      <button className={styles.levelTestDone} onClick={onRetake}>
+        <span className={styles.ltDoneIcon}>✅</span>
+        <div className={styles.ltDoneBody}>
+          <div className={styles.ltDoneTitle}>Level: {testResult.level} — {testResult.name}</div>
+          <div className={styles.ltDoneSub}>Retake test to update your level</div>
+        </div>
+        <span className={styles.ltArrow}>→</span>
+      </button>
+    )
+  }
+  return (
+    <div className={styles.levelTestCard}>
+      <div className={styles.ltCardInner}>
+        <div className={styles.ltEmoji}>🎯</div>
+        <div className={styles.ltBody}>
+          <div className={styles.ltTitle}>Find Your English Level</div>
+          <div className={styles.ltSub}>Take a 20-question test to get your personalized learning plan</div>
+        </div>
+      </div>
+      <button className={styles.ltBtn} onClick={onStart}>Start Test →</button>
+    </div>
+  )
+}
+
+function LearnHubContent({ onSectionOpen, onNodeOpen, onOpenLevelTest }) {
   const xp                   = useStore(s => s.xp)
   const reviewDeck           = useStore(s => s.reviewDeck)
   const adaptiveData         = useStore(s => s.adaptiveData)
@@ -117,6 +145,8 @@ function LearnHubContent({ onSectionOpen, onNodeOpen }) {
   const addXP                = useStore(s => s.addXP)
   const completeDailyAct     = useStore(s => s.completeDailyActivity)
   const conversationHistory  = useStore(s => s.conversationHistory)
+  const testResult           = useStore(s => s.testResult)
+  const clearTestResult      = useStore(s => s.clearTestResult)
 
   const level = getLevel(xp)
 
@@ -198,6 +228,12 @@ function LearnHubContent({ onSectionOpen, onNodeOpen }) {
           {level.emoji} {level.name}
         </div>
       </div>
+
+      <LevelTestCard
+        testResult={testResult}
+        onStart={onOpenLevelTest}
+        onRetake={() => { clearTestResult(); onOpenLevelTest() }}
+      />
 
       <ContinueCard lastSection={activeLearnSection} onContinue={onSectionOpen} />
 
@@ -282,9 +318,10 @@ function SectionWrapper({ section, onBack }) {
 }
 
 export default function LearnPage() {
-  const activeLearnSection   = useStore(s => s.activeLearnSection)
+  const activeLearnSection    = useStore(s => s.activeLearnSection)
   const setActiveLearnSection = useStore(s => s.setActiveLearnSection)
   const setActivePage         = useStore(s => s.setActivePage)
+  const [showLevelTest, setShowLevelTest] = useState(false)
 
   const handleSectionOpen = (id) => setActiveLearnSection(id)
   const handleBack        = () => setActiveLearnSection(null)
@@ -315,9 +352,18 @@ export default function LearnPage() {
   }
 
   return (
-    <LearnHubContent
-      onSectionOpen={handleSectionOpen}
-      onNodeOpen={handleNodeOpen}
-    />
+    <>
+      <LearnHubContent
+        onSectionOpen={handleSectionOpen}
+        onNodeOpen={handleNodeOpen}
+        onOpenLevelTest={() => setShowLevelTest(true)}
+      />
+      {showLevelTest && (
+        <LevelTest
+          onClose={() => setShowLevelTest(false)}
+          onGoSection={(sec) => { setShowLevelTest(false); setActiveLearnSection(sec) }}
+        />
+      )}
+    </>
   )
 }

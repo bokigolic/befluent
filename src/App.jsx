@@ -21,6 +21,7 @@ import { LEVEL_INFO } from './features/adaptive/adaptiveEngine'
 import { useSwipeNavigation } from './hooks/useSwipeNavigation'
 import LearnPage    from './pages/LearnPage/LearnPage'
 import PracticePage from './pages/PracticePage/PracticePage'
+import LevelTest    from './features/leveltest/LevelTest'
 
 const ProfilePage  = lazy(() => import('./pages/ProfilePage/ProfilePage'))
 const ProgressPage = lazy(() => import('./features/progress/ProgressPage'))
@@ -114,12 +115,13 @@ function App() {
   const showSettings   = useStore(s => s.showSettings)
   const setShowSettings = useStore(s => s.setShowSettings)
 
-  const [splashDone,    setSplashDone]    = useState(!shouldShowSplash())
-  const [onboardDone,   setOnboardDone]   = useState(!shouldShowOnboarding())
-  const [showScrollTop, setShowScrollTop] = useState(false)
-  const [quizOpen,      setQuizOpen]      = useState(false)
-  const [showNudge,     setShowNudge]     = useState(false)
-  const [showShortcuts, setShowShortcuts] = useState(false)
+  const [splashDone,       setSplashDone]       = useState(!shouldShowSplash())
+  const [onboardDone,      setOnboardDone]      = useState(!shouldShowOnboarding())
+  const [showScrollTop,    setShowScrollTop]    = useState(false)
+  const [quizOpen,         setQuizOpen]         = useState(false)
+  const [showNudge,        setShowNudge]        = useState(false)
+  const [showShortcuts,    setShowShortcuts]    = useState(false)
+  const [profileLevelTest, setProfileLevelTest] = useState(false)
   const nudgeShownRef = useRef(false)
   const mainRef       = useRef(null)
 
@@ -227,7 +229,7 @@ function App() {
         {/* ── Profile ── */}
         {activePage === 'profile' && (
           <Suspense fallback={skelFallback}>
-            <ProfilePage />
+            <ProfilePage onOpenLevelTest={() => setProfileLevelTest(true)} />
           </Suspense>
         )}
       </div>
@@ -276,6 +278,13 @@ function App() {
 
       {showShortcuts && (
         <ShortcutsOverlay onClose={() => setShowShortcuts(false)} />
+      )}
+
+      {profileLevelTest && (
+        <LevelTest
+          onClose={() => setProfileLevelTest(false)}
+          onGoSection={(sec) => { setProfileLevelTest(false); setActivePage('learn'); setActiveLearnSection(sec) }}
+        />
       )}
 
       <div style={{ textAlign:'center', padding:'4px 0 8px', fontSize:11, color:'var(--t3)', userSelect:'none' }}>

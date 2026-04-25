@@ -62,6 +62,7 @@ export const ACHIEVEMENTS_DEF = [
   { id: 'idioms_20',      title: 'Idiom Master',       desc: 'Save 20 idioms',                     emoji: '🎭', xpReward: 30 },
   { id: 'idiom_quiz_perfect', title: 'Idiom Champion', desc: 'Score 10/10 on idiom quiz',          emoji: '🏆', xpReward: 50 },
   { id: 'slang_master',   title: 'Slang Expert',       desc: 'Save all slang idioms',              emoji: '😎', xpReward: 25 },
+  { id: 'level_test',     title: 'Self-Aware',         desc: 'Complete the English level test',    emoji: '🎯', xpReward: 20 },
 ]
 
 let _notifId = 0
@@ -130,6 +131,9 @@ const useStore = create((set, get) => ({
   // Conversations
   conversationHistory:   load('bf_conversations', []),
 
+  // Level test
+  testResult:            load('bf_test_result', null),
+
   setActiveGrammarCategory: (id) => set({ activeGrammarCategory: id }),
 
   setActiveLearnSection: (section) => set({ activeLearnSection: section }),
@@ -137,6 +141,22 @@ const useStore = create((set, get) => ({
   setUserLevel: (level) => set(() => {
     persist('bf_user_level', level)
     return { userLevel: level }
+  }),
+
+  saveTestResult: (result) => set(state => {
+    persist('bf_test_result', result)
+    localStorage.setItem('bf_level_tested', 'true')
+    const achs = state.achievements.includes('level_test')
+      ? state.achievements
+      : [...state.achievements, 'level_test']
+    persist('bf_achievements', achs)
+    return { testResult: result, achievements: achs }
+  }),
+
+  clearTestResult: () => set(() => {
+    localStorage.removeItem('bf_level_tested')
+    persist('bf_test_result', null)
+    return { testResult: null }
   }),
 
   setDailyGoalMinutes: (mins) => set(() => {
