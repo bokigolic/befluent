@@ -37,6 +37,108 @@
   white-space: nowrap;
   flex-shrink: 0;
   color: var(--t1);
+  background: rgba(59,130,246,0.12);
+}
+
+/* ── Section label ── */
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--t3);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+/* ── Streak + goal row ── */
+.pathRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.streakPill {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  background: rgba(245,158,11,0.15);
+  color: var(--acc-a);
+  padding: 6px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.goalWrap {
+  flex: 1;
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.goalBar {
+  height: 5px;
+  background: var(--bord2);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.goalFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--acc), var(--acc2));
+  border-radius: 99px;
+  transition: width 0.4s var(--ease);
+}
+
+.goalLabel {
+  font-size: 11px;
+  color: var(--t3);
+}
+
+/* ── Continue card ── */
+.continueCard {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(59,130,246,0.06);
+  border: 1px solid rgba(59,130,246,0.2);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  text-align: left;
+  width: 100%;
+}
+.continueCard:hover { border-color: rgba(59,130,246,0.4); background: rgba(59,130,246,0.1); }
+
+.continueIcon { font-size: 28px; flex-shrink: 0; }
+
+.continueBody { flex: 1; }
+
+.continueLabel {
+  font-size: 11px;
+  color: var(--t3);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.continueTitle {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--t1);
+}
+
+.continueArrow {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--acc);
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 /* ── Level Test Card ── */
@@ -57,8 +159,7 @@
 }
 
 .ltEmoji { font-size: 32px; flex-shrink: 0; }
-
-.ltBody { flex: 1; }
+.ltBody  { flex: 1; }
 
 .ltTitle {
   font-family: 'Space Grotesk', sans-serif;
@@ -106,7 +207,6 @@
 .levelTestDone:hover { border-color: rgba(16,185,129,0.4); background: rgba(16,185,129,0.12); }
 
 .ltDoneIcon { font-size: 22px; flex-shrink: 0; }
-
 .ltDoneBody { flex: 1; }
 
 .ltDoneTitle {
@@ -124,178 +224,29 @@
 
 .ltArrow { font-size: 16px; color: var(--t3); flex-shrink: 0; }
 
-/* ── Continue card ── */
-.continueCard {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  background: rgba(59,130,246,0.06);
-  border: 1px solid rgba(59,130,246,0.2);
-  border-radius: var(--radius);
-  padding: 14px 16px;
-  cursor: pointer;
-  transition: border-color 0.15s, background 0.15s;
-  text-align: left;
-  width: 100%;
-}
-.continueCard:hover { border-color: rgba(59,130,246,0.4); background: rgba(59,130,246,0.1); }
-
-.continueIcon { font-size: 28px; flex-shrink: 0; }
-
-.continueLabel {
-  font-size: 11px;
-  color: var(--t3);
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-  font-weight: 700;
-  margin-bottom: 2px;
-}
-
-.continueTitle {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: 15px;
-  color: var(--acc);
-}
-
-/* ── Daily path card ── */
-.dailyCard {
-  background: var(--surface);
-  border: 1px solid var(--bord2);
-  border-radius: var(--radius);
-  padding: 16px;
+/* ── Section groups ── */
+.groupWrap {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
-.dailyHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.dailyTitle {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: 15px;
-  color: var(--t1);
-}
-
-.dailyProgress {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: 13px;
-  color: var(--t3);
-}
-
-.dailyBar {
-  height: 4px;
-  background: var(--bord2);
-  border-radius: 99px;
-  overflow: hidden;
-}
-
-.dailyBarFill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--acc), var(--acc2));
-  border-radius: 99px;
-  transition: width 0.4s var(--ease);
-}
-
-.dailyComplete {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: 13px;
-  color: var(--acc-g);
-  text-align: center;
-  padding: 6px 0;
-  animation: bounceIn 400ms var(--ease) both;
-}
-
-.dailyActivities {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.actCard {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: var(--elevated);
-  border: 1px solid var(--bord2);
-  border-radius: var(--radius-sm);
-  padding: 10px 12px;
-  cursor: pointer;
-  transition: border-color 0.15s, background 0.15s;
-  text-align: left;
-  width: 100%;
-}
-.actCard:hover:not(.actDone) { border-color: var(--acc); background: var(--hover); }
-
-.actDone {
-  opacity: 0.5;
-  cursor: default;
-  text-decoration: line-through;
-}
-
-.actIcon { font-size: 20px; flex-shrink: 0; }
-
-.actTitle {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  font-size: 13px;
-  color: var(--t1);
-}
-
-.actMeta {
-  font-size: 11px;
-  color: var(--t3);
-  margin-top: 1px;
-}
-
-.actCheck {
-  margin-left: auto;
-  color: var(--acc-g);
-  font-weight: 700;
-  font-size: 14px;
-  flex-shrink: 0;
-}
-
-/* ── Section label ── */
-.sectionLabel {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--t3);
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-}
-
-.pathSection {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-/* ── Section grid ── */
+/* ── Section grid (2 columns) ── */
 .sectionGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 }
 
-@media (min-width: 640px) {
-  .sectionGrid { grid-template-columns: repeat(3, 1fr); }
-}
-
+/* ── Section card ── */
 .sectionCard {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 14px 12px;
+  gap: 4px;
+  padding: 14px 14px 12px;
   background: var(--surface);
   border: 1px solid var(--bord2);
+  border-left: 3px solid var(--sec-color);
   border-radius: var(--radius);
   cursor: pointer;
   transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
@@ -307,22 +258,38 @@
   box-shadow: 0 6px 20px rgba(0,0,0,0.3), 0 0 0 1px color-mix(in srgb, var(--sec-color) 20%, transparent);
 }
 
-.secIcon { font-size: 28px; display: block; }
+.secTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
 
-.secBody { flex: 1; }
+.secIcon { font-size: 26px; line-height: 1; }
+
+.secPct {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--t3);
+}
 
 .secTitle {
   font-family: 'Space Grotesk', sans-serif;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--t1);
-  margin-bottom: 3px;
 }
 
 .secSub {
   font-size: 11px;
   color: var(--t2);
-  line-height: 1.4;
+  line-height: 1.3;
+}
+
+.secSub2 {
+  font-size: 11px;
+  color: var(--t3);
 }
 
 .progressBar {
@@ -330,7 +297,7 @@
   background: var(--bord2);
   border-radius: 99px;
   overflow: hidden;
-  margin-top: 8px;
+  margin-top: 6px;
 }
 
 .progressFill {
@@ -340,17 +307,7 @@
   transition: width 0.5s var(--ease);
 }
 
-.secLevel {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: 10px;
-  color: var(--t3);
-  align-self: flex-end;
-}
-
-/* ── Section view wrapper ── */
-/* Use 'backwards' fill-mode NOT 'both'/'forwards' — retaining transform:translateX(0)
-   after animation ends would create a containing block for position:fixed overlays */
+/* ── Section view (opened section) ── */
 .sectionView {
   animation: slideIn 260ms var(--ease) backwards;
 }

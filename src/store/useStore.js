@@ -135,9 +135,17 @@ const useStore = create((set, get) => ({
   // Level test
   testResult:            load('bf_test_result', null),
 
+  // Last visited section (for "Continue" card)
+  lastVisited:           load('bf_last_visited', null),
+
   setActiveGrammarCategory: (id) => set({ activeGrammarCategory: id }),
 
   setActiveLearnSection: (section) => set({ activeLearnSection: section }),
+
+  setLastVisited: (data) => set(() => {
+    persist('bf_last_visited', data)
+    return { lastVisited: data }
+  }),
 
   setUserLevel: (level) => set(() => {
     persist('bf_user_level', level)

@@ -1,32 +1,45 @@
 import { useEffect, useMemo, useRef, useState, lazy, Suspense } from 'react'
 import useStore, { getLevel } from '../../store/useStore'
-import { getDueCards } from '../../features/review/spacedRepetition'
 import { NEWS_ARTICLES } from '../../features/news/newsData'
-import CoursePath from '../../features/path/CoursePath'
 import GrammarSection from '../../features/grammar/GrammarSection'
 import GrammarDetailPage from '../../features/grammar/GrammarDetailPage'
 import LevelTest from '../../features/leveltest/LevelTest'
 import styles from './LearnPage.module.css'
 
-const TopicsPage         = lazy(() => import('../../features/topics/TopicsPage'))
-const NewsPage           = lazy(() => import('../../features/news/NewsPage'))
-const IdiomsPage         = lazy(() => import('../../features/idioms/IdiomsPage'))
-const WritingPage        = lazy(() => import('../../features/writing/WritingPage'))
-const VerbsPage          = lazy(() => import('../../features/verbs/VerbsPage'))
-const ConversationsPage  = lazy(() => import('../../features/conversations/ConversationsPage'))
+const TopicsPage        = lazy(() => import('../../features/topics/TopicsPage'))
+const NewsPage          = lazy(() => import('../../features/news/NewsPage'))
+const IdiomsPage        = lazy(() => import('../../features/idioms/IdiomsPage'))
+const WritingPage       = lazy(() => import('../../features/writing/WritingPage'))
+const VerbsPage         = lazy(() => import('../../features/verbs/VerbsPage'))
+const ConversationsPage = lazy(() => import('../../features/conversations/ConversationsPage'))
 
 const skel = <div className="suspenseSkel" />
 
-const SECTIONS = [
-  { id: 'grammar',       icon: '📚', title: 'Grammar',             sub: '81 lessons · 11 categories',    color: '#6366f1', level: 'A1–C1' },
-  { id: 'verbs',         icon: '⚡', title: 'Verbs',               sub: '118 irregular · 100+ phrasal',  color: '#3b82f6', level: 'A1–B2' },
-  { id: 'topics',        icon: '🗂️', title: 'Vocabulary Topics',   sub: '12 topics · 480 words',          color: '#10b981', level: 'A2–B2' },
-  { id: 'news',          icon: '📰', title: 'News in English',     sub: '35 articles · A2–C1',            color: '#f59e0b', level: 'A2–C1' },
-  { id: 'idioms',        icon: '💬', title: 'Idioms & Slang',      sub: '200 idioms · 11 categories',     color: '#ec4899', level: 'A2–C1' },
-  { id: 'writing',       icon: '✍️', title: 'Writing Practice',    sub: 'AI-powered feedback',            color: '#8b5cf6', level: 'B1–C1' },
-  { id: 'conversations', icon: '🗣️', title: 'Conversations',       sub: 'Practice real-life scenarios with AI', color: '#06b6d4', level: 'A2–C1' },
+const SECTION_GROUPS = [
+  {
+    label: 'Language',
+    sections: [
+      { id: 'grammar',       icon: '📚', title: 'Grammar',       sub: '81 lessons',   sub2: 'A1 → C1',          color: '#6366f1' },
+      { id: 'verbs',         icon: '⚡', title: 'Verbs',         sub: '200+ verbs',   sub2: 'irregular+phrasal', color: '#3b82f6' },
+    ],
+  },
+  {
+    label: 'Vocabulary',
+    sections: [
+      { id: 'topics',        icon: '🗂️', title: 'Topics',        sub: '12 topics',    sub2: '480 words',         color: '#10b981' },
+      { id: 'idioms',        icon: '💬', title: 'Idioms',        sub: '200 idioms',   sub2: '11 categories',     color: '#ec4899' },
+    ],
+  },
+  {
+    label: 'Real English',
+    sections: [
+      { id: 'news',          icon: '📰', title: 'News',          sub: '35 articles',  sub2: 'A2 → C1',           color: '#f59e0b' },
+      { id: 'conversations', icon: '🗣️', title: 'Conversations', sub: '12 scenarios', sub2: 'AI roleplay',       color: '#06b6d4' },
+    ],
+  },
 ]
 
+// ── Section card ──────────────────────────────────────────────────────────────
 function SectionCard({ sec, onClick, progress }) {
   return (
     <button
@@ -34,75 +47,36 @@ function SectionCard({ sec, onClick, progress }) {
       style={{ '--sec-color': sec.color }}
       onClick={() => onClick(sec.id)}
     >
-      <span className={styles.secIcon}>{sec.icon}</span>
-      <div className={styles.secBody}>
-        <div className={styles.secTitle}>{sec.title}</div>
-        <div className={styles.secSub}>{sec.sub}</div>
-        {progress > 0 && (
-          <div className={styles.progressBar}>
-            <div className={styles.progressFill} style={{ width: `${progress}%` }} />
-          </div>
-        )}
+      <div className={styles.secTop}>
+        <span className={styles.secIcon}>{sec.icon}</span>
+        {progress > 0 && <span className={styles.secPct}>{progress}%</span>}
       </div>
-      <span className={styles.secLevel}>{sec.level}</span>
+      <div className={styles.secTitle}>{sec.title}</div>
+      <div className={styles.secSub}>{sec.sub}</div>
+      <div className={styles.secSub2}>{sec.sub2}</div>
+      <div className={styles.progressBar}>
+        <div className={styles.progressFill} style={{ width: `${progress}%` }} />
+      </div>
     </button>
   )
 }
 
-function DailyPathCard({ activities, completedToday, onStart }) {
-  const total = activities.length
-  const done  = completedToday.length
-
+// ── Continue card ─────────────────────────────────────────────────────────────
+function ContinueCard({ lastVisited, onContinue }) {
+  if (!lastVisited) return null
   return (
-    <div className={styles.dailyCard}>
-      <div className={styles.dailyHeader}>
-        <span className={styles.dailyTitle}>📅 Today's Path</span>
-        <span className={styles.dailyProgress}>{done}/{total}</span>
-      </div>
-      <div className={styles.dailyBar}>
-        <div className={styles.dailyBarFill} style={{ width: `${total > 0 ? (done / total) * 100 : 0}%` }} />
-      </div>
-      {done === total && total > 0 && (
-        <div className={styles.dailyComplete}>🎉 +50 XP Daily Complete!</div>
-      )}
-      <div className={styles.dailyActivities}>
-        {activities.map(act => {
-          const isDone = completedToday.includes(act.id)
-          return (
-            <button
-              key={act.id}
-              className={`${styles.actCard} ${isDone ? styles.actDone : ''}`}
-              onClick={() => !isDone && onStart(act)}
-            >
-              <span className={styles.actIcon}>{act.icon}</span>
-              <div className={styles.actBody}>
-                <div className={styles.actTitle}>{act.title}</div>
-                <div className={styles.actMeta}>{act.time} min · +{act.xp} XP</div>
-              </div>
-              {isDone && <span className={styles.actCheck}>✓</span>}
-            </button>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
-
-function ContinueCard({ lastSection, onContinue }) {
-  if (!lastSection) return null
-  const sec = SECTIONS.find(s => s.id === lastSection)
-  if (!sec) return null
-  return (
-    <button className={styles.continueCard} onClick={() => onContinue(lastSection)}>
-      <span className={styles.continueIcon}>{sec.icon}</span>
+    <button className={styles.continueCard} onClick={() => onContinue(lastVisited.section)}>
+      <span className={styles.continueIcon}>{lastVisited.emoji}</span>
       <div className={styles.continueBody}>
         <div className={styles.continueLabel}>Continue where you left off</div>
-        <div className={styles.continueTitle}>{sec.title} →</div>
+        <div className={styles.continueTitle}>{lastVisited.title}</div>
       </div>
+      <span className={styles.continueArrow}>Resume →</span>
     </button>
   )
 }
 
+// ── Level test card ───────────────────────────────────────────────────────────
 function LevelTestCard({ testResult, onStart, onRetake }) {
   if (testResult) {
     return (
@@ -122,7 +96,7 @@ function LevelTestCard({ testResult, onStart, onRetake }) {
         <div className={styles.ltEmoji}>🎯</div>
         <div className={styles.ltBody}>
           <div className={styles.ltTitle}>Find Your English Level</div>
-          <div className={styles.ltSub}>Take a 20-question test to get your personalized learning plan</div>
+          <div className={styles.ltSub}>20-question test · get your personalized learning plan</div>
         </div>
       </div>
       <button className={styles.ltBtn} onClick={onStart}>Start Test →</button>
@@ -130,78 +104,21 @@ function LevelTestCard({ testResult, onStart, onRetake }) {
   )
 }
 
-function LearnHubContent({ onSectionOpen, onNodeOpen, onOpenLevelTest }) {
-  const xp                   = useStore(s => s.xp)
-  const reviewDeck           = useStore(s => s.reviewDeck)
-  const adaptiveData         = useStore(s => s.adaptiveData)
-  const readArticles         = useStore(s => s.readArticles)
-  const savedIdioms          = useStore(s => s.savedIdioms)
-  const completedLessons     = useStore(s => s.completedLessons)
-  const grammarProgress      = useStore(s => s.grammarProgress)
-  const dailyPath            = useStore(s => s.dailyPath)
-  const completedDailyPath   = useStore(s => s.completedDailyPath)
-  const setDailyPath         = useStore(s => s.setDailyPath)
-  const activeLearnSection   = useStore(s => s.activeLearnSection)
-  const addXP                = useStore(s => s.addXP)
-  const completeDailyAct     = useStore(s => s.completeDailyActivity)
-  const conversationHistory  = useStore(s => s.conversationHistory)
-  const testResult           = useStore(s => s.testResult)
-  const clearTestResult      = useStore(s => s.clearTestResult)
+// ── Learn hub content ─────────────────────────────────────────────────────────
+function LearnHubContent({ onSectionOpen, onOpenLevelTest }) {
+  const xp                  = useStore(s => s.xp)
+  const streak              = useStore(s => s.streak)
+  const todayCount          = useStore(s => s.todayCount)
+  const dailyGoal           = useStore(s => s.dailyGoal)
+  const lastVisited         = useStore(s => s.lastVisited)
+  const readArticles        = useStore(s => s.readArticles)
+  const savedIdioms         = useStore(s => s.savedIdioms)
+  const grammarProgress     = useStore(s => s.grammarProgress)
+  const conversationHistory = useStore(s => s.conversationHistory)
+  const testResult          = useStore(s => s.testResult)
+  const clearTestResult     = useStore(s => s.clearTestResult)
 
   const level = getLevel(xp)
-
-  // Generate daily path once per day
-  useEffect(() => {
-    if (dailyPath.length > 0) return
-    const acts = []
-    const dueCards = getDueCards(reviewDeck)
-    if (dueCards.length > 0) {
-      acts.push({ id: 'review', type: 'review', icon: '🔄',
-        title: `Review ${dueCards.length} word${dueCards.length !== 1 ? 's' : ''} due`,
-        time: Math.max(2, Math.round(dueCards.length * 0.4)), xp: dueCards.length * 3 })
-    }
-    if (adaptiveData.weakCategories?.[0]) {
-      const cat = adaptiveData.weakCategories[0]
-      const label = cat.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
-      acts.push({ id: `grammar-${cat}`, type: 'grammar', icon: '📚',
-        title: `${label} — Grammar lesson`, time: 5, xp: 10 })
-    } else {
-      acts.push({ id: 'grammar-general', type: 'grammar', icon: '📚',
-        title: 'Grammar lesson', time: 5, xp: 10 })
-    }
-    const readIds = Object.keys(readArticles)
-    const unread = NEWS_ARTICLES.filter(a => !readIds.includes(a.id))
-    if (unread.length > 0) {
-      const art = unread[Math.floor(Date.now() / 86400000) % unread.length]
-      acts.push({ id: `news-${art.id}`, type: 'news', icon: '📰',
-        title: `Read: ${art.title.slice(0, 35)}…`, time: art.readTime?.replace(' min read','') ?? 4, xp: 15 })
-    }
-    // Suggest a conversation scenario (added before idioms so it always makes the cut)
-    const seenScenarios = new Set((conversationHistory ?? []).map(c => c.scenarioId))
-    const suggestedScenarioId = conversationHistory.length === 0
-      ? 'cafe'
-      : (['cafe','airport','shopping','directions','restaurant'].find(id => !seenScenarios.has(id)) ?? 'cafe')
-    acts.push({ id: `conv-${suggestedScenarioId}`, type: 'conversations', icon: '🗣️',
-      title: `Conversation: ${suggestedScenarioId.replace(/-/g, ' ')}`, time: 5, xp: 20 })
-
-    acts.push({ id: 'idioms-daily', type: 'idioms', icon: '💬',
-      title: 'Explore 3 new idioms', time: 2, xp: 9 })
-
-    setDailyPath(acts.slice(0, 4))
-  }, [])
-
-  const today = new Date().toDateString()
-  const completedToday = completedDailyPath.date === today ? completedDailyPath.completed : []
-
-  const handleActivityStart = (act) => {
-    completeDailyAct(act.id)
-    addXP(act.xp)
-    if (act.type === 'review')              { onSectionOpen?.('review') }
-    else if (act.type === 'grammar')        { onSectionOpen?.('grammar') }
-    else if (act.type === 'news')           { onSectionOpen?.('news') }
-    else if (act.type === 'idioms')         { onSectionOpen?.('idioms') }
-    else if (act.type === 'conversations')  { onSectionOpen?.('conversations') }
-  }
 
   const avgGrammarProgress = useMemo(() => {
     const vals = Object.values(grammarProgress).filter(v => v > 0)
@@ -209,25 +126,47 @@ function LearnHubContent({ onSectionOpen, onNodeOpen, onOpenLevelTest }) {
   }, [grammarProgress])
 
   const sectionProgress = {
-    grammar: avgGrammarProgress,
-    verbs:   0,
-    topics:  0,
-    news:    Math.round((Object.keys(readArticles).length / 35) * 100),
-    idioms:  Math.round((savedIdioms.length / 200) * 100),
-    writing: 0,
+    grammar:       avgGrammarProgress,
+    verbs:         0,
+    topics:        0,
+    news:          Math.round((Object.keys(readArticles).length / NEWS_ARTICLES.length) * 100),
+    idioms:        Math.round((savedIdioms.length / 200) * 100),
+    conversations: Math.min(100, Math.round(((conversationHistory?.length ?? 0) / 12) * 100)),
   }
+
+  const goalPct = dailyGoal > 0 ? Math.min(100, Math.round((todayCount / dailyGoal) * 100)) : 0
 
   return (
     <div className={styles.hub}>
+      {/* Header */}
       <div className={styles.hubHeader}>
         <div>
           <h1 className={styles.hubTitle}>📖 Learn</h1>
           <p className={styles.hubSub}>Your personal learning center</p>
         </div>
-        <div className={styles.levelBadge} style={{ background: `${level.name === 'Beginner' ? 'rgba(16,217,160,0.15)' : 'rgba(59,130,246,0.15)'}` }}>
+        <div className={styles.levelBadge}>
           {level.emoji} {level.name}
         </div>
       </div>
+
+      {/* ── Your Path ── */}
+      <div className={styles.sectionLabel}>Your Path</div>
+
+      {(streak > 0 || goalPct > 0) && (
+        <div className={styles.pathRow}>
+          {streak > 0 && <div className={styles.streakPill}>🔥 {streak} day streak</div>}
+          {dailyGoal > 0 && (
+            <div className={styles.goalWrap}>
+              <div className={styles.goalBar}>
+                <div className={styles.goalFill} style={{ width: `${goalPct}%` }} />
+              </div>
+              <span className={styles.goalLabel}>{todayCount}/{dailyGoal} today</span>
+            </div>
+          )}
+        </div>
+      )}
+
+      <ContinueCard lastVisited={lastVisited} onContinue={onSectionOpen} />
 
       <LevelTestCard
         testResult={testResult}
@@ -235,36 +174,27 @@ function LearnHubContent({ onSectionOpen, onNodeOpen, onOpenLevelTest }) {
         onRetake={() => { clearTestResult(); onOpenLevelTest() }}
       />
 
-      <ContinueCard lastSection={activeLearnSection} onContinue={onSectionOpen} />
-
-      {dailyPath.length > 0 && (
-        <DailyPathCard
-          activities={dailyPath}
-          completedToday={completedToday}
-          onStart={handleActivityStart}
-        />
-      )}
-
-      <div className={styles.pathSection}>
-        <div className={styles.sectionLabel}>Course Path</div>
-        <CoursePath onNodeOpen={onNodeOpen} />
-      </div>
-
-      <div className={styles.sectionLabel}>All Sections</div>
-      <div className={styles.sectionGrid}>
-        {SECTIONS.map(sec => (
-          <SectionCard
-            key={sec.id}
-            sec={sec}
-            onClick={onSectionOpen}
-            progress={sectionProgress[sec.id] ?? 0}
-          />
-        ))}
-      </div>
+      {/* ── Learn by Category ── */}
+      {SECTION_GROUPS.map(group => (
+        <div key={group.label} className={styles.groupWrap}>
+          <div className={styles.sectionLabel}>{group.label}</div>
+          <div className={styles.sectionGrid}>
+            {group.sections.map(sec => (
+              <SectionCard
+                key={sec.id}
+                sec={sec}
+                onClick={onSectionOpen}
+                progress={sectionProgress[sec.id] ?? 0}
+              />
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   )
 }
 
+// ── Section wrapper (opens full section) ──────────────────────────────────────
 function BackBar({ onBack }) {
   return (
     <div className={styles.sectionBackBar}>
@@ -277,65 +207,42 @@ function SectionWrapper({ section, onBack }) {
   return (
     <div className={styles.sectionView}>
       <Suspense fallback={skel}>
-        {section === 'grammar'  && (
+        {section === 'grammar' && (
           <>
             <BackBar onBack={onBack} />
             <GrammarSection standalone />
             <GrammarDetailPage />
           </>
         )}
-        {section === 'verbs'   && <VerbsPage onBack={onBack} />}
-        {section === 'topics'  && (
-          <>
-            <BackBar onBack={onBack} />
-            <TopicsPage />
-          </>
-        )}
-        {section === 'news'    && (
-          <>
-            <BackBar onBack={onBack} />
-            <NewsPage />
-          </>
-        )}
-        {section === 'idioms'  && (
-          <>
-            <BackBar onBack={onBack} />
-            <IdiomsPage />
-          </>
-        )}
-        {section === 'writing' && (
-          <>
-            <BackBar onBack={onBack} />
-            <WritingPage />
-          </>
-        )}
-        {section === 'conversations' && (
-          <ConversationsPage onBack={onBack} />
-        )}
+        {section === 'verbs'         && <VerbsPage onBack={onBack} />}
+        {section === 'topics'        && (<><BackBar onBack={onBack} /><TopicsPage /></>)}
+        {section === 'news'          && (<><BackBar onBack={onBack} /><NewsPage /></>)}
+        {section === 'idioms'        && (<><BackBar onBack={onBack} /><IdiomsPage /></>)}
+        {section === 'writing'       && (<><BackBar onBack={onBack} /><WritingPage /></>)}
+        {section === 'conversations' && <ConversationsPage onBack={onBack} />}
       </Suspense>
     </div>
   )
 }
 
+// ── Main LearnPage ────────────────────────────────────────────────────────────
 export default function LearnPage() {
   const activeLearnSection    = useStore(s => s.activeLearnSection)
   const setActiveLearnSection = useStore(s => s.setActiveLearnSection)
   const setActivePage         = useStore(s => s.setActivePage)
+  const setLastVisited        = useStore(s => s.setLastVisited)
   const [showLevelTest, setShowLevelTest] = useState(false)
 
-  const handleSectionOpen = (id) => setActiveLearnSection(id)
-  const handleBack        = () => setActiveLearnSection(null)
-
-  const handleNodeOpen = (node) => {
-    if (node.type === 'grammar')        setActiveLearnSection('grammar')
-    else if (node.type === 'verbs')         setActiveLearnSection('verbs')
-    else if (node.type === 'topics')        setActiveLearnSection('topics')
-    else if (node.type === 'news')          setActiveLearnSection('news')
-    else if (node.type === 'idioms')        setActiveLearnSection('idioms')
-    else if (node.type === 'writing')       setActiveLearnSection('writing')
-    else if (node.type === 'conversations') setActiveLearnSection('conversations')
+  const handleSectionOpen = (id) => {
+    const allSections = SECTION_GROUPS.flatMap(g => g.sections)
+    const sec = allSections.find(s => s.id === id)
+    if (sec) setLastVisited({ section: id, title: sec.title, emoji: sec.icon })
+    setActiveLearnSection(id)
   }
 
+  const handleBack = () => setActiveLearnSection(null)
+
+  // Redirect 'review' section to Practice tab
   const reviewRedirectDone = useRef(false)
   useEffect(() => {
     if (activeLearnSection === 'review' && !reviewRedirectDone.current) {
@@ -347,10 +254,7 @@ export default function LearnPage() {
 
   if (activeLearnSection && activeLearnSection !== 'review') {
     return (
-      <SectionWrapper
-        section={activeLearnSection}
-        onBack={handleBack}
-      />
+      <SectionWrapper section={activeLearnSection} onBack={handleBack} />
     )
   }
 
@@ -360,7 +264,6 @@ export default function LearnPage() {
     <>
       <LearnHubContent
         onSectionOpen={handleSectionOpen}
-        onNodeOpen={handleNodeOpen}
         onOpenLevelTest={() => setShowLevelTest(true)}
       />
       {showLevelTest && (

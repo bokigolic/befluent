@@ -32,6 +32,15 @@
   white-space: nowrap;
 }
 
+/* ── Section label ── */
+.sectionLabel {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--t3);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
 /* ── Quick review card ── */
 .quickCard {
   background: linear-gradient(135deg, rgba(129,140,248,0.12), rgba(59,130,246,0.08));
@@ -94,75 +103,68 @@
 .startBtn:hover:not(:disabled) { opacity: 0.9; transform: translateY(-1px); }
 .startBtnDim { background: var(--elevated); color: var(--t3); }
 
-/* ── Section label ── */
-.sectionLabel {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--t3);
-  text-transform: uppercase;
-  letter-spacing: 0.07em;
-}
-
-/* ── Practice modes grid ── */
-.modesGrid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-@media (min-width: 480px) {
-  .modesGrid { grid-template-columns: repeat(3, 1fr); }
-}
-
-.modeCard {
+/* ── Practice list (vertical) ── */
+.practiceList {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 14px 12px;
+  gap: 0;
   background: var(--surface);
   border: 1px solid var(--bord2);
   border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.practiceItem {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: none;
+  border-bottom: 1px solid var(--bord2);
+  background: transparent;
   cursor: pointer;
   text-align: left;
-  transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  width: 100%;
+  transition: background 0.15s, transform 0.12s;
 }
-.modeCard:hover {
-  border-color: var(--bord);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+.practiceItem:last-child { border-bottom: none; }
+.practiceItem:hover {
+  background: var(--hover);
+  transform: translateX(3px);
 }
 
-.modeIcon { font-size: 26px; }
+.itemIcon {
+  font-size: 22px;
+  flex-shrink: 0;
+  width: 28px;
+  text-align: center;
+}
 
-.modeTitle {
+.itemBody {
+  flex: 1;
+  min-width: 0;
+}
+
+.itemTitle {
   font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: 13px;
+  font-weight: 600;
+  font-size: 15px;
   color: var(--t1);
 }
 
-.modeDesc {
-  font-size: 11px;
-  color: var(--t2);
-  line-height: 1.4;
-  flex: 1;
-}
-
-.modeFooter {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 4px;
-}
-
-.modeTime {
-  font-size: 11px;
+.itemDesc {
+  font-size: 12px;
   color: var(--t3);
+  margin-top: 2px;
 }
 
-.modeArrow {
+.itemArrow {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
   font-size: 13px;
   color: var(--acc);
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 /* ── Recent sessions ── */
@@ -176,16 +178,17 @@
 .recentRow {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   padding: 10px 14px;
   border-bottom: 1px solid var(--bord2);
 }
 .recentRow:last-child { border-bottom: none; }
 
+.recentIcon { font-size: 14px; flex-shrink: 0; }
+
 .recentMode {
   font-size: 13px;
   color: var(--t1);
-  text-transform: capitalize;
   flex: 1;
 }
 
