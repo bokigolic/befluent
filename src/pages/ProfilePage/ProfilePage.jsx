@@ -9,8 +9,6 @@ const FEATURES = [
   'Vocabulary: 12 topics · 480 words',
   'News in English: 35 articles A2–C1',
   'Idioms & Slang: 200 idioms · 11 categories',
-  'AI Writing Practice with feedback',
-  'AI Conversation Simulator',
   'Spaced Repetition review system',
   'Adaptive learning engine',
   'English Level Test (A1–C1)',
@@ -32,7 +30,6 @@ function ProfilePage({ onOpenSettings, onOpenLevelTest, onGoProgress }) {
   const achievements   = useStore(s => s.achievements)
   const totalSearches  = useStore(s => s.totalSearches)
   const completedLessons = useStore(s => s.completedLessons)
-  const writingHistory = useStore(s => s.writingHistory)
   const dailyGoal      = useStore(s => s.dailyGoal)
   const setDailyGoal   = useStore(s => s.setDailyGoal)
   const dictMode       = useStore(s => s.dictMode)
@@ -56,10 +53,6 @@ function ProfilePage({ onOpenSettings, onOpenLevelTest, onGoProgress }) {
   const progress = getXpProgress(xp)
   const nextLevel = LEVELS.find(l => l.min > xp)
   const xpToNext  = nextLevel ? nextLevel.min - xp : 0
-
-  const avgWritingScore = writingHistory.length > 0
-    ? Math.round(writingHistory.reduce((s, e) => s + (e.score ?? 0), 0) / writingHistory.length)
-    : null
 
   const unlockedAchs = ACHIEVEMENTS_DEF.filter(a => achievements.includes(a.id))
   const topAchs      = unlockedAchs.slice(0, 3)
@@ -142,12 +135,6 @@ function ProfilePage({ onOpenSettings, onOpenLevelTest, onGoProgress }) {
         <div className={styles.statCard}>
           <div className={styles.statNum} style={{ color: 'var(--acc-p)' }}>{completedLessons.length}</div>
           <div className={styles.statLbl}>✅ Lessons done</div>
-        </div>
-        <div className={styles.statCard}>
-          <div className={styles.statNum} style={{ color: 'var(--acc2)' }}>
-            {avgWritingScore !== null ? avgWritingScore : '—'}
-          </div>
-          <div className={styles.statLbl}>✍️ Writing avg</div>
         </div>
         <div className={styles.statCard}>
           <div className={styles.statNum} style={{ color: '#ec4899' }}>{achievements.length}</div>
@@ -312,7 +299,6 @@ function ProfilePage({ onOpenSettings, onOpenLevelTest, onGoProgress }) {
           <div className={styles.creditItem}><span className={styles.creditDot} />Dictionary API — Free Dictionary</div>
           <div className={styles.creditItem}><span className={styles.creditDot} />Translation — MyMemory API</div>
           <div className={styles.creditItem}><span className={styles.creditDot} />Word suggestions — Datamuse API</div>
-          <div className={styles.creditItem}><span className={styles.creditDot} />AI features — AI language assistant</div>
           <div className={styles.creditItem}><span className={styles.creditDot} />Hosting — Netlify</div>
         </div>
 

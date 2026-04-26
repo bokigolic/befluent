@@ -9,9 +9,7 @@ import styles from './LearnPage.module.css'
 const TopicsPage        = lazy(() => import('../../features/topics/TopicsPage'))
 const NewsPage          = lazy(() => import('../../features/news/NewsPage'))
 const IdiomsPage        = lazy(() => import('../../features/idioms/IdiomsPage'))
-const WritingPage       = lazy(() => import('../../features/writing/WritingPage'))
 const VerbsPage         = lazy(() => import('../../features/verbs/VerbsPage'))
-const ConversationsPage = lazy(() => import('../../features/conversations/ConversationsPage'))
 
 const skel = <div className="suspenseSkel" />
 
@@ -34,7 +32,6 @@ const SECTION_GROUPS = [
     label: 'Real English',
     sections: [
       { id: 'news',          icon: '📰', title: 'News',          sub: '35 articles',  sub2: 'A2 → C1',           color: '#f59e0b' },
-      { id: 'conversations', icon: '🗣️', title: 'Conversations', sub: '12 scenarios', sub2: 'AI roleplay',       color: '#06b6d4' },
     ],
   },
 ]
@@ -114,7 +111,6 @@ function LearnHubContent({ onSectionOpen, onOpenLevelTest }) {
   const readArticles        = useStore(s => s.readArticles)
   const savedIdioms         = useStore(s => s.savedIdioms)
   const grammarProgress     = useStore(s => s.grammarProgress)
-  const conversationHistory = useStore(s => s.conversationHistory)
   const testResult          = useStore(s => s.testResult)
   const clearTestResult     = useStore(s => s.clearTestResult)
 
@@ -131,7 +127,6 @@ function LearnHubContent({ onSectionOpen, onOpenLevelTest }) {
     topics:        0,
     news:          Math.round((Object.keys(readArticles ?? {}).length / NEWS_ARTICLES.length) * 100),
     idioms:        Math.round(((savedIdioms ?? []).length / 200) * 100),
-    conversations: Math.min(100, Math.round(((conversationHistory?.length ?? 0) / 12) * 100)),
   }
 
   const goalPct = dailyGoal > 0 ? Math.min(100, Math.round((todayCount / dailyGoal) * 100)) : 0
@@ -218,8 +213,6 @@ function SectionWrapper({ section, onBack }) {
         {section === 'topics'        && (<><BackBar onBack={onBack} /><TopicsPage /></>)}
         {section === 'news'          && (<><BackBar onBack={onBack} /><NewsPage /></>)}
         {section === 'idioms'        && (<><BackBar onBack={onBack} /><IdiomsPage /></>)}
-        {section === 'writing'       && (<><BackBar onBack={onBack} /><WritingPage /></>)}
-        {section === 'conversations' && <ConversationsPage onBack={onBack} />}
       </Suspense>
     </div>
   )

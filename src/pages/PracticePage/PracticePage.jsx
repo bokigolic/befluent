@@ -7,14 +7,12 @@ import styles from './PracticePage.module.css'
 const ReviewPage  = lazy(() => import('../../features/review/ReviewPage'))
 const QuizPage    = lazy(() => import('../../pages/QuizPage/QuizPage'))
 const IdiomsPage  = lazy(() => import('../../features/idioms/IdiomsPage'))
-const WritingPage = lazy(() => import('../../features/writing/WritingPage'))
 const NewsPage    = lazy(() => import('../../features/news/NewsPage'))
 const TopicsPage  = lazy(() => import('../../features/topics/TopicsPage'))
 
 const skel = <div className="suspenseSkel" />
 
 const PRACTICE_ITEMS = [
-  { id: 'writing',   icon: '✍️', title: 'Writing Practice',  desc: 'AI corrects your English',        time: '~5 min' },
   { id: 'grammar',   icon: '📝', title: 'Grammar Quiz',      desc: 'Random grammar questions',        time: '~5 min' },
   { id: 'idioms',    icon: '💬', title: 'Idiom Quiz',        desc: 'Guess the meaning',               time: '~3 min' },
   { id: 'topics',    icon: '🗂️', title: 'Vocabulary Quiz',   desc: 'Test topic words',                time: '~5 min' },
@@ -63,30 +61,12 @@ function PracticeItem({ item, onStart }) {
   )
 }
 
-// ── Recent session row ────────────────────────────────────────────────────────
-function RecentSession({ entry }) {
-  const scoreColor =
-    entry.score >= 90 ? 'var(--acc-g)' :
-    entry.score >= 70 ? 'var(--acc)'   :
-    entry.score >= 50 ? 'var(--acc-a)' : 'var(--acc-p)'
-  return (
-    <div className={styles.recentRow}>
-      <span className={styles.recentIcon}>✍️</span>
-      <span className={styles.recentMode}>Writing</span>
-      <span className={styles.recentDate}>{new Date(entry.date).toLocaleDateString()}</span>
-      <span className={styles.recentScore} style={{ color: scoreColor }}>{entry.score}%</span>
-    </div>
-  )
-}
-
 // ── Practice hub ──────────────────────────────────────────────────────────────
 function PracticeHub({ onModeStart, onReviewStart, onLevelTest }) {
-  const reviewDeck     = useStore(s => s.reviewDeck)
-  const writingHistory = useStore(s => s.writingHistory)
-  const streak         = useStore(s => s.streak)
+  const reviewDeck = useStore(s => s.reviewDeck)
+  const streak     = useStore(s => s.streak)
 
   const dueCards = getDueCards(reviewDeck)
-  const recent   = writingHistory.slice(0, 3)
 
   return (
     <div className={styles.hub}>
@@ -108,14 +88,6 @@ function PracticeHub({ onModeStart, onReviewStart, onLevelTest }) {
         ))}
       </div>
 
-      {recent.length > 0 && (
-        <>
-          <div className={styles.sectionLabel}>Recent Practice</div>
-          <div className={styles.recentList}>
-            {recent.map((e, i) => <RecentSession key={i} entry={e} />)}
-          </div>
-        </>
-      )}
     </div>
   )
 }
@@ -141,7 +113,6 @@ function PracticePage() {
   if (active === 'review')  return modeView(<ReviewPage />)
   if (active === 'grammar') return modeView(<QuizPage onClose={handleBack} />)
   if (active === 'idioms')  return modeView(<IdiomsPage autoStartQuiz />)
-  if (active === 'writing') return modeView(<WritingPage />)
   if (active === 'news')    return modeView(<NewsPage autoOpenQuiz />)
   if (active === 'topics')  return modeView(<TopicsPage autoOpenQuiz />)
 
