@@ -51,6 +51,11 @@ export function useConversation(scenario) {
   ])
 
   const callAPI = useCallback(async (history) => {
+    if (!API_KEY) {
+      const err = new Error('AI service is not available right now.')
+      err.isConfigError = true
+      throw err
+    }
     const res = await callWithRetry(
       () => fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
@@ -73,10 +78,14 @@ export function useConversation(scenario) {
       }
     )
     setRetryStatus(null)
-    if (res.status === 401) throw new Error('AI service is not configured. Please contact support.')
+    if (res.status === 401) {
+      const err = new Error('AI service is not available right now.')
+      err.isConfigError = true
+      throw err
+    }
     if (!res.ok) {
       const body = await res.text()
-      throw new Error(`API ${res.status}: ${body.slice(0, 100)}`)
+      throw new Error(`API error ${res.status}. Please try again.`)
     }
     const data = await res.json()
     return data.content?.[0]?.text ?? ''
@@ -103,7 +112,9 @@ export function useConversation(scenario) {
     } catch (e) {
       const msg = e.isOverloaded
         ? 'AI is currently overloaded. Please try again in a minute.'
-        : '🔌 Could not connect. Check your internet connection and try again.'
+        : e.isConfigError
+          ? e.message
+          : '🔌 Could not connect. Check your internet connection and try again.'
       setError(msg)
       setMessages([{
         id: 'err-0',
@@ -154,7 +165,9 @@ export function useConversation(scenario) {
     } catch (e) {
       const msg = e.isOverloaded
         ? 'AI is currently overloaded. Please try again in a minute.'
-        : '⚠️ Connection error. Please try again.'
+        : e.isConfigError
+          ? e.message
+          : '⚠️ Connection error. Please try again.'
       setError(msg)
       setMessages(prev => [...prev, {
         id: `err-${Date.now()}`,
