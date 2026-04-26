@@ -258,7 +258,11 @@ function ResultCard({ word, dictMode, onWordClick }) {
 
   if (isLoading) return <Skeleton />
 
-  if (error) {
+  const showTranslation = dictMode !== 'en-en' && translation
+  const transLabel = dictMode === 'en-sr' ? 'EN → SR' : 'SR → EN'
+
+  // In SR→EN mode with a Serbian word, the dictionary won't find it — show translation only
+  if (error && !showTranslation) {
     return (
       <div className={styles.errorBox}>
         <div className={styles.errorTitle}>
@@ -279,10 +283,26 @@ function ResultCard({ word, dictMode, onWordClick }) {
     )
   }
 
-  if (!data) return null
+  if (error && showTranslation) {
+    return (
+      <>
+        <div className={styles.translationBox}>
+          <div className={styles.transLabel}>{transLabel}</div>
+          <div className={styles.transMain}>
+            <span className={styles.transWord}>{word}</span>
+            <span className={styles.transEq}> = </span>
+            {translation}
+          </div>
+          {alternatives.length > 0 && (
+            <div className={styles.transAlts}>Also: {alternatives.join(' · ')}</div>
+          )}
+        </div>
+        {toast && <div className={styles.toast}>{toast}</div>}
+      </>
+    )
+  }
 
-  const showTranslation = dictMode !== 'en-en' && translation
-  const transLabel = dictMode === 'en-sr' ? 'Serbian' : 'English'
+  if (!data) return null
 
   return (
     <>
@@ -291,7 +311,11 @@ function ResultCard({ word, dictMode, onWordClick }) {
       {showTranslation && (
         <div className={styles.translationBox}>
           <div className={styles.transLabel}>{transLabel}</div>
-          <div className={styles.transMain}>{translation}</div>
+          <div className={styles.transMain}>
+            <span className={styles.transWord}>{word}</span>
+            <span className={styles.transEq}> = </span>
+            {translation}
+          </div>
           {alternatives.length > 0 && (
             <div className={styles.transAlts}>Also: {alternatives.join(' · ')}</div>
           )}

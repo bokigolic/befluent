@@ -75,7 +75,7 @@ const useStore = create((set, get) => ({
   lastStreakDate: load('bf_streak_date', ''),
   theme:          load('bf_theme', 'dark'),
   activePage:     'dictionary',
-  dictMode:       'en-en',
+  dictMode:       load('bf_dict_mode', 'en-sr'),
   currentWord:    '',
   searchHistory:  load('bf_history', []),
   savedWords:     load('bf_saved', []),
@@ -147,9 +147,11 @@ const useStore = create((set, get) => ({
     return { lastVisited: data }
   }),
 
-  setUserLevel: (level) => set(() => {
+  setUserLevel: (level) => set((state) => {
     persist('bf_user_level', level)
-    return { userLevel: level }
+    const adaptiveData = { ...state.adaptiveData, currentLevel: level }
+    persist('bf_adaptive', adaptiveData)
+    return { userLevel: level, adaptiveData }
   }),
 
   saveTestResult: (result) => set(state => {
@@ -453,7 +455,7 @@ const useStore = create((set, get) => ({
   }),
 
   setActivePage:  (page) => set({ activePage: page }),
-  setDictMode:    (mode) => set({ dictMode: mode }),
+  setDictMode:    (mode) => set(() => { persist('bf_dict_mode', mode); return { dictMode: mode } }),
   setCurrentWord: (word) => set({ currentWord: word }),
 
   addToHistory: (word, mode) => set(state => {

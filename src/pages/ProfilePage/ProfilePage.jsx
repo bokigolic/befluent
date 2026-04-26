@@ -312,7 +312,7 @@ function ProfilePage({ onOpenSettings, onOpenLevelTest, onGoProgress }) {
           <div className={styles.creditItem}><span className={styles.creditDot} />Dictionary API — Free Dictionary</div>
           <div className={styles.creditItem}><span className={styles.creditDot} />Translation — MyMemory API</div>
           <div className={styles.creditItem}><span className={styles.creditDot} />Word suggestions — Datamuse API</div>
-          <div className={styles.creditItem}><span className={styles.creditDot} />AI features — Claude by Anthropic</div>
+          <div className={styles.creditItem}><span className={styles.creditDot} />AI features — AI language assistant</div>
           <div className={styles.creditItem}><span className={styles.creditDot} />Hosting — Netlify</div>
         </div>
 

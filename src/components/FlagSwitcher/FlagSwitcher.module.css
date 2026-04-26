@@ -9,11 +9,46 @@
 .container {
   display: flex;
   align-items: center;
+  gap: 8px;
   background: var(--surface);
   border: 1px solid var(--bord);
   border-radius: var(--radius);
-  padding: 8px;
+  padding: 6px 8px;
   margin-bottom: 18px;
+}
+
+.tabGroup {
+  display: flex;
+  flex: 1;
+  gap: 4px;
+}
+
+.modeTab {
+  flex: 1;
+  padding: 9px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--t3);
+  transition: all 0.2s var(--ease);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.modeTabActive {
+  background: var(--elevated);
+  color: var(--acc);
+  border-color: rgba(124, 111, 255, 0.3);
+  box-shadow: 0 2px 8px rgba(124, 111, 255, 0.12);
+}
+
+.modeTab:hover:not(.modeTabActive) {
+  color: var(--t1);
+  background: var(--hover, rgba(255,255,255,0.04));
 }
 
 /* ── Flag sides ── */

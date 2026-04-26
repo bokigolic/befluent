@@ -106,6 +106,17 @@
   margin-top: 4px;
 }
 
+.transWord {
+  color: var(--t2);
+  font-weight: 600;
+}
+
+.transEq {
+  color: var(--t3);
+  font-weight: 400;
+  margin: 0 2px;
+}
+
 /* ── Main card ── */
 .card {
   background: rgba(13,18,32,0.85);
