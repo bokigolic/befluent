@@ -35,7 +35,7 @@ export function useAIHint() {
             'anthropic-dangerous-direct-browser-access': 'true',
           },
           body: JSON.stringify({
-            model: 'claude-sonnet-4-5',
+            model: 'claude-haiku-4-5-20251001',
             max_tokens: 300,
             messages: [{
               role: 'user',
@@ -64,9 +64,10 @@ Respond in JSON only:
       if (currentWord.current !== word) return
       setRetryStatus(null)
 
+      if (res.status === 401) throw new Error('AI service is not configured.')
       if (!res.ok) {
         const body = await res.text()
-        throw new Error(`API ${res.status}: ${body.slice(0, 120)}`)
+        throw new Error(`Could not load hint (${res.status}).`)
       }
 
       const data = await res.json()

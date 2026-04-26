@@ -172,10 +172,7 @@ function SettingsPage({ onClose }) {
               <span className={styles.aboutLabel}>Translation</span>
               <span className={styles.aboutVal}>MyMemory API</span>
             </div>
-            <div className={styles.aboutRow}>
-              <span className={styles.aboutLabel}>AI hints</span>
-              <span className={styles.aboutVal}>Claude by Anthropic</span>
-            </div>
+            <div className={styles.aboutRow}></div>
           </div>
           <div className={styles.shortcuts}>
             <div className={styles.sectionTitle} style={{ marginBottom: 8 }}>

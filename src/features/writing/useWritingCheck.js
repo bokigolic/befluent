@@ -74,7 +74,7 @@ export function useWritingCheck() {
             'anthropic-dangerous-direct-browser-access': 'true',
           },
           body: JSON.stringify({
-            model: 'claude-sonnet-4-5',
+            model: 'claude-haiku-4-5-20251001',
             max_tokens: 1200,
             system: SYSTEM_PROMPT,
             messages: [{ role: 'user', content: buildUserPrompt(text, mode, targetGrammar, difficulty) }],
@@ -88,6 +88,7 @@ export function useWritingCheck() {
 
       setRetryStatus(null)
 
+      if (res.status === 401) throw new Error('AI service is not configured. Please contact support.')
       if (!res.ok) {
         const body = await res.text()
         throw new Error(`API ${res.status}: ${body.slice(0, 120)}`)
@@ -109,7 +110,9 @@ export function useWritingCheck() {
       setRetryStatus(null)
       setError(e.isOverloaded
         ? 'AI is currently overloaded. Please try again in a minute.'
-        : e.message)
+        : e.message.startsWith('API ')
+          ? 'Could not connect to AI. Please try again.'
+          : e.message)
     } finally {
       setIsLoading(false)
     }

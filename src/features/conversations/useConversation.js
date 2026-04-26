@@ -73,6 +73,7 @@ export function useConversation(scenario) {
       }
     )
     setRetryStatus(null)
+    if (res.status === 401) throw new Error('AI service is not configured. Please contact support.')
     if (!res.ok) {
       const body = await res.text()
       throw new Error(`API ${res.status}: ${body.slice(0, 100)}`)
@@ -102,7 +103,7 @@ export function useConversation(scenario) {
     } catch (e) {
       const msg = e.isOverloaded
         ? 'AI is currently overloaded. Please try again in a minute.'
-        : '🔌 Could not connect. Check your internet connection or API key.'
+        : '🔌 Could not connect. Check your internet connection and try again.'
       setError(msg)
       setMessages([{
         id: 'err-0',
