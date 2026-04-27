@@ -14,7 +14,7 @@
 
   --t1:        #f0f4ff;
   --t2:        #8896b3;
-  --t3:        #3d4f6e;
+  --t3:        #5e6e8a;
 
   --bord:      rgba(59,130,246,0.18);
   --bord2:     rgba(255,255,255,0.06);
@@ -381,6 +381,17 @@ body::after {
   .topicsGrid {
     grid-template-columns: 1fr !important;
   }
+}
+
+/* ── Disable heavy background animations on mobile (non-composited = jank) ── */
+@media (max-width: 768px) {
+  @keyframes float1 { 0%,100% { transform: translateZ(0); } }
+  @keyframes float2 { 0%,100% { transform: translateZ(0); } }
+  @keyframes float3 { 0%,100% { transform: translateZ(0); } }
+  @keyframes float4 { 0%,100% { transform: translateZ(0); } }
+  @keyframes float5 { 0%,100% { transform: translateZ(0); } }
+  @keyframes float6 { 0%,100% { transform: translateZ(0); } }
+  @keyframes particleFloat { 0%,100% { transform: translateZ(0); } }
 }
 
 /* ── Safe area top (notched phones) ── */

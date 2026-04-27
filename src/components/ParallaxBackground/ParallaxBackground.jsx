@@ -87,6 +87,8 @@ export default function ParallaxBackground() {
           background: p.color,
           opacity: p.opacity,
           animation: `${p.anim} ${p.dur} ease-in-out ${p.delay} infinite`,
+          willChange: 'transform',
+          transform: 'translateZ(0)',
         }} />
       ))}
     </div>

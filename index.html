@@ -15,8 +15,8 @@
     <!-- OPEN GRAPH -->
     <meta property="og:type" content="website"/>
     <meta property="og:url" content="https://be-fluent.netlify.app/"/>
-    <meta property="og:title" content="BeFluent — Učite engleski sa AI asistentom"/>
-    <meta property="og:description" content="400.000+ engleskih reči, 81 lekcija gramatike, AI konverzacija, vesti na engleskom. Besplatan engleski rečnik za srpsko govorno područje."/>
+    <meta property="og:title" content="BeFluent — Učite engleski jezik"/>
+    <meta property="og:description" content="400.000+ engleskih reči, 81 lekcija gramatike, vesti na engleskom i idiomi. Besplatan engleski rečnik za srpsko govorno područje."/>
     <meta property="og:image" content="https://be-fluent.netlify.app/icons/icon-512.png"/>
     <meta property="og:image:width" content="512"/>
     <meta property="og:image:height" content="512"/>
@@ -47,10 +47,23 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png"/>
     <link rel="manifest" href="/manifest.webmanifest"/>
 
-    <!-- FONTS -->
+    <!-- RESOURCE HINTS -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com"/>
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com"/>
+    <link rel="dns-prefetch" href="https://api.dictionaryapi.dev"/>
+    <link rel="dns-prefetch" href="https://api.datamuse.com"/>
+    <link rel="dns-prefetch" href="https://api.mymemory.translated.net"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    <link rel="preconnect" href="https://api.dictionaryapi.dev" crossorigin/>
+
+    <!-- FONTS (non-blocking) -->
+    <link rel="preload" href="/icons/icon-192.png" as="image"/>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+          rel="stylesheet" media="print" onload="this.media='all'"/>
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    </noscript>
 
     <!-- JSON-LD: WebApplication -->
     <script type="application/ld+json">
@@ -94,7 +107,7 @@
       "name": "Šta je BeFluent?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "BeFluent je besplatna aplikacija za učenje engleskog jezika namenjena srpskom govornom području. Sadrži rečnik sa 400.000+ reči, lekcije gramatike, AI konverzacijsku praksu i više."
+        "text": "BeFluent je besplatna aplikacija za učenje engleskog jezika namenjena srpskom govornom području. Sadrži rečnik sa 400.000+ reči, lekcije gramatike, vesti na engleskom i sistem ponavljanja."
       }
     },
     {
